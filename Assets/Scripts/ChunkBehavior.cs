@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace ChunkBehavior
+namespace MapGeneration
 {
     /// <summary>
     /// Purpose:
@@ -11,31 +11,32 @@ namespace ChunkBehavior
     /// </summary>
     public class ChunkBehavior : MonoBehaviour 
     {
-        [SerializeField]
+        [Header("The coresponding Chunk to this behavior"),SerializeField]
         private Chunk chunk;
-        public Chunk Chunk { get { return chunk; } }
 
+        [Header("Objects used to fill unused exits"), SerializeField]
         private List<GameObject> exitFillers;
 
-        private void Start()
+        public Chunk Chunk { get { return chunk; } }
+
+        public virtual void Start()
         {
             
         }
 
-        private void Update()
+        public virtual void Update()
         {
             
         }
 
-        private void CloseExits()
+        public virtual void CloseExits()
         {
 
         }
 
-        public void UpdateChunk()
+        public virtual void UpdateChunk()
         {
 
         }
-
     }
 }
