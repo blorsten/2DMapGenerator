@@ -50,57 +50,21 @@ namespace MapGeneration
         private Tilemap _enviorment;
 
         //Properties for generel properties
-        public int Width
-        {
-            get { return _width; }
-            set { _width = value; }
-        }
-        public int Height
-        {
-            get { return _height; }
-            set { _height = value; }
-        }
-        public ChunkType ChunkType
-        {
-            get { return _chunkType; }
-            set { _chunkType = value; }
-        }
+        public int Width{ get { return _width; } set { _width = value; }}
+        public int Height{get { return _height; } set { _height = value; }}
+        public ChunkType ChunkType{get { return _chunkType; } set { _chunkType = value; }}
 
         //Properties for opennings
-        public bool TopOpen
-        {
-            get { return _topOpen; }
-            set { _topOpen = value; }
-        }
-        public bool BottomOpen
-        {
-            get { return _bottomOpen; }
-            set { _bottomOpen = value; }
-        }
-        public bool LeftOpen
-        {
-            get { return _leftOpen; }
-            set { _leftOpen = value; }
-        }
-        public bool RightOpen
-        {
-            get { return _rightOpen; }
-            set { _rightOpen = value; }
-        }
+        public bool TopOpen{get { return _topOpen; } set { _topOpen = value; }}
+        public bool BottomOpen{get { return _bottomOpen; } set { _bottomOpen = value; }}
+        public bool LeftOpen{get { return _leftOpen; } set { _leftOpen = value; }}
+        public bool RightOpen{get { return _rightOpen; } set { _rightOpen = value; }}
 
         //Properties for references
-        public ChunkBehavior ChunkBehavior
-        {
-            get { return _chunkBehavior; }
-            set { _chunkBehavior = value; }
-        }
-        public Tilemap Enviorment
-        {
-            get { return _enviorment; }
-            set { _enviorment = value; }
-        }
+        public ChunkBehavior ChunkBehavior{get { return _chunkBehavior; } set { _chunkBehavior = value; }}
+        public Tilemap Enviorment{get { return _enviorment; } set { _enviorment = value; }}
 
-        public string ID { get; set; }
+        public string ID { get; set; }//A ID to indentify the Chunk
 
         //These properties tells te chunk whick openings are used
         public bool TopConnection { get; set; }
