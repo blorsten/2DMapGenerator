@@ -9,24 +9,24 @@ namespace MapGeneration
     /// Creator:
     /// Niels Justesen
     /// </summary>
-    public class ChunkBehavior : MonoBehaviour 
+    public class ChunkBehavior : MonoBehaviour
     {
-        [Header("The coresponding Chunk to this behavior"),SerializeField]
-        private Chunk chunk;
+        [Header("The coresponding Chunk to this behavior"), SerializeField]
+        private Chunk _chunk;
 
         [Header("Objects used to fill unused exits"), SerializeField]
         private List<GameObject> exitFillers;
 
-        public Chunk Chunk { get { return chunk; } }
+        public Chunk Chunk { get { return _chunk; } }
 
         public virtual void Start()
         {
-            
+
         }
 
         public virtual void Update()
         {
-            
+
         }
 
         public virtual void CloseExits()
