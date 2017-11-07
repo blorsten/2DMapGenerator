@@ -15,7 +15,7 @@ namespace MapGeneration
         private Chunk _chunk;
 
         [Header("Objects used to fill unused exits"), SerializeField]
-        private List<GameObject> exitFillers;
+        private List<GameObject> _exitFillers;
 
         public Chunk Chunk { get { return _chunk; } }
 
