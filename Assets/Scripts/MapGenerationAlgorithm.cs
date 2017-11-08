@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace MapGeneration
 {
@@ -12,7 +13,7 @@ namespace MapGeneration
         /// Process a given map
         /// </summary>
         /// <param name="map">map to process</param>
-        /// <param name="mapBlueprint">related blueprint</param>
-        public abstract void Process(Map map, MapBlueprint mapBlueprint);
+        /// <param name="usableChunks">List of all the usable chunks, filtered by <see cref="MapBlueprint.Generate"/>.</param>
+        public abstract void Process(Map map, List<Chunk> usableChunks);
     }
 }
