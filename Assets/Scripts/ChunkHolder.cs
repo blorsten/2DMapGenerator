@@ -9,7 +9,7 @@ namespace MapGeneration
     /// Creator:
     /// </summary>
     [Serializable]
-    public struct  ChunkHolder
+    public class ChunkHolder
     {
         [SerializeField] private Chunk __prefab;
 
@@ -36,16 +36,6 @@ namespace MapGeneration
         {
             Instance = Object.Instantiate(Prefab, position, Quaternion.identity,parent);
             return Instance;
-        }
-
-        public static bool operator ==(ChunkHolder chunk1, ChunkHolder chunk2)
-        {
-            return chunk1.Prefab == chunk2.Prefab && chunk1.Instance == chunk2.Instance;
-        }
-
-        public static bool operator !=(ChunkHolder chunk1, ChunkHolder chunk2)
-        {
-            return !(chunk1 == chunk2);
         }
     }
 }

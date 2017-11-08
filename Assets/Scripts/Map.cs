@@ -1,6 +1,8 @@
 ﻿using System;
 using Random = System.Random;
 using Extensions;
+using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace MapGeneration
 {
@@ -14,7 +16,7 @@ namespace MapGeneration
         public Random Random { get; private set; }
         public int Seed { get; private set; }
         public MapBlueprint MapBlueprint { get; private set; }
-        public ChunkHolder[,] Grid { get; set; }
+        public ChunkGrid Grid { get; set; }
         public ChunkHolder StartChunk { get; set; }
         public ChunkHolder EndChunk { get; set; }
 
@@ -23,9 +25,12 @@ namespace MapGeneration
             Seed = seed;
             MapBlueprint = mapBlueprint;
             Random = random;
-
+            
             //Generate the map ID from the newly created random.
             ID = new Guid(RandomExtension.GenerateByteSeed(Random));
+
+            Grid = new GameObject().AddComponent<ChunkGrid>();
+            Grid.Size = mapBlueprint.GridSize;
         }
     }
 }

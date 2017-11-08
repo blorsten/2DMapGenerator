@@ -7,7 +7,7 @@ namespace MPPlayground
     {
         void Start()
         {
-            MapBuilder.Instance.Generate(new MapBlueprint());
+            MapBuilder.Instance.Generate();
         }
     }
 }

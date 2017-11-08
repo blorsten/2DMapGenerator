@@ -64,7 +64,7 @@ namespace MapGeneration
         /// <param name="map">map</param>
         public void Spawn(Map map)
         {
-
+            map.Grid.UpdateGrid(true);
         }
 
         /// <summary>
