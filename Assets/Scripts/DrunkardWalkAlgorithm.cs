@@ -31,7 +31,7 @@ namespace MapGeneration
         public override void Process(Map map, List<Chunk> usableChunks)
         {
             Vector2Int startPoint = map.Random.Range(Vector2Int.zero, map.MapBlueprint.GridSize);
-            _markedChunks.Add(map.Grid.Grid[startPoint.x, startPoint.y]);
+            _markedChunks.Add(map.Grid[startPoint.x, startPoint.y]);
             Vector2Int currentPos = startPoint;
 
             List<CardinalDirections> candidates = ((CardinalDirections[]) Enum.GetValues(typeof(CardinalDirections))).ToList();
@@ -43,7 +43,7 @@ namespace MapGeneration
                 Vector2Int? nextPosition = CheckNextPosition(currentPos, _currentDirection, map);
                 if (nextPosition != null)
                 {
-                    ChunkHolder nextChunk = map.Grid.Grid[nextPosition.Value.x, nextPosition.Value.y];
+                    ChunkHolder nextChunk = map.Grid[nextPosition.Value.x, nextPosition.Value.y];
                     if (!_markedChunks.Contains(nextChunk))
                     {
                         currentPos = nextPosition.Value;
