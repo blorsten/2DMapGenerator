@@ -12,7 +12,7 @@ namespace MapGeneration
     {
         public Guid ID { get; private set; }
         public Random Random { get; private set; }
-        public  int Seed { get; private set; }
+        public int Seed { get; private set; }
         public MapBlueprint MapBlueprint { get; private set; }
         public ChunkHolder[,] Grid { get; set; }
         public ChunkHolder StartChunk { get; set; }

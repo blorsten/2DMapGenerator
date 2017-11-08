@@ -7,7 +7,7 @@ namespace MPPlayground
     {
         void Start()
         {
-            Debug.Log(ResourceHandler.Instance.Chunks.Count);
+            MapBuilder.Instance.Generate(new MapBlueprint());
         }
     }
 }

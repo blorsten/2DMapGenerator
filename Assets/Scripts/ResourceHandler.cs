@@ -12,7 +12,7 @@ namespace MapGeneration
         [SerializeField]
         private List<Chunk> _chunks;
 
-        public List<Chunk> Chunks { get { return _chunks; } set { _chunks = value; } }
+        public List<Chunk> Chunks { get { return _chunks; } private set { _chunks = value; } }
 
         protected override void Awake()
         {
