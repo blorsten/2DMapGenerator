@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace MapGeneration
 {
@@ -10,9 +11,8 @@ namespace MapGeneration
     /// </summary>
     public class DrunkardWalkAlgorithm : MapGenerationAlgorithm
     {
-        public override void Process(Map map, MapBlueprint mapBlueprint)
+        public override void Process(Map map, List<Chunk> usableChunks)
         {
-
         }
     }
 }
