@@ -49,13 +49,13 @@ namespace MapGeneration
                         currentPos = nextPosition.Value;
                         _markedChunks.Add(nextChunk);
                         nextChunk.Prefab = usableChunks.FirstOrDefault();
-                        candidates = ((CardinalDirections[])Enum.GetValues(typeof(CardinalDirections))).ToList();
+                        candidates = ((CardinalDirections[]) Enum.GetValues(typeof(CardinalDirections))).ToList();
                     }
+                    else
+                        candidates.Remove(_currentDirection);
                 }
                 else
-                {
                     candidates.Remove(_currentDirection);
-                }
             }
 
             map.StartChunk = _markedChunks.FirstOrDefault();
