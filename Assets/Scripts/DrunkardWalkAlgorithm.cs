@@ -9,6 +9,8 @@ namespace MapGeneration
     /// Creator:
     /// Niels Justesen
     /// </summary>
+
+    [CreateAssetMenu(fileName = "Drunkard Walk Algorithm", menuName = "MapGeneration/Algorithms/DrunkardWalk")]
     public class DrunkardWalkAlgorithm : MapGenerationAlgorithm
     {
         public override void Process(Map map, List<Chunk> usableChunks)

@@ -8,6 +8,7 @@ namespace MapGeneration
     /// Purpose:
     /// Creator: Peter Witt
     /// </summary>
+    [CreateAssetMenu(fileName = "new Map Blueprint", menuName = "MapGeneration/CreateBlueprint")]
     public class MapBlueprint : ScriptableObject
     {
         [SerializeField] private List<MapGenerationAlgorithm> _algorithmStack;
