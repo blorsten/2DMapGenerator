@@ -23,31 +23,23 @@ namespace MapGeneration
         [Header("Properties"), SerializeField]
         private int _width;//Tells the width of the chunk
 
-        [SerializeField]
-        private int _height;//Tells the height of the chunk
-
-        [SerializeField]
-        private ChunkType _chunkType;//Tells the type of the chunk
+        //Tells the height of the chunk
+        [SerializeField] private int _height;
+        
+        //Tells the type of the chunk
+        [SerializeField] private ChunkType _chunkType;
 
         //These fields tells what openings are open on the chunk
-        [Header("Openings"), SerializeField]
-        private bool _topOpen;
+        [Header("Openings"), SerializeField] private bool _topOpen;
 
-        [SerializeField]
-        private bool _bottomOpen;
-
-        [SerializeField]
-        private bool _leftOpen;
-
-        [SerializeField]
-        private bool _rightOpen;
+        [SerializeField] private bool _bottomOpen;
+        [SerializeField] private bool _leftOpen;
+        [SerializeField] private bool _rightOpen;
 
         //This section if for refernces
-        [Header("Refernces"), SerializeField]
-        private ChunkBehavior _chunkBehavior;
+        [Header("Refernces"), SerializeField] private ChunkBehavior _chunkBehavior;
 
-        [SerializeField]
-        private Tilemap _enviorment;
+        [SerializeField] private Tilemap _enviorment;
 
         //Properties for generel properties
         public int Width{ get { return _width; } set { _width = value; }}
