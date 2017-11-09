@@ -43,7 +43,15 @@ namespace MapGeneration
             //Start the post process
             mapBlueprint.StartPostProcess(map);
 
+            ActiveMap = map;
+
             return map;
+        }
+
+        private void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.Space))
+                Despawn(ActiveMap);
         }
 
         /// <summary>
@@ -92,7 +100,17 @@ namespace MapGeneration
         /// <param name="map">map</param>
         public void Despawn(Map map)
         {
-            
+            //todo: Save persistant data before destroying
+
+            //Destroying all instances of the spawned chunks
+            for (int i = 0; i < map.Grid.GetLength(0); i++)
+            {
+                for (int j = 0; j < map.Grid.GetLength(1); j++)
+                {
+                    if(map.Grid[i,j].Instance)
+                        Destroy(map.Grid[i,j].Instance.gameObject);
+                }
+            }
         }
 
 
