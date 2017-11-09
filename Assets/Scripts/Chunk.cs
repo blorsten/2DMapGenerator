@@ -66,5 +66,18 @@ namespace MapGeneration
 
         //A list for the items in the chunk
         public List<GameObject> Items { get; set; }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            if (TopConnection)            
+                Gizmos.DrawLine(this.transform.position, transform.position + Vector3.up * (Height / 2f));
+            if (BottomConnetion)
+                Gizmos.DrawLine(this.transform.position, transform.position + Vector3.down * (Height / 2f));
+            if (RightConnection)
+                Gizmos.DrawLine(this.transform.position, transform.position + Vector3.right * (Width / 2f));
+            if (LeftConnection)
+                Gizmos.DrawLine(this.transform.position, transform.position + Vector3.left * (Width / 2f));
+        }
     }
 }
