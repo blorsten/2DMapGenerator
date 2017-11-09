@@ -50,20 +50,19 @@ namespace MapGeneration
         /// </summary>
         public void OnDrawGizmos()
         {
-            for (int x = 0; x < Grid.GetLength(0); x++)
+            Vector2 gridSize = MapBlueprint.GridSize;
+            Vector2 chunkSize = MapBlueprint.ChunkSize;
+
+            
+            for (int x = 0; x < gridSize.x; x++)
             {
-                for (int y = 0; y < Grid.GetLength(1); y++)
+                for (int y = 0; y < gridSize.y; y++)
                 {
-                    float xPosition = transform.position.x;
-                    float yPosition = transform.position.y;
 
-                    Vector2 chunkSize = new Vector2(MapBlueprint.ChunkSize.x, MapBlueprint.ChunkSize.y);
+                    float xPosition = transform.position.x + chunkSize.x * x + chunkSize.x / 2;
+                    float yPosition = transform.position.y + chunkSize.y * y + chunkSize.y / 2;
 
-                    Vector2 currentPosition = new Vector2(
-                        xPosition + MapBlueprint.ChunkSize.x * x,
-                        yPosition + MapBlueprint.ChunkSize.y * y);
-
-                    Gizmos.DrawWireCube(currentPosition, chunkSize);
+                    Gizmos.DrawWireCube(new Vector3(xPosition,yPosition), chunkSize);
                 }
             }
         }

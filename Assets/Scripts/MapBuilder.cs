@@ -78,18 +78,21 @@ namespace MapGeneration
         /// <param name="map">map</param>
         public void Spawn(Map map)
         {
-            float chunkSizeX = map.MapBlueprint.ChunkSize.x;
-            float chunkSizeY = map.MapBlueprint.ChunkSize.y;
+            Vector2 gridSize = map.MapBlueprint.GridSize;
+            Vector2 chunkSize = map.MapBlueprint.ChunkSize;
 
-            for (int x = 0; x < map.MapBlueprint.GridSize.x; x++)
+            for (int x = 0; x < gridSize.x; x++)
             {
-                for (int y = 0; y < map.MapBlueprint.GridSize.y; y++)
+                for (int y = 0; y < gridSize.y; y++)
                 {
-                    float xPosition = map.transform.position.x + chunkSizeX * x;
-                    float yPOsition = map.transform.position.y + chunkSizeY * y;
+                    float xPosition = transform.position.x + chunkSize.x * x 
+                        + chunkSize.x / 2 - .5f;
+                    float yPosition = transform.position.y + chunkSize.y * y 
+                        + chunkSize.y / 2 - .5f;
 
                     if (map.Grid[x, y] != null && map.Grid[x,y].Prefab != null) 
-                        map.Grid[x, y].Instantiate(new Vector2(xPosition, yPOsition), transform);
+                        map.Grid[x, y].Instantiate(new Vector2(xPosition, yPosition), 
+                            map.transform);
                 }
             }
         }
