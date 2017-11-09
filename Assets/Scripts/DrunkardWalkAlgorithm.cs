@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using Extensions;
 using System;
 using System.Linq;
+using MapGeneration.Extensions;
 
 namespace MapGeneration
 {

@@ -1,8 +1,7 @@
 ﻿using System;
 using Random = System.Random;
-using Extensions;
+using MapGeneration.Extensions;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace MapGeneration
 {
