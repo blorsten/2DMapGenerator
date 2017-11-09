@@ -1,6 +1,7 @@
 ﻿using System;
 using Random = System.Random;
 using MapGeneration.Extensions;
+using MapGeneration.SaveSystem;
 using UnityEngine;
 
 namespace MapGeneration
@@ -18,6 +19,7 @@ namespace MapGeneration
         public ChunkHolder[,] Grid { get; set; }
         public ChunkHolder StartChunk { get; set; }
         public ChunkHolder EndChunk { get; set; }
+        public MapDataSaver MapDataSaver { get; set; }
 
         /// <summary>
         /// This initializes the map
@@ -42,6 +44,8 @@ namespace MapGeneration
                     Grid[x,y] = new ChunkHolder();
                 }
             }
+
+            MapDataSaver = gameObject.AddComponent<MapDataSaver>();
         }
 
         /// <summary>

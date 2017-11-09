@@ -84,6 +84,8 @@ namespace MapGeneration
                         map.Grid[x, y].Instantiate(new Vector2(xPosition, yPOsition), transform);
                 }
             }
+
+            map.MapDataSaver.LoadPersistentData();
         }
 
         /// <summary>
@@ -92,10 +94,7 @@ namespace MapGeneration
         /// <param name="map">map</param>
         public void Despawn(Map map)
         {
-            
+            map.MapDataSaver.SavePersistentData();
         }
-
-
-        
     }
 }
