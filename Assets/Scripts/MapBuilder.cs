@@ -29,13 +29,19 @@ namespace MapGeneration
             Random random = new Random(seed);
 
             //Creating the new map
-            Map map = new Map(seed, mapBlueprint, random);
-            
+            Map map = new GameObject(mapBlueprint.name).AddComponent<Map>();
+            map.Initialize(seed,mapBlueprint,random);
+
+            Maps = new List<Map> {map};
+
             //Start the blueprint process
             mapBlueprint.Generate(map);
 
             //Now that the map is fully made, spawn it.
             Spawn(map);
+
+            //Start the post process
+            mapBlueprint.StartPostProcess(map);
 
             return map;
         }
@@ -64,7 +70,20 @@ namespace MapGeneration
         /// <param name="map">map</param>
         public void Spawn(Map map)
         {
+            float chunkSizeX = map.MapBlueprint.ChunkSize.x;
+            float chunkSizeY = map.MapBlueprint.ChunkSize.y;
 
+            for (int x = 0; x < map.MapBlueprint.GridSize.x; x++)
+            {
+                for (int y = 0; y < map.MapBlueprint.GridSize.y; y++)
+                {
+                    float xPosition = map.transform.position.x + chunkSizeX * x;
+                    float yPOsition = map.transform.position.y + chunkSizeY * y;
+
+                    if (map.Grid[x, y] != null && map.Grid[x,y].Prefab != null) 
+                        map.Grid[x, y].Instantiate(new Vector2(xPosition, yPOsition), transform);
+                }
+            }
         }
 
         /// <summary>
@@ -75,5 +94,8 @@ namespace MapGeneration
         {
             
         }
+
+
+        
     }
 }

@@ -9,11 +9,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bc37a4d3022d22e4f8dda53e488456b8, type: 3}
-  m_Name: TestBlueprint
+  m_Name: DrunkardWalkTest
   m_EditorClassIdentifier: 
-  _algorithmStack: []
-  _gridSize: {x: 0, y: 0}
-  _chunkSize: {x: 0, y: 0}
+  _algorithmStack:
+  - {fileID: 11400000, guid: 0e5b4a0a9086c5344bb0bc144b9d28ce, type: 2}
+  _gridSize: {x: 10, y: 10}
+  _chunkSize: {x: 1, y: 1}
   _userSeed: 0
   __whitelistedChunks: []
   __blacklistedChunks: []

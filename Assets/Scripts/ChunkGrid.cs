@@ -21,6 +21,19 @@ namespace MapGeneration
         //This is the actual grid
         public ChunkHolder[,] Grid { get; set; }
 
+        public Vector2Int Size
+        {
+            get
+            {
+                return _size;
+            }
+            set
+            {
+                _size = value;
+                UpdateGrid();
+            }
+        }
+
         /// <summary>
         /// Call this to place a chunk holder in the grid, will return false if the postion isn't 
         /// valid or the position already contains a chunk holder
@@ -33,7 +46,7 @@ namespace MapGeneration
         {
             //This will instantiate the grid if the grid isn't instantiaded
             if(Grid == null)
-                Grid = new ChunkHolder[_size.x,_size.y];
+                Grid = new ChunkHolder[Size.x,Size.y];
 
             //This will check if the postion is in the grid
             if (Grid.GetLength(0) > position.x && Grid.GetLength(1) > position.y)
@@ -57,29 +70,41 @@ namespace MapGeneration
         /// <param name="placeGrid">If this is true, then the grid will be placed in the world</param>
         public virtual void UpdateGrid(bool placeGrid = false)
         {
+            //This will instantiate the grid if the grid isn't instantiaded
+            if (Grid == null)
+                Grid = new ChunkHolder[Size.x, Size.y];
+
             //This saves the current grid, so when the new grid is made, then the data can be put
             //in the new grid
             ChunkHolder[,] _oldGridData = (ChunkHolder[,])Grid.Clone();
 
             //This Creates the new grid and inserts the old data
-            Grid = new ChunkHolder[_size.x, _size.y];
-            for (int x = 0; x < _size.x; x++)
+            Grid = new ChunkHolder[Size.x, Size.y];
+            for (int x = 0; x < Size.x; x++)
+            {
+                for (int y = 0; y < Size.y; y++)
+                {
+                    Grid[x, y] = new ChunkHolder();
+                }
+            }
+
+            for (int x = 0; x < Size.x; x++)
             {
                 //If the old data's row lenght is less than the new grid, then break
                 if (_oldGridData.GetLength(0) <= x)
                     break;
 
-                for (int y = 0; y < _size.y; y++)
+                for (int y = 0; y < Size.y; y++)
                 {
                     //If the old data's column lenght is less than the new grid, then break
                     if (_oldGridData.GetLength(1) <= y)
                         break;
 
                     //This inserts the the old data and removes the data from the old array
-                    if (_oldGridData[x, y] != default(ChunkHolder))
+                    if (_oldGridData[x, y] != null)
                     {
                         Grid[x, y] = _oldGridData[x, y];
-                        _oldGridData[x, y].Instance = null;
+                        _oldGridData[x, y] = null;
                     }
                 }
             }
@@ -88,7 +113,7 @@ namespace MapGeneration
             //there wasn't place for.
             foreach (var o in _oldGridData)
             {
-                if (o.Instance != null)
+                if (o != null)
                     Destroy(o.Instance);
             }
 
@@ -103,13 +128,13 @@ namespace MapGeneration
         /// </summary>
         protected virtual void PlaceGrid()
         {
-            float xOffset = _size.x * (_cellGap.x + _cellSize.x) / 2 - _cellSize.x / 2;
-            float yOffset = _size.y * (_cellGap.y + _cellSize.y) / 2 - _cellSize.y / 2;
+            float xOffset = Size.x * (_cellGap.x + _cellSize.x) / 2 - _cellSize.x / 2;
+            float yOffset = Size.y * (_cellGap.y + _cellSize.y) / 2 - _cellSize.y / 2;
 
             //This will go through the grid 
-            for (int x = 0; x < _size.x; x++)
+            for (int x = 0; x < Size.x; x++)
             {
-                for (int y = 0; y < _size.y; y++)
+                for (int y = 0; y < Size.y; y++)
                 {
                     //Will place the chunk if the cells contrains a chunk holder
                     if (Grid[x, y] != default(ChunkHolder))
@@ -139,15 +164,15 @@ namespace MapGeneration
             if(!_drawGizmos)
                 return;
 
-            for (int x = 0; x < _size.x; x++)
+            for (int x = 0; x < Size.x; x++)
             {
-                for (int y = 0; y < _size.y; y++)
+                for (int y = 0; y < Size.y; y++)
                 {
                     float xPosition = (_cellGap.x + _cellSize.x) * x;
                     float yPosition = (_cellGap.y + _cellSize.y) * y;
 
-                    float xOffset = _size.x * (_cellGap.x + _cellSize.x) / 2 - _cellSize.x / 2;
-                    float yOffset = _size.y * (_cellGap.y + _cellSize.y) / 2 - _cellSize.y / 2;
+                    float xOffset = Size.x * (_cellGap.x + _cellSize.x) / 2 - _cellSize.x / 2;
+                    float yOffset = Size.y * (_cellGap.y + _cellSize.y) / 2 - _cellSize.y / 2;
 
                     Vector2 point = new Vector2(
                         transform.position.x + xPosition - xOffset, 
