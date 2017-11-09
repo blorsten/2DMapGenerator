@@ -124,5 +124,20 @@ namespace MapGeneration
 
             return null;
         }
+
+        public override void PostProcess(Map map, List<Chunk> usableChunks)
+        {
+            Color startColor = new Color(1, 0, 0);
+
+            float incrementer = 1f / _markedChunks.Count;
+
+            foreach (ChunkHolder markedChunk in _markedChunks)
+            {
+                if (markedChunk.Instance)
+                    markedChunk.Instance.GetComponent<SpriteRenderer>().color = startColor += new Color(0, incrementer, incrementer);
+            }
+
+            base.PostProcess(map, usableChunks);
+        }
     }
 }

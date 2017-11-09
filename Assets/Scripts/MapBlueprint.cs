@@ -42,6 +42,25 @@ namespace MapGeneration
         }
 
         /// <summary>
+        /// Post processes the map after it has been spawned.
+        /// </summary>
+        /// <param name="map">map</param>
+        public void StartPostProcess(Map map)
+        {
+            //Get a list of all the usable chunks.
+            List<Chunk> usabledChunks = GetUsableChunks();
+
+            //If we got any algorithms, go through them and post process them.
+            if (_algorithmStack != null && _algorithmStack.Any())
+            {
+                foreach (MapGenerationAlgorithm mapGenerationAlgorithm in _algorithmStack)
+                {
+                    mapGenerationAlgorithm.PostProcess(map, usabledChunks);
+                }
+            }
+        }
+
+        /// <summary>
         /// Grabs all chunks from ResourceHandler and filters them with the settings in this blueprint.
         /// </summary>
         /// <returns>List of usable chunks.</returns>

@@ -32,14 +32,16 @@ namespace MapGeneration
             Map map = new GameObject(mapBlueprint.name).AddComponent<Map>();
             map.Initialize(seed,mapBlueprint,random);
 
-            Maps = new List<Map>();
-            Maps.Add(map);
+            Maps = new List<Map> {map};
 
             //Start the blueprint process
             mapBlueprint.Generate(map);
 
             //Now that the map is fully made, spawn it.
             Spawn(map);
+
+            //Start the post process
+            mapBlueprint.StartPostProcess(map);
 
             return map;
         }
