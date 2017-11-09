@@ -11,31 +11,44 @@ namespace MapGeneration.SaveSystem
     /// Purpose: Used on maps to save its childs persistent data.
     /// Creator: MP
     /// </summary>
-    [RequireComponent(typeof(Map))]
-    public class MapDataSaver : MonoBehaviour
+    public class MapDataSaver
     {
-        private Map _map;
-
-        public List<VariableData<FieldInfo>> SavedFieldInfos;
-        public List<VariableData<PropertyInfo>> SavedPropertyInfos;
-        public List<Guid> DirtyGuids;
-
         private List<VariableInfo> _prefabClasses;
 
-        void Start()
-        {
-            _map = GetComponent<Map>();
+        public Map Map { get; set; }
+        public List<VariableData<FieldInfo>> SavedFieldInfos { get; set; }
+        public List<VariableData<PropertyInfo>> SavedPropertyInfos { get; set; }
+        public List<Guid> DirtyIds { get; set; }
 
+        public Guid ID { get; set; }
+        public int Seed { get; set; }
+        public MapBlueprint MapBlueprint { get; set; }
+
+        public MapDataSaver(Map map)
+        {
+            Map = map;
+
+            ID = map.ID;
+            Seed = map.Seed;
+            MapBlueprint = map.MapBlueprint;
+
+            SavedFieldInfos = new List<VariableData<FieldInfo>>();
+            SavedPropertyInfos = new List<VariableData<PropertyInfo>>();
+            DirtyIds = new List<Guid>();
+        }
+
+        public void Initialize()
+        {
             _prefabClasses = new List<VariableInfo>();
 
-            var components = GetComponentsInChildren<MonoBehaviour>();
+            var components = Map.GetComponentsInChildren<MonoBehaviour>();
             foreach (MonoBehaviour monoBehaviour in components)
             {
                 Type monoType = monoBehaviour.GetType();
 
                 if (_prefabClasses.All(info => info.Type != monoType))
                 {
-                    VariableInfo newVariableInfo = new VariableInfo(monoType);    
+                    VariableInfo newVariableInfo = new VariableInfo(monoType);
                     newVariableInfo.Load(monoBehaviour);
                     _prefabClasses.Add(newVariableInfo);
                 }
@@ -44,15 +57,30 @@ namespace MapGeneration.SaveSystem
 
         public void LoadPersistentData()
         {
-            foreach (DataIdentity child in GetComponentsInChildren<DataIdentity>())
+            if (_prefabClasses == null)
+                Initialize();
+
+            foreach (DataIdentity child in Map.GetComponentsInChildren<DataIdentity>())
             {
+                if (child.Id == Guid.Empty)
+                {
+                    child.Initialize(Map.Random);
+
+                    if (DirtyIds.Contains(child.Id))
+                        child.IsDirty = true;
+                }
+
                 LoadPersistentData(child);
             }
         }
 
         public void SavePersistentData()
         {
-            foreach (DataIdentity child in GetComponentsInChildren<DataIdentity>())
+            SavedPropertyInfos.Clear();
+            SavedFieldInfos.Clear();
+            DirtyIds.Clear();
+
+            foreach (DataIdentity child in Map.GetComponentsInChildren<DataIdentity>())
             {
                 SavePersistentData(child);
             }
@@ -68,12 +96,12 @@ namespace MapGeneration.SaveSystem
                 {
                     var data = fieldInfo.Key.GetValue(comp);
 
-                    if (data != null && !data.Equals(persistentDataClass))
+                    if (data != null && !data.Equals(fieldInfo.Value))
                     {
                         SavedFieldInfos.Add(
                             new VariableData<FieldInfo>(persistentDataClass.Type, fieldInfo.Key, go.Id, data));
 
-                        DirtyGuids.Add(go.Id);
+                        DirtyIds.Add(go.Id);
                         go.IsDirty = true;
                     }
                 }
@@ -82,12 +110,12 @@ namespace MapGeneration.SaveSystem
                 {
                     var data = propertyInfo.Key.GetValue(comp, null);
 
-                    if (data != null && !data.Equals(persistentDataClass))
+                    if (data != null && !data.Equals(propertyInfo.Value))
                     {
                         SavedPropertyInfos.Add(
                             new VariableData<PropertyInfo>(persistentDataClass.Type, propertyInfo.Key, go.Id, data));
 
-                        DirtyGuids.Add(go.Id);
+                        DirtyIds.Add(go.Id);
                         go.IsDirty = true;
                     }
                 }

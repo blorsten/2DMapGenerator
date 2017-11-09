@@ -33,6 +33,9 @@ namespace MapGeneration
 
         public override void Process(Map map, List<Chunk> usableChunks)
         {
+            //First we reset the algorithm
+            _markedChunks.Clear();
+
             //This is where the walk starts.
             Vector2Int startPoint = map.Random.Range(Vector2Int.zero, map.MapBlueprint.GridSize);
 

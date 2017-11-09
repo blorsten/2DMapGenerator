@@ -16,7 +16,6 @@ namespace MPPlayground
         {
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                MapBuilder.Instance.Despawn(_map);
                 _map = MapBuilder.Instance.Generate();
             }
         }

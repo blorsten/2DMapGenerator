@@ -11,4 +11,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52e17ffcf52d15d44b443ef1f3cb7f8e, type: 3}
   m_Name: Drunkard Walk Algorithm
   m_EditorClassIdentifier: 
-  _pathLength: 100
+  _pathLength: 1
