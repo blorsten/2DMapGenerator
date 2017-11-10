@@ -1,11 +1,7 @@
 ﻿using UnityEngine;
 
-namespace Extensions
+namespace MapGeneration.Extensions
 {
-    /// <summary>
-    /// Purpose:
-    /// Creator:
-    /// </summary>
     public static class RandomExtension
     {
         /// <summary>

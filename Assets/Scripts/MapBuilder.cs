@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using MapGeneration.SaveSystem;
 using UnityEngine;
 using Random = System.Random;
 
@@ -11,7 +13,13 @@ namespace MapGeneration
         [SerializeField] private MapBlueprint _currentBlueprint;
 
         public Map ActiveMap { get; set; }
-        public List<Map> Maps { get; set; }
+        public List<MapDataSaver> SavedMaps { get; set; }
+
+        protected override void Awake()
+        {
+            base.Awake();
+            SavedMaps = new List<MapDataSaver>();
+        }
 
         /// <summary>
         /// Generates a map from a specific blueprint
@@ -20,31 +28,50 @@ namespace MapGeneration
         /// <returns>Map</returns>
         public Map Generate(MapBlueprint mapBlueprint)
         {
-            //If the seed has been defined in the blueprint use that instead
+            //If the seed has been defined in the blueprint use that instead.
             var seed = mapBlueprint.UserSeed != 0 ? 
                 mapBlueprint.UserSeed : 
                 DateTime.Now.Millisecond;
 
-            //Create a new random from that seed.
-            Random random = new Random(seed);
-
-            //Creating the new map
+            //Creating the new map.
             Map map = new GameObject(mapBlueprint.name).AddComponent<Map>();
-            map.Initialize(seed,mapBlueprint,random);
+            map.Initialize(seed, mapBlueprint);
 
-            Maps = new List<Map> {map};
+            //Save the new map.
+            Save(map);
 
-            //Start the blueprint process
+            //Start the blueprint process.
             mapBlueprint.Generate(map);
 
             //Now that the map is fully made, spawn it.
             Spawn(map);
 
-            //Start the post process
-            mapBlueprint.StartPostProcess(map);
 
             ActiveMap = map;
 
+            return map;
+        }
+
+        public Map Generate(MapDataSaver existingMap)
+        {
+            //Creating the new map.
+            Map map = new GameObject(existingMap.MapBlueprint.name).AddComponent<Map>();
+
+            //If save data from active map before making this new one.
+            if (ActiveMap.MapDataSaver == existingMap && existingMap.Map)
+                existingMap.SavePersistentData();
+
+            //Update MapDataSaver with the new map reference.
+            existingMap.Map = map;
+
+            //Initialize the map with the existing data saver.
+            map.Initialize(existingMap.MapSeed, existingMap.MapBlueprint, existingMap);
+
+            //Start the blueprint process.
+            existingMap.MapBlueprint.Generate(map);
+
+            //Now that the map is fully made, spawn it.
+            Spawn(map);
             return map;
         }
 
@@ -69,7 +96,7 @@ namespace MapGeneration
         /// <param name="map">map</param>
         public void Save(Map map)
         {
-
+            SavedMaps.Add(map.MapDataSaver);
         }
 
         /// <summary>
@@ -80,6 +107,18 @@ namespace MapGeneration
         {
             Vector2 gridSize = map.MapBlueprint.GridSize;
             Vector2 chunkSize = map.MapBlueprint.ChunkSize;
+            //Remember if we have a already active map.
+            Map oldMap = ActiveMap;
+
+            //Set the new map as active.
+            ActiveMap = map;
+
+            //Lets destroy the old map if there was one.
+            if (oldMap != null)
+                Despawn(oldMap);
+
+            float chunkSizeX = map.MapBlueprint.ChunkSize.x;
+            float chunkSizeY = map.MapBlueprint.ChunkSize.y;
 
             for (int x = 0; x < gridSize.x; x++)
             {
@@ -95,6 +134,11 @@ namespace MapGeneration
                             map.transform);
                 }
             }
+
+            //Start the post process
+            map.MapBlueprint.StartPostProcess(map);
+
+            map.MapDataSaver.LoadPersistentData();
         }
 
         /// <summary>
@@ -103,20 +147,20 @@ namespace MapGeneration
         /// <param name="map">map</param>
         public void Despawn(Map map)
         {
-            //todo: Save persistant data before destroying
+            //If the new map isn't the same as the old one, save its data before despawning.
+            if (map && map.MapDataSaver != ActiveMap.MapDataSaver)
+                map.MapDataSaver.SavePersistentData();
 
             //Destroying all instances of the spawned chunks
-            for (int i = 0; i < map.Grid.GetLength(0); i++)
-            {
-                for (int j = 0; j < map.Grid.GetLength(1); j++)
-                {
-                    if(map.Grid[i,j].Instance)
-                        Destroy(map.Grid[i,j].Instance.gameObject);
-                }
-            }
+            Destroy(map.gameObject);
         }
 
-
-        
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                Generate(SavedMaps[0]);
+            }
+        }
     }
 }

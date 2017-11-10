@@ -1,8 +1,8 @@
 ﻿using System;
 using Random = System.Random;
-using Extensions;
+using MapGeneration.Extensions;
+using MapGeneration.SaveSystem;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace MapGeneration
 {
@@ -19,6 +19,7 @@ namespace MapGeneration
         public ChunkHolder[,] Grid { get; set; }
         public ChunkHolder StartChunk { get; set; }
         public ChunkHolder EndChunk { get; set; }
+        public MapDataSaver MapDataSaver { get; set; }
 
         /// <summary>
         /// This initializes the map
@@ -26,11 +27,12 @@ namespace MapGeneration
         /// <param name="seed">The maps seed</param>
         /// <param name="mapBlueprint">The maps blueprint</param>
         /// <param name="random">The random class used</param>
-        public void Initialize(int seed, MapBlueprint mapBlueprint, Random random)
+        /// <param name="mapDataSaver">Existing map data saver if any.</param>
+        public void Initialize(int seed, MapBlueprint mapBlueprint, MapDataSaver mapDataSaver = null)
         {
             Seed = seed;
             MapBlueprint = mapBlueprint;
-            Random = random;
+            Random = new Random(seed);
             
             //Generate the map ID from the newly created random.
             ID = new Guid(RandomExtension.GenerateByteSeed(Random));
@@ -43,6 +45,8 @@ namespace MapGeneration
                     Grid[x,y] = new ChunkHolder();
                 }
             }
+
+            MapDataSaver = mapDataSaver ?? new MapDataSaver(this);
         }
 
         /// <summary>
