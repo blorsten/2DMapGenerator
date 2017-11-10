@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using MapGeneration.Extensions;
 using UnityEngine;
 
 namespace MapGeneration.SaveSystem
@@ -13,51 +12,50 @@ namespace MapGeneration.SaveSystem
     /// </summary>
     public class MapDataSaver
     {
-        private List<VariableInfo> _prefabClasses;
+        private List<VariableInfo> _savedTypes;
+        private readonly List<VariableData<FieldInfo>> _savedFieldInfos;
+        private readonly List<VariableData<PropertyInfo>> _savedPropertyInfos;
+        private readonly List<Guid> _dirtyIds;
 
         public Map Map { get; set; }
-        public List<VariableData<FieldInfo>> SavedFieldInfos { get; set; }
-        public List<VariableData<PropertyInfo>> SavedPropertyInfos { get; set; }
-        public List<Guid> DirtyIds { get; set; }
-
-        public Guid ID { get; set; }
-        public int Seed { get; set; }
+        public Guid MapId { get; set; }
+        public int MapSeed { get; set; }
         public MapBlueprint MapBlueprint { get; set; }
 
         public MapDataSaver(Map map)
         {
             Map = map;
 
-            ID = map.ID;
-            Seed = map.Seed;
+            MapId = map.ID;
+            MapSeed = map.Seed;
             MapBlueprint = map.MapBlueprint;
 
-            SavedFieldInfos = new List<VariableData<FieldInfo>>();
-            SavedPropertyInfos = new List<VariableData<PropertyInfo>>();
-            DirtyIds = new List<Guid>();
+            _savedFieldInfos = new List<VariableData<FieldInfo>>();
+            _savedPropertyInfos = new List<VariableData<PropertyInfo>>();
+            _dirtyIds = new List<Guid>();
         }
 
-        public void Initialize()
+        private void Initialize()
         {
-            _prefabClasses = new List<VariableInfo>();
+            _savedTypes = new List<VariableInfo>();
 
             var components = Map.GetComponentsInChildren<MonoBehaviour>();
             foreach (MonoBehaviour monoBehaviour in components)
             {
                 Type monoType = monoBehaviour.GetType();
 
-                if (_prefabClasses.All(info => info.Type != monoType))
+                if (_savedTypes.All(info => info.Type != monoType))
                 {
                     VariableInfo newVariableInfo = new VariableInfo(monoType);
                     newVariableInfo.Load(monoBehaviour);
-                    _prefabClasses.Add(newVariableInfo);
+                    _savedTypes.Add(newVariableInfo);
                 }
             }
         }
 
         public void LoadPersistentData()
         {
-            if (_prefabClasses == null)
+            if (_savedTypes == null)
                 Initialize();
 
             foreach (DataIdentity child in Map.GetComponentsInChildren<DataIdentity>())
@@ -66,7 +64,7 @@ namespace MapGeneration.SaveSystem
                 {
                     child.Initialize(Map.Random);
 
-                    if (DirtyIds.Contains(child.Id))
+                    if (_dirtyIds.Contains(child.Id))
                         child.IsDirty = true;
                 }
 
@@ -76,9 +74,9 @@ namespace MapGeneration.SaveSystem
 
         public void SavePersistentData()
         {
-            SavedPropertyInfos.Clear();
-            SavedFieldInfos.Clear();
-            DirtyIds.Clear();
+            _savedPropertyInfos.Clear();
+            _savedFieldInfos.Clear();
+            _dirtyIds.Clear();
 
             foreach (DataIdentity child in Map.GetComponentsInChildren<DataIdentity>())
             {
@@ -86,11 +84,11 @@ namespace MapGeneration.SaveSystem
             }
         }
 
-        private void SavePersistentData(DataIdentity go)
+        private void SavePersistentData(DataIdentity identity)
         {
-            foreach (VariableInfo persistentDataClass in _prefabClasses)
+            foreach (VariableInfo persistentDataClass in _savedTypes)
             {
-                Component comp = go.GetComponent(persistentDataClass.Type);
+                Component comp = identity.GetComponent(persistentDataClass.Type);
 
                 foreach (KeyValuePair<FieldInfo, object> fieldInfo in persistentDataClass.FieldInfos)
                 {
@@ -98,11 +96,11 @@ namespace MapGeneration.SaveSystem
 
                     if (data != null && !data.Equals(fieldInfo.Value))
                     {
-                        SavedFieldInfos.Add(
-                            new VariableData<FieldInfo>(persistentDataClass.Type, fieldInfo.Key, go.Id, data));
+                        _savedFieldInfos.Add(
+                            new VariableData<FieldInfo>(persistentDataClass.Type, fieldInfo.Key, identity.Id, data));
 
-                        DirtyIds.Add(go.Id);
-                        go.IsDirty = true;
+                        _dirtyIds.Add(identity.Id);
+                        identity.IsDirty = true;
                     }
                 }
 
@@ -112,32 +110,32 @@ namespace MapGeneration.SaveSystem
 
                     if (data != null && !data.Equals(propertyInfo.Value))
                     {
-                        SavedPropertyInfos.Add(
-                            new VariableData<PropertyInfo>(persistentDataClass.Type, propertyInfo.Key, go.Id, data));
+                        _savedPropertyInfos.Add(
+                            new VariableData<PropertyInfo>(persistentDataClass.Type, propertyInfo.Key, identity.Id, data));
 
-                        DirtyIds.Add(go.Id);
-                        go.IsDirty = true;
+                        _dirtyIds.Add(identity.Id);
+                        identity.IsDirty = true;
                     }
                 }
             }
         }
 
-        private void LoadPersistentData(DataIdentity character)
+        private void LoadPersistentData(DataIdentity identity)
         {
-            if (!character.IsDirty)
+            if (!identity.IsDirty)
                 return;
 
-            foreach (VariableData<FieldInfo> fieldCabinet in SavedFieldInfos.Where(cabinet => cabinet.Id == character.Id))
+            foreach (VariableData<FieldInfo> fieldCabinet in _savedFieldInfos.Where(cabinet => cabinet.Id == identity.Id))
             {
-                fieldCabinet.Info.SetValue(character.GetComponent(fieldCabinet.Type), fieldCabinet.Data);
+                fieldCabinet.Info.SetValue(identity.GetComponent(fieldCabinet.Type), fieldCabinet.Data);
             }
 
-            foreach (VariableData<PropertyInfo> propertyCabinet in SavedPropertyInfos.Where(cabinet => cabinet.Id == character.Id))
+            foreach (VariableData<PropertyInfo> propertyCabinet in _savedPropertyInfos.Where(cabinet => cabinet.Id == identity.Id))
             {
-                propertyCabinet.Info.SetValue(character.GetComponent(propertyCabinet.Type), propertyCabinet.Data, null);
+                propertyCabinet.Info.SetValue(identity.GetComponent(propertyCabinet.Type), propertyCabinet.Data, null);
             }
 
-            character.IsDirty = false;
+            identity.IsDirty = false;
         }
     }
 }

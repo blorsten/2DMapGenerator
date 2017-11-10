@@ -13,12 +13,12 @@ namespace MapGeneration
         [SerializeField] private MapBlueprint _currentBlueprint;
 
         public Map ActiveMap { get; set; }
-        public List<MapDataSaver> Maps { get; set; }
+        public List<MapDataSaver> SavedMaps { get; set; }
 
         protected override void Awake()
         {
             base.Awake();
-            Maps = new List<MapDataSaver>();
+            SavedMaps = new List<MapDataSaver>();
         }
 
         /// <summary>
@@ -55,14 +55,14 @@ namespace MapGeneration
             Map map = new GameObject(existingMap.MapBlueprint.name).AddComponent<Map>();
 
             //If save data from active map before making this new one.
-            if (ActiveMap.MapDataSaver == existingMap)
+            if (ActiveMap.MapDataSaver == existingMap && existingMap.Map)
                 existingMap.SavePersistentData();
 
             //Update MapDataSaver with the new map reference.
             existingMap.Map = map;
 
             //Initialize the map with the existing data saver.
-            map.Initialize(existingMap.Seed, existingMap.MapBlueprint, existingMap);
+            map.Initialize(existingMap.MapSeed, existingMap.MapBlueprint, existingMap);
 
             //Start the blueprint process.
             existingMap.MapBlueprint.Generate(map);
@@ -88,7 +88,7 @@ namespace MapGeneration
         /// <param name="map">map</param>
         public void Save(Map map)
         {
-            Maps.Add(map.MapDataSaver);
+            SavedMaps.Add(map.MapDataSaver);
         }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace MapGeneration
             ActiveMap = map;
 
             //Lets destroy the old map if there was one.
-            if (oldMap)
+            if (oldMap != null)
                 Despawn(oldMap);
 
             float chunkSizeX = map.MapBlueprint.ChunkSize.x;
@@ -146,32 +146,7 @@ namespace MapGeneration
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                Generate(Maps[0]);
-            }
-
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                Generate(Maps[1]);
-            }
-
-            if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                Generate(Maps[2]);
-            }
-
-            if (Input.GetKeyDown(KeyCode.Alpha4))
-            {
-                Generate(Maps[3]);
-            }
-
-            if (Input.GetKeyDown(KeyCode.Alpha5))
-            {
-                Generate(Maps[4]);
-            }
-
-            if (Input.GetKeyDown(KeyCode.Alpha6))
-            {
-                Generate(Maps[5]);
+                Generate(SavedMaps[0]);
             }
         }
     }

@@ -8,15 +8,15 @@ namespace MapGeneration.SaveSystem
 {
     /// <summary>
     /// Purpose: Struct used to save different types found by <see cref="MapDataSaver"/>
-    /// Creator:
+    /// Creator: MP
     /// </summary>
     public struct VariableInfo
     {
         private const BindingFlags VariablesBindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
 
-        public Type Type;
-        public Dictionary<PropertyInfo, object> PropertiesInfos;
-        public Dictionary<FieldInfo, object> FieldInfos;
+        public Type Type { get; private set; }
+        public Dictionary<PropertyInfo, object> PropertiesInfos { get; private set; }
+        public Dictionary<FieldInfo, object> FieldInfos { get; private set; }
 
         public VariableInfo(Type type) : this()
         {

@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 114954615687445604}
   - component: {fileID: 2569400268406748972}
   - component: {fileID: 212478768671752684}
+  - component: {fileID: 114282765854696264}
+  - component: {fileID: 114310284085469956}
   m_Layer: 0
   m_Name: OpenChunk
   m_TagString: Untagged
@@ -73,6 +75,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114282765854696264
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1385046613858880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40f2823d3cb2e0543bddb7a6c193470f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  asd: 
+--- !u!114 &114310284085469956
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1385046613858880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f60627f4252f6bb4e80ab9ff226ae40e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114954615687445604
 MonoBehaviour:
   m_ObjectHideFlags: 1
