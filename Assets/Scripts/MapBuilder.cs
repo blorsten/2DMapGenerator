@@ -75,12 +75,6 @@ namespace MapGeneration
             return map;
         }
 
-        private void Update()
-        {
-            if(Input.GetKeyDown(KeyCode.Space))
-                Despawn(ActiveMap);
-        }
-
         /// <summary>
         /// Generates a map form current blueprint
         /// </summary>
@@ -153,14 +147,6 @@ namespace MapGeneration
 
             //Destroying all instances of the spawned chunks
             Destroy(map.gameObject);
-        }
-
-        void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                Generate(SavedMaps[0]);
-            }
         }
     }
 }
