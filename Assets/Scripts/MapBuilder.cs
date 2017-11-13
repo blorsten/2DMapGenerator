@@ -1,24 +1,36 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using MapGeneration.SaveSystem;
 using UnityEngine;
-using Random = System.Random;
 
 namespace MapGeneration
 {
     public class MapBuilder : Singleton<MapBuilder>
     {
-        [SerializeField] private MapBlueprint _currentBlueprint;
+        #region CUSTOM INSPECTOR FIELDS
+        public Map PreExistingMap;
+        public MapBlueprint CurrentBlueprint;
+        #endregion
+
+        private List<MapDataSaver> _savedMaps;
 
         public Map ActiveMap { get; set; }
-        public List<MapDataSaver> SavedMaps { get; set; }
+
+        public List<MapDataSaver> SavedMaps
+        {
+            get { return _savedMaps ?? (_savedMaps = new List<MapDataSaver>()); }
+        }
 
         protected override void Awake()
         {
             base.Awake();
-            SavedMaps = new List<MapDataSaver>();
+
+            //If we generated a map in editor make it active when running the game.
+            if (PreExistingMap)
+            {
+                ActiveMap = PreExistingMap;
+                SavedMaps.Add(PreExistingMap.MapDataSaver);
+            }
         }
 
         /// <summary>
@@ -45,7 +57,6 @@ namespace MapGeneration
 
             //Now that the map is fully made, spawn it.
             Spawn(map);
-
 
             ActiveMap = map;
 
@@ -81,7 +92,7 @@ namespace MapGeneration
         /// <returns>Map</returns>
         public Map Generate()
         {
-            return Generate(_currentBlueprint);
+            return Generate(CurrentBlueprint);
         }
 
         /// <summary>
@@ -110,9 +121,6 @@ namespace MapGeneration
             //Lets destroy the old map if there was one.
             if (oldMap != null)
                 Despawn(oldMap);
-
-            float chunkSizeX = map.MapBlueprint.ChunkSize.x;
-            float chunkSizeY = map.MapBlueprint.ChunkSize.y;
 
             for (int x = 0; x < gridSize.x; x++)
             {
@@ -145,8 +153,13 @@ namespace MapGeneration
             if (map && map.MapDataSaver != ActiveMap.MapDataSaver)
                 map.MapDataSaver.SavePersistentData();
 
-            //Destroying all instances of the spawned chunks
-            Destroy(map.gameObject);
+            if (Application.isPlaying)
+            {
+                //Destroying all instances of the spawned chunks
+                Destroy(map.gameObject);
+            }
+            else
+                DestroyImmediate(map.gameObject);
         }
     }
 }

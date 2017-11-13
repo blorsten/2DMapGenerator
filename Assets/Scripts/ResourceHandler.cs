@@ -7,6 +7,7 @@ namespace MapGeneration
     /// Purpose:
     /// Creator:
     /// </summary>
+    [ExecuteInEditMode]
     public class ResourceHandler : Singleton<ResourceHandler>
     {
         [SerializeField]

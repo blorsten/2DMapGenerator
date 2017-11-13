@@ -56,7 +56,6 @@ namespace MapGeneration
         {
             Vector2 gridSize = MapBlueprint.GridSize;
             Vector2 chunkSize = MapBlueprint.ChunkSize;
-
             
             for (int x = 0; x < gridSize.x; x++)
             {
