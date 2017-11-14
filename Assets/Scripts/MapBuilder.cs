@@ -1,41 +1,62 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using MapGeneration.SaveSystem;
 using UnityEngine;
-using Random = System.Random;
 
 namespace MapGeneration
 {
     public class MapBuilder : Singleton<MapBuilder>
     {
+        private List<MapDataSaver> _savedMaps;
+
         [SerializeField] private MapBlueprint _currentBlueprint;
+        [SerializeField] private Map _preExistingMap;
 
         public Map ActiveMap { get; set; }
-        public List<MapDataSaver> SavedMaps { get; set; }
+
+        public Map PreExistingMap { get { return _preExistingMap; } set { _preExistingMap = value; } }
+        public MapBlueprint CurrentBlueprint { get { return _currentBlueprint; } set { _currentBlueprint = value; } }
+        public List<MapDataSaver> SavedMaps { get { return _savedMaps ?? (_savedMaps = new List<MapDataSaver>()); } }
 
         protected override void Awake()
         {
             base.Awake();
-            SavedMaps = new List<MapDataSaver>();
+
+            //If we generated a map in editor make it active when running the game.
+            if (PreExistingMap)
+            {
+                Generate(PreExistingMap.MapBlueprint, PreExistingMap.Seed);
+                Despawn(PreExistingMap);
+            }
         }
 
         /// <summary>
         /// Generates a map from a specific blueprint
         /// </summary>
         /// <param name="mapBlueprint">blueprint</param>
+        /// <param name="seed">If defined it will be the chosen seed for this generation.</param>
         /// <returns>Map</returns>
-        public Map Generate(MapBlueprint mapBlueprint)
+        public Map Generate(MapBlueprint mapBlueprint, int seed = 0)
         {
+            if (!mapBlueprint)
+            {
+                Debug.LogError("MapBuilder: Tried to generate map from blueprint but diden't get one!", gameObject);
+                return null;
+            }
+
             //If the seed has been defined in the blueprint use that instead.
-            var seed = mapBlueprint.UserSeed != 0 ? 
-                mapBlueprint.UserSeed : 
-                DateTime.Now.Millisecond;
+            int chosenSeed;
+
+            if (seed != 0)
+                chosenSeed = seed;
+            else if (mapBlueprint.UserSeed != 0)
+                chosenSeed = mapBlueprint.UserSeed;
+            else
+                chosenSeed = DateTime.Now.Millisecond;
 
             //Creating the new map.
             Map map = new GameObject(mapBlueprint.name).AddComponent<Map>();
-            map.Initialize(seed, mapBlueprint);
+            map.Initialize(chosenSeed, mapBlueprint);
 
             //Save the new map.
             Save(map);
@@ -45,7 +66,6 @@ namespace MapGeneration
 
             //Now that the map is fully made, spawn it.
             Spawn(map);
-
 
             ActiveMap = map;
 
@@ -81,7 +101,7 @@ namespace MapGeneration
         /// <returns>Map</returns>
         public Map Generate()
         {
-            return Generate(_currentBlueprint);
+            return Generate(CurrentBlueprint);
         }
 
         /// <summary>
@@ -111,9 +131,6 @@ namespace MapGeneration
             if (oldMap != null)
                 Despawn(oldMap);
 
-            float chunkSizeX = map.MapBlueprint.ChunkSize.x;
-            float chunkSizeY = map.MapBlueprint.ChunkSize.y;
-
             for (int x = 0; x < gridSize.x; x++)
             {
                 for (int y = 0; y < gridSize.y; y++)
@@ -142,11 +159,16 @@ namespace MapGeneration
         public void Despawn(Map map)
         {
             //If the new map isn't the same as the old one, save its data before despawning.
-            if (map && map.MapDataSaver != ActiveMap.MapDataSaver)
+            if (map && map.MapDataSaver != null && map.MapDataSaver != ActiveMap.MapDataSaver)
                 map.MapDataSaver.SavePersistentData();
 
-            //Destroying all instances of the spawned chunks
-            Destroy(map.gameObject);
+            if (Application.isPlaying)
+            {
+                //Destroying all instances of the spawned chunks
+                Destroy(map.gameObject);
+            }
+            else
+                DestroyImmediate(map.gameObject);
         }
     }
 }

@@ -2,24 +2,29 @@
 using Random = System.Random;
 using MapGeneration.Extensions;
 using MapGeneration.SaveSystem;
+using MapGeneration.Utils;
 using UnityEngine;
 
 namespace MapGeneration
 {
     /// <summary>
-    /// Purpose:
-    /// Creator:
+    /// Purpose: Holds all data and behaviour of a map.
+    /// Creator: PW
     /// </summary>
     public class Map : MonoBehaviour
     {
+        [SerializeField, ReadOnly] private int _seed;
+        [SerializeField, ReadOnly] private MapBlueprint _mapBlueprint;
+
         public Guid ID { get; private set; }
         public Random Random { get; private set; }
-        public int Seed { get; private set; }
-        public MapBlueprint MapBlueprint { get; private set; }
         public ChunkHolder[,] Grid { get; set; }
         public ChunkHolder StartChunk { get; set; }
         public ChunkHolder EndChunk { get; set; }
         public MapDataSaver MapDataSaver { get; set; }
+
+        public int Seed { get { return _seed; } private set { _seed = value; } }
+        public MapBlueprint MapBlueprint { get { return _mapBlueprint; } private set { _mapBlueprint = value; } }
 
         /// <summary>
         /// This initializes the map
@@ -56,7 +61,6 @@ namespace MapGeneration
         {
             Vector2 gridSize = MapBlueprint.GridSize;
             Vector2 chunkSize = MapBlueprint.ChunkSize;
-
             
             for (int x = 0; x < gridSize.x; x++)
             {
