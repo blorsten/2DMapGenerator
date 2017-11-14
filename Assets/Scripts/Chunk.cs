@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -36,15 +37,13 @@ namespace MapGeneration
         [SerializeField] private bool _leftOpen;
         [SerializeField] private bool _rightOpen;
 
+        [SerializeField] private List<Connection> _connections = new List<Connection>();
+
         //This section if for refernces
         [Header("Refernces"), SerializeField] private ChunkBehavior _chunkBehavior;
 
         [SerializeField] private Tilemap _enviorment;
-
-        [SerializeField] private List<Vector3Int> _topConnections = new List<Vector3Int>();
-        [SerializeField, HideInInspector] private List<Vector3Int> _bottomConnections = new List<Vector3Int>();
-        [SerializeField, HideInInspector] private List<Vector3Int> _leftConnections = new List<Vector3Int>();
-        [SerializeField, HideInInspector] private List<Vector3Int> _rightConnections = new List<Vector3Int>();
+        
 
 
         //Properties for generel properties
@@ -73,10 +72,8 @@ namespace MapGeneration
         //A list for the items in the chunk
         public List<GameObject> Items { get; set; }
 
-        public List<Vector3Int> TopConnections{get { return _topConnections; }set { _topConnections = value; }}
-        public List<Vector3Int> BottomConnections{get { return _bottomConnections; }set { _bottomConnections = value; }}
-        public List<Vector3Int> LeftConnections{get { return _leftConnections; }set { _leftConnections = value; }}
-        public List<Vector3Int> RightConnections{get { return _rightConnections; }set { _rightConnections = value; }}
+        public List<Connection> Connections{get { return _connections; } set { _connections = value; }}
+
 
         private void OnDrawGizmos()
         {
@@ -90,30 +87,28 @@ namespace MapGeneration
             if (LeftConnection)
                 Gizmos.DrawLine(this.transform.position, transform.position + Vector3.left * (Width / 2f));
 
-            Gizmos.color = Color.blue;
-            foreach (var c in TopConnections)
-            {
-                Gizmos.DrawCube(Enviorment.GetCellCenterWorld(c),Enviorment.cellSize/4);
-            }
+            
 
-            Gizmos.color = Color.green;
-            foreach (var c in BottomConnections)
+            foreach (var c in Connections)
             {
-                Gizmos.DrawCube(Enviorment.GetCellCenterWorld(c), Enviorment.cellSize / 4);
-            }
+                switch (c.Type)
+                {
+                    case ConnectionType.Top:
+                        Gizmos.color = Color.blue;
+                        break;
+                    case ConnectionType.Bottom:
+                        Gizmos.color = Color.green;
+                        break;
+                    case ConnectionType.Left:
+                        Gizmos.color = Color.red;
+                        break;
+                    case ConnectionType.Right:
+                        Gizmos.color = Color.magenta;
+                        break;
+                }
+                Gizmos.DrawCube(Enviorment.GetCellCenterWorld(c.Position), Enviorment.cellSize / 4);
 
-            Gizmos.color = Color.red;
-            foreach (var c in RightConnections)
-            {
-                Gizmos.DrawCube(Enviorment.GetCellCenterWorld(c), Enviorment.cellSize / 4);
             }
-
-            Gizmos.color = Color.magenta;
-            foreach (var c in LeftConnections)
-            {
-                Gizmos.DrawCube(Enviorment.GetCellCenterWorld(c), Enviorment.cellSize / 4);
-            }
-
         }
     }
 }

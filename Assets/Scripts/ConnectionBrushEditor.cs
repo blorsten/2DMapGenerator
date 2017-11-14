@@ -18,6 +18,8 @@ namespace MapGeneration
             GUILayout.BeginHorizontal();
             Brush.BrushConnectionType =
                 (ConnectionType)EditorGUILayout.EnumPopup("Connection type", Brush.BrushConnectionType);
+            
+            
             GUILayout.EndHorizontal();
 
         }

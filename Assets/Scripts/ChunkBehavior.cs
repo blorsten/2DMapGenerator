@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace MapGeneration
@@ -31,7 +32,29 @@ namespace MapGeneration
 
         public virtual void CloseExits()
         {
-
+            foreach (var c in Chunk.Connections){
+                switch (c.Type)
+                {
+                    case ConnectionType.Top:
+                        if(Chunk.TopConnection)
+                            Chunk.Enviorment.SetTile(c.Position,null);
+                        break;
+                    case ConnectionType.Bottom:
+                        if (Chunk.BottomConnetion)
+                            Chunk.Enviorment.SetTile(c.Position, null);
+                        break;
+                    case ConnectionType.Left:
+                        if (Chunk.LeftConnection)
+                            Chunk.Enviorment.SetTile(c.Position, null);
+                        break;
+                    case ConnectionType.Right:
+                        if (Chunk.RightConnection)
+                            Chunk.Enviorment.SetTile(c.Position, null);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
         }
 
         public virtual void UpdateChunk()
