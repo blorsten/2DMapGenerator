@@ -174,16 +174,16 @@ namespace MapGeneration
             switch (currDirection)
             {
                 case Direction.Down:
-                    current.Instance.BottomConnetion = true;
-                    next.Instance.TopConnection = true;
+                    current.Instance.ChunkHolder.ChunkOpenings.BottomConnetion = true;
+                    next.Instance.ChunkHolder.ChunkOpenings.TopConnection = true;
                     break;
                 case Direction.Left:
-                    current.Instance.LeftConnection = true;
-                    next.Instance.RightConnection = true;
+                    current.Instance.ChunkHolder.ChunkOpenings.LeftConnection = true;
+                    next.Instance.ChunkHolder.ChunkOpenings.RightConnection = true;
                     break;
                 case Direction.Right:
-                    current.Instance.RightConnection = true;
-                    next.Instance.LeftConnection = true;
+                    current.Instance.ChunkHolder.ChunkOpenings.RightConnection = true;
+                    next.Instance.ChunkHolder.ChunkOpenings.LeftConnection = true;
                     break;
                 default:
                     break;

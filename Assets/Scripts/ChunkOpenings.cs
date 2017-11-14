@@ -6,7 +6,7 @@ namespace MapGeneration
     /// Purpose:
     /// Creator:
     /// </summary>
-    public class ChunkOpenings : MonoBehaviour
+    public class ChunkOpenings
     {
         //These properties tells te chunk whick openings are used
         public bool TopConnection { get; set; }

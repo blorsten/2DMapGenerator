@@ -23,7 +23,7 @@ namespace MapGeneration
 
         public ChunkOpenings ChunkOpenings
         {
-            get { if(_chunkOpenings == null)_chunkOpenings = new ChunkOpenings();return _chunkOpenings;}
+            get { if(_chunkOpenings == null)_chunkOpenings = new ChunkOpenings(); return _chunkOpenings;}
             set { _chunkOpenings = value; }
         }
         /// <summary>
