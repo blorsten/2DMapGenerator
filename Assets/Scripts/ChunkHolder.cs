@@ -12,6 +12,7 @@ namespace MapGeneration
     public class ChunkHolder
     {
         [SerializeField] private Chunk __prefab;
+        private ChunkOpenings _chunkOpenings;
 
         public Chunk Prefab
         {
@@ -20,6 +21,11 @@ namespace MapGeneration
         }
         public Chunk Instance { get; set; }
 
+        public ChunkOpenings ChunkOpenings
+        {
+            get { if(_chunkOpenings == null)_chunkOpenings = new ChunkOpenings();return _chunkOpenings;}
+            set { _chunkOpenings = value; }
+        }
         /// <summary>
         /// Instantiate Prefab and save in Instance
         /// </summary>

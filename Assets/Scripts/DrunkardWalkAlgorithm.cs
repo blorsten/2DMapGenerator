@@ -177,20 +177,20 @@ namespace MapGeneration
             switch (dirr)
             {
                 case CardinalDirections.North:
-                    current.Instance.TopConnection = true;
-                    next.Instance.BottomConnetion = true;
+                    current.Instance.ChunkHolder.ChunkOpenings.TopConnection = true;
+                    next.Instance.ChunkHolder.ChunkOpenings.BottomConnetion = true;
                     break;
                 case CardinalDirections.South:
-                    current.Instance.BottomConnetion = true;
-                    next.Instance.TopConnection = true;
+                    current.Instance.ChunkHolder.ChunkOpenings.BottomConnetion = true;
+                    next.Instance.ChunkHolder.ChunkOpenings.TopConnection = true;
                     break;
                 case CardinalDirections.East:
-                    current.Instance.RightConnection = true;
-                    next.Instance.LeftConnection = true;
+                    current.Instance.ChunkHolder.ChunkOpenings.RightConnection = true;
+                    next.Instance.ChunkHolder.ChunkOpenings.LeftConnection = true;
                     break;
                 case CardinalDirections.West:
-                    current.Instance.LeftConnection = true;
-                    next.Instance.RightConnection = true;
+                    current.Instance.ChunkHolder.ChunkOpenings.LeftConnection = true;
+                    next.Instance.ChunkHolder.ChunkOpenings.RightConnection = true;
                     break;
             }
         }
