@@ -2,7 +2,6 @@
 using Random = System.Random;
 using MapGeneration.Extensions;
 using MapGeneration.SaveSystem;
-using MapGeneration.Utils;
 using UnityEngine;
 
 namespace MapGeneration
@@ -13,8 +12,8 @@ namespace MapGeneration
     /// </summary>
     public class Map : MonoBehaviour
     {
-        [SerializeField, ReadOnly] private int _seed;
-        [SerializeField, ReadOnly] private MapBlueprint _mapBlueprint;
+        [SerializeField] private int _seed;
+        [SerializeField] private MapBlueprint _mapBlueprint;
 
         public Guid ID { get; private set; }
         public Random Random { get; private set; }
