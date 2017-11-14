@@ -41,6 +41,12 @@ namespace MapGeneration
 
         [SerializeField] private Tilemap _enviorment;
 
+        [SerializeField] private List<Vector3Int> _topConnections = new List<Vector3Int>();
+        [SerializeField, HideInInspector] private List<Vector3Int> _bottomConnections = new List<Vector3Int>();
+        [SerializeField, HideInInspector] private List<Vector3Int> _leftConnections = new List<Vector3Int>();
+        [SerializeField, HideInInspector] private List<Vector3Int> _rightConnections = new List<Vector3Int>();
+
+
         //Properties for generel properties
         public int Width{ get { return _width; } set { _width = value; }}
         public int Height{get { return _height; } set { _height = value; }}
@@ -67,6 +73,11 @@ namespace MapGeneration
         //A list for the items in the chunk
         public List<GameObject> Items { get; set; }
 
+        public List<Vector3Int> TopConnections{get { return _topConnections; }set { _topConnections = value; }}
+        public List<Vector3Int> BottomConnections{get { return _bottomConnections; }set { _bottomConnections = value; }}
+        public List<Vector3Int> LeftConnections{get { return _leftConnections; }set { _leftConnections = value; }}
+        public List<Vector3Int> RightConnections{get { return _rightConnections; }set { _rightConnections = value; }}
+
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
@@ -78,6 +89,31 @@ namespace MapGeneration
                 Gizmos.DrawLine(this.transform.position, transform.position + Vector3.right * (Width / 2f));
             if (LeftConnection)
                 Gizmos.DrawLine(this.transform.position, transform.position + Vector3.left * (Width / 2f));
+
+            Gizmos.color = Color.blue;
+            foreach (var c in TopConnections)
+            {
+                Gizmos.DrawCube(Enviorment.GetCellCenterWorld(c),Enviorment.cellSize/4);
+            }
+
+            Gizmos.color = Color.green;
+            foreach (var c in BottomConnections)
+            {
+                Gizmos.DrawCube(Enviorment.GetCellCenterWorld(c), Enviorment.cellSize / 4);
+            }
+
+            Gizmos.color = Color.red;
+            foreach (var c in RightConnections)
+            {
+                Gizmos.DrawCube(Enviorment.GetCellCenterWorld(c), Enviorment.cellSize / 4);
+            }
+
+            Gizmos.color = Color.magenta;
+            foreach (var c in LeftConnections)
+            {
+                Gizmos.DrawCube(Enviorment.GetCellCenterWorld(c), Enviorment.cellSize / 4);
+            }
+
         }
     }
 }

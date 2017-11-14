@@ -92,7 +92,14 @@ MonoBehaviour:
   _leftOpen: 1
   _rightOpen: 1
   _chunkBehavior: {fileID: 0}
-  _enviorment: {fileID: 0}
+  _enviorment: {fileID: 8195094282530004520}
+  _topConnections:
+  - {x: 0, y: 1, z: 0}
+  - {x: -1, y: 1, z: 0}
+  - {x: -2, y: 1, z: 0}
+  _bottomConnections: []
+  _leftConnections: []
+  _rightConnections: []
 --- !u!212 &212007495136950492
 SpriteRenderer:
   m_ObjectHideFlags: 1
