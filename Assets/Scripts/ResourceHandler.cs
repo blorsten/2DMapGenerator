@@ -18,13 +18,14 @@ namespace MapGeneration
         protected override void Awake()
         {
             base.Awake();
-            Load();
+            UpdateResources();
         }
 
         /// <summary>
         /// Loads all chunks from resources
         /// </summary>
-        public void Load()
+        [ContextMenu("Update Chunks")]
+        public void UpdateResources()
         {
             Chunks = new List<Chunk>();
             Chunks.AddRange(Resources.LoadAll<Chunk>(string.Empty));
