@@ -24,6 +24,9 @@ namespace MapBuilderEditor
         {
             if (GUILayout.Button("Generate"))
             {
+                if (!Application.isPlaying && _context.ActiveMap != _context.PreExistingMap)
+                    DestroyImmediate(_context.PreExistingMap.gameObject);
+
                 _context.PreExistingMap = _context.Generate();
                 EditorUtility.SetDirty(_context);
             }

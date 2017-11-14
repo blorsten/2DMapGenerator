@@ -28,8 +28,8 @@ namespace MapGeneration
             //If we generated a map in editor make it active when running the game.
             if (PreExistingMap)
             {
-                ActiveMap = PreExistingMap;
-                SavedMaps.Add(PreExistingMap.MapDataSaver);
+                Generate(PreExistingMap.MapBlueprint, PreExistingMap.Seed);
+                Despawn(PreExistingMap);
             }
         }
 
@@ -37,17 +37,23 @@ namespace MapGeneration
         /// Generates a map from a specific blueprint
         /// </summary>
         /// <param name="mapBlueprint">blueprint</param>
+        /// <param name="seed">If defined it will be the chosen seed for this generation.</param>
         /// <returns>Map</returns>
-        public Map Generate(MapBlueprint mapBlueprint)
+        public Map Generate(MapBlueprint mapBlueprint, int seed = 0)
         {
             //If the seed has been defined in the blueprint use that instead.
-            var seed = mapBlueprint.UserSeed != 0 ? 
-                mapBlueprint.UserSeed : 
-                DateTime.Now.Millisecond;
+            int chosenSeed = 0;
+
+            if (seed != 0)
+                chosenSeed = seed;
+            else if (mapBlueprint.UserSeed != 0)
+                chosenSeed = mapBlueprint.UserSeed;
+            else
+                chosenSeed = DateTime.Now.Millisecond;
 
             //Creating the new map.
             Map map = new GameObject(mapBlueprint.name).AddComponent<Map>();
-            map.Initialize(seed, mapBlueprint);
+            map.Initialize(chosenSeed, mapBlueprint);
 
             //Save the new map.
             Save(map);
@@ -150,7 +156,7 @@ namespace MapGeneration
         public void Despawn(Map map)
         {
             //If the new map isn't the same as the old one, save its data before despawning.
-            if (map && map.MapDataSaver != ActiveMap.MapDataSaver)
+            if (map && map.MapDataSaver != null && map.MapDataSaver != ActiveMap.MapDataSaver)
                 map.MapDataSaver.SavePersistentData();
 
             if (Application.isPlaying)
