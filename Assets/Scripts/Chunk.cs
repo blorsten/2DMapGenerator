@@ -41,10 +41,11 @@ namespace MapGeneration
 
         [SerializeField] private Tilemap _enviorment;
 
-        //Properties for generel properties
+        //Properties for generel stuff
         public int Width{ get { return _width; } set { _width = value; }}
         public int Height{get { return _height; } set { _height = value; }}
         public ChunkType ChunkType{get { return _chunkType; } set { _chunkType = value; }}
+        public ChunkHolder ChunkHolder { get; set; }
 
         //Properties for opennings
         public bool TopOpen{get { return _topOpen; } set { _topOpen = value; }}
