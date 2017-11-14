@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace MapGeneration
 {
@@ -7,7 +6,7 @@ namespace MapGeneration
     {
         private static bool _isQuitting;
 
-        public bool DontDestroyOnLoadConfig;
+        public bool DontDestroyOnLoadConfig = true;
 
         private static T instance;
 
@@ -30,7 +29,8 @@ namespace MapGeneration
                         GameObject newInstance = new GameObject(typeof(T).ToString());
                         instance = newInstance.AddComponent<T>();
 
-                        DontDestroyOnLoad(newInstance);
+                        if (Application.isPlaying)
+                            DontDestroyOnLoad(newInstance);
 
                         return instance;
                     }
@@ -52,16 +52,16 @@ namespace MapGeneration
             return false;
         }
 
-        [ExecuteInEditMode]
         protected virtual void Awake()
         {
-            if (DontDestroyOnLoadConfig)
+            if (DontDestroyOnLoadConfig && Application.isPlaying)
                 DontDestroyOnLoad(gameObject);
         }
 
         private void OnApplicationQuit()
         {
-            _isQuitting = true;
+            if (!Application.isPlaying)
+                _isQuitting = true;
         }
     }
 }
