@@ -7,19 +7,16 @@ namespace MapGeneration
 {
     public class MapBuilder : Singleton<MapBuilder>
     {
-        #region CUSTOM INSPECTOR FIELDS
-        public Map PreExistingMap;
-        public MapBlueprint CurrentBlueprint;
-        #endregion
-
         private List<MapDataSaver> _savedMaps;
+
+        [SerializeField] private MapBlueprint _currentBlueprint;
+        [SerializeField] private Map _preExistingMap;
 
         public Map ActiveMap { get; set; }
 
-        public List<MapDataSaver> SavedMaps
-        {
-            get { return _savedMaps ?? (_savedMaps = new List<MapDataSaver>()); }
-        }
+        public Map PreExistingMap { get { return _preExistingMap; } set { _preExistingMap = value; } }
+        public MapBlueprint CurrentBlueprint { get { return _currentBlueprint; } set { _currentBlueprint = value; } }
+        public List<MapDataSaver> SavedMaps { get { return _savedMaps ?? (_savedMaps = new List<MapDataSaver>()); } }
 
         protected override void Awake()
         {
@@ -41,8 +38,14 @@ namespace MapGeneration
         /// <returns>Map</returns>
         public Map Generate(MapBlueprint mapBlueprint, int seed = 0)
         {
+            if (!mapBlueprint)
+            {
+                Debug.LogError("MapBuilder: Tried to generate map from blueprint but diden't get one!", gameObject);
+                return null;
+            }
+
             //If the seed has been defined in the blueprint use that instead.
-            int chosenSeed = 0;
+            int chosenSeed;
 
             if (seed != 0)
                 chosenSeed = seed;

@@ -16,10 +16,9 @@ namespace MapGeneration
         [SerializeField] private bool _specifyChunkSize;
         [SerializeField] private Vector2Int _chunkSize;
         [SerializeField] private float _tileSize;
-        [SerializeField] private int _userSeed;
+        [SerializeField] private int _userSeed; 
         [SerializeField] private List<Chunk> __whitelistedChunks; //List of all chunks it can use, if its empty it uses all.
         [SerializeField] private List<Chunk> __blacklistedChunks; //List of all chunks it MAY not use, if its empty it uses all or whitelisted.
-        
 
         public Vector2Int GridSize { get { return _gridSize; }}
         public Vector2Int ChunkSize { get { return _chunkSize; }}
