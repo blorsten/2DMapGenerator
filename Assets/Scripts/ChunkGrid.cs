@@ -84,7 +84,7 @@ namespace MapGeneration
             {
                 for (int y = 0; y < Size.y; y++)
                 {
-                    Grid[x, y] = new ChunkHolder();
+                    Grid[x, y] = new ChunkHolder(new Vector2Int(x,y));
                 }
             }
 

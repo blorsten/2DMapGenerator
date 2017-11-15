@@ -86,8 +86,13 @@ MonoBehaviour:
   _width: 10
   _height: 8
   _chunkType: 0
+  _topOpen: 0
+  _bottomOpen: 0
+  _leftOpen: 0
+  _rightOpen: 0
+  _connections: []
   _chunkBehavior: {fileID: 0}
-  _enviorment: {fileID: 0}
+  _enviorment: {fileID: 8195094282487141402}
   _chunkHolder:
     __prefab: {fileID: 0}
     _chunkOpenings:
@@ -95,6 +100,9 @@ MonoBehaviour:
       _bottomOpen: 0
       _leftOpen: 0
       _rightOpen: 0
+  _showConnectionWhenPlay: 1
+  _showBacktrackingWhenPlay: 1
+  _showEdgesWhenPlay: 1
 --- !u!156049354 &2569400265418369976
 Grid:
   m_ObjectHideFlags: 1

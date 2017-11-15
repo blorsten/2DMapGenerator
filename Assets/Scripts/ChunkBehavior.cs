@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace MapGeneration
@@ -17,7 +18,15 @@ namespace MapGeneration
         [Header("Objects used to fill unused exits"), SerializeField]
         private List<GameObject> _exitFillers;
 
-        public Chunk Chunk { get { return _chunk; } }
+        public Chunk Chunk
+        {
+            get
+            {
+                if (!_chunk)
+                    _chunk = GetComponent<Chunk>();
+                return _chunk;
+            }
+        }
 
         public virtual void Start()
         {
@@ -31,7 +40,7 @@ namespace MapGeneration
 
         public virtual void CloseExits()
         {
-
+            
         }
 
         public virtual void UpdateChunk()
