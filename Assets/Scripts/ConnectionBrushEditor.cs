@@ -7,7 +7,7 @@ namespace MapGeneration
 {
 
     [CustomEditor(typeof(ConnectionBrush))]
-    public class ConnectionBrushEditor : GridBrushEditorBase
+    public class ConnectionBrushEditor : GridBrushEditor
     {
         public ConnectionBrush Brush { get { return (target as ConnectionBrush); } }
 
@@ -22,7 +22,11 @@ namespace MapGeneration
             
             GUILayout.EndHorizontal();
 
+            
+
         }
+
+        
     }
 }
 

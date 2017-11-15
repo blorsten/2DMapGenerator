@@ -32,7 +32,6 @@ namespace MapGeneration
 
         //These fields tells what openings are open on the chunk
         [Header("Openings"), SerializeField] private bool _topOpen;
-
         [SerializeField] private bool _bottomOpen;
         [SerializeField] private bool _leftOpen;
         [SerializeField] private bool _rightOpen;
@@ -43,7 +42,11 @@ namespace MapGeneration
         [Header("Refernces"), SerializeField] private ChunkBehavior _chunkBehavior;
 
         [SerializeField] private Tilemap _enviorment;
-        
+
+        [Header("Gizmos"), SerializeField] private bool _showConnectionWhenPlay = true;
+        [SerializeField] private bool _showBacktrackingWhenPlay = true;
+        [SerializeField] private bool _showEdgesWhenPlay = true;
+
 
 
         //Properties for generel properties
@@ -78,36 +81,62 @@ namespace MapGeneration
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-            if (TopConnection)            
-                Gizmos.DrawLine(this.transform.position, transform.position + Vector3.up * (Height / 2f));
-            if (BottomConnetion)
-                Gizmos.DrawLine(this.transform.position, transform.position + Vector3.down * (Height / 2f));
-            if (RightConnection)
-                Gizmos.DrawLine(this.transform.position, transform.position + Vector3.right * (Width / 2f));
-            if (LeftConnection)
-                Gizmos.DrawLine(this.transform.position, transform.position + Vector3.left * (Width / 2f));
-
-            
-
-            foreach (var c in Connections)
+            if (!(!_showBacktrackingWhenPlay && Application.isPlaying))
             {
-                switch (c.Type)
-                {
-                    case ConnectionType.Top:
-                        Gizmos.color = Color.blue;
-                        break;
-                    case ConnectionType.Bottom:
-                        Gizmos.color = Color.green;
-                        break;
-                    case ConnectionType.Left:
-                        Gizmos.color = Color.red;
-                        break;
-                    case ConnectionType.Right:
-                        Gizmos.color = Color.magenta;
-                        break;
-                }
-                Gizmos.DrawCube(Enviorment.GetCellCenterWorld(c.Position), Enviorment.cellSize / 4);
+                if (TopConnection)
+                    Gizmos.DrawLine(this.transform.position,
+                        transform.position + Vector3.up * (Height / 2f));
+                if (BottomConnetion)
+                    Gizmos.DrawLine(this.transform.position,
+                        transform.position + Vector3.down * (Height / 2f));
+                if (RightConnection)
+                    Gizmos.DrawLine(this.transform.position,
+                        transform.position + Vector3.right * (Width / 2f));
+                if (LeftConnection)
+                    Gizmos.DrawLine(this.transform.position,
+                        transform.position + Vector3.left * (Width / 2f));
+            }
 
+            if (!(!_showConnectionWhenPlay && Application.isPlaying))
+            {
+                foreach (var c in Connections)
+                {
+                    switch (c.Type)
+                    {
+                        case ConnectionType.Top:
+                            Gizmos.color = Color.blue;
+                            break;
+                        case ConnectionType.Bottom:
+                            Gizmos.color = Color.green;
+                            break;
+                        case ConnectionType.Left:
+                            Gizmos.color = Color.red;
+                            break;
+                        case ConnectionType.Right:
+                            Gizmos.color = Color.magenta;
+                            break;
+                    }
+                    Gizmos.DrawCube(Enviorment.GetCellCenterWorld(c.Position),
+                        Enviorment.cellSize / 4);
+
+                }
+            }
+
+            if (!(!_showEdgesWhenPlay && Application.isPlaying))
+            {
+                Gizmos.color = Color.white;
+                Vector2 gridSize = new Vector2(Width, Height);
+                Vector2 cellSize = Enviorment.cellSize;
+
+                float yMin = transform.position.y - gridSize.y * cellSize.y / 2;
+                float yMax = transform.position.y + gridSize.y * cellSize.y / 2;
+                float xMin = transform.position.x - gridSize.x * cellSize.x / 2;
+                float xMax = transform.position.x + gridSize.x * cellSize.x / 2;
+
+                Gizmos.DrawLine(new Vector3(xMin, yMin), new Vector3(xMin, yMax));
+                Gizmos.DrawLine(new Vector3(xMax, yMin), new Vector3(xMax, yMax));
+                Gizmos.DrawLine(new Vector3(xMin, yMin), new Vector3(xMax, yMin));
+                Gizmos.DrawLine(new Vector3(xMin, yMax), new Vector3(xMax, yMax));
             }
         }
     }

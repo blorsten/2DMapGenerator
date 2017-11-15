@@ -116,6 +116,9 @@ MonoBehaviour:
     _type: 3
   _chunkBehavior: {fileID: 114323684222790624}
   _enviorment: {fileID: 8195094282530004520}
+  _showConnectionWhenPlay: 0
+  _showBacktrackingWhenPlay: 0
+  _showEdgesWhenPlay: 0
 --- !u!212 &212007495136950492
 SpriteRenderer:
   m_ObjectHideFlags: 1

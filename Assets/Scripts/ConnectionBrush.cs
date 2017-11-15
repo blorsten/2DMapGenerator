@@ -15,23 +15,8 @@ namespace MapGeneration
     [CustomGridBrush(false, true, false, "ConnectionBrush")]
     public class ConnectionBrush : GridBrush
     {
-        
         public ConnectionType BrushConnectionType { get; set; }
-#if UNITY_EDITOR
-        [MenuItem("Assets/Create/Brushes/ConnectionBrush")]
-        //This Function is called when you click the menu entry
-        private static void CreateConnectionBrush()
-        {
-            string path = EditorUtility.SaveFilePanelInProject("Sace ConnectionBrush",
-                "ConnectionBrush", "asset", "Save ConnectionBrush", "Assets");
-
-            if(path != "")
-                AssetDatabase.CreateAsset(ScriptableObject.CreateInstance<ConnectionBrush>(),path);
-
-        }
-#endif
         
-
         public override void Paint(GridLayout gridLayout, GameObject brushTarget, Vector3Int position)
         {
             Chunk chunk = brushTarget.GetComponent<Chunk>() ??
@@ -64,6 +49,19 @@ namespace MapGeneration
 
 
         }
+#if UNITY_EDITOR
+        [MenuItem("Assets/Create/Brushes/ConnectionBrush")]
+        //This Function is called when you click the menu entry
+        private static void CreateConnectionBrush()
+        {
+            string path = EditorUtility.SaveFilePanelInProject("Sace ConnectionBrush",
+                "ConnectionBrush", "asset", "Save ConnectionBrush", "Assets");
+
+            if (path != "")
+                AssetDatabase.CreateAsset(ScriptableObject.CreateInstance<ConnectionBrush>(), path);
+
+        }
+#endif
     }
 
 }

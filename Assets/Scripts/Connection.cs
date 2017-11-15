@@ -8,7 +8,7 @@ namespace MapGeneration
     {
         [SerializeField]
         private Vector3Int _position;
-        [SerializeField]
+        [SerializeField ]
         private ConnectionType _type;
 
         public Vector3Int Position
