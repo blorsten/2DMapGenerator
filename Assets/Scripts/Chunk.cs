@@ -32,12 +32,18 @@ namespace MapGeneration
         [Header("Refernces"), SerializeField] private ChunkBehavior _chunkBehavior;
 
         [SerializeField] private Tilemap _enviorment;
+        [SerializeField] private ChunkHolder _chunkHolder;
 
         //Properties for generel stuff
         public int Width { get { return _width; } set { _width = value; } }
         public int Height { get { return _height; } set { _height = value; } }
         public ChunkType ChunkType { get { return _chunkType; } set { _chunkType = value; } }
-        public ChunkHolder ChunkHolder { get; set; }
+
+        public ChunkHolder ChunkHolder
+        {
+            get { return _chunkHolder; }
+            set { _chunkHolder = value; }
+        }
 
         //Properties for references
         public ChunkBehavior ChunkBehavior { get { return _chunkBehavior; } set { _chunkBehavior = value; } }

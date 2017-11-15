@@ -12,7 +12,7 @@ namespace MapGeneration
     public class ChunkHolder
     {
         [SerializeField] private Chunk __prefab;
-        private ChunkOpenings _chunkOpenings;
+        [SerializeField] private ChunkOpenings _chunkOpenings;
 
         public Chunk Prefab
         {
