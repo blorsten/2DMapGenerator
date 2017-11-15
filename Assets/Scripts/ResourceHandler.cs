@@ -28,7 +28,7 @@ namespace MapGeneration
         public void UpdateResources()
         {
             Chunks = new List<Chunk>();
-            Chunks.AddRange(Resources.LoadAll<Chunk>(string.Empty));
+            Chunks.AddRange(Resources.LoadAll<Chunk>("Chunks"));
         }
     }
 }

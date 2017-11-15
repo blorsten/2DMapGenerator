@@ -291,8 +291,11 @@ MonoBehaviour:
   DontDestroyOnLoadConfig: 1
   _chunks:
   - {fileID: 114318020207900078, guid: a3a3c04d2aa3731428a1007a6e6a5c13, type: 2}
+  - {fileID: 0}
+  - {fileID: 114941419155164888, guid: 6d4b5c2e89dcd9d4a82c3d2756fcdbce, type: 2}
   - {fileID: 114954615687445604, guid: 8b8e01b8cce04df48b2c92a668a218ac, type: 2}
   - {fileID: 114054360555391768, guid: 1f239368e2e2c964591d568b4823e746, type: 2}
+  - {fileID: 114946033942520992, guid: 63d553f5232ab9d4d9f3fd8a50af0fc9, type: 2}
 --- !u!4 &1000003807
 Transform:
   m_ObjectHideFlags: 0
