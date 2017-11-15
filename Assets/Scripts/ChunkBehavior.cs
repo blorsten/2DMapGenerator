@@ -40,29 +40,7 @@ namespace MapGeneration
 
         public virtual void CloseExits()
         {
-            foreach (var c in Chunk.Connections){
-                switch (c.Type)
-                {
-                    case ConnectionType.Top:
-                        if(Chunk.ChunkHolder.ChunkOpenings.TopConnection)
-                            Chunk.Enviorment.SetTile(c.Position,null);
-                        break;
-                    case ConnectionType.Bottom:
-                        if (Chunk.ChunkHolder.ChunkOpenings.BottomConnetion)
-                            Chunk.Enviorment.SetTile(c.Position, null);
-                        break;
-                    case ConnectionType.Left:
-                        if (Chunk.ChunkHolder.ChunkOpenings.LeftConnection)
-                            Chunk.Enviorment.SetTile(c.Position, null);
-                        break;
-                    case ConnectionType.Right:
-                        if (Chunk.ChunkHolder.ChunkOpenings.RightConnection)
-                            Chunk.Enviorment.SetTile(c.Position, null);
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
-            }
+            
         }
 
         public virtual void UpdateChunk()
