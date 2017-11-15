@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace MapGeneration.Algorithm
@@ -9,12 +10,6 @@ namespace MapGeneration.Algorithm
     /// </summary>
     public class MapGenerationAlgorithm : ScriptableObject
     {
-        //Compass directions used for choosing where to go next.
-        public enum CardinalDirections
-        {
-            Top, Bottom, Left, Right
-        }
-
         /// <summary>
         /// Process a given map
         /// </summary>
@@ -42,32 +37,32 @@ namespace MapGeneration.Algorithm
         /// <param name="nextDir"></param>
         /// <param name="currentMap"></param>
         /// <returns></returns>
-        protected Vector2Int? CheckNextPosition(Vector2Int currentPosition, CardinalDirections nextDir, Map currentMap)
+        protected Vector2Int? CheckNextPosition(Vector2Int currentPosition, PathAlgorithm.CardinalDirections nextDir, Map currentMap)
         {
             switch (nextDir)
             {
-                case CardinalDirections.Top:
+                case PathAlgorithm.CardinalDirections.Top:
                     currentPosition += new Vector2Int(0, 1);
                     if (currentPosition.y < currentMap.MapBlueprint.GridSize.y && currentPosition.y >= 0)
                     {
                         return currentPosition;
                     }
                     break;
-                case CardinalDirections.Bottom:
+                case PathAlgorithm.CardinalDirections.Bottom:
                     currentPosition += new Vector2Int(0, -1);
                     if (currentPosition.y < currentMap.MapBlueprint.GridSize.y && currentPosition.y >= 0)
                     {
                         return currentPosition;
                     }
                     break;
-                case CardinalDirections.Right:
+                case PathAlgorithm.CardinalDirections.Right:
                     currentPosition += new Vector2Int(1, 0);
                     if (currentPosition.x < currentMap.MapBlueprint.GridSize.x && currentPosition.x >= 0)
                     {
                         return currentPosition;
                     }
                     break;
-                case CardinalDirections.Left:
+                case PathAlgorithm.CardinalDirections.Left:
                     currentPosition += new Vector2Int(-1, 0);
                     if (currentPosition.x < currentMap.MapBlueprint.GridSize.x && currentPosition.x >= 0)
                     {
@@ -85,23 +80,23 @@ namespace MapGeneration.Algorithm
         /// <param name="dir">The direction the algorithm took</param>
         /// <param name="current">the current chunk</param>
         /// <param name="next">the next chunk in the queue</param>
-        protected void SetChunkConnections(CardinalDirections dir, ChunkHolder current, ChunkHolder next)
+        protected void SetChunkConnections(PathAlgorithm.CardinalDirections dir, ChunkHolder current, ChunkHolder next)
         {
             switch (dir)
             {
-                case CardinalDirections.Top:
+                case PathAlgorithm.CardinalDirections.Top:
                     current.Instance.ChunkHolder.ChunkOpenings.TopConnection = true;
                     next.Instance.ChunkHolder.ChunkOpenings.BottomConnetion = true;
                     break;
-                case CardinalDirections.Bottom:
+                case PathAlgorithm.CardinalDirections.Bottom:
                     current.Instance.ChunkHolder.ChunkOpenings.BottomConnetion = true;
                     next.Instance.ChunkHolder.ChunkOpenings.TopConnection = true;
                     break;
-                case CardinalDirections.Left:
+                case PathAlgorithm.CardinalDirections.Left:
                     current.Instance.ChunkHolder.ChunkOpenings.LeftConnection = true;
                     next.Instance.ChunkHolder.ChunkOpenings.RightConnection = true;
                     break;
-                case CardinalDirections.Right:
+                case PathAlgorithm.CardinalDirections.Right:
                     current.Instance.ChunkHolder.ChunkOpenings.RightConnection = true;
                     next.Instance.ChunkHolder.ChunkOpenings.LeftConnection = true;
                     break;

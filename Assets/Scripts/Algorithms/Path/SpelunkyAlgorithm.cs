@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using MapGeneration.Extensions;
-using System;
 using System.Linq;
 
 namespace MapGeneration.Algorithm
