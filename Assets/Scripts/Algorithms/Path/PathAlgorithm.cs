@@ -12,6 +12,13 @@ namespace MapGeneration.Algorithm
     /// </summary>
     public class PathAlgorithm : MapGenerationAlgorithm
     {
+        //Compass directions used for choosing where to go next.
+        [Flags]
+        public enum CardinalDirections
+        {
+            Top, Bottom, Left, Right
+        }
+
         protected CardinalDirections NextDirection;
         protected Queue<ChunkHolder> MarkedChunks = new Queue<ChunkHolder>();
         protected Queue<CardinalDirections> DirectionsTaken = new Queue<CardinalDirections>();
