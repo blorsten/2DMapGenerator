@@ -34,14 +34,14 @@ namespace MapGeneration
         [SerializeField] private Tilemap _enviorment;
 
         //Properties for generel stuff
-        public int Width{ get { return _width; } set { _width = value; }}
-        public int Height{get { return _height; } set { _height = value; }}
-        public ChunkType ChunkType{get { return _chunkType; } set { _chunkType = value; }}
+        public int Width { get { return _width; } set { _width = value; } }
+        public int Height { get { return _height; } set { _height = value; } }
+        public ChunkType ChunkType { get { return _chunkType; } set { _chunkType = value; } }
         public ChunkHolder ChunkHolder { get; set; }
 
         //Properties for references
-        public ChunkBehavior ChunkBehavior{get { return _chunkBehavior; } set { _chunkBehavior = value; }}
-        public Tilemap Enviorment{get { return _enviorment; } set { _enviorment = value; }}
+        public ChunkBehavior ChunkBehavior { get { return _chunkBehavior; } set { _chunkBehavior = value; } }
+        public Tilemap Enviorment { get { return _enviorment; } set { _enviorment = value; } }
 
         public string ID { get; set; }//A ID to indentify the Chunk
 
@@ -60,5 +60,6 @@ namespace MapGeneration
             if (ChunkHolder.ChunkOpenings.LeftConnection)
                 Gizmos.DrawLine(this.transform.position, transform.position + Vector3.left * (Width / 2f));
         }
+
     }
 }

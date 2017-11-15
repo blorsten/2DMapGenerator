@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using ChunkExtension;
 using UnityEngine;
 
 namespace MapGeneration
@@ -87,6 +88,9 @@ namespace MapGeneration
             {
                 usableChunks = usableChunks.Except(__blacklistedChunks).ToList();
             }
+
+            //Remove all chunks that doesnt fit the blueprint.
+            usableChunks.RemoveAll(chunk => !chunk.CompareSize(_chunkSize));
 
             return usableChunks;
         }
