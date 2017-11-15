@@ -81,7 +81,7 @@ namespace MapGeneration.Algorithm
                 ChunkHolder nextChunk = map.Grid[nextPosition.Value.x, nextPosition.Value.y];
 
                 //if the next chunk isnt marked, continue the process
-                if (!MarkedChunks.Contains(nextChunk))
+                if (!MarkedChunks.Contains(nextChunk) && map.Place(nextChunk, usableChunks.FirstOrDefault()))
                 {
                     //enqueue the direction that was taken
                     DirectionsTaken.Enqueue(NextDirection);
@@ -93,7 +93,6 @@ namespace MapGeneration.Algorithm
                     MarkedChunks.Enqueue(nextChunk);
 
                     //Change the prefab on the found chunk to another one. TODO: Find another way to mark marked chunks.
-                    nextChunk.Prefab = usableChunks.FirstOrDefault();
                     //Reset candidates.
 
                     ResetDirectionCandidates();

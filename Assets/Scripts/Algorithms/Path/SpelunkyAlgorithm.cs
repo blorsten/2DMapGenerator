@@ -24,7 +24,7 @@ namespace MapGeneration.Algorithm
             ChunkHolder firstChunk = map.Grid[startPoint.x, startPoint.y];
             MarkedChunks.Enqueue(firstChunk);
             map.StartChunk = firstChunk;
-            firstChunk.Prefab = usableChunks.FirstOrDefault();
+            map.Place(firstChunk, usableChunks.FirstOrDefault());
 
             Vector2Int currentPos = startPoint;
 
