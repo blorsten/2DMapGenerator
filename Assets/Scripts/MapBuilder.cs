@@ -150,6 +150,16 @@ namespace MapGeneration
             map.MapBlueprint.StartPostProcess(map);
 
             map.MapDataSaver.LoadPersistentData();
+
+
+            for (int x = 0; x < gridSize.x; x++)
+            {
+                for (int y = 0; y < gridSize.y; y++)
+                {
+                    if(map.Grid[x, y].Instance && map.Grid[x, y].Instance.ChunkBehavior)
+                        map.Grid[x,y].Instance.ChunkBehavior.CloseExits();
+                }
+            }
         }
 
         /// <summary>

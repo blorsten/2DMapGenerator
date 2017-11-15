@@ -24,7 +24,9 @@ namespace MapBuilderEditor
             if (GUILayout.Button("Generate"))
             {
                 //If we went from playing to editor and generates a new map, destroy the old one.
-                if (!Application.isPlaying && _context.ActiveMap != _context.PreExistingMap)
+                if (!Application.isPlaying && _context.PreExistingMap && 
+                    _context.PreExistingMap.gameObject &&
+                    _context.ActiveMap != _context.PreExistingMap )
                     DestroyImmediate(_context.PreExistingMap.gameObject);
 
                 //Set the preexisting map to the one we just generated.
