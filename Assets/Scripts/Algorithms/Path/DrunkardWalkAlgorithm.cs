@@ -16,11 +16,14 @@ namespace MapGeneration.Algorithm
     [CreateAssetMenu(fileName = "Drunkard Walk Algorithm", menuName = "MapGeneration/Algorithms/DrunkardWalk")]
     public class DrunkardWalkAlgorithm : PathAlgorithm
     {
+
         //Number of times the algorithms creates a marked chunk.
         [SerializeField] private int _pathLength;
 
         public override void Process(Map map, List<Chunk> usableChunks)
         {
+            base.Process(map, usableChunks);
+
             //This is where the walk starts.
             Vector2Int startPoint = map.Random.Range(Vector2Int.zero, map.MapBlueprint.GridSize);
 
@@ -30,14 +33,18 @@ namespace MapGeneration.Algorithm
 
         public override void PostProcess(Map map, List<Chunk> usableChunks)
         {
-            BackTrackChunks(MarkedChunks, DirectionsTaken);
+            BackTrackChunks(Road);
             base.PostProcess(map, usableChunks);
         }
 
-        protected virtual bool StartWalk(Map map, List<Chunk> usableChunks, Vector2Int startPosition)
+        protected virtual Queue<KeyValuePair<ChunkHolder, CardinalDirections?>> StartWalk(Map map, List<Chunk> usableChunks, Vector2Int startPosition)
         {
+            Road = new Queue<KeyValuePair<ChunkHolder, CardinalDirections?>>();
+
             //The first chunk is marked.
             var firstChunk = map.Grid[startPosition.x, startPosition.y];
+
+            Road.Enqueue(new KeyValuePair<ChunkHolder, CardinalDirections?>(firstChunk, null));
 
             if (!MarkedChunks.Contains(firstChunk))
                 MarkedChunks.Enqueue(firstChunk);
@@ -50,21 +57,21 @@ namespace MapGeneration.Algorithm
             //We create a list of all the possible directions for the walk, based from the enum.
             ResetDirectionCandidates();
 
-            int iterations = 0;
+            int pathLength = 0;
 
             //While we still have more chunks to mark and it hasn't gone stuck yet, keep marking.
-            while (MarkedChunks.Count <= _pathLength && DirectionCandidates.Any())
+            while (pathLength <= _pathLength && DirectionCandidates.Any())
             {
-                if (!FindNextChunk(map, usableChunks, ref currentPos) && iterations++ == 0)
+                var possibleSegment = FindNextChunk(map, usableChunks, ref currentPos);
+
+                if (possibleSegment != null)
                 {
-                    return false;
-                }
-                else
-                {
-                    return true;
+                    Road.Enqueue(possibleSegment.GetValueOrDefault());
+                    pathLength++;
                 }
             }
-            return true;
+
+            return Road;
         }
     }
 }

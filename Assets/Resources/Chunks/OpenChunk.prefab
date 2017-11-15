@@ -100,20 +100,25 @@ MonoBehaviour:
   _width: 3
   _height: 3
   _chunkType: 0
+  _topOpen: 0
+  _bottomOpen: 0
+  _leftOpen: 0
+  _rightOpen: 0
   _connections:
   - _position: {x: 0, y: 1, z: 0}
     _type: 0
+    _chunk: {fileID: 114954615687445604}
   - _position: {x: 0, y: -1, z: 0}
     _type: 1
+    _chunk: {fileID: 114954615687445604}
   - _position: {x: -1, y: 0, z: 0}
     _type: 2
+    _chunk: {fileID: 114954615687445604}
   - _position: {x: 1, y: 0, z: 0}
     _type: 3
+    _chunk: {fileID: 114954615687445604}
   _chunkBehavior: {fileID: 114323684222790624}
   _enviorment: {fileID: 8195094282530004520}
-  _showConnectionWhenPlay: 0
-  _showBacktrackingWhenPlay: 0
-  _showEdgesWhenPlay: 0
   _chunkHolder:
     __prefab: {fileID: 0}
     _chunkOpenings:
@@ -121,6 +126,9 @@ MonoBehaviour:
       _bottomOpen: 0
       _leftOpen: 0
       _rightOpen: 0
+  _showConnectionWhenPlay: 0
+  _showBacktrackingWhenPlay: 0
+  _showEdgesWhenPlay: 0
 --- !u!156049354 &2569400268406748972
 Grid:
   m_ObjectHideFlags: 1

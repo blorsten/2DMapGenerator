@@ -41,7 +41,8 @@ namespace MapGeneration
             {
                 foreach (MapGenerationAlgorithm mapGenerationAlgorithm in _algorithmStack)
                 {
-                    mapGenerationAlgorithm.Process(map, usabledChunks);
+                    if (mapGenerationAlgorithm)
+                        mapGenerationAlgorithm.Process(map, usabledChunks);
                 }
             }
         }
@@ -53,14 +54,15 @@ namespace MapGeneration
         public void StartPostProcess(Map map)
         {
             //Get a list of all the usable chunks.
-            List<Chunk> usabledChunks = GetUsableChunks();
+            List<Chunk> usableChunks = GetUsableChunks();
 
             //If we got any algorithms, go through them and post process them.
             if (_algorithmStack != null && _algorithmStack.Any())
             {
                 foreach (MapGenerationAlgorithm mapGenerationAlgorithm in _algorithmStack)
                 {
-                    mapGenerationAlgorithm.PostProcess(map, usabledChunks);
+                    if (mapGenerationAlgorithm)
+                        mapGenerationAlgorithm.PostProcess(map, usableChunks);
                 }
             }
         }

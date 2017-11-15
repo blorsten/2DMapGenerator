@@ -102,5 +102,13 @@ namespace MapGeneration.Algorithm
                     break;
             }
         }
+
+        /// <summary>
+        /// Cleans all shared data in algorithm.
+        /// </summary>
+        protected virtual void Reset()
+        {
+            
+        }
     }
 }
