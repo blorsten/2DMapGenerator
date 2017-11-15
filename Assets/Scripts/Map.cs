@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using MapGeneration.Algorithm;
 using Random = System.Random;
 using MapGeneration.Extensions;
 using MapGeneration.SaveSystem;
@@ -49,7 +50,7 @@ namespace MapGeneration
             {
                 for (int y = 0; y < Grid.GetLength(1); y++)
                 {
-                    Grid[x,y] = new ChunkHolder();
+                    Grid[x,y] = new ChunkHolder(new Vector2Int(x,y));
                 }
             }
 
@@ -87,10 +88,10 @@ namespace MapGeneration
         public List<ChunkHolder> GetNeighbor(ChunkHolder chunkHolder)
         {
             return GetNeighbor(chunkHolder, 
-                DrunkardWalkAlgorithm.CardinalDirections.North | 
-                DrunkardWalkAlgorithm.CardinalDirections.South |
-                DrunkardWalkAlgorithm.CardinalDirections.East |
-                DrunkardWalkAlgorithm.CardinalDirections.West);
+                PathAlgorithm.CardinalDirections.Top |
+                PathAlgorithm.CardinalDirections.Bottom |
+                PathAlgorithm.CardinalDirections.Right |
+                PathAlgorithm.CardinalDirections.Left);
         }
 
         /// <summary>
@@ -99,7 +100,7 @@ namespace MapGeneration
         /// <param name="chunkHolder">Chunkholder</param>
         /// <param name="directions">Directions to get</param>
         /// <returns>array with neighbors</returns>
-        public List<ChunkHolder> GetNeighbor(ChunkHolder chunkHolder, DrunkardWalkAlgorithm.CardinalDirections directions)
+        public List<ChunkHolder> GetNeighbor(ChunkHolder chunkHolder, PathAlgorithm.CardinalDirections directions)
         {
             List<ChunkHolder> listToReturn = new List<ChunkHolder>();
             bool done = false;
@@ -110,19 +111,19 @@ namespace MapGeneration
                 {
                     if (Grid[x, y] == chunkHolder)
                     {
-                        if(directions == DrunkardWalkAlgorithm.CardinalDirections.North &&
+                        if(directions == PathAlgorithm.CardinalDirections.Top &&
                             y + 1 < Grid.GetLength(1))
                             listToReturn.Add(Grid[x,y+1]);
 
-                        if(directions == DrunkardWalkAlgorithm.CardinalDirections.South &&
+                        if(directions == PathAlgorithm.CardinalDirections.Bottom &&
                             y - 1 > -1)
                             listToReturn.Add(Grid[x,y-1]);
 
-                        if(directions == DrunkardWalkAlgorithm.CardinalDirections.East &&
+                        if(directions == PathAlgorithm.CardinalDirections.Right &&
                             x - 1 > -1)
                             listToReturn.Add(Grid[x -1, y]);
 
-                        if (directions == DrunkardWalkAlgorithm.CardinalDirections.West &&
+                        if (directions == PathAlgorithm.CardinalDirections.Left &&
                             x +1 < Grid.GetLength(0))
                             listToReturn.Add(Grid[x +1, y]);
 

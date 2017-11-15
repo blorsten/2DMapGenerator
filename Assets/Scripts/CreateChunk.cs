@@ -9,7 +9,7 @@ namespace MapGeneration
     /// </summary>
     public class CreateChunk : MonoBehaviour
     {
-        [MenuItem("MapGeneration/Create/Chunk")]
+        [MenuItem("Assets/Create/MapGeneration/Chunk")]
         public static void CreateDefaultChunk()
         {
             var prefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Templates/defaultChunk.prefab", typeof(GameObject)) as GameObject;

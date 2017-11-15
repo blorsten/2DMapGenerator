@@ -150,6 +150,7 @@ namespace MapGeneration
             map.MapBlueprint.StartPostProcess(map);
 
             map.MapDataSaver.LoadPersistentData();
+
         }
 
         /// <summary>

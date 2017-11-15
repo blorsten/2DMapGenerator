@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using MapGeneration.Algorithm;
+using UnityEngine;
 
 namespace MapGeneration.ConditionalChunks
 {
@@ -9,7 +10,7 @@ namespace MapGeneration.ConditionalChunks
     [CreateAssetMenu(fileName = "Validate Neighbor", menuName = "MapGeneration/Conditional Chunks/ValidateNeighbor")]/// 
     public class ValidateNeighbor : ValidationEntry
     {
-        [SerializeField] private DrunkardWalkAlgorithm.CardinalDirections _direction;
+        [SerializeField] private PathAlgorithm.CardinalDirections _direction;
         [SerializeField] private GameObject __chunkToCheck;
 
         public override bool Validate(Map map, ChunkHolder chunkHolder)
