@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using ChunkExtension;
+using MapGeneration.Algorithm;
 using UnityEngine;
 
 namespace MapGeneration
