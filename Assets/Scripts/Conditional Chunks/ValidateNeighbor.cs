@@ -11,13 +11,14 @@ namespace MapGeneration.ConditionalChunks
     public class ValidateNeighbor : ValidationEntry
     {
         [SerializeField] private PathAlgorithm.CardinalDirections _direction;
-        [SerializeField] private GameObject __chunkToCheck;
+        [SerializeField, Tooltip("Leave empty if neighbor should be empty")]
+        private GameObject __chunkToCheck;
 
         public override bool Validate(Map map, ChunkHolder chunkHolder)
         {
             foreach (var item in map.GetNeighbor(chunkHolder, _direction))
             {
-                if (item.Prefab != null)
+                if (item.Prefab != __chunkToCheck)
                     return false;
             }
 
