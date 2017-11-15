@@ -26,9 +26,12 @@ namespace MapGeneration
             {
                 Connection connection = chunk.Connections.FirstOrDefault(x => x.Position == position);
                 if (connection != null)
+                {
                     connection.Type = BrushConnectionType;
+                    connection.Chunk = chunk;
+                }
                 else
-                    chunk.Connections.Add(new Connection(position,BrushConnectionType));
+                    chunk.Connections.Add(new Connection(position,BrushConnectionType,chunk));
             }
             base.Paint(gridLayout, brushTarget, position);
         }
