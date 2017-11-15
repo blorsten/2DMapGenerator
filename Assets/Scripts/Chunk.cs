@@ -104,7 +104,7 @@ namespace MapGeneration
                         transform.position + Vector3.left * (Width / 2f));
             }
 
-            if (!(!_showConnectionWhenPlay && Application.isPlaying))
+            if (!(!_showConnectionWhenPlay && Application.isPlaying) && Enviorment)
             {
                 foreach (var c in Connections)
                 {
@@ -129,7 +129,7 @@ namespace MapGeneration
                 }
             }
 
-            if (!(!_showEdgesWhenPlay && Application.isPlaying))
+            if (!(!_showEdgesWhenPlay && Application.isPlaying) && Enviorment)
             {
                 Gizmos.color = Color.white;
                 Vector2 gridSize = new Vector2(Width, Height);
