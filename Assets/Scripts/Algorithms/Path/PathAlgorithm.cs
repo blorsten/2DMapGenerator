@@ -84,6 +84,7 @@ namespace MapGeneration.Algorithm
                     //Reset candidates.
 
                     ResetDirectionCandidates();
+                    map.EndChunk = MarkedChunks.LastOrDefault();
                     return true;
                 }
 
@@ -92,7 +93,6 @@ namespace MapGeneration.Algorithm
             else
                 DirectionCandidates.Remove(NextDirection);
 
-            map.EndChunk = MarkedChunks.LastOrDefault();
             return false;
         }
     }

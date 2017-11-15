@@ -25,25 +25,46 @@ namespace MapGeneration.Algorithm
             Vector2Int startPoint = map.Random.Range(Vector2Int.zero, map.MapBlueprint.GridSize);
 
             //The first chunk is marked.
-            var firstChunk = map.Grid[startPoint.x, startPoint.y];
-            MarkedChunks.Enqueue(firstChunk);
-            map.StartChunk = firstChunk;
-            firstChunk.Prefab = usableChunks.FirstOrDefault();
-
-            Vector2Int currentPos = startPoint;
-
-            //We create a list of all the possible directions for the walk, based from the enum.
-            ResetDirectionCandidates();
-
-            //While we still have more chunks to mark and it hasn't gone stuck yet, keep marking.
-            while (MarkedChunks.Count <= _pathLength && DirectionCandidates.Any())
-                FindNextChunk(map, usableChunks, ref currentPos);
+            StartWalk(map, usableChunks, startPoint);
         }
 
         public override void PostProcess(Map map, List<Chunk> usableChunks)
         {
             BackTrackChunks(MarkedChunks, DirectionsTaken);
             base.PostProcess(map, usableChunks);
+        }
+
+        protected virtual bool StartWalk(Map map, List<Chunk> usableChunks, Vector2Int startPosition)
+        {
+            //The first chunk is marked.
+            var firstChunk = map.Grid[startPosition.x, startPosition.y];
+
+            if (!MarkedChunks.Contains(firstChunk))
+                MarkedChunks.Enqueue(firstChunk);
+
+            map.StartChunk = firstChunk;
+            firstChunk.Prefab = usableChunks.FirstOrDefault();
+
+            Vector2Int currentPos = startPosition;
+
+            //We create a list of all the possible directions for the walk, based from the enum.
+            ResetDirectionCandidates();
+
+            int iterations = 0;
+
+            //While we still have more chunks to mark and it hasn't gone stuck yet, keep marking.
+            while (MarkedChunks.Count <= _pathLength && DirectionCandidates.Any())
+            {
+                if (!FindNextChunk(map, usableChunks, ref currentPos) && iterations++ == 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            return true;
         }
     }
 }
