@@ -33,7 +33,6 @@ namespace MapGeneration
                 else
                     chunk.Connections.Add(new Connection(position,BrushConnectionType,chunk));
             }
-            base.Paint(gridLayout, brushTarget, position);
         }
 
 
@@ -48,7 +47,6 @@ namespace MapGeneration
                 if (connection != null)
                     chunk.Connections.Remove(connection);
             }
-            base.Erase(gridLayout, brushTarget, position);
 
 
         }

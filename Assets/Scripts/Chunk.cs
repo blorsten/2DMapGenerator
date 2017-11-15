@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using MapGeneration.Extensions;
 
 namespace MapGeneration
 {
@@ -106,26 +107,33 @@ namespace MapGeneration
 
             if (!(!_showConnectionWhenPlay && Application.isPlaying) && Enviorment)
             {
+                Gizmos.color = new Color(231f / 255f, 76f / 255f, 60f / 255f);
+                 
                 foreach (var c in Connections)
                 {
+                    Vector3 cellPosition = Enviorment.GetCellCenterWorld(c.Position);
+                    Vector2 cellSize = Enviorment.cellSize;
+
+                    Vector3 top = new Vector3(cellPosition.x, cellPosition.y + cellSize.y / 2);
+                    Vector3 bottom = new Vector3(cellPosition.x, cellPosition.y - cellSize.y / 2);
+                    Vector3 right = new Vector3(cellPosition.x + cellSize.x / 2, cellPosition.y);
+                    Vector3 left = new Vector3(cellPosition.x - cellSize.x / 2, cellPosition.y);
+
                     switch (c.Type)
                     {
                         case ConnectionType.Top:
-                            Gizmos.color = Color.blue;
+                            GizmoUtilities.DrawArrow(top,ArrowDirection.Up);
                             break;
                         case ConnectionType.Bottom:
-                            Gizmos.color = Color.green;
+                            GizmoUtilities.DrawArrow(bottom, ArrowDirection.Down);
                             break;
                         case ConnectionType.Left:
-                            Gizmos.color = Color.red;
+                            GizmoUtilities.DrawArrow(left, ArrowDirection.Left);
                             break;
                         case ConnectionType.Right:
-                            Gizmos.color = Color.magenta;
+                            GizmoUtilities.DrawArrow(right, ArrowDirection.Right);
                             break;
                     }
-                    Gizmos.DrawCube(Enviorment.GetCellCenterWorld(c.Position),
-                        Enviorment.cellSize / 4);
-
                 }
             }
 
