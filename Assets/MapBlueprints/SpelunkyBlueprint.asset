@@ -18,7 +18,7 @@ MonoBehaviour:
   _specifyChunkSize: 0
   _chunkSize: {x: 10, y: 8}
   _tileSize: 1
-  _userSeed: 1337
+  _userSeed: 0
   __whitelistedChunks:
   - {fileID: 114946033942520992, guid: 63d553f5232ab9d4d9f3fd8a50af0fc9, type: 2}
   - {fileID: 114941419155164888, guid: 6d4b5c2e89dcd9d4a82c3d2756fcdbce, type: 2}

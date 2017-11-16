@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 114946033942520992}
   - component: {fileID: 2569400268001777612}
   - component: {fileID: 114160238530807654}
-  - component: {fileID: 114578610961299344}
   m_Layer: 0
   m_Name: SpelunkyChunk
   m_TagString: Untagged
@@ -88,17 +87,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _chunk: {fileID: 114946033942520992}
   _exitFillers: []
---- !u!114 &114578610961299344
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1360773334679520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f60627f4252f6bb4e80ab9ff226ae40e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114946033942520992
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -211,7 +199,6 @@ MonoBehaviour:
       _bottomOpen: 0
       _leftOpen: 0
       _rightOpen: 0
-    _position: {x: 0, y: 0}
   _showConnectionWhenPlay: 1
   _showBacktrackingWhenPlay: 1
   _showEdgesWhenPlay: 1

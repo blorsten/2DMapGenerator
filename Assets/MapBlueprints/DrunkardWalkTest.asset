@@ -13,10 +13,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _algorithmStack:
   - {fileID: 11400000, guid: 0e5b4a0a9086c5344bb0bc144b9d28ce, type: 2}
-  - {fileID: 11400000, guid: 980311384abc5bb46a46461349ad1e6f, type: 2}
   _gridSize: {x: 10, y: 10}
   _specifyChunkSize: 0
-  _chunkSize: {x: 3, y: 3}
+  _chunkSize: {x: 4, y: 4}
   _tileSize: 0
   _userSeed: 0
   __whitelistedChunks: []

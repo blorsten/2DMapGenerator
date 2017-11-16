@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using MapGeneration.Algorithm;
 using Random = System.Random;
 using MapGeneration.Extensions;
 using MapGeneration.SaveSystem;
+using MapGeneration.ConditionalChunks;
 using UnityEngine;
 
 namespace MapGeneration
@@ -51,6 +55,90 @@ namespace MapGeneration
             }
 
             MapDataSaver = mapDataSaver ?? new MapDataSaver(this);
+        }
+
+        /// <summary>
+        /// Paces a chunk in a chunkholder if it validates
+        /// </summary>
+        /// <param name="chunkHolder">Where to place</param>
+        /// <param name="chunk">Chunk to place</param>
+        /// <returns>Wheter the chunk was placed or not</returns>
+        public bool Place(ChunkHolder chunkHolder, Chunk chunk)
+        {
+            if (chunk is ConditionalChunk)
+            {
+                if ((chunk as ConditionalChunk).Validate(this, chunkHolder))
+                {
+                    chunkHolder.Prefab = chunk;
+                    return true;
+                }
+
+                return false;
+            }
+
+            chunkHolder.Prefab = chunk;
+            return true;
+        }
+
+        /// <summary>
+        /// Gets all the neighboring chunks
+        /// </summary>
+        /// <param name="chunkHolder">Chunkholder</param>
+        /// <returns>array with neighbors</returns>
+        public List<ChunkHolder> GetNeighbor(ChunkHolder chunkHolder)
+        {
+            return GetNeighbor(chunkHolder, 
+                PathAlgorithm.CardinalDirections.Top |
+                PathAlgorithm.CardinalDirections.Bottom |
+                PathAlgorithm.CardinalDirections.Right |
+                PathAlgorithm.CardinalDirections.Left);
+        }
+
+        /// <summary>
+        /// Gets the neighbors in the given directions
+        /// </summary>
+        /// <param name="chunkHolder">Chunkholder</param>
+        /// <param name="directions">Directions to get</param>
+        /// <returns>array with neighbors</returns>
+        public List<ChunkHolder> GetNeighbor(ChunkHolder chunkHolder, PathAlgorithm.CardinalDirections directions)
+        {
+            List<ChunkHolder> listToReturn = new List<ChunkHolder>();
+            bool done = false;
+
+            for (int x = 0; x < Grid.GetLength(0); x++)
+            {
+                for (int y = 0; y < Grid.GetLength(1); y++)
+                {
+                    if (Grid[x, y] == chunkHolder)
+                    {
+                        if(directions == PathAlgorithm.CardinalDirections.Top &&
+                            y + 1 < Grid.GetLength(1))
+                            listToReturn.Add(Grid[x,y+1]);
+
+                        if(directions == PathAlgorithm.CardinalDirections.Bottom &&
+                            y - 1 > -1)
+                            listToReturn.Add(Grid[x,y-1]);
+
+                        if(directions == PathAlgorithm.CardinalDirections.Right &&
+                            x - 1 > -1)
+                            listToReturn.Add(Grid[x -1, y]);
+
+                        if (directions == PathAlgorithm.CardinalDirections.Left &&
+                            x +1 < Grid.GetLength(0))
+                            listToReturn.Add(Grid[x +1, y]);
+
+                        done = true;
+                    }
+
+                    if (done)
+                        break;
+                }
+
+                if (done)
+                    break;
+            }
+
+            return listToReturn;
         }
 
         /// <summary>
