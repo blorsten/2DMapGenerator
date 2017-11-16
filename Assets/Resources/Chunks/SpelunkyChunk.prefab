@@ -54,7 +54,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1360773334679520}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -26, z: 0}
+  m_LocalPosition: {x: 6.345872, y: -14.490765, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4034929015009762}
@@ -105,7 +105,25 @@ MonoBehaviour:
   _bottomOpen: 0
   _leftOpen: 0
   _rightOpen: 0
-  _connections:
+  _tileData:
+  - _position: {x: 0, y: 1, z: 0}
+    _type: 2
+    _chunk: {fileID: 114946033942520992}
+  - _position: {x: 0, y: 2, z: 0}
+    _type: 2
+    _chunk: {fileID: 114946033942520992}
+  - _position: {x: 0, y: 3, z: 0}
+    _type: 2
+    _chunk: {fileID: 114946033942520992}
+  - _position: {x: 0, y: 4, z: 0}
+    _type: 2
+    _chunk: {fileID: 114946033942520992}
+  - _position: {x: 0, y: 5, z: 0}
+    _type: 2
+    _chunk: {fileID: 114946033942520992}
+  - _position: {x: 0, y: 6, z: 0}
+    _type: 2
+    _chunk: {fileID: 114946033942520992}
   - _position: {x: 1, y: 7, z: 0}
     _type: 0
     _chunk: {fileID: 114946033942520992}
@@ -130,6 +148,24 @@ MonoBehaviour:
   - _position: {x: 8, y: 7, z: 0}
     _type: 0
     _chunk: {fileID: 114946033942520992}
+  - _position: {x: 9, y: 6, z: 0}
+    _type: 3
+    _chunk: {fileID: 114946033942520992}
+  - _position: {x: 9, y: 5, z: 0}
+    _type: 3
+    _chunk: {fileID: 114946033942520992}
+  - _position: {x: 9, y: 4, z: 0}
+    _type: 3
+    _chunk: {fileID: 114946033942520992}
+  - _position: {x: 9, y: 3, z: 0}
+    _type: 3
+    _chunk: {fileID: 114946033942520992}
+  - _position: {x: 9, y: 2, z: 0}
+    _type: 3
+    _chunk: {fileID: 114946033942520992}
+  - _position: {x: 9, y: 1, z: 0}
+    _type: 3
+    _chunk: {fileID: 114946033942520992}
   - _position: {x: 1, y: 0, z: 0}
     _type: 1
     _chunk: {fileID: 114946033942520992}
@@ -153,42 +189,6 @@ MonoBehaviour:
     _chunk: {fileID: 114946033942520992}
   - _position: {x: 8, y: 0, z: 0}
     _type: 1
-    _chunk: {fileID: 114946033942520992}
-  - _position: {x: 0, y: 6, z: 0}
-    _type: 2
-    _chunk: {fileID: 114946033942520992}
-  - _position: {x: 0, y: 5, z: 0}
-    _type: 2
-    _chunk: {fileID: 114946033942520992}
-  - _position: {x: 0, y: 4, z: 0}
-    _type: 2
-    _chunk: {fileID: 114946033942520992}
-  - _position: {x: 0, y: 3, z: 0}
-    _type: 2
-    _chunk: {fileID: 114946033942520992}
-  - _position: {x: 0, y: 2, z: 0}
-    _type: 2
-    _chunk: {fileID: 114946033942520992}
-  - _position: {x: 0, y: 1, z: 0}
-    _type: 2
-    _chunk: {fileID: 114946033942520992}
-  - _position: {x: 9, y: 6, z: 0}
-    _type: 3
-    _chunk: {fileID: 114946033942520992}
-  - _position: {x: 9, y: 5, z: 0}
-    _type: 3
-    _chunk: {fileID: 114946033942520992}
-  - _position: {x: 9, y: 4, z: 0}
-    _type: 3
-    _chunk: {fileID: 114946033942520992}
-  - _position: {x: 9, y: 3, z: 0}
-    _type: 3
-    _chunk: {fileID: 114946033942520992}
-  - _position: {x: 9, y: 2, z: 0}
-    _type: 3
-    _chunk: {fileID: 114946033942520992}
-  - _position: {x: 9, y: 1, z: 0}
-    _type: 3
     _chunk: {fileID: 114946033942520992}
   _chunkBehavior: {fileID: 114160238530807654}
   _enviorment: {fileID: 8195094280621685034}
