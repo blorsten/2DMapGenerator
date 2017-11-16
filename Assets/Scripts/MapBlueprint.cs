@@ -13,6 +13,8 @@ namespace MapGeneration
     [CreateAssetMenu(fileName = "new Map Blueprint", menuName = "MapGeneration/CreateBlueprint")]
     public class MapBlueprint : ScriptableObject
     {
+        private readonly List<MapGenerationAlgorithm> _instancedAlgorithms = new List<MapGenerationAlgorithm>();
+
         [SerializeField] private List<MapGenerationAlgorithm> _algorithmStack;
         [SerializeField] private Vector2Int _gridSize;
         [SerializeField] private bool _specifyChunkSize;
@@ -33,17 +35,18 @@ namespace MapGeneration
         /// <param name="map">map</param>
         public void Generate(Map map)
         {
+            //If we havent instantiated any of the used algorithms, do so.
+            _instancedAlgorithms.Clear();
+            foreach (var algorithm in _algorithmStack)
+                if (algorithm)
+                    _instancedAlgorithms.Add(Instantiate(algorithm));
+
             //Get a list of all the usable chunks.
-            List<Chunk> usabledChunks = GetUsableChunks();
+            List<Chunk> usableChunks = GetUsableChunks();
 
             //If we got any algorithms, go through them and process them.
-            if (_algorithmStack != null && _algorithmStack.Any())
-            {
-                foreach (MapGenerationAlgorithm mapGenerationAlgorithm in _algorithmStack)
-                {
-                    mapGenerationAlgorithm.Process(map, usabledChunks);
-                }
-            }
+            if (_instancedAlgorithms != null && _instancedAlgorithms.Any())
+                _instancedAlgorithms.ForEach(algorithm => algorithm.Process(map, usableChunks));
         }
 
         /// <summary>
@@ -53,16 +56,11 @@ namespace MapGeneration
         public void StartPostProcess(Map map)
         {
             //Get a list of all the usable chunks.
-            List<Chunk> usabledChunks = GetUsableChunks();
+            List<Chunk> usableChunks = GetUsableChunks();
 
             //If we got any algorithms, go through them and post process them.
-            if (_algorithmStack != null && _algorithmStack.Any())
-            {
-                foreach (MapGenerationAlgorithm mapGenerationAlgorithm in _algorithmStack)
-                {
-                    mapGenerationAlgorithm.PostProcess(map, usabledChunks);
-                }
-            }
+            if (_instancedAlgorithms != null && _instancedAlgorithms.Any())
+                _instancedAlgorithms.ForEach(algorithm => algorithm.PostProcess(map, usableChunks));
         }
 
         /// <summary>

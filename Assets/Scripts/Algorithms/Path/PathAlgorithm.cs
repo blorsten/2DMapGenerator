@@ -21,15 +21,17 @@ namespace MapGeneration.Algorithm
 
         protected CardinalDirections NextDirection;
         protected Queue<ChunkHolder> MarkedChunks = new Queue<ChunkHolder>();
-        protected Queue<CardinalDirections> DirectionsTaken = new Queue<CardinalDirections>();
+
+        //Collection used to store the road the path algorithm took.
+        protected Queue<KeyValuePair<ChunkHolder, CardinalDirections?>> Road = new Queue<KeyValuePair<ChunkHolder, CardinalDirections?>>();
+
+        //Collection used to store all the directions the path algorithm can take.
         protected List<CardinalDirections> DirectionCandidates;
 
         public override void Process(Map map, List<Chunk> usableChunks)
         {
             base.Process(map, usableChunks);
-            MarkedChunks.Clear();
-            DirectionsTaken.Clear();
-            ResetDirectionCandidates();
+            Reset();
         }
 
         /// <summary>
@@ -40,15 +42,47 @@ namespace MapGeneration.Algorithm
         protected void BackTrackChunks(Queue<ChunkHolder> chunks, Queue<CardinalDirections> directions)
         {
             CardinalDirections currentDirection = CardinalDirections.Bottom;
+
+            //While there is still chunks to make connections from do so.
             while (chunks.Count > 0)
             {
-                ChunkHolder currentChunk = chunks.Dequeue();
+                ChunkHolder currentChunk = chunks.Dequeue(); //Grab a chunkholder from queue
 
+                //If there still are directions, take one.
                 if (directions.Count > 0)
                     currentDirection = directions.Dequeue();
 
+                //Set a direction from current to previous.
                 if (currentChunk.Instance && chunks.Count > 0)
                     SetChunkConnections(currentDirection, currentChunk, chunks.First());
+            }
+        }
+
+        /// <summary>
+        /// Backtraks both queues
+        /// </summary>
+        /// <param name="road"></param>
+        protected void BackTrackChunks(Queue<KeyValuePair<ChunkHolder, CardinalDirections?>> road)
+        {
+            //Dont make any connections if the road are not long enough.
+            if (road.Count < 2)
+                return;
+
+            CardinalDirections currentDirection = CardinalDirections.Bottom;
+
+            //Grab the first chunkholder, which doesnt have a from direction.
+            ChunkHolder current = road.Dequeue().Key;
+
+            while (road.Count > 0)
+            {
+                KeyValuePair<ChunkHolder, CardinalDirections?> currentChunk = road.Dequeue();
+
+                if (currentChunk.Value != null)
+                    currentDirection = currentChunk.Value.Value;
+
+                SetChunkConnections(currentDirection, current, currentChunk.Key);
+
+                current = currentChunk.Key;
             }
         }
 
@@ -66,8 +100,8 @@ namespace MapGeneration.Algorithm
         /// <param name="map">Map it works on.</param>
         /// <param name="usableChunks">All usable chunks.</param>
         /// <param name="currentPos"></param>
-        /// <returns>Returns true if it found one, false if it dident.</returns>
-        protected bool FindNextChunk(Map map, List<Chunk> usableChunks, ref Vector2Int currentPos)
+        /// <returns>Returns the chunkholder it found and what direction it took. Is null if it dident find a new chunkholder.</returns>
+        protected KeyValuePair<ChunkHolder, CardinalDirections?>? FindNextChunk(Map map, List<Chunk> usableChunks, ref Vector2Int currentPos)
         {
             //find the next direction among the candidates.
             NextDirection = DirectionCandidates[map.Random.Range(0, DirectionCandidates.Count)];
@@ -83,9 +117,6 @@ namespace MapGeneration.Algorithm
                 //if the next chunk isnt marked, continue the process
                 if (!MarkedChunks.Contains(nextChunk))
                 {
-                    //enqueue the direction that was taken
-                    DirectionsTaken.Enqueue(NextDirection);
-
                     //set current position to the next position
                     currentPos = nextPosition.Value;
 
@@ -94,11 +125,12 @@ namespace MapGeneration.Algorithm
 
                     //Change the prefab on the found chunk to another one. TODO: Find another way to mark marked chunks.
                     nextChunk.Prefab = usableChunks.FirstOrDefault();
+                    
                     //Reset candidates.
-
                     ResetDirectionCandidates();
+
                     map.EndChunk = MarkedChunks.LastOrDefault();
-                    return true;
+                    return new KeyValuePair<ChunkHolder, CardinalDirections?>(nextChunk, NextDirection);
                 }
 
                 DirectionCandidates.Remove(NextDirection);
@@ -106,7 +138,15 @@ namespace MapGeneration.Algorithm
             else
                 DirectionCandidates.Remove(NextDirection);
 
-            return false;
+            return null;
+        }
+
+        protected override void Reset()
+        {
+            base.Reset();
+            MarkedChunks.Clear();
+            ResetDirectionCandidates();
+            Road.Clear();
         }
     }
 }

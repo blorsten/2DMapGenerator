@@ -48,8 +48,6 @@ namespace MapGeneration
         [SerializeField] private bool _showBacktrackingWhenPlay = true;
         [SerializeField] private bool _showEdgesWhenPlay = true;
 
-
-
         //Properties for generel properties
         public int Width{ get { return _width; } set { _width = value; }}
         public int Height{get { return _height; } set { _height = value; }}
