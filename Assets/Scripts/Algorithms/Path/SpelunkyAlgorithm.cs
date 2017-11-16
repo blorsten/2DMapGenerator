@@ -25,6 +25,7 @@ namespace MapGeneration.Algorithm
             MarkedChunks.Enqueue(firstChunk);
             map.StartChunk = firstChunk;
             map.Place(firstChunk, usableChunks.FirstOrDefault());
+            Road.Enqueue(new KeyValuePair<ChunkHolder, CardinalDirections?>(firstChunk, null));
 
             Vector2Int currentPos = startPoint;
 
@@ -34,13 +35,20 @@ namespace MapGeneration.Algorithm
 
             //If there are no more candidates, the work is done.
             while (DirectionCandidates.Count > 0)
-                if (FindNextChunk(map, usableChunks, ref currentPos))
+            {
+                var nextChunk = FindNextChunk(map, usableChunks, ref currentPos);
+
+                if (nextChunk != null)
+                {
+                    Road.Enqueue(nextChunk.GetValueOrDefault());
                     DirectionCandidates.Remove(CardinalDirections.Top);
+                }
+            }
         }
 
         public override void PostProcess(Map map, List<Chunk> usableChunks)
         {
-            BackTrackChunks(MarkedChunks, DirectionsTaken);
+            BackTrackChunks(Road);
             base.PostProcess(map, usableChunks);
         }
     }

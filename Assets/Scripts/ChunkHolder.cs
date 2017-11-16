@@ -13,8 +13,13 @@ namespace MapGeneration
     {
         [SerializeField] private Chunk __prefab;
         [SerializeField] private ChunkOpenings _chunkOpenings;
+        [SerializeField] private Vector2Int _position;
 
-        public Vector2Int Position { get; set; }
+        public Vector2Int Position
+        {
+            get { return _position; }
+            set { _position = value; }
+        }
 
         public Chunk Prefab
         {
@@ -25,13 +30,13 @@ namespace MapGeneration
 
         public ChunkOpenings ChunkOpenings
         {
-            get { if(_chunkOpenings == null)_chunkOpenings = new ChunkOpenings(); return _chunkOpenings;}
+            get { return _chunkOpenings ?? (_chunkOpenings = new ChunkOpenings()); }
             set { _chunkOpenings = value; }
         }
 
         public ChunkHolder(Vector2Int position)
         {
-            this.Position = position;
+            Position = position;
         }
         /// <summary>
         /// Instantiate Prefab and save in Instance

@@ -14,25 +14,30 @@ namespace MapGeneration.Algorithm
     [CreateAssetMenu(fileName = "Dead End Algorithm", menuName = "MapGeneration/Algorithms/DeadEndMaker")]
     public class DeadEndMaker : DrunkardWalkAlgorithm
     {
-        [SerializeField] private int _nrOfDeadEnds;
+        private List<Queue<KeyValuePair<ChunkHolder, CardinalDirections?>>> _roads;
 
-        private List<ChunkHolder> _usedChunks = new List<ChunkHolder>();
-
+        //Contains all the chunks it should start a drunkard walk from.
         private List<ChunkHolder> _myMarkedChunks;
+
+        //How many entanglements can the dead end maker make.
+        [SerializeField] private int _nrOfDeadEnds;
 
         public override void Process(Map map, List<Chunk> usableChunks)
         {
-            _usedChunks.Clear();
+            //Reset all collections
+            Reset();
 
+            //Find out which chunks has aleready been changed by other algorithms.
             FindMarkedChunks(map);
-            base.Process(map, usableChunks);
+
+            //Then start the dead end maker.
+            StartWalk(map, usableChunks, Vector2Int.zero);
         }
 
-        public override void PostProcess(Map map, List<Chunk> usableChunks)
-        {
-            base.PostProcess(map, usableChunks);
-        }
-
+        /// <summary>
+        /// Find all chunkholders that has been changed by algorithms.
+        /// </summary>
+        /// <param name="map"></param>
         private void FindMarkedChunks(Map map)
         {
             foreach (ChunkHolder chunk in map.Grid)
@@ -44,46 +49,61 @@ namespace MapGeneration.Algorithm
             }
         }
 
-        protected override bool StartWalk(Map map, List<Chunk> usableChunks, Vector2Int startPosition)
+        public override void PostProcess(Map map, List<Chunk> usableChunks)
         {
+            //Backtacks all roads that has been created.
+            _roads.ForEach(BackTrackChunks);
+        }
+
+        /// <summary>
+        /// Starts the dead ens maker.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="usableChunks"></param>
+        /// <param name="startPosition"></param>
+        /// <returns></returns>
+        protected override Queue<KeyValuePair<ChunkHolder, CardinalDirections?>> StartWalk(Map map, List<Chunk> usableChunks, Vector2Int startPosition)
+        {
+            //Save references to start and end.
             ChunkHolder start = map.StartChunk;
             ChunkHolder end = map.EndChunk;
 
+            //Create a new queue for the upcomming road.
+            _roads = new List<Queue<KeyValuePair<ChunkHolder, CardinalDirections?>>>();
+
+            //Create a copy of the marked chunks, this will be all the chunks we can visit.
             _myMarkedChunks = MarkedChunks.ToList();
+
+            //Iterate until we reached x number of dead ends.
             for (int i = 0; i < _nrOfDeadEnds; i++)
             {
-                if (_usedChunks.Count >= MarkedChunks.Count || !_myMarkedChunks.Any())
-                {
-                    return true;
-                }
+                //If we dont have any marked chunks to start one, break.
+                if (!_myMarkedChunks.Any())
+                    return null;
 
                 ChunkHolder startChunk = _myMarkedChunks[map.Random.Range(0, _myMarkedChunks.Count)];
                 startPosition = startChunk.Position;
 
-                if (!_usedChunks.Contains(startChunk))
-                {
-                    _usedChunks.Add(startChunk);
-                }
-                else
-                {
-                    i--;
-                }
+                //Tries and do a drunkard walk on the marked chunk.
+                Queue<KeyValuePair<ChunkHolder, CardinalDirections?>> newRoad = base.StartWalk(map, usableChunks, startPosition);
 
-
-                if (base.StartWalk(map, usableChunks, startPosition))
+                //If it succeeded remove it from start candidates and add it to the main road.
+                if (newRoad != null)
                 {
                     _myMarkedChunks.Remove(startChunk);
-                }
-                else
+                    _roads.Add(newRoad);
+                } 
+                else 
                 {
+                    //If it failed to find a new road, dont count it as a dead end iteration.
                     i--;
                 }
-
             }
 
-            map.StartChunk = start;
+            //Now that we have made alot of dead ends, set the start and end to the first ones.
+            map.StartChunk = start; 
             map.EndChunk = end;
-            return true;
+            return null;
         }
     }
 }
