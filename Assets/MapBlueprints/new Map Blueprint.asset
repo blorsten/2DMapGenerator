@@ -9,13 +9,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bc37a4d3022d22e4f8dda53e488456b8, type: 3}
-  m_Name: DeadEndTester
+  m_Name: new Map Blueprint
   m_EditorClassIdentifier: 
   _algorithmStack:
   - {fileID: 11400000, guid: 15226341bb4f718438db7e3bc6a4ee4c, type: 2}
   - {fileID: 11400000, guid: 88f213a205c1c9044bb92bc039b7a5b8, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 980311384abc5bb46a46461349ad1e6f, type: 2}
-  _gridSize: {x: 4, y: 4}
+  _gridSize: {x: 3, y: 40}
   _specifyChunkSize: 0
   _chunkSize: {x: 10, y: 8}
   _tileSize: 0
