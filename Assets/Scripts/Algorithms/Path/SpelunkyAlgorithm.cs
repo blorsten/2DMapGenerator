@@ -2,6 +2,7 @@
 using UnityEngine;
 using MapGeneration.Extensions;
 using System.Linq;
+using ListExstention;
 
 namespace MapGeneration.Algorithm
 {
@@ -24,7 +25,7 @@ namespace MapGeneration.Algorithm
             ChunkHolder firstChunk = map.Grid[startPoint.x, startPoint.y];
             MarkedChunks.Enqueue(firstChunk);
             map.StartChunk = firstChunk;
-            map.Place(firstChunk, usableChunks.FirstOrDefault());
+            map.Place(firstChunk, usableChunks.RandomEntry(map.Random));
             Road.Enqueue(new KeyValuePair<ChunkHolder, CardinalDirections?>(firstChunk, null));
 
             Vector2Int currentPos = startPoint;

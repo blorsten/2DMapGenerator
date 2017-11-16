@@ -13,3 +13,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _direction: 0
   __chunkToCheck: {fileID: 0}
+  _chunkToSpawn: {fileID: 114780497894023618, guid: 728eb2ca8e8e8cb4184a175d888cf35b,
+    type: 2}
