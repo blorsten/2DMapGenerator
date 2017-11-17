@@ -24,10 +24,11 @@ namespace MapGeneration.Extensions
         /// <param name="size">The size of the arrow</param>
         public static void DrawArrow(Vector3 position, ArrowDirection direction,float size = .5f)
         {
-            Vector3 shaftPosition = Vector3.zero;
-            Vector3 leftPosition = Vector3.zero;
-            Vector3 rightPosition = Vector3.zero;
+            Vector3 shaftPosition = Vector3.zero;//The middle part of the arrow
+            Vector3 leftPosition = Vector3.zero;//The left side of the arrow
+            Vector3 rightPosition = Vector3.zero;//The right side of the arrow
 
+            //This takes the diretion parameter and sets the postions for an arrow corresponding with the diretion
             switch (direction)
             {
                 case ArrowDirection.Up:
@@ -52,6 +53,7 @@ namespace MapGeneration.Extensions
                     break;
             }
 
+            //This draws the arrow
             UnityEngine.Gizmos.DrawLine(position,shaftPosition);
             UnityEngine.Gizmos.DrawLine(position,leftPosition);
             UnityEngine.Gizmos.DrawLine(position,rightPosition);
