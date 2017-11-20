@@ -65,6 +65,9 @@ namespace MapGeneration
         /// <returns>Wheter the chunk was placed or not</returns>
         public bool Place(ChunkHolder chunkHolder, Chunk chunk)
         {
+            if (chunkHolder.Prefab != null)
+                return false;
+
             if (chunk is ConditionalChunk)
             {
                 if ((chunk as ConditionalChunk).Validate(this, chunkHolder))
@@ -78,6 +81,24 @@ namespace MapGeneration
 
             chunkHolder.Prefab = chunk;
             return true;
+        }
+
+        /// <summary>
+        /// Gets the position of a chunkholder in the grid
+        /// </summary>
+        /// <param name="chunkHolder">Chunkholder</param>
+        /// <returns>Position</returns>
+        public Vector2Int GetChunkPos(ChunkHolder chunkHolder)
+        {
+            for (int x = 0; x < Grid.GetLength(0); x++)
+            {
+                for (int y = 0; y < Grid.GetLength(1); y++)
+                {
+                    if(Grid[x,y] == chunkHolder)
+                        return new Vector2Int(x, y);
+                }
+            }
+            throw new ArgumentOutOfRangeException("chunkHolder", "Chunkholder not in grid.");
         }
 
         /// <summary>

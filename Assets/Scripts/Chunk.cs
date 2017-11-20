@@ -87,7 +87,7 @@ namespace MapGeneration
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-            if (!(!_showBacktrackingWhenPlay && Application.isPlaying))
+            if (ChunkHolder != null && !(!_showBacktrackingWhenPlay && Application.isPlaying))
             {
                 if (ChunkHolder.ChunkOpenings.TopConnection)
                     Gizmos.DrawLine(this.transform.position,

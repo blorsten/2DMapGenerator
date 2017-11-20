@@ -2,6 +2,7 @@
 using UnityEngine;
 using System;
 using System.Linq;
+using ListExstention;
 using MapGeneration.Extensions;
 
 namespace MapGeneration.Algorithm
@@ -57,7 +58,7 @@ namespace MapGeneration.Algorithm
                 MarkedChunks.Enqueue(firstChunk);
 
             map.StartChunk = firstChunk;
-            map.Place(firstChunk, usableChunks.FirstOrDefault());
+            map.Place(firstChunk, usableChunks.RandomEntry(map.Random));
 
             Vector2Int currentPos = startPosition;
 

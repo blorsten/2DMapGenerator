@@ -18,16 +18,29 @@ namespace MapGeneration.ConditionalChunks
             {
                 if (!item.Validate(map, chunkHolder))
                 {
-                    DisApproved(map);
+                    DisApproved(map, chunkHolder);
                     return false;
                 }
             }
 
-            Approved(map);
+            Approved(map,chunkHolder);
             return true;
         }
 
-        public virtual void Approved(Map map) { }
-        public virtual void DisApproved(Map map) { }
+        public virtual void Approved(Map map, ChunkHolder chunkHolder)
+        {
+            foreach (var item in _validationStack)
+            {
+                item.Approved(map,chunkHolder);
+            }
+        }
+
+        public virtual void DisApproved(Map map, ChunkHolder chunkHolder)
+        {
+            foreach (var item in _validationStack)
+            {
+                item.DisApproved(map, chunkHolder);
+            }
+        }
     }
 }
