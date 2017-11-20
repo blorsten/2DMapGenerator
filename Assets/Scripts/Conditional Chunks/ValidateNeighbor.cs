@@ -31,7 +31,7 @@ namespace MapGeneration.ConditionalChunks
 
             foreach (var item in neighbors)
             {
-                if (item.Prefab != null)
+                if (item.Prefab != __chunkToCheck)
                     return false;
             }
 

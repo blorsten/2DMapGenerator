@@ -86,19 +86,19 @@ namespace MapGeneration
         /// <summary>
         /// Gets the position of a chunkholder in the grid
         /// </summary>
-        /// <param name="c">Chunkholder</param>
+        /// <param name="chunkHolder">Chunkholder</param>
         /// <returns>Position</returns>
-        public Vector2Int GetChunkPos(ChunkHolder c)
+        public Vector2Int GetChunkPos(ChunkHolder chunkHolder)
         {
             for (int x = 0; x < Grid.GetLength(0); x++)
             {
                 for (int y = 0; y < Grid.GetLength(1); y++)
                 {
-                    if(Grid[x,y] == c)
+                    if(Grid[x,y] == chunkHolder)
                         return new Vector2Int(x, y);
                 }
             }
-            throw new ArgumentOutOfRangeException("c", "Chunkholder not in grid.");
+            throw new ArgumentOutOfRangeException("chunkHolder", "Chunkholder not in grid.");
         }
 
         /// <summary>
