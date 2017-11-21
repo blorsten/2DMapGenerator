@@ -122,9 +122,9 @@ namespace MapGeneration.Algorithm
 
                     //enqueue the next chunk, so we know it is used.
                     MarkedChunks.Enqueue(nextChunk);
-
-                    //Change the prefab on the found chunk to another one. TODO: Find another way to mark marked chunks.
                     
+                    //Change the prefab on the found chunk to another one. TODO: Find another way to mark marked chunks.
+
                     //Reset candidates.
                     ResetDirectionCandidates();
 

@@ -15,41 +15,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 15226341bb4f718438db7e3bc6a4ee4c, type: 2}
   - {fileID: 11400000, guid: 88f213a205c1c9044bb92bc039b7a5b8, type: 2}
   - {fileID: 11400000, guid: 980311384abc5bb46a46461349ad1e6f, type: 2}
-  - {fileID: 11400000, guid: 525be36b77b57f64b95dfee16d43b9d3, type: 2}
   _gridSize: {x: 4, y: 4}
   _specifyChunkSize: 0
   _chunkSize: {x: 10, y: 8}
   _tileSize: 1
   _userSeed: 0
   __whitelistedChunks:
-  - {fileID: 114388877904034564, guid: 2142181738c919b4fb1074cf82c02e3d, type: 2}
-  - {fileID: 114757590520994812, guid: e80e5f99b9907f149beea1204abf4aa4, type: 2}
-  - {fileID: 114636449747279650, guid: 294bf0e5f4a621f4a8d387b784e89acd, type: 2}
-  - {fileID: 114982811240829234, guid: e5070a1bc2ab4f549962e133fe1cf426, type: 2}
-  - {fileID: 114703696231352310, guid: 4f98ed3e7d11ede458896a0a748095c8, type: 2}
-  - {fileID: 114435316827823030, guid: fe2edb3014268f7448d4b0fb5257ec0b, type: 2}
-  - {fileID: 114569385727250392, guid: 10daf4343033a5d478ab0a524c3d573c, type: 2}
-  - {fileID: 114994132734151666, guid: bf03e9f0869232141b27069e603dc5d0, type: 2}
-  - {fileID: 114295943903487292, guid: 2259343a4a60e93479efe3f2ffefc985, type: 2}
-  - {fileID: 114812716910522764, guid: 5fe463452e224fc418294b6dd7b7ec93, type: 2}
-  - {fileID: 114413286660229096, guid: 7cf753338f2adb349a2e25562b819f2e, type: 2}
-  - {fileID: 114278302058638458, guid: b850d1c8431755843ba679120cd330b2, type: 2}
-  - {fileID: 114788787391023292, guid: f70fa3b9451ce0d41a25a365cd8314c4, type: 2}
-  - {fileID: 114745790875449378, guid: dc2e20264cab70d4ca2ab4c33264b988, type: 2}
-  - {fileID: 114411381809765632, guid: 030a4ca028613db4aa8635a1a684daa1, type: 2}
-  - {fileID: 114287203569135020, guid: c2cf1165e1e20e045ba9d26b6df5da20, type: 2}
-  - {fileID: 114103835611523876, guid: 72e97db948760694c85dcf008889e16f, type: 2}
-  - {fileID: 114420257430524740, guid: f6f086ecfd8ffdc4dae36b6742020a60, type: 2}
-  - {fileID: 114208568241830090, guid: 62155cb577fa55f41afecb4d668c5384, type: 2}
-  - {fileID: 114195749810310678, guid: 42b9254f3a4b3a242875a6e6f2d00636, type: 2}
-  - {fileID: 114681986657142444, guid: 441a69bdec2e18a49848622f84701d5e, type: 2}
-  - {fileID: 114238239000005144, guid: 11c57341a5b297c45b1bc17514e3dba7, type: 2}
-  - {fileID: 114353373651252766, guid: 0dff6c6288e77984aaf012fa5435b858, type: 2}
-  - {fileID: 114962248582494906, guid: e1848560bd2424241a335e594286a8d4, type: 2}
-  - {fileID: 114728859798267840, guid: 342b5b2436a547c489a2c0251946e131, type: 2}
-  - {fileID: 114675047077522118, guid: fcc8b3a42d27b12448182ee3c41b475b, type: 2}
-  - {fileID: 114286252424926290, guid: aab7fb451db3a2741871d3fe38136a3a, type: 2}
-  - {fileID: 114526055357769824, guid: 1856b12b3b462ed4f90f0444efeb2c39, type: 2}
-  - {fileID: 114538120139386364, guid: 786d2c3f0f3f6f74c98d55de0b6ad188, type: 2}
-  - {fileID: 114104361915751932, guid: 69a5226307cd75a4aa11181bb7ce0e59, type: 2}
+  - {fileID: 114946033942520992, guid: 63d553f5232ab9d4d9f3fd8a50af0fc9, type: 2}
   __blacklistedChunks: []
