@@ -11,11 +11,13 @@ namespace MapGeneration
 
         [SerializeField] private MapBlueprint _currentBlueprint;
         [SerializeField] private Map _preExistingMap;
+        [SerializeField] private List<int> _savedSeeds;
 
         public Map ActiveMap { get; set; }
 
-        public Map PreExistingMap { get { return _preExistingMap; } set { _preExistingMap = value; } }
         public MapBlueprint CurrentBlueprint { get { return _currentBlueprint; } set { _currentBlueprint = value; } }
+        public Map PreExistingMap { get { return _preExistingMap; } set { _preExistingMap = value; } }
+        public List<int> SavedSeeds { get { return _savedSeeds; } set { _savedSeeds = value; } }
         public List<MapDataSaver> SavedMaps { get { return _savedMaps ?? (_savedMaps = new List<MapDataSaver>()); } }
 
         protected override void Awake()
@@ -102,6 +104,11 @@ namespace MapGeneration
         public Map Generate()
         {
             return Generate(CurrentBlueprint);
+        }
+
+        public Map Generate(int seed)
+        {
+            return Generate(CurrentBlueprint, seed);
         }
 
         /// <summary>
