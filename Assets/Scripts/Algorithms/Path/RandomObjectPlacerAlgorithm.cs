@@ -47,7 +47,7 @@ namespace MapGeneration
                                 instantiateObject = false;
                                 break;
                         }
-                        InstantiateRandomObect(ref objects,objectType, map,
+                        InstantiateRandomObect(ref objects,objectType, map.Grid[x, y].Instance,
                             map.Grid[x, y].Instance.Enviorment.GetCellCenterWorld(c.Position));
                     }
 
@@ -55,7 +55,7 @@ namespace MapGeneration
             }
     }
 
-        private void InstantiateRandomObect(ref List<MapObject> list, ObjectType type, Map map, Vector3 position )
+        private void InstantiateRandomObect(ref List<MapObject> list, ObjectType type, Chunk chunk, Vector3 position )
         {
             list.Clear();
             foreach (var o in ResourceHandler.Instance.Objects)
@@ -64,7 +64,7 @@ namespace MapGeneration
                     list.Add(o);
             }
             if (list.Count > 0)
-                Instantiate(list[Random.Range(0, list.Count)].gameObject, position, Quaternion.identity,map.transform);
+                Instantiate(list[Random.Range(0, list.Count)].gameObject, position, Quaternion.identity, chunk.transform);
             list.Clear();
         }
 }

@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4976963937326840}
   - component: {fileID: 114844111033599164}
   m_Layer: 0
-  m_Name: Spike
+  m_Name: Treasure
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,7 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5625e8e0523796349bbfc88fbcdb09c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 1
+  _type: 0
 --- !u!212 &212543591182786388
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -116,7 +116,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d3ca5dee00e48d844a0120362abcc538, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0316bfe2e1236d6449c9767453b6e031, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
