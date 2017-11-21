@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 114946033942520992}
   - component: {fileID: 2569400268001777612}
   - component: {fileID: 114160238530807654}
+  - component: {fileID: 114777189773369792}
   m_Layer: 0
   m_Name: SpelunkyChunk
   m_TagString: Untagged
@@ -87,6 +88,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _chunk: {fileID: 114946033942520992}
   _exitFillers: []
+--- !u!114 &114777189773369792
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1360773334679520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a24a8b37cb175d44887ad7b1330ea62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _showConnectionWhenPlay: 1
+  _showBacktrackingWhenPlay: 1
+  _showEdgesWhenPlay: 1
+  _gizmos: {fileID: 11400000, guid: d4b527a7799b05b4eb00028e2d202084, type: 2}
 --- !u!114 &114946033942520992
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -105,90 +121,19 @@ MonoBehaviour:
   _bottomOpen: 0
   _leftOpen: 0
   _rightOpen: 0
-  _tileData:
-  - _position: {x: 1, y: 7, z: 0}
-    _type: 0
+  _connections: []
+  _tileTileFlags:
+  - _position: {x: 4, y: 1, z: 0}
+    _type: 5
     _chunk: {fileID: 114946033942520992}
-  - _position: {x: 2, y: 7, z: 0}
-    _type: 0
+  - _position: {x: 5, y: 1, z: 0}
+    _type: 5
     _chunk: {fileID: 114946033942520992}
-  - _position: {x: 3, y: 7, z: 0}
-    _type: 0
+  - _position: {x: 6, y: 1, z: 0}
+    _type: 6
     _chunk: {fileID: 114946033942520992}
-  - _position: {x: 4, y: 7, z: 0}
-    _type: 0
-    _chunk: {fileID: 114946033942520992}
-  - _position: {x: 5, y: 7, z: 0}
-    _type: 0
-    _chunk: {fileID: 114946033942520992}
-  - _position: {x: 6, y: 7, z: 0}
-    _type: 0
-    _chunk: {fileID: 114946033942520992}
-  - _position: {x: 7, y: 7, z: 0}
-    _type: 0
-    _chunk: {fileID: 114946033942520992}
-  - _position: {x: 8, y: 7, z: 0}
-    _type: 0
-    _chunk: {fileID: 114946033942520992}
-  - _position: {x: 1, y: 0, z: 0}
-    _type: 1
-    _chunk: {fileID: 114946033942520992}
-  - _position: {x: 2, y: 0, z: 0}
-    _type: 1
-    _chunk: {fileID: 114946033942520992}
-  - _position: {x: 3, y: 0, z: 0}
-    _type: 1
-    _chunk: {fileID: 114946033942520992}
-  - _position: {x: 4, y: 0, z: 0}
-    _type: 1
-    _chunk: {fileID: 114946033942520992}
-  - _position: {x: 5, y: 0, z: 0}
-    _type: 1
-    _chunk: {fileID: 114946033942520992}
-  - _position: {x: 7, y: 0, z: 0}
-    _type: 1
-    _chunk: {fileID: 114946033942520992}
-  - _position: {x: 8, y: 0, z: 0}
-    _type: 1
-    _chunk: {fileID: 114946033942520992}
-  - _position: {x: 6, y: 0, z: 0}
-    _type: 1
-    _chunk: {fileID: 114946033942520992}
-  - _position: {x: 0, y: 6, z: 0}
-    _type: 2
-    _chunk: {fileID: 114946033942520992}
-  - _position: {x: 0, y: 5, z: 0}
-    _type: 2
-    _chunk: {fileID: 114946033942520992}
-  - _position: {x: 0, y: 4, z: 0}
-    _type: 2
-    _chunk: {fileID: 114946033942520992}
-  - _position: {x: 0, y: 3, z: 0}
-    _type: 2
-    _chunk: {fileID: 114946033942520992}
-  - _position: {x: 0, y: 2, z: 0}
-    _type: 2
-    _chunk: {fileID: 114946033942520992}
-  - _position: {x: 0, y: 1, z: 0}
-    _type: 2
-    _chunk: {fileID: 114946033942520992}
-  - _position: {x: 9, y: 1, z: 0}
-    _type: 3
-    _chunk: {fileID: 114946033942520992}
-  - _position: {x: 9, y: 2, z: 0}
-    _type: 3
-    _chunk: {fileID: 114946033942520992}
-  - _position: {x: 9, y: 3, z: 0}
-    _type: 3
-    _chunk: {fileID: 114946033942520992}
-  - _position: {x: 9, y: 4, z: 0}
-    _type: 3
-    _chunk: {fileID: 114946033942520992}
-  - _position: {x: 9, y: 5, z: 0}
-    _type: 3
-    _chunk: {fileID: 114946033942520992}
-  - _position: {x: 9, y: 6, z: 0}
-    _type: 3
+  - _position: {x: 3, y: 1, z: 0}
+    _type: 6
     _chunk: {fileID: 114946033942520992}
   _chunkBehavior: {fileID: 114160238530807654}
   _enviorment: {fileID: 8195094280621685034}
@@ -200,9 +145,6 @@ MonoBehaviour:
       _leftOpen: 0
       _rightOpen: 0
     _position: {x: 0, y: 0}
-  _showConnectionWhenPlay: 1
-  _showBacktrackingWhenPlay: 1
-  _showEdgesWhenPlay: 1
 --- !u!19719996 &2113883506638556750
 TilemapCollider2D:
   m_ObjectHideFlags: 1

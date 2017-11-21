@@ -20,6 +20,7 @@ namespace MapGeneration
         {
             base.Awake();
             UpdateResources();
+            UpdateObjects();
         }
 
         /// <summary>
@@ -39,7 +40,7 @@ namespace MapGeneration
         public void UpdateObjects()
         {
             Objects = new List<MapObject>();
-            Objects.AddRange(Resources.LoadAll<MapObject>("Objects"));
+            Objects.AddRange(Resources.LoadAll<MapObject>("MapObjects"));
         }
     }
 }
