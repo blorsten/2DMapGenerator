@@ -28,7 +28,7 @@ namespace MapGeneration
             if (chunk)
             {
                 //If a chunk in the tiledata list allready this position, replace it else create new
-                TileFlag connection = chunk.TileFlags.FirstOrDefault(x => x.Position == position);
+                TileFlag tileFlags = chunk.TileFlags.FirstOrDefault(x => x.Position == position);
                 TileType tileType = TileType.Top;
 
                 switch (BrushTileFlag)
@@ -46,13 +46,13 @@ namespace MapGeneration
                         tileType = TileType.FlyingSpawn;
                         break;
                 }
-                if (connection != null)
+                if (tileFlags != null)
                 {
-                    connection.Type = tileType;
-                    connection.Chunk = chunk;
+                    tileFlags.Type = tileType;
+                    tileFlags.Chunk = chunk;
                 }
                 else
-                    chunk.Connections.Add(new TileFlag(position,tileType,chunk));
+                    chunk.TileFlags.Add(new TileFlag(position,tileType,chunk));
             }
         }
 

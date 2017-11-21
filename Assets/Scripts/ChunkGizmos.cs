@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using MapGeneration;
 using MapGeneration.Extensions;
@@ -7,10 +8,14 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class ChunkGizmos : MonoBehaviour
 {
-
-    [Header("Gizmos"), SerializeField] private bool _showConnectionWhenPlay = true;
-    [SerializeField] private bool _showBacktrackingWhenPlay = true;
-    [SerializeField] private bool _showEdgesWhenPlay = true;
+    [Header("Gizmos"), SerializeField]
+    private bool _showConnectionWhenPlay = true;
+    [SerializeField]
+    private bool _showBacktrackingWhenPlay = true;
+    [SerializeField]
+    private bool _showEdgesWhenPlay = true;
+    [SerializeField]
+    private GizmoIcons _gizmos;
 
     private Chunk _chunk;
 
@@ -24,17 +29,46 @@ public class ChunkGizmos : MonoBehaviour
         }
     }
 
+    public void Awake()
+    {
+        if(!_gizmos)
+            Debug.LogWarning(gameObject.name + " is missing a " + typeof(GizmoIcons).Name);
+    }
 
     private void OnDrawGizmos()
     {
-        if(!Chunk)
+        if (!Chunk)
             return;
 
         DrawBackTracking();
-
         DrawConnections();
-
         DrawEdges();
+        DrawFlags();
+    }
+
+    private void DrawFlags()
+    {
+        if (!_gizmos)
+            return;
+        foreach (var flag in Chunk.TileFlags)
+        {
+            switch (flag.Type)
+            {
+                case TileType.Trap:
+                    Gizmos.DrawIcon(Chunk.Enviorment.GetCellCenterWorld(flag.Position),_gizmos.TrapIcon,true);
+                    break;
+                case TileType.Treasure:
+                    Gizmos.DrawIcon(Chunk.Enviorment.GetCellCenterWorld(flag.Position), _gizmos.TreasureIcon, true);
+                    break;
+                case TileType.FlyingSpawn:
+                    Gizmos.DrawIcon(Chunk.Enviorment.GetCellCenterWorld(flag.Position), _gizmos.FlyingIcon, true);
+                    break;
+                case TileType.GroundSpawn:
+                    Gizmos.DrawIcon(Chunk.Enviorment.GetCellCenterWorld(flag.Position), _gizmos.GroundIcon, true);
+                    break;
+
+            }
+        }
     }
 
     private void DrawEdges()

@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4630954887643650}
   - component: {fileID: 114318020207900078}
   - component: {fileID: 2569400266715604796}
+  - component: {fileID: 114118907387241566}
   m_Layer: 0
   m_Name: 4x4Chunk
   m_TagString: Untagged
@@ -72,6 +73,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114118907387241566
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1309751282094236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a24a8b37cb175d44887ad7b1330ea62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _showConnectionWhenPlay: 1
+  _showBacktrackingWhenPlay: 1
+  _showEdgesWhenPlay: 1
+  _gizmos: {fileID: 11400000, guid: d4b527a7799b05b4eb00028e2d202084, type: 2}
 --- !u!114 &114318020207900078
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -102,9 +118,6 @@ MonoBehaviour:
       _leftOpen: 0
       _rightOpen: 0
     _position: {x: 0, y: 0}
-  _showConnectionWhenPlay: 1
-  _showBacktrackingWhenPlay: 1
-  _showEdgesWhenPlay: 1
 --- !u!156049354 &2569400266715604796
 Grid:
   m_ObjectHideFlags: 1
