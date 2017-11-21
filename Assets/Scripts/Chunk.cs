@@ -18,6 +18,7 @@ namespace MapGeneration
     /// Creator:
     /// Mikkel Nielsen
     /// </summary>
+    [ExecuteInEditMode]
     public class Chunk : MonoBehaviour
     {
         //This sections is for generel properties 
@@ -36,8 +37,10 @@ namespace MapGeneration
         [SerializeField] private bool _leftOpen;
         [SerializeField] private bool _rightOpen;
 
-        //This is a list of Tiles in the chunk
-        [SerializeField] private List<Tile> _tileData = new List<Tile>();
+        //This is a list of TileFlags in the chunk
+        [SerializeField] private List<TileFlag> _connections = new List<TileFlag>();
+
+        [SerializeField] private List<TileFlag> _tileTileFlags = new List<TileFlag>();
 
         //This section is for refernces
         [Header("Refernces"), SerializeField] private ChunkBehavior _chunkBehavior;
@@ -81,8 +84,14 @@ namespace MapGeneration
         //A list for the items in the chunk
         public List<GameObject> Items { get; set; }
 
-        public List<Tile> TileData{get { return _tileData; } set { _tileData = value; }}
+        public List<TileFlag> Connections{get { return _connections; } set { _connections = value; }}
+        public List<TileFlag> TileFlags{get { return _tileTileFlags; }set { _tileTileFlags = value; }}
 
+       public void Start()
+        {
+            if(!_enviorment)
+                Debug.LogWarning(gameObject.name + " dosen't have a refernec to a envierment tilemap");
+        }
 
         private void OnDrawGizmos()
         {
@@ -107,7 +116,7 @@ namespace MapGeneration
             {
                 Gizmos.color = new Color(231f / 255f, 76f / 255f, 60f / 255f);
                  
-                foreach (var c in TileData)
+                foreach (var c in Connections)
                 {
                     Vector3 cellPosition = Enviorment.GetCellCenterWorld(c.Position);
                     Vector2 cellSize = Enviorment.cellSize;
@@ -119,16 +128,16 @@ namespace MapGeneration
 
                     switch (c.Type)
                     {
-                        case TileType.TopConnection:
+                        case TileType.Top:
                             GizmoUtilities.DrawArrow(top,ArrowDirection.Up);
                             break;
-                        case TileType.BottomConnection:
+                        case TileType.Bottom:
                             GizmoUtilities.DrawArrow(bottom, ArrowDirection.Down);
                             break;
-                        case TileType.LeftConnection:
+                        case TileType.Left:
                             GizmoUtilities.DrawArrow(left, ArrowDirection.Left);
                             break;
-                        case TileType.RightConnection:
+                        case TileType.Right:
                             GizmoUtilities.DrawArrow(right, ArrowDirection.Right);
                             break;
                     }
