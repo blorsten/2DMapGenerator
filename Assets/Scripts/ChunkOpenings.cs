@@ -48,5 +48,25 @@ namespace MapGeneration
             get { return _rightOpen; }
             set { _rightOpen = value; }
         }
+
+        public static bool operator == (ChunkOpenings a, ChunkOpenings b)
+        {
+            bool isValid = true;
+            
+            if (a.TopOpen != b.TopOpen)
+                isValid = false;
+            if (a.RightOpen != b.RightOpen)
+                isValid = false;
+            if (a.BottomOpen != b.BottomOpen)
+                isValid = false;
+            if (a.LeftOpen != b.LeftOpen)
+                isValid = false;
+
+            return isValid;
+        }
+        public static bool operator !=(ChunkOpenings a, ChunkOpenings b)
+        {
+            return !(a == b);
+        }
     }
 }

@@ -44,12 +44,7 @@ namespace MapGeneration.Algorithm
                     DirectionCandidates.Remove(CardinalDirections.Top);
                 }
             }
-        }
-
-        public override void PostProcess(Map map, List<Chunk> usableChunks)
-        {
             BackTrackChunks(Road);
-            base.PostProcess(map, usableChunks);
         }
     }
 }

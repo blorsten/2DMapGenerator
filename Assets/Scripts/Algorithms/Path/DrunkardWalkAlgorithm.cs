@@ -28,12 +28,7 @@ namespace MapGeneration.Algorithm
 
             //The first chunk is marked.
             StartWalk(map, usableChunks, startPoint);
-        }
-
-        public override void PostProcess(Map map, List<Chunk> usableChunks)
-        {
             BackTrackChunks(Road);
-            base.PostProcess(map, usableChunks);
         }
 
         /// <summary>
