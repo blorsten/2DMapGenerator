@@ -47,9 +47,6 @@ namespace MapGeneration
         [SerializeField] private Tilemap _enviorment;
         [SerializeField] private ChunkHolder _chunkHolder;
 
-        [Header("Gizmos"), SerializeField] private bool _showConnectionWhenPlay = true;
-        [SerializeField] private bool _showBacktrackingWhenPlay = true;
-        [SerializeField] private bool _showEdgesWhenPlay = true;
 
         //Properties for generel properties
         public int Width{ get { return _width; } set { _width = value; }}
@@ -93,74 +90,7 @@ namespace MapGeneration
                 Debug.LogWarning(gameObject.name + " dosen't have a refernec to a envierment tilemap");
         }
 
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.red;
-            if (ChunkHolder != null && !(!_showBacktrackingWhenPlay && Application.isPlaying))
-            {
-                if (ChunkHolder.ChunkOpenings.TopConnection)
-                    Gizmos.DrawLine(this.transform.position,
-                        transform.position + Vector3.up * (Height / 2f));
-                if (ChunkHolder.ChunkOpenings.BottomConnetion)
-                    Gizmos.DrawLine(this.transform.position,
-                        transform.position + Vector3.down * (Height / 2f));
-                if (ChunkHolder.ChunkOpenings.RightConnection)
-                    Gizmos.DrawLine(this.transform.position,
-                        transform.position + Vector3.right * (Width / 2f));
-                if (ChunkHolder.ChunkOpenings.LeftConnection)
-                    Gizmos.DrawLine(this.transform.position,
-                        transform.position + Vector3.left * (Width / 2f));
-            }
-
-            if (!(!_showConnectionWhenPlay && Application.isPlaying) && Enviorment)
-            {
-                Gizmos.color = new Color(231f / 255f, 76f / 255f, 60f / 255f);
-                 
-                foreach (var c in Connections)
-                {
-                    Vector3 cellPosition = Enviorment.GetCellCenterWorld(c.Position);
-                    Vector2 cellSize = Enviorment.cellSize;
-
-                    Vector3 top = new Vector3(cellPosition.x, cellPosition.y + cellSize.y / 2);
-                    Vector3 bottom = new Vector3(cellPosition.x, cellPosition.y - cellSize.y / 2);
-                    Vector3 right = new Vector3(cellPosition.x + cellSize.x / 2, cellPosition.y);
-                    Vector3 left = new Vector3(cellPosition.x - cellSize.x / 2, cellPosition.y);
-
-                    switch (c.Type)
-                    {
-                        case TileType.Top:
-                            GizmoUtilities.DrawArrow(top,ArrowDirection.Up);
-                            break;
-                        case TileType.Bottom:
-                            GizmoUtilities.DrawArrow(bottom, ArrowDirection.Down);
-                            break;
-                        case TileType.Left:
-                            GizmoUtilities.DrawArrow(left, ArrowDirection.Left);
-                            break;
-                        case TileType.Right:
-                            GizmoUtilities.DrawArrow(right, ArrowDirection.Right);
-                            break;
-                    }
-                }
-            }
-
-            if (!(!_showEdgesWhenPlay && Application.isPlaying) && Enviorment)
-            {
-                Gizmos.color = Color.white;
-                Vector2 gridSize = new Vector2(Width, Height);
-                Vector2 cellSize = Enviorment.cellSize;
-
-                float yMin = transform.position.y - gridSize.y * cellSize.y / 2;
-                float yMax = transform.position.y + gridSize.y * cellSize.y / 2;
-                float xMin = transform.position.x - gridSize.x * cellSize.x / 2;
-                float xMax = transform.position.x + gridSize.x * cellSize.x / 2;
-
-                Gizmos.DrawLine(new Vector3(xMin, yMin), new Vector3(xMin, yMax));
-                Gizmos.DrawLine(new Vector3(xMax, yMin), new Vector3(xMax, yMax));
-                Gizmos.DrawLine(new Vector3(xMin, yMin), new Vector3(xMax, yMin));
-                Gizmos.DrawLine(new Vector3(xMin, yMax), new Vector3(xMax, yMax));
-            }
-        }
+        
 
     }
 }
