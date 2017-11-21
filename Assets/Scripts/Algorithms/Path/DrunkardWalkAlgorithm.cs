@@ -20,21 +20,27 @@ namespace MapGeneration.Algorithm
         //Number of times the algorithms creates a marked chunk.
         [SerializeField] private int _pathLength;
 
-        public override void Process(Map map, List<Chunk> usableChunks)
+        public override bool Process(Map map, List<Chunk> usableChunks)
         {
-            base.Process(map, usableChunks);
+            bool success = base.Process(map, usableChunks);
 
             //This is where the walk starts.
             Vector2Int startPoint = map.Random.Range(Vector2Int.zero, map.MapBlueprint.GridSize);
+            var chunks = map.Grid.Cast<ChunkHolder>().Where(holder => holder.Prefab).ToList();
 
             //The first chunk is marked.
             StartWalk(map, usableChunks, startPoint);
+
+            if (Road == null || Road != null && !Road.Any())
+                return false;
+
+            return success;
         }
 
-        public override void PostProcess(Map map, List<Chunk> usableChunks)
+        public override bool PostProcess(Map map, List<Chunk> usableChunks)
         {
             BackTrackChunks(Road);
-            base.PostProcess(map, usableChunks);
+            return base.PostProcess(map, usableChunks);
         }
 
         /// <summary>

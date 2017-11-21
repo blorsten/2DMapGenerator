@@ -22,7 +22,7 @@ namespace MapGeneration.Algorithm
         //How many entanglements can the dead end maker make.
         [SerializeField] private int _nrOfDeadEnds;
 
-        public override void Process(Map map, List<Chunk> usableChunks)
+        public override bool Process(Map map, List<Chunk> usableChunks)
         {
             //Reset all collections
             Reset();
@@ -32,6 +32,11 @@ namespace MapGeneration.Algorithm
 
             //Then start the dead end maker.
             StartWalk(map, usableChunks, Vector2Int.zero);
+
+            if (_roads == null || _roads != null && !_roads.Any())
+                return false;
+
+            return true;
         }
 
         /// <summary>
@@ -49,10 +54,11 @@ namespace MapGeneration.Algorithm
             }
         }
 
-        public override void PostProcess(Map map, List<Chunk> usableChunks)
+        public override bool PostProcess(Map map, List<Chunk> usableChunks)
         {
             //Backtacks all roads that has been created.
             _roads.ForEach(BackTrackChunks);
+            return true;
         }
 
         /// <summary>

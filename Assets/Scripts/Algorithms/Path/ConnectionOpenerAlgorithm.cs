@@ -12,8 +12,7 @@ namespace MapGeneration.Algorithm
     [CreateAssetMenu(fileName = "Filler Algorithm", menuName = "MapGeneration/Algorithms/Filler Algorithm")]
     public class ConnectionOpenerAlgorithm : MapGenerationAlgorithm
     {
-
-        public override void PostProcess(Map map, List<Chunk> usableChunks)
+        public override bool PostProcess(Map map, List<Chunk> usableChunks)
         {
             //This goes throw all of the map's chunks
             for (int x = 0; x < map.Grid.GetLength(0); x++)
@@ -50,6 +49,8 @@ namespace MapGeneration.Algorithm
 
                 }
             }
+
+            return true;
         }
     }
 }

@@ -16,7 +16,7 @@ namespace MapGeneration.Algorithm
     [CreateAssetMenu(fileName = "Spelunky Algorithm", menuName = "MapGeneration/Algorithms/Spelunky")]
     public class SpelunkyAlgorithm : PathAlgorithm
     {
-        public override void Process(Map map, List<Chunk> usableChunks)
+        public override bool Process(Map map, List<Chunk> usableChunks)
         {
             //set the statpoint in the top row of the map grid
             Vector2Int startPoint = new Vector2Int(map.Random.Range(0, map.MapBlueprint.GridSize.x), map.MapBlueprint.GridSize.y - 1);
@@ -45,12 +45,17 @@ namespace MapGeneration.Algorithm
                     DirectionCandidates.Remove(CardinalDirections.Top);
                 }
             }
+
+            if (Road == null || Road != null && !Road.Any())
+                return false;
+
+            return true;
         }
 
-        public override void PostProcess(Map map, List<Chunk> usableChunks)
+        public override bool PostProcess(Map map, List<Chunk> usableChunks)
         {
             BackTrackChunks(Road);
-            base.PostProcess(map, usableChunks);
+            return base.PostProcess(map, usableChunks);
         }
     }
 }

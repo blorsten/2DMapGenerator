@@ -29,10 +29,11 @@ namespace MapGeneration.Algorithm
         //Collection used to store all the directions the path algorithm can take.
         protected List<CardinalDirections> DirectionCandidates;
 
-        public override void Process(Map map, List<Chunk> usableChunks)
+        public override bool Process(Map map, List<Chunk> usableChunks)
         {
-            base.Process(map, usableChunks);
+            bool success = base.Process(map, usableChunks);
             Reset();
+            return success;
         }
 
         /// <summary>

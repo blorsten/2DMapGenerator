@@ -38,14 +38,15 @@ namespace MapGeneration
         /// <param name="mapBlueprint">blueprint</param>
         /// <param name="seed">If defined it will be the chosen seed for this generation.</param>
         /// <returns>Map</returns>
-        public Map Generate(MapBlueprint mapBlueprint, int seed = 0)
+        public Map Generate(MapBlueprint mapBlueprint, int seed = 0)                               
         {
             if (!mapBlueprint)
             {
-                Debug.LogError("MapBuilder: Tried to generate map from blueprint but diden't get one!", gameObject);
+                Debug.LogWarning("MapBuilder: Tried to generate map from " +
+                               "blueprint but diden't get one.", gameObject);
                 return null;
             }
-
+            
             //If the seed has been defined in the blueprint use that instead.
             int chosenSeed;
 
@@ -60,11 +61,15 @@ namespace MapGeneration
             Map map = new GameObject(mapBlueprint.name).AddComponent<Map>();
             map.Initialize(chosenSeed, mapBlueprint);
 
+            //Start the blueprint process.
+            if (!mapBlueprint.Generate(map))
+            {
+                CleanupFailedMap(map);
+                return null;
+            }
+
             //Save the new map.
             Save(map);
-
-            //Start the blueprint process.
-            mapBlueprint.Generate(map);
 
             //Now that the map is fully made, spawn it.
             Spawn(map);
@@ -76,6 +81,13 @@ namespace MapGeneration
 
         public Map Generate(MapDataSaver existingMap)
         {
+            if (existingMap == null)
+            {
+                Debug.LogWarning("MapBuilder: Tried to generate map from " +
+                                 "a existing map but diden't get a valid one.", gameObject);
+                return null;
+            }
+
             //Creating the new map.
             Map map = new GameObject(existingMap.MapBlueprint.name).AddComponent<Map>();
 
@@ -90,7 +102,11 @@ namespace MapGeneration
             map.Initialize(existingMap.MapSeed, existingMap.MapBlueprint, existingMap);
 
             //Start the blueprint process.
-            existingMap.MapBlueprint.Generate(map);
+            if (!existingMap.MapBlueprint.Generate(map))
+            {
+                CleanupFailedMap(map);
+                return null;
+            }
 
             //Now that the map is fully made, spawn it.
             Spawn(map);
@@ -128,6 +144,7 @@ namespace MapGeneration
         {
             Vector2 gridSize = map.MapBlueprint.GridSize;
             Vector2 chunkSize = map.MapBlueprint.ChunkSize;
+            
             //Remember if we have a already active map.
             Map oldMap = ActiveMap;
 
@@ -177,6 +194,19 @@ namespace MapGeneration
             }
             else
                 DestroyImmediate(map.gameObject);
+        }
+
+        private void CleanupFailedMap(Map map)
+        {
+            Debug.LogWarning(string.Format("MapBuilder: {0} failed to generate.", map.name), this);
+
+            if (map)
+            {
+                if (!Application.isPlaying)
+                    DestroyImmediate(map.gameObject);
+                else
+                    Destroy(map.gameObject);
+            }
         }
     }
 }
