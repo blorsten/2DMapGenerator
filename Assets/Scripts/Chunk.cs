@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using MapGeneration.Extensions;
+using MapGeneration.Utils;
+
 
 namespace MapGeneration
 {
     public enum ChunkType
     {
-        Default, DeadEnd, Reward, Secret
+        Default, DeadEnd, Reward, Secret, Start, End
     }
 
     /// <summary>
@@ -38,9 +40,9 @@ namespace MapGeneration
         [SerializeField] private bool _rightOpen;
 
         //This is a list of TileFlags in the chunk
-        [SerializeField] private List<TileFlag> _connections = new List<TileFlag>();
+        [SerializeField, ReadOnly] private List<TileFlag> _connections = new List<TileFlag>();
 
-        [SerializeField] private List<TileFlag> _tileTileFlags = new List<TileFlag>();
+        [SerializeField, ReadOnly] private List<TileFlag> _tileTileFlags = new List<TileFlag>();
 
         //This section is for refernces
         [Header("Refernces"), SerializeField] private ChunkBehavior _chunkBehavior;
