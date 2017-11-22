@@ -8,10 +8,13 @@ using UnityEngine;
 namespace MapGeneration.Utils
 {
     [ExecuteInEditMode]
-    public class ChunkGizmos : MonoBehaviour
+    public class MapGizmos : MonoBehaviour
     {
+        private const string TRAP_ICON_PATH = "Trap.png";
+        private const string TREASURE_ICON_PATH = "Treasure.png";
+        private const string GROUND_ICON_PATH = "Ground.png";
+        private const string FLYING_ICON_PATH = "Flying.png";
 
-        [Header("References"),SerializeField] private GizmoIcons _gizmos;
 
         [Header("Draw Booleans"), SerializeField] private bool _drawConnections = true;
         [SerializeField] private bool _drawBacktracking = true;
@@ -19,69 +22,73 @@ namespace MapGeneration.Utils
         [SerializeField] private bool _drawTileFlags = true;
         
 
-        private Chunk _chunk;
+        private Map _map;
 
-        public Chunk Chunk
+        public Map Map
         {
             get
             {
-                if (!_chunk)
-                    _chunk = GetComponent<Chunk>();
-                return _chunk;
+                if (!_map)
+                    _map = GetComponent<Map>();
+                return _map;
             }
-        }
-
-        public void Awake()
-        {
-            if (!_gizmos)
-                Debug.LogWarning(gameObject.name + " is missing a " + typeof(GizmoIcons).Name);
+            set { _map = value; }
         }
 
         public void OnDrawGizmos()
         {
-            if (!Chunk)
+            if (Map == null || Map.Grid == null)
                 return;
-
-            DrawBackTracking();
-            DrawConnections();
-            DrawEdges();
-            DrawFlags();
+            for (int x = 0; x < Map.Grid.GetLength(0); x++)
+            {
+                for (int y = 0; y < Map.Grid.GetLength(1); y++)
+                {
+                    if(Map.Grid[x, y].Instance == null)
+                        continue;
+                    Chunk chunk = Map.Grid[x, y].Instance;
+                    DrawBackTracking(chunk);
+                    DrawConnections(chunk);
+                    DrawEdges(chunk);
+                    DrawFlags(chunk);
+                }
+            }
+            
         }
 
-        private void DrawFlags()
+        private void DrawFlags(Chunk chunk)
         {
-            if (!_gizmos || !_drawTileFlags)
+            if (!_drawTileFlags)
                 return;
-            foreach (var flag in Chunk.TileFlags)
+            foreach (var flag in chunk.TileFlags)
             {
-                Vector3 postition = Chunk.Enviorment.GetCellCenterWorld(flag.Position);
+                Vector3 postition = chunk.Enviorment.GetCellCenterWorld(flag.Position);
 
                 switch (flag.Type)
                 {
                     case TileType.Trap:
-                        UnityEngine.Gizmos.DrawIcon(postition, _gizmos.TrapIcon, true);
+                        UnityEngine.Gizmos.DrawIcon(postition, TRAP_ICON_PATH, true);
                         break;
                     case TileType.Treasure:
-                        UnityEngine.Gizmos.DrawIcon(postition, _gizmos.TreasureIcon, true);
+                        UnityEngine.Gizmos.DrawIcon(postition,TREASURE_ICON_PATH, true);
                         break;
                     case TileType.FlyingSpawn:
-                        UnityEngine.Gizmos.DrawIcon(postition, _gizmos.FlyingIcon, true);
+                        UnityEngine.Gizmos.DrawIcon(postition, FLYING_ICON_PATH, true);
                         break;
                     case TileType.GroundSpawn:
-                        UnityEngine.Gizmos.DrawIcon(postition, _gizmos.GroundIcon, true);
+                        UnityEngine.Gizmos.DrawIcon(postition, GROUND_ICON_PATH, true);
                         break;
 
                 }
             }
         }
 
-        private void DrawEdges()
+        private void DrawEdges(Chunk chunk)
         {
-            if (_drawEdges && Chunk.Enviorment)
+            if (_drawEdges && chunk.Enviorment)
             {
                 UnityEngine.Gizmos.color = Color.white;
-                Vector2 gridSize = new Vector2(Chunk.Width, Chunk.Height);
-                Vector2 cellSize = Chunk.Enviorment.cellSize;
+                Vector2 gridSize = new Vector2(chunk.Width, chunk.Height);
+                Vector2 cellSize = chunk.Enviorment.cellSize;
 
                 float yMin = transform.position.y - gridSize.y * cellSize.y / 2;
                 float yMax = transform.position.y + gridSize.y * cellSize.y / 2;
@@ -95,16 +102,16 @@ namespace MapGeneration.Utils
             }
         }
 
-        private void DrawConnections()
+        private void DrawConnections(Chunk chunk)
         {
-            if (_drawConnections && Chunk.Enviorment)
+            if (_drawConnections && chunk.Enviorment)
             {
                 UnityEngine.Gizmos.color = new Color(231f / 255f, 76f / 255f, 60f / 255f);
 
-                foreach (var c in Chunk.Connections)
+                foreach (var c in chunk.Connections)
                 {
-                    Vector3 cellPosition = Chunk.Enviorment.GetCellCenterWorld(c.Position);
-                    Vector2 cellSize = Chunk.Enviorment.cellSize;
+                    Vector3 cellPosition = chunk.Enviorment.GetCellCenterWorld(c.Position);
+                    Vector2 cellSize = chunk.Enviorment.cellSize;
 
                     Vector3 top = new Vector3(cellPosition.x, cellPosition.y + cellSize.y / 2);
                     Vector3 bottom = new Vector3(cellPosition.x, cellPosition.y - cellSize.y / 2);
@@ -130,24 +137,24 @@ namespace MapGeneration.Utils
             }
         }
 
-        private void DrawBackTracking()
+        private void DrawBackTracking(Chunk chunk)
         {
-            if (Chunk.ChunkHolder != null && _drawBacktracking && Chunk.Enviorment)
+            if (chunk.ChunkHolder != null && _drawBacktracking && chunk.Enviorment)
             {
                 UnityEngine.Gizmos.color = Color.red;
 
-                if (Chunk.ChunkHolder.ChunkOpenings.TopConnection)
-                    UnityEngine.Gizmos.DrawLine(transform.position,
-                        transform.position + Vector3.up * (Chunk.Height / 2f));
-                if (Chunk.ChunkHolder.ChunkOpenings.BottomConnetion)
-                    UnityEngine.Gizmos.DrawLine(transform.position,
-                        transform.position + Vector3.down * (Chunk.Height / 2f));
-                if (Chunk.ChunkHolder.ChunkOpenings.RightConnection)
-                    UnityEngine.Gizmos.DrawLine(transform.position,
-                        transform.position + Vector3.right * (Chunk.Width / 2f));
-                if (Chunk.ChunkHolder.ChunkOpenings.LeftConnection)
-                    UnityEngine.Gizmos.DrawLine(transform.position,
-                        transform.position + Vector3.left * (Chunk.Width / 2f));
+                if (chunk.ChunkHolder.ChunkOpenings.TopConnection)
+                    UnityEngine.Gizmos.DrawLine(chunk.transform.position,
+                        chunk.transform.position + Vector3.up * (chunk.Height / 2f));
+                if (chunk.ChunkHolder.ChunkOpenings.BottomConnetion)
+                    UnityEngine.Gizmos.DrawLine(chunk.transform.position,
+                        chunk.transform.position + Vector3.down * (chunk.Height / 2f));
+                if (chunk.ChunkHolder.ChunkOpenings.RightConnection)
+                    UnityEngine.Gizmos.DrawLine(chunk.transform.position,
+                        chunk.transform.position + Vector3.right * (chunk.Width / 2f));
+                if (chunk.ChunkHolder.ChunkOpenings.LeftConnection)
+                    UnityEngine.Gizmos.DrawLine(chunk.transform.position,
+                        chunk.transform.position + Vector3.left * (chunk.Width / 2f));
             }
         }
     }

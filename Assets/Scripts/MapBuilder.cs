@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using MapGeneration.SaveSystem;
+using MapGeneration.Utils;
 using UnityEngine;
 
 namespace MapGeneration
@@ -59,6 +60,7 @@ namespace MapGeneration
 
             //Creating the new map.
             Map map = new GameObject(mapBlueprint.name).AddComponent<Map>();
+            map.gameObject.AddComponent<MapGizmos>().Map = map;
             map.Initialize(chosenSeed, mapBlueprint);
 
             //Start the blueprint process.
