@@ -6,13 +6,13 @@ using UnityEngine;
 namespace MapGeneration
 {
     /// <summary>
-    /// This class is used to show information for the TileTypeBrush in the inspector
+    /// This class is used to show information for the ConnectionBrush in the inspector
     /// </summary>
-    [CustomEditor(typeof(TileTypeBrush))]
-    public class TileTypeBrushEditor : GridBrushEditor
+    [CustomEditor(typeof(ConnectionBrush))]
+    public class ConnectionBrushEditor : GridBrushEditor
     {
-        //The current TileTypeBrush
-        public TileTypeBrush Brush { get { return (target as TileTypeBrush); } }
+        //The current ConnectionBrush
+        public ConnectionBrush Brush { get { return (target as ConnectionBrush); } }
 
 
         public override void OnPaintInspectorGUI()
@@ -21,7 +21,7 @@ namespace MapGeneration
             GUILayout.BeginHorizontal();
             //This shows a dropdown menu that tells the brush what type of tile it will place
             Brush.BrushTileType =
-                (TileType)EditorGUILayout.EnumPopup("Tile type", Brush.BrushTileType);
+                (BrushTileType)EditorGUILayout.EnumPopup("TileFlag type", Brush.BrushTileType);
             GUILayout.EndHorizontal();
         }
     }

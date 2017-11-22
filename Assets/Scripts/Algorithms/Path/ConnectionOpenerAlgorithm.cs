@@ -25,23 +25,23 @@ namespace MapGeneration.Algorithm
                         continue;
 
                     //This goes through all of the chunks tiles and removes the used connection tiles
-                    foreach (var c in map.Grid[x, y].Instance.TileData)
+                    foreach (var c in map.Grid[x, y].Instance.Connections)
                     {
                         switch (c.Type)
                         {
-                            case TileType.TopConnection:
+                            case TileType.Top:
                                 if (c.Chunk.ChunkHolder.ChunkOpenings.TopConnection)
                                     c.Chunk.Enviorment.SetTile(c.Position, null);
                                 break;
-                            case TileType.BottomConnection:
+                            case TileType.Bottom:
                                 if (c.Chunk.ChunkHolder.ChunkOpenings.BottomConnetion)
                                     c.Chunk.Enviorment.SetTile(c.Position, null);
                                 break;
-                            case TileType.LeftConnection:
+                            case TileType.Left:
                                 if (c.Chunk.ChunkHolder.ChunkOpenings.LeftConnection)
                                     c.Chunk.Enviorment.SetTile(c.Position, null);
                                 break;
-                            case TileType.RightConnection:
+                            case TileType.Right:
                                 if (c.Chunk.ChunkHolder.ChunkOpenings.RightConnection)
                                     c.Chunk.Enviorment.SetTile(c.Position, null);
                                 break;
