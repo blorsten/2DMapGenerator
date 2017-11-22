@@ -18,7 +18,7 @@ namespace MapGeneration.Algorithm
     public class DrunkardWalkAlgorithm : PathAlgorithm
     {
         //Number of times the algorithms creates a marked chunk.
-        [SerializeField] private int _pathLength;
+        [SerializeField] private int _pathLength = 10;
 
         public override void Process(Map map, List<Chunk> usableChunks)
         {

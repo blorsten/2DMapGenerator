@@ -16,7 +16,7 @@ namespace MapGeneration
         private readonly List<MapGenerationAlgorithm> _instancedAlgorithms = new List<MapGenerationAlgorithm>();
 
         [SerializeField] private List<MapGenerationAlgorithm> _algorithmStack;
-        [SerializeField] private Vector2Int _gridSize;
+        [SerializeField] private Vector2Int _gridSize = new Vector2Int(4,4);
         [SerializeField] private bool _specifyChunkSize;
         [SerializeField] private Vector2Int _chunkSize;
         [SerializeField] private float _tileSize;

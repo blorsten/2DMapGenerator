@@ -20,7 +20,7 @@ namespace MapGeneration.Algorithm
         private List<ChunkHolder> _myMarkedChunks;
 
         //How many entanglements can the dead end maker make.
-        [SerializeField] private int _nrOfDeadEnds;
+        [SerializeField] private int _nrOfDeadEnds = 2;
 
         public override void Process(Map map, List<Chunk> usableChunks)
         {
