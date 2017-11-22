@@ -83,7 +83,6 @@ namespace MapGeneration
 
         public List<Tile> TileData{get { return _tileData; } set { _tileData = value; }}
 
-
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;

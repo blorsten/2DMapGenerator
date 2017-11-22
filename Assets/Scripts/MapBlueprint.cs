@@ -17,16 +17,13 @@ namespace MapGeneration
 
         [SerializeField] private List<MapGenerationAlgorithm> _algorithmStack;
         [SerializeField] private Vector2Int _gridSize;
-        [SerializeField] private bool _specifyChunkSize;
         [SerializeField] private Vector2Int _chunkSize;
-        [SerializeField] private float _tileSize;
         [SerializeField] private int _userSeed; 
         [SerializeField] private List<Chunk> __whitelistedChunks; //List of all chunks it can use, if its empty it uses all.
         [SerializeField] private List<Chunk> __blacklistedChunks; //List of all chunks it MAY not use, if its empty it uses all or whitelisted.
 
         public Vector2Int GridSize { get { return _gridSize; }}
         public Vector2Int ChunkSize { get { return _chunkSize; }}
-        public float TileSize { get { return _tileSize; }}
         public int UserSeed { get { return _userSeed; } }
 
         /// <summary>
@@ -155,14 +152,6 @@ namespace MapGeneration
             {
                 Debug.LogWarning(string.Format("MapBlueprint: {0} " +
                                                "has a invalid chunk size.", name), this);
-                isUsable = false;
-            }
-
-            if (_tileSize == 0)
-            {
-                Debug.LogWarning(string.Format("MapBlueprint: {0} " +
-                                               "has a invalid tile size.", name), this);
-
                 isUsable = false;
             }
 
