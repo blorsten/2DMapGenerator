@@ -95,9 +95,5 @@ namespace MapGeneration
                 _chunkOpenings = value;
             }
         }
-        {
-
-        
-
     }
 }

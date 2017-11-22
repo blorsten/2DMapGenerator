@@ -5,13 +5,13 @@ using MapGeneration;
 using MapGeneration.Extensions;
 using UnityEngine;
 
-namespace MapGeneration.Gizmos
+namespace MapGeneration.Utils
 {
     [ExecuteInEditMode]
     public class ChunkGizmos : MonoBehaviour
     {
 
-        [Header("References"),SerializeField]private GizmoIcons _gizmos;
+        [Header("References"),SerializeField] private GizmoIcons _gizmos;
 
         [Header("Draw Booleans"), SerializeField] private bool _drawConnections = true;
         [SerializeField] private bool _drawBacktracking = true;

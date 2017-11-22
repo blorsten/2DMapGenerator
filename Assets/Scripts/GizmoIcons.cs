@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MapGeneration.Gizmos
+namespace MapGeneration.Utils
 {
     [CreateAssetMenu(fileName = "GizmoIcons", menuName = "MapGeneration/Gizmos/GizmoIcons")]
     public class GizmoIcons : ScriptableObject
