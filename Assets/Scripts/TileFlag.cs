@@ -5,14 +5,14 @@ namespace MapGeneration
 {
     public enum TileType
     {
-        TopConnection, BottomConnection, LeftConnection, RightConnection
+        None, Top, Bottom, Left, Right, Trap, Treasure, FlyingSpawn, GroundSpawn
     }
 
     /// <summary>
     /// This class is to store data outside of a tilemap for tiles
     /// </summary>
     [Serializable]
-    public class Tile
+    public class TileFlag
     {
         [SerializeField] private Vector3Int _position;//The postion of the tile in the chunk
         [SerializeField] private TileType _type;//The type if the tile
@@ -23,7 +23,7 @@ namespace MapGeneration
         public TileType Type{get { return _type; }set { _type = value; }}
         public Chunk Chunk{get { return _chunk; }set { _chunk = value; }}
 
-        public Tile(Vector3Int position, TileType type, Chunk chunk)
+        public TileFlag(Vector3Int position, TileType type, Chunk chunk)
         {
             Position = position;
             Type = type;
