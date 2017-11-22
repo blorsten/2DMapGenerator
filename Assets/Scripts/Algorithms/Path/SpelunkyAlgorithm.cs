@@ -25,7 +25,6 @@ namespace MapGeneration.Algorithm
             ChunkHolder firstChunk = map.Grid[startPoint.x, startPoint.y];
             MarkedChunks.Enqueue(firstChunk);
             map.StartChunk = firstChunk;
-            map.Place(firstChunk, usableChunks.RandomEntry(map.Random));
             Road.Enqueue(new KeyValuePair<ChunkHolder, CardinalDirections?>(firstChunk, null));
 
             Vector2Int currentPos = startPoint;
@@ -45,12 +44,7 @@ namespace MapGeneration.Algorithm
                     DirectionCandidates.Remove(CardinalDirections.Top);
                 }
             }
-        }
-
-        public override void PostProcess(Map map, List<Chunk> usableChunks)
-        {
             BackTrackChunks(Road);
-            base.PostProcess(map, usableChunks);
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using MapGeneration.Extensions;
+using MapGeneration.Utils;
 
 namespace MapGeneration
 {
@@ -31,10 +32,7 @@ namespace MapGeneration
         [SerializeField] private ChunkType _chunkType;
 
         //These fields tells what openings are open on the chunk
-        [Header("Openings"), SerializeField] private bool _topOpen;
-        [SerializeField] private bool _bottomOpen;
-        [SerializeField] private bool _leftOpen;
-        [SerializeField] private bool _rightOpen;
+        [Header("Openings"), SerializeField] private ChunkOpenings _chunkOpenings;
 
         //This is a list of Tiles in the chunk
         [SerializeField] private List<Tile> _tileData = new List<Tile>();
@@ -42,7 +40,7 @@ namespace MapGeneration
         //This section is for refernces
         [Header("Refernces"), SerializeField] private ChunkBehavior _chunkBehavior;
         [SerializeField] private Tilemap _enviorment;
-        [SerializeField] private ChunkHolder _chunkHolder;
+        private ChunkHolder _chunkHolder;
 
         [Header("Gizmos"), SerializeField] private bool _showConnectionWhenPlay = true;
         [SerializeField] private bool _showBacktrackingWhenPlay = true;
@@ -83,11 +81,25 @@ namespace MapGeneration
 
         public List<Tile> TileData{get { return _tileData; } set { _tileData = value; }}
 
+        public ChunkOpenings ChunkOpenings
+        {
+            get
+            {
+                return _chunkOpenings;
+            }
+
+            set
+            {
+                _chunkOpenings = value;
+            }
+        }
 
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-            if (ChunkHolder != null && !(!_showBacktrackingWhenPlay && Application.isPlaying))
+            if (ChunkHolder != null && 
+                !ChunkHolder.Equals(null) && 
+                !(!_showBacktrackingWhenPlay && Application.isPlaying))
             {
                 if (ChunkHolder.ChunkOpenings.TopConnection)
                     Gizmos.DrawLine(this.transform.position,
