@@ -7,8 +7,15 @@ namespace MPPlayground
     {
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Return))
-                MapBuilder.Instance.Generate();
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                MapCycler.Instance.LoadNextMap();
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                MapCycler.Instance.LoadPreviousMap();
+            }
         }
     }
 }
