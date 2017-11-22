@@ -52,7 +52,6 @@ namespace MapGeneration.Algorithm
                 MarkedChunks.Enqueue(firstChunk);
 
             map.StartChunk = firstChunk;
-            map.Place(firstChunk, usableChunks.FirstOrDefault());
 
             Vector2Int currentPos = startPosition;
 

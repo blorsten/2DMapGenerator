@@ -25,16 +25,11 @@ namespace MapGeneration.Algorithm
             base.Process(map, usableChunks);
         }
 
-        public override void PostProcess(Map map, List<Chunk> usableChunks)
-        {
-            base.PostProcess(map, usableChunks);
-        }
-
         private void FindChunksToReplace(Map map)
         {
             foreach (ChunkHolder chunk in map.Grid)
             {
-                if (chunk.Prefab != null)
+                if (!chunk.ChunkOpenings.IsEmpty())
                 {
                     _chunksToReplace.Add(chunk);
                 }
@@ -47,9 +42,9 @@ namespace MapGeneration.Algorithm
             {
                 foreach (Chunk chunk in usableChunks)
                 {
-                    if (chunkholder.Prefab.ChunkOpenings == chunk.ChunkOpenings)
+                    if (chunkholder.ChunkOpenings == chunk.ChunkOpenings)
                     {
-                        chunkholder.Prefab = chunk;
+                        map.Place(chunkholder, chunk);
                     }
                 }
             }

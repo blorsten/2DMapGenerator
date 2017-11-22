@@ -18,11 +18,52 @@ namespace MapGeneration
         private bool _leftOpen;
         [SerializeField]
         private bool _rightOpen;
+
+        private bool _topConnection;
+        private bool _bottomConnetion;
+        private bool _leftConnection;
+        private bool _rightConnection;
+
         //These properties tells te chunk whick openings are used
-        public bool TopConnection { get; set; }
-        public bool BottomConnetion { get; set; }
-        public bool LeftConnection { get; set; }
-        public bool RightConnection { get; set; }
+        public bool TopConnection
+        {
+            get { return _topConnection; }
+            set
+            {
+                _topConnection = value;
+                TopOpen = value;
+            }
+        }
+
+        public bool BottomConnetion
+        {
+            get { return _bottomConnetion; }
+            set
+            {
+                _bottomConnetion = value;
+                BottomOpen = value;
+            }
+        }
+
+        public bool LeftConnection
+        {
+            get { return _leftConnection; }
+            set
+            {
+                _leftConnection = value;
+                LeftOpen = value;
+            }
+        }
+
+        public bool RightConnection
+        {
+            get { return _rightConnection; }
+            set
+            {
+                _rightConnection = value;
+                RightOpen = value;
+            }
+        }
 
         //Properties for opennings
         public bool TopOpen
@@ -64,9 +105,26 @@ namespace MapGeneration
 
             return isValid;
         }
+
         public static bool operator !=(ChunkOpenings a, ChunkOpenings b)
         {
             return !(a == b);
+        }
+
+        public bool IsEmpty()
+        {
+            bool isValid = true;
+
+            if (TopOpen)
+                isValid = false;
+            if (RightOpen)
+                isValid = false;
+            if (BottomOpen)
+                isValid = false;
+            if (LeftOpen)
+                isValid = false;
+
+            return isValid;
         }
     }
 }

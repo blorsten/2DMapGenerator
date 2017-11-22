@@ -115,7 +115,7 @@ namespace MapGeneration.Algorithm
                 ChunkHolder nextChunk = map.Grid[nextPosition.Value.x, nextPosition.Value.y];
 
                 //if the next chunk isnt marked, continue the process
-                if (!MarkedChunks.Contains(nextChunk) && map.Place(nextChunk, usableChunks.FirstOrDefault()))
+                if (!MarkedChunks.Contains(nextChunk))
                 {
                     //set current position to the next position
                     currentPos = nextPosition.Value;
