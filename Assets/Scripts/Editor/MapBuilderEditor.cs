@@ -44,6 +44,7 @@ namespace MapBuilderEditor
                     if (GUILayout.Button("CLEAR"))
                     {
                         _context.SavedSeeds.Clear();
+                        EditorUtility.SetDirty(_context);
                     }
                 }
                 GUILayout.EndHorizontal();
@@ -64,7 +65,7 @@ namespace MapBuilderEditor
                     {
                         GUILayout.Label(savedSeed.ToString(), new GUIStyle(GUI.skin.label)
                         {
-                            fontStyle = savedSeed == _context.PreExistingMap.Seed ? FontStyle.BoldAndItalic : FontStyle.Normal
+                            fontStyle = _context.PreExistingMap && savedSeed == _context.PreExistingMap.Seed ? FontStyle.BoldAndItalic : FontStyle.Normal
                         });
 
                         if (GUILayout.Button("LOAD", GUILayout.Width(50)))
@@ -106,6 +107,9 @@ namespace MapBuilderEditor
 
             //Set the preexisting map to the one we just generated.
             _context.PreExistingMap = _context.Generate(seed);
+            
+            if (!_context.PreExistingMap)
+                return;
 
             //If the seeds is not saved yet, do so.
             if (!_context.SavedSeeds.Contains(_context.PreExistingMap.Seed))

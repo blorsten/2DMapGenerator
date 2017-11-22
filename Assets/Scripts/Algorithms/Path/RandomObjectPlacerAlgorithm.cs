@@ -11,7 +11,7 @@ namespace MapGeneration
     public class RandomObjectPlacerAlgorithm : MapGenerationAlgorithm
     {
 
-        public override void PostProcess(Map map, List<Chunk> usableChunks)
+        public override bool PostProcess(Map map, List<Chunk> usableChunks)
         {
             //This goes throw all of the map's chunks
             for (int x = 0; x < map.Grid.GetLength(0); x++)
@@ -28,7 +28,6 @@ namespace MapGeneration
                     //This goes through all of the chunks tiles and removes the used connection tiles
                     foreach (var c in map.Grid[x, y].Instance.TileFlags)
                     {
-                        bool instantiateObject = true;
                         switch (c.Type)
                         {
                             case TileType.Trap:
@@ -43,9 +42,6 @@ namespace MapGeneration
                             case TileType.GroundSpawn:
                                 objectType = ObjectType.GroundSpawner;
                                 break;
-                            default:
-                                instantiateObject = false;
-                                break;
                         }
                         InstantiateRandomObect(ref objects,objectType, map.Grid[x, y].Instance,
                             map.Grid[x, y].Instance.Enviorment.GetCellCenterWorld(c.Position));
@@ -53,7 +49,9 @@ namespace MapGeneration
 
                 }
             }
-    }
+
+            return true;
+        }
 
         private void InstantiateRandomObect(ref List<MapObject> list, ObjectType type, Chunk chunk, Vector3 position )
         {

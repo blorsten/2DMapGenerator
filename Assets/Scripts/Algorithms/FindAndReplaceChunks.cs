@@ -16,13 +16,13 @@ namespace MapGeneration.Algorithm
     {
         private List<ChunkHolder> _chunksToReplace = new List<ChunkHolder>();
 
-        public override void Process(Map map, List<Chunk> usableChunks)
+        public override bool Process(Map map, List<Chunk> usableChunks)
         {
             _chunksToReplace.Clear();
 
             FindChunksToReplace(map);
             PlaceMatchingChunks(map, usableChunks);
-            base.Process(map, usableChunks);
+            return base.Process(map, usableChunks);
         }
 
         private void FindChunksToReplace(Map map)
