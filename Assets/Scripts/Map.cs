@@ -73,6 +73,7 @@ namespace MapGeneration
                 if ((chunk as ConditionalChunk).Validate(this, chunkHolder))
                 {
                     chunkHolder.Prefab = chunk;
+                    chunkHolder.ChunkType = chunk.ChunkType;
                     return true;
                 }
 

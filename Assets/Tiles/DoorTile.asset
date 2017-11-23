@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af12c3cf9a17dac408124725775b285f, type: 3}
+  m_Name: DoorTile
+  m_EditorClassIdentifier: 
+  _sprite: {fileID: 21300000, guid: 29d388932bf9d5f46b6774ebda7da4e5, type: 3}
+  __objectToSpawn: {fileID: 114844111033599164, guid: 6277504902ee09348a94fb3b70d491d9,
+    type: 2}

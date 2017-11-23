@@ -4,18 +4,52 @@ using UnityEngine;
 
 namespace MapGeneration
 {
+    [RequireComponent(typeof(Collider2D))]
+    [RequireComponent(typeof(GameplayObject))]
     public class PlayerSpawner : MonoBehaviour
     {
-        [SerializeField] private GameObject __player;
+        private bool _isInDoor;
+        private GameplayObject _gameplayObject;
 
-        public void Start()
+        void Awake()
         {
-            GameObject player = GameObject.FindWithTag("Player");
-            if (player == null)
-                Instantiate(__player, transform.position, Quaternion.identity).transform.position = transform.position;
-            else
-            {
+            _gameplayObject = GetComponent<GameplayObject>();
+        }
+
+        public void GrabPlayer(GameObject player)
+        {
+            if (player != null)
                 player.transform.position = transform.position;
+        }
+
+        void Update()
+        {
+            if (!Input.GetKeyDown(KeyCode.E) || !_isInDoor)
+                return;
+
+            if (_gameplayObject.Owner.ChunkType == ChunkType.Start)
+            {
+                MapCycler.Instance.LoadPreviousMap();
+            }
+            else if (_gameplayObject.Owner.ChunkType == ChunkType.End)
+            {
+                MapCycler.Instance.LoadNextMap();
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.CompareTag("Player"))
+            {
+                _isInDoor = true;
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            if (collision.CompareTag("Player"))
+            {
+                _isInDoor = false;
             }
         }
     }

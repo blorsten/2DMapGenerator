@@ -81,7 +81,7 @@ namespace MapGeneration.Algorithm
             {
                 //If we dont have any marked chunks to start one, break.
                 if (!_myMarkedChunks.Any())
-                    return null;
+                    break;
 
                 ChunkHolder startChunk = _myMarkedChunks[map.Random.Range(0, _myMarkedChunks.Count)];
                 startPosition = startChunk.Position;

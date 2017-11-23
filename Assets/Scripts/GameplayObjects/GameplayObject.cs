@@ -6,7 +6,7 @@ namespace MapGeneration
 {
     public class GameplayObject : MonoBehaviour
     {
-        
+        public Chunk Owner { get; set; }
     }
 }
 

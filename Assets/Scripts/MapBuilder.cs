@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using MapGeneration.SaveSystem;
 using MapGeneration.Utils;
@@ -20,6 +21,8 @@ namespace MapGeneration
         public Map PreExistingMap { get { return _preExistingMap; } set { _preExistingMap = value; } }
         public List<int> SavedSeeds { get { return _savedSeeds; } set { _savedSeeds = value; } }
         public List<MapDataSaver> SavedMaps { get { return _savedMaps ?? (_savedMaps = new List<MapDataSaver>()); } }
+
+        public event Action<Map> MapSpawned;
 
         protected override void Awake()
         {
@@ -177,6 +180,7 @@ namespace MapGeneration
 
             map.MapDataSaver.LoadPersistentData();
 
+            StartCoroutine(InvokeMapSpawned(ActiveMap));
         }
 
         /// <summary>
@@ -209,6 +213,12 @@ namespace MapGeneration
                 else
                     Destroy(map.gameObject);
             }
+        }
+
+        private IEnumerator InvokeMapSpawned(Map map)
+        {
+            yield return null;
+            if (MapSpawned != null) MapSpawned.Invoke(map);
         }
     }
 }
