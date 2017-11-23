@@ -202,7 +202,7 @@ Prefab:
     - target: {fileID: 114152713502933388, guid: a57f45a710587af42acac56e1b1e5164,
         type: 2}
       propertyPath: _savedSeeds.Array.size
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4840674171011802, guid: a57f45a710587af42acac56e1b1e5164, type: 2}
       propertyPath: m_LocalPosition.x
@@ -270,18 +270,23 @@ Prefab:
     - target: {fileID: 114152713502933388, guid: a57f45a710587af42acac56e1b1e5164,
         type: 2}
       propertyPath: _savedSeeds.Array.data[4]
-      value: 712
+      value: 671
       objectReference: {fileID: 0}
     - target: {fileID: 114152713502933388, guid: a57f45a710587af42acac56e1b1e5164,
         type: 2}
       propertyPath: _savedSeeds.Array.data[5]
-      value: 915
+      value: 511
       objectReference: {fileID: 0}
     - target: {fileID: 114152713502933388, guid: a57f45a710587af42acac56e1b1e5164,
         type: 2}
       propertyPath: _savedSeeds.Array.data[6]
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 114394862698149482, guid: a57f45a710587af42acac56e1b1e5164,
+        type: 2}
+      propertyPath: __player
+      value: 
+      objectReference: {fileID: 100002, guid: 87a2357765801c34292d6718d8b4d770, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a57f45a710587af42acac56e1b1e5164, type: 2}
   m_IsPrefabParent: 0
