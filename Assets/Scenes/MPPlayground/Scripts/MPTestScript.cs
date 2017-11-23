@@ -5,17 +5,9 @@ namespace MPPlayground
 {
     public class MPTestScript : MonoBehaviour
     {
-        void Update()
+        void Start()
         {
-            if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                MapCycler.Instance.LoadNextMap();
-            }
-
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
-            {
-                MapCycler.Instance.LoadPreviousMap();
-            }
+            MapCycler.Instance.LoadNextMap();
         }
     }
 }

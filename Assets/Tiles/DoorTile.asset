@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Name: DoorTile
   m_EditorClassIdentifier: 
   _sprite: {fileID: 21300000, guid: 29d388932bf9d5f46b6774ebda7da4e5, type: 3}
-  __objectToSpawn: {fileID: 1302908191973980, guid: 6277504902ee09348a94fb3b70d491d9,
+  __objectToSpawn: {fileID: 114844111033599164, guid: 6277504902ee09348a94fb3b70d491d9,
     type: 2}

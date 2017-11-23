@@ -34,6 +34,8 @@ namespace MapGeneration
             set { _chunkOpenings = value; }
         }
 
+        public ChunkType ChunkType { get; set; }
+
         public ChunkHolder(Vector2Int position)
         {
             Position = position;

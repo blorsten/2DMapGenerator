@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using MapGeneration.SaveSystem;
@@ -12,6 +13,7 @@ namespace MapGeneration
     /// </summary>
     public class MapCycler : Singleton<MapCycler>
     {
+        private bool _isStartChunk;
         [SerializeField] private GameObject __player;
 
         public GameObject Player { get; set; }
@@ -22,6 +24,12 @@ namespace MapGeneration
         {
             base.Awake();
             Maps = new LinkedList<Guid>();
+            MapBuilder.Instance.MapSpawned += OnMapSpawned;
+        }
+
+        private void OnMapSpawned(Map activeMap)
+        {
+            GrabPlayer(activeMap, _isStartChunk);
         }
 
         /// <summary>
@@ -67,13 +75,15 @@ namespace MapGeneration
             if (foundMap != null)
             {
                 CurrentMap = Maps.Find(id);
-                GrabPlayer(MapBuilder.Instance.Generate(foundMap), isStartChunk);
+                MapBuilder.Instance.Generate(foundMap);
             }
             else
             {
                 var newMap = MapBuilder.Instance.Generate();
                 CurrentMap = Maps.AddLast(newMap.ID);
             }
+
+            _isStartChunk = isStartChunk;
         }
 
         /// <summary>
@@ -83,13 +93,18 @@ namespace MapGeneration
         /// <param name="isStartChunk">Should it place the player in start chunk?</param>
         public void GrabPlayer(Map map, bool isStartChunk)
         {
+            if (!Player)
+                Player = Instantiate(__player);
+
             if (isStartChunk)
             {
-                //TODO: Find the start chunk in the map and call grab player on that door it finds.
+                PlayerSpawner plySpawner = map.StartChunk.Instance.GetComponentInChildren<PlayerSpawner>();
+                plySpawner.GrabPlayer(Player);
             }
             else
             {
-                //TODO: Find the end chunk in the map and call grab player on that door it finds.
+                PlayerSpawner plySpawner = map.EndChunk.Instance.GetComponentInChildren<PlayerSpawner>();
+                plySpawner.GrabPlayer(Player);
             }
         }
     }

@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
+using ListExstention;
+using UnityEditor;
 
 namespace MapGeneration.Algorithm
 {
@@ -40,13 +42,25 @@ namespace MapGeneration.Algorithm
         {
             foreach (ChunkHolder chunkholder in _chunksToReplace)
             {
-                foreach (Chunk chunk in usableChunks)
+                if (chunkholder == map.StartChunk)
                 {
-                    if (chunkholder.ChunkOpenings == chunk.ChunkOpenings)
-                    {
-                        map.Place(chunkholder, chunk);
-                    }
+                    map.Place(chunkholder,
+                        usableChunks.RandomEntry(chunk => chunkholder.ChunkOpenings == chunk.ChunkOpenings &&
+                                                          chunk.ChunkType == ChunkType.Start));
+                    continue;
                 }
+
+                if (chunkholder == map.EndChunk)
+                {
+                    map.Place(chunkholder,
+                        usableChunks.RandomEntry(chunk => chunkholder.ChunkOpenings == chunk.ChunkOpenings &&
+                                                          chunk.ChunkType == ChunkType.End));
+                    continue;
+                }
+
+                map.Place(chunkholder,
+                    usableChunks.RandomEntry(chunk => chunkholder.ChunkOpenings == chunk.ChunkOpenings &&
+                                                      chunk.ChunkType == ChunkType.Default));
             }
         }
     }

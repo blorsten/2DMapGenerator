@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+﻿using MapGeneration;
+using UnityEngine;
 using UnityEngine.Tilemaps;
 
 [CreateAssetMenu(fileName = "Spawner Tile", menuName = "MapGeneration/Tiles/Spawner Tile")]
 public class SpawnerTile : TileBase
 {
     [SerializeField] protected Sprite _sprite;
-    [SerializeField] protected GameObject __objectToSpawn;
+    [SerializeField] protected GameplayObject __objectToSpawn;
 
     public override bool StartUp(Vector3Int position, ITilemap tilemap, GameObject go)
     {
@@ -19,8 +20,10 @@ public class SpawnerTile : TileBase
                 return false;
             }
 
-            Instantiate(__objectToSpawn, currentTilemap.GetCellCenterWorld(position),
-                Quaternion.identity);
+            GameplayObject newObj = Instantiate(__objectToSpawn, currentTilemap.GetCellCenterWorld(position),
+                Quaternion.identity, currentTilemap.transform);
+
+            newObj.Owner = currentTilemap.GetComponentInParent<Chunk>();
         }
 
         return base.StartUp(position, tilemap, go);

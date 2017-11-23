@@ -112,86 +112,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &638695052
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 638695056}
-  - component: {fileID: 638695055}
-  - component: {fileID: 638695054}
-  - component: {fileID: 638695053}
-  m_Layer: 0
-  m_Name: Camera
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!81 &638695053
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 638695052}
-  m_Enabled: 1
---- !u!124 &638695054
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 638695052}
-  m_Enabled: 1
---- !u!20 &638695055
-Camera:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 638695052}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 1
-  orthographic size: 30.37044
-  m_Depth: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
---- !u!4 &638695056
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 638695052}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 29.2, y: 29.8, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1000003805
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,10 +154,10 @@ MonoBehaviour:
   - {fileID: 114745790875449378, guid: dc2e20264cab70d4ca2ab4c33264b988, type: 2}
   - {fileID: 114569385727250392, guid: 10daf4343033a5d478ab0a524c3d573c, type: 2}
   - {fileID: 114994132734151666, guid: bf03e9f0869232141b27069e603dc5d0, type: 2}
-  - {fileID: 114404974599984866, guid: ef9da68ac4e1c244fbcead3457793a18, type: 2}
+  - {fileID: 114710271327258202, guid: 7712d5e7e1f290646acb1d602f8261b6, type: 2}
+  - {fileID: 114821389368631668, guid: 0bb46e33e17de0e48b43b80054e81954, type: 2}
   - {fileID: 114295943903487292, guid: 2259343a4a60e93479efe3f2ffefc985, type: 2}
   - {fileID: 114812716910522764, guid: 5fe463452e224fc418294b6dd7b7ec93, type: 2}
-  - {fileID: 114236882719105372, guid: 213d9aae1cebf62449bca69d682d0f65, type: 2}
   - {fileID: 114411381809765632, guid: 030a4ca028613db4aa8635a1a684daa1, type: 2}
   - {fileID: 114287203569135020, guid: c2cf1165e1e20e045ba9d26b6df5da20, type: 2}
   - {fileID: 114103835611523876, guid: 72e97db948760694c85dcf008889e16f, type: 2}
@@ -254,11 +174,41 @@ MonoBehaviour:
   - {fileID: 114526055357769824, guid: 1856b12b3b462ed4f90f0444efeb2c39, type: 2}
   - {fileID: 114538120139386364, guid: 786d2c3f0f3f6f74c98d55de0b6ad188, type: 2}
   - {fileID: 114104361915751932, guid: 69a5226307cd75a4aa11181bb7ce0e59, type: 2}
+  - {fileID: 114502247889634952, guid: 0f0f3fe8307fce840b93da025a697cdf, type: 2}
+  - {fileID: 114934095544021350, guid: 2578b65207f25de4bb8ec8b47e418acf, type: 2}
+  - {fileID: 114014164203036482, guid: 444e3512266e09e4581d0e53d21e7ffd, type: 2}
+  - {fileID: 114641327879179858, guid: 5f5c846a43ea2344c9afe38656e064af, type: 2}
+  - {fileID: 114323676764884796, guid: 9c857577138cac24abdee208a4a16a40, type: 2}
+  - {fileID: 114735698912835474, guid: 50637380f25f21b429d0dfb029afe198, type: 2}
+  - {fileID: 114706693565621932, guid: 055f082300faeaf408e8f4959095f162, type: 2}
+  - {fileID: 114569531433331594, guid: d8868401a1cfc234ca4b21b7f6a8fcf4, type: 2}
+  - {fileID: 114895151716068832, guid: b203ae49fa820ad4c925591e786c498d, type: 2}
+  - {fileID: 114542385458147496, guid: 1ece83ff78194b84db43ed27e698280f, type: 2}
+  - {fileID: 114599495561242148, guid: 500bf16525b75dd46904e1d1396544ce, type: 2}
+  - {fileID: 114244286883640908, guid: 8c7c6336ff330b648a4e576355dd9740, type: 2}
+  - {fileID: 114701555788263262, guid: 07c70062ac819ce45ba5aa78ce977808, type: 2}
+  - {fileID: 114067481997693694, guid: 3ed8eb6499feb9f41bbf29c6dcd8c793, type: 2}
+  - {fileID: 114355732999802798, guid: c300e498125175c4e9f267c83d82e7cf, type: 2}
   - {fileID: 114941419155164888, guid: 6d4b5c2e89dcd9d4a82c3d2756fcdbce, type: 2}
   - {fileID: 114954615687445604, guid: 8b8e01b8cce04df48b2c92a668a218ac, type: 2}
   - {fileID: 114054360555391768, guid: 1f239368e2e2c964591d568b4823e746, type: 2}
   - {fileID: 114946033942520992, guid: 63d553f5232ab9d4d9f3fd8a50af0fc9, type: 2}
   - {fileID: 114196630298748248, guid: 495a6db585ccb7d46843b9796dfb32d6, type: 2}
+  - {fileID: 114582679703906488, guid: 7dbbb8e25ef7d7043bd6a38e636e4836, type: 2}
+  - {fileID: 114294529599749086, guid: 3043bf7eb6c79074081db9547e08fea5, type: 2}
+  - {fileID: 114313801957171038, guid: c47690b74db79404992575ef6f21830d, type: 2}
+  - {fileID: 114020332338506862, guid: 70cf63148977a1040ace75b50d63fc0d, type: 2}
+  - {fileID: 114404974599984866, guid: ef9da68ac4e1c244fbcead3457793a18, type: 2}
+  - {fileID: 114588977000841172, guid: 3c45b16aa6877d24e862c5aa39520560, type: 2}
+  - {fileID: 114474806094930030, guid: 58fc05436d1fa554a8ed2fbf08c4c835, type: 2}
+  - {fileID: 114174375358428306, guid: 0c009bc3eb94f6b419a2bef02257f6ab, type: 2}
+  - {fileID: 114044240018786030, guid: 3e3c72e96e2f72049bb3c8b920f39ab2, type: 2}
+  - {fileID: 114003650207468032, guid: f6d164d360e928445b82e2fc384b5bad, type: 2}
+  - {fileID: 114674914063203030, guid: fda3511670ad5c74d91adb4b2574886f, type: 2}
+  - {fileID: 114132249166211188, guid: 96f6deb12b223474cb7e52b3d6035b37, type: 2}
+  - {fileID: 114693960475569592, guid: a362e737479f9b140ae8f77aaa0ea555, type: 2}
+  - {fileID: 114994326117088404, guid: d31f625c490606243ba72c935164efe2, type: 2}
+  - {fileID: 114910219237004514, guid: 8283556b3d8ced54eadfe312e2db2e42, type: 2}
   _objects:
   - {fileID: 114844111033599164, guid: 6277504902ee09348a94fb3b70d491d9, type: 2}
   - {fileID: 114844111033599164, guid: 9b411340174b5d14f86e505656c7d990, type: 2}
@@ -274,7 +224,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2032332518
 GameObject:
@@ -322,7 +272,7 @@ MonoBehaviour:
   DontDestroyOnLoadConfig: 0
   _currentBlueprint: {fileID: 11400000, guid: 6e54b0d443ed9f54589c13f0d7a0dc78, type: 2}
   _preExistingMap: {fileID: 0}
-  _savedSeeds: ba0000009e02000042020000f6000000af020000b1030000b80000005c0200003f020000e4020000970300005c00000006010000a2010000f60200009c0300005f0000001f010000ca0100008d02000041030000d4030000a90000005701000011020000bf0200007f03000054020000ee020000810300002f000000d100000058010000dc00000078030000930100002800000036000000f5000000e0030000c10000007800000015010000c501000073030000d5010000
+  _savedSeeds: 
 --- !u!4 &2032332521
 Transform:
   m_ObjectHideFlags: 0
