@@ -22,29 +22,25 @@ namespace MapGeneration
                     if (!map.Grid[x, y].Instance)
                         continue;
 
-                    List<MapObject> objects = new List<MapObject>();
-                    ObjectType objectType = ObjectType.FlyingSpawner;
+                    List<GameplayObject> objects = new List<GameplayObject>();
 
                     //This goes through all of the chunks tiles and removes the used connection tiles
                     foreach (var c in map.Grid[x, y].Instance.TileFlags)
                     {
+                        var position = map.Grid[x, y].Instance.Enviorment
+                            .GetCellCenterWorld(c.Position);
+                        Chunk chunk = map.Grid[x, y].Instance;
+
                         switch (c.Type)
                         {
                             case TileType.Trap:
-                                objectType = ObjectType.Trap;
+                                InstantiateRandomObect<Trap>(ref objects,chunk,position);
                                 break;
                             case TileType.Treasure:
-                                objectType = ObjectType.Treasure;
-                                break;
-                            case TileType.FlyingSpawn:
-                                objectType = ObjectType.FlyingSpawner;
-                                break;
-                            case TileType.GroundSpawn:
-                                objectType = ObjectType.GroundSpawner;
+                                InstantiateRandomObect<Treasure>(ref objects,chunk,position);
                                 break;
                         }
-                        InstantiateRandomObect(ref objects,objectType, map.Grid[x, y].Instance,
-                            map.Grid[x, y].Instance.Enviorment.GetCellCenterWorld(c.Position));
+
                     }
 
                 }
@@ -53,12 +49,13 @@ namespace MapGeneration
             return true;
         }
 
-        private void InstantiateRandomObect(ref List<MapObject> list, ObjectType type, Chunk chunk, Vector3 position )
+        private void InstantiateRandomObect<T>(ref List<GameplayObject> list, Chunk chunk,
+            Vector3 position) where T : GameplayObject
         {
             list.Clear();
             foreach (var o in ResourceHandler.Instance.Objects)
             {
-                if(o.Type == type)
+                if(o.GetType() == typeof(T))
                     list.Add(o);
             }
             if (list.Count > 0)
