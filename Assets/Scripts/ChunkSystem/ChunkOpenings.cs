@@ -128,5 +128,24 @@ namespace MapGeneration
 
             return isValid;
         }
+
+        public bool IsMatching(ChunkOpenings b)
+        {
+            bool isValid = true;
+
+            if (TopOpen && !b.TopOpen)
+                isValid = false;
+
+            if (RightOpen && !b.RightOpen)
+                isValid = false;
+
+            if (BottomOpen && !b.BottomOpen)
+                isValid = false;
+
+            if (LeftOpen && !b.LeftOpen)
+                isValid = false;
+
+            return isValid;
+        }
     }
 }

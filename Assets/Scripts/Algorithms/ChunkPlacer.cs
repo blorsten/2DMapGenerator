@@ -45,22 +45,25 @@ namespace MapGeneration.Algorithm
                 if (chunkholder == map.StartChunk)
                 {
                     map.Place(chunkholder,
-                        usableChunks.RandomEntry(chunk => chunkholder.ChunkOpenings == chunk.ChunkOpenings &&
-                                                          chunk.ChunkType == ChunkType.Start));
+                        usableChunks.RandomEntry(chunk => 
+                            chunkholder.ChunkOpenings.IsMatching(chunk.ChunkOpenings) &&
+                            chunk.ChunkType == ChunkType.Start, map.Random));
                     continue;
                 }
 
                 if (chunkholder == map.EndChunk)
                 {
                     map.Place(chunkholder,
-                        usableChunks.RandomEntry(chunk => chunkholder.ChunkOpenings == chunk.ChunkOpenings &&
-                                                          chunk.ChunkType == ChunkType.End));
+                        usableChunks.RandomEntry(chunk => 
+                            chunkholder.ChunkOpenings.IsMatching(chunk.ChunkOpenings) &&
+                            chunk.ChunkType == ChunkType.End, map.Random));
                     continue;
                 }
 
                 map.Place(chunkholder,
-                    usableChunks.RandomEntry(chunk => chunkholder.ChunkOpenings == chunk.ChunkOpenings &&
-                                                      chunk.ChunkType == ChunkType.Default));
+                    usableChunks.RandomEntry(chunk => 
+                        chunkholder.ChunkOpenings.IsMatching(chunk.ChunkOpenings) &&
+                        chunk.ChunkType == ChunkType.Default, map.Random));
             }
         }
     }

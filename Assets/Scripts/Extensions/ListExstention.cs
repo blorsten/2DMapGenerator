@@ -38,5 +38,10 @@ namespace ListExstention
         {
             return l.Where(predicate).ToList().RandomEntry();
         }
+
+        public static T RandomEntry<T>(this IList<T> l, Func<T, bool> predicate, Random r)
+        {
+            return l.Where(predicate).ToList().RandomEntry(r);
+        }
     }
 }
