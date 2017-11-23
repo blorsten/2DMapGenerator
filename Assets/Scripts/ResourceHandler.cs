@@ -11,10 +11,10 @@ namespace MapGeneration
     public class ResourceHandler : Singleton<ResourceHandler>
     {
         [SerializeField]private List<Chunk> _chunks;
-        [SerializeField] private List<MapObject> _objects;
+        [SerializeField] private List<GameplayObject> _objects;
 
         public List<Chunk> Chunks { get { return _chunks; } private set { _chunks = value; } }
-        public List<MapObject> Objects{get { return _objects; }private set { _objects = value; }}
+        public List<GameplayObject> Objects{get { return _objects; }private set { _objects = value; }}
 
         protected override void Awake()
         {
@@ -39,8 +39,8 @@ namespace MapGeneration
         [ContextMenu("Update Objects")]
         public void UpdateObjects()
         {
-            Objects = new List<MapObject>();
-            Objects.AddRange(Resources.LoadAll<MapObject>("MapObjects"));
+            Objects = new List<GameplayObject>();
+            Objects.AddRange(Resources.LoadAll<GameplayObject>("MapObjects"));
         }
     }
 }
