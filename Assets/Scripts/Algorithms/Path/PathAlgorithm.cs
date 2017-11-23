@@ -29,10 +29,11 @@ namespace MapGeneration.Algorithm
         //Collection used to store all the directions the path algorithm can take.
         protected List<CardinalDirections> DirectionCandidates;
 
-        public override void Process(Map map, List<Chunk> usableChunks)
+        public override bool Process(Map map, List<Chunk> usableChunks)
         {
-            base.Process(map, usableChunks);
+            bool success = base.Process(map, usableChunks);
             Reset();
+            return success;
         }
 
         /// <summary>
@@ -116,7 +117,7 @@ namespace MapGeneration.Algorithm
                 ChunkHolder nextChunk = map.Grid[nextPosition.Value.x, nextPosition.Value.y];
 
                 //if the next chunk isnt marked, continue the process
-                if (!MarkedChunks.Contains(nextChunk) && map.Place(nextChunk, usableChunks.RandomEntry(map.Random)))
+                if (!MarkedChunks.Contains(nextChunk))
                 {
                     //set current position to the next position
                     currentPos = nextPosition.Value;
@@ -124,8 +125,6 @@ namespace MapGeneration.Algorithm
                     //enqueue the next chunk, so we know it is used.
                     MarkedChunks.Enqueue(nextChunk);
 
-                    //Change the prefab on the found chunk to another one. TODO: Find another way to mark marked chunks.
-                    
                     //Reset candidates.
                     ResetDirectionCandidates();
 

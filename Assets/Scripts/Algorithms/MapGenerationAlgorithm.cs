@@ -15,9 +15,9 @@ namespace MapGeneration.Algorithm
         /// </summary>
         /// <param name="map">map to process</param>
         /// <param name="usableChunks">List of all the usable chunks, filtered by <see cref="MapBlueprint.Generate"/>.</param>
-        public virtual void Process(Map map, List<Chunk> usableChunks)
+        public virtual bool Process(Map map, List<Chunk> usableChunks)
         {
-
+            return true;
         }
 
         /// <summary>
@@ -25,9 +25,9 @@ namespace MapGeneration.Algorithm
         /// </summary>
         /// <param name="map">map to process</param>
         /// <param name="usableChunks">List of all the usable chunks, filtered by <see cref="MapBlueprint.Generate"/>.</param>
-        public virtual void PostProcess(Map map, List<Chunk> usableChunks)
+        public virtual bool PostProcess(Map map, List<Chunk> usableChunks)
         {
-
+            return true;
         }
 
         /// <summary>
@@ -85,20 +85,20 @@ namespace MapGeneration.Algorithm
             switch (dir)
             {
                 case PathAlgorithm.CardinalDirections.Top:
-                    current.Instance.ChunkHolder.ChunkOpenings.TopConnection = true;
-                    next.Instance.ChunkHolder.ChunkOpenings.BottomConnetion = true;
+                    current.ChunkOpenings.TopConnection = true;
+                    next.ChunkOpenings.BottomConnetion = true;
                     break;
                 case PathAlgorithm.CardinalDirections.Bottom:
-                    current.Instance.ChunkHolder.ChunkOpenings.BottomConnetion = true;
-                    next.Instance.ChunkHolder.ChunkOpenings.TopConnection = true;
+                    current.ChunkOpenings.BottomConnetion = true;
+                    next.ChunkOpenings.TopConnection = true;
                     break;
                 case PathAlgorithm.CardinalDirections.Left:
-                    current.Instance.ChunkHolder.ChunkOpenings.LeftConnection = true;
-                    next.Instance.ChunkHolder.ChunkOpenings.RightConnection = true;
+                    current.ChunkOpenings.LeftConnection = true;
+                    next.ChunkOpenings.RightConnection = true;
                     break;
                 case PathAlgorithm.CardinalDirections.Right:
-                    current.Instance.ChunkHolder.ChunkOpenings.RightConnection = true;
-                    next.Instance.ChunkHolder.ChunkOpenings.LeftConnection = true;
+                    current.ChunkOpenings.RightConnection = true;
+                    next.ChunkOpenings.LeftConnection = true;
                     break;
             }
         }

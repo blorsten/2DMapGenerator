@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System;
+using System.Linq;
 using MapGeneration.Extensions;
 
 namespace ListExstention
@@ -31,6 +32,16 @@ namespace ListExstention
         public static T RandomEntry<T>(this IList<T> l)
         {
             return RandomEntry(l, new Random());
+        }
+
+        public static T RandomEntry<T>(this IList<T> l, Func<T, bool> predicate)
+        {
+            return l.Where(predicate).ToList().RandomEntry();
+        }
+
+        public static T RandomEntry<T>(this IList<T> l, Func<T, bool> predicate, Random r)
+        {
+            return l.Where(predicate).ToList().RandomEntry(r);
         }
     }
 }
