@@ -29,6 +29,13 @@ namespace MapGeneration
 
         private void OnMapSpawned(Map activeMap)
         {
+            //If we generated a preexisting map, count it as one in the cycler.
+            if (!Maps.Contains(activeMap.ID))
+            {
+                CurrentMap = Maps.AddLast(activeMap.ID);
+                _isStartChunk = true;
+            }
+
             GrabPlayer(activeMap, _isStartChunk);
         }
 

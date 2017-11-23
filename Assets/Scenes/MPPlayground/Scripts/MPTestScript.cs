@@ -7,7 +7,7 @@ namespace MPPlayground
     {
         void Start()
         {
-            MapCycler.Instance.LoadNextMap();
+            //MapCycler.Instance.LoadNextMap();
         }
     }
 }
