@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-[CreateAssetMenu(fileName = "Player Spawner Tile", menuName = "MapGeneration/Tiles/Spawner Tile")]
+[CreateAssetMenu(fileName = "Spawner Tile", menuName = "MapGeneration/Tiles/Spawner Tile")]
 public class SpawnerTile : TileBase
 {
     [SerializeField] protected Sprite _sprite;
