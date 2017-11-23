@@ -63,9 +63,9 @@ namespace MapGeneration
         /// <param name="chunkHolder">Where to place</param>
         /// <param name="chunk">Chunk to place</param>
         /// <returns>Wheter the chunk was placed or not</returns>
-        public bool Place(ChunkHolder chunkHolder, Chunk chunk)
+        public bool Place(ChunkHolder chunkHolder, Chunk chunk, bool forcePlace = false)
         {
-            if (chunkHolder.Prefab != null)
+            if (chunkHolder.Prefab != null && !forcePlace)
                 return false;
 
             if (chunk is ConditionalChunk)
