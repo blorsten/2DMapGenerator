@@ -14,7 +14,7 @@ namespace MapGeneration.Algorithm
     /// Niels Justesen
     /// Mathias Prisfeldt
     /// </summary>
-    [CreateAssetMenu(fileName = "Drunkard Walk Algorithm", menuName = "MapGeneration/Algorithms/DrunkardWalk")]
+    [CreateAssetMenu(fileName = "New Drunkard Walk", menuName = "MapGeneration/Algorithms/Drunkard Walk")]
     public class DrunkardWalkAlgorithm : PathAlgorithm
     {
         //Number of times the algorithms creates a marked chunk.

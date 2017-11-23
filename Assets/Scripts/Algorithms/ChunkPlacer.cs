@@ -13,8 +13,8 @@ namespace MapGeneration.Algorithm
     /// Niels Justesen
     /// </summary>
 
-    [CreateAssetMenu(fileName = "Set Valid Chunks", menuName = "MapGeneration/Algorithms/FindAndReplaceChunks")]
-    public class FindAndReplaceChunks : MapGenerationAlgorithm
+    [CreateAssetMenu(fileName = "New Chunk Placer", menuName = "MapGeneration/Algorithms/Chunk Placer")]
+    public class ChunkPlacer : MapGenerationAlgorithm
     {
         private List<ChunkHolder> _chunksToReplace = new List<ChunkHolder>();
 

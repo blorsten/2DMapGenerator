@@ -141,7 +141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DontDestroyOnLoadConfig: 1
   _chunks:
-  - {fileID: 114318020207900078, guid: a3a3c04d2aa3731428a1007a6e6a5c13, type: 2}
+  - {fileID: 114196630298748248, guid: 495a6db585ccb7d46843b9796dfb32d6, type: 2}
   - {fileID: 114388877904034564, guid: 2142181738c919b4fb1074cf82c02e3d, type: 2}
   - {fileID: 114757590520994812, guid: e80e5f99b9907f149beea1204abf4aa4, type: 2}
   - {fileID: 114636449747279650, guid: 294bf0e5f4a621f4a8d387b784e89acd, type: 2}
@@ -191,9 +191,6 @@ MonoBehaviour:
   - {fileID: 114355732999802798, guid: c300e498125175c4e9f267c83d82e7cf, type: 2}
   - {fileID: 114941419155164888, guid: 6d4b5c2e89dcd9d4a82c3d2756fcdbce, type: 2}
   - {fileID: 114954615687445604, guid: 8b8e01b8cce04df48b2c92a668a218ac, type: 2}
-  - {fileID: 114054360555391768, guid: 1f239368e2e2c964591d568b4823e746, type: 2}
-  - {fileID: 114946033942520992, guid: 63d553f5232ab9d4d9f3fd8a50af0fc9, type: 2}
-  - {fileID: 114196630298748248, guid: 495a6db585ccb7d46843b9796dfb32d6, type: 2}
   - {fileID: 114582679703906488, guid: 7dbbb8e25ef7d7043bd6a38e636e4836, type: 2}
   - {fileID: 114294529599749086, guid: 3043bf7eb6c79074081db9547e08fea5, type: 2}
   - {fileID: 114313801957171038, guid: c47690b74db79404992575ef6f21830d, type: 2}
@@ -209,10 +206,7 @@ MonoBehaviour:
   - {fileID: 114693960475569592, guid: a362e737479f9b140ae8f77aaa0ea555, type: 2}
   - {fileID: 114994326117088404, guid: d31f625c490606243ba72c935164efe2, type: 2}
   - {fileID: 114910219237004514, guid: 8283556b3d8ced54eadfe312e2db2e42, type: 2}
-  _objects:
-  - {fileID: 114844111033599164, guid: 6277504902ee09348a94fb3b70d491d9, type: 2}
-  - {fileID: 114844111033599164, guid: 9b411340174b5d14f86e505656c7d990, type: 2}
-  - {fileID: 114844111033599164, guid: fcb89872005b68f4b9d52210a7630985, type: 2}
+  _objects: []
 --- !u!4 &1000003807
 Transform:
   m_ObjectHideFlags: 0
@@ -248,8 +242,7 @@ GameObject:
 --- !u!114 &2032332519
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114230813160857530, guid: a57f45a710587af42acac56e1b1e5164,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2032332518}
   m_Enabled: 1
@@ -272,7 +265,7 @@ MonoBehaviour:
   DontDestroyOnLoadConfig: 0
   _currentBlueprint: {fileID: 11400000, guid: 6e54b0d443ed9f54589c13f0d7a0dc78, type: 2}
   _preExistingMap: {fileID: 0}
-  _savedSeeds: 
+  _savedSeeds: 2b000000210300007801000020020000
 --- !u!4 &2032332521
 Transform:
   m_ObjectHideFlags: 0

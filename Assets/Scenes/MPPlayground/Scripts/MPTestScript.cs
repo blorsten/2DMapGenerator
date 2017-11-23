@@ -7,7 +7,8 @@ namespace MPPlayground
     {
         void Start()
         {
-            //MapCycler.Instance.LoadNextMap();
+            if (!MapBuilder.Instance.PreExistingMap)
+                MapCycler.Instance.LoadNextMap();
         }
     }
 }

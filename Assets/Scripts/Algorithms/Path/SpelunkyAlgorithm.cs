@@ -13,7 +13,7 @@ namespace MapGeneration.Algorithm
     /// Niels Justesen
     /// Mathias Prisfeldt
     /// </summary>
-    [CreateAssetMenu(fileName = "Spelunky Algorithm", menuName = "MapGeneration/Algorithms/Spelunky")]
+    [CreateAssetMenu(fileName = "New Spelunky Walk", menuName = "MapGeneration/Algorithms/Spelunky Walk")]
     public class SpelunkyAlgorithm : PathAlgorithm
     {
         public override bool Process(Map map, List<Chunk> usableChunks)

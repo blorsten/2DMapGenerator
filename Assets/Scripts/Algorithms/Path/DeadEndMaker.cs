@@ -11,7 +11,7 @@ namespace MapGeneration.Algorithm
     /// Creator:
     /// NJ og MP
     /// </summary>
-    [CreateAssetMenu(fileName = "Dead End Algorithm", menuName = "MapGeneration/Algorithms/DeadEndMaker")]
+    [CreateAssetMenu(fileName = "New Dead End Maker", menuName = "MapGeneration/Algorithms/Dead End Maker")]
     public class DeadEndMaker : DrunkardWalkAlgorithm
     {
         private List<Queue<KeyValuePair<ChunkHolder, CardinalDirections?>>> _roads;

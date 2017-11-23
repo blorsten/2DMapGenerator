@@ -9,7 +9,7 @@ namespace MapGeneration.Algorithm
     /// <summary>
     /// This algoritm find the used connections in chunks a removes the tiles in that connection.
     /// </summary>
-    [CreateAssetMenu(fileName = "Filler Algorithm", menuName = "MapGeneration/Algorithms/Filler Algorithm")]
+    [CreateAssetMenu(fileName = "New Connection Opener", menuName = "MapGeneration/Algorithms/Connection Opener")]
     public class ConnectionOpenerAlgorithm : MapGenerationAlgorithm
     {
         public override bool PostProcess(Map map, List<Chunk> usableChunks)

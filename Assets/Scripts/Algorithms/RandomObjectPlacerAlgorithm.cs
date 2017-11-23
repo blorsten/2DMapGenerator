@@ -7,10 +7,9 @@ using Random = UnityEngine.Random;
 
 namespace MapGeneration
 {
-    [CreateAssetMenu(fileName = "Random Object Placer", menuName = "MapGeneration/Algorithms/Random Object Placer")]
+    [CreateAssetMenu(fileName = "New Random Object Placer", menuName = "MapGeneration/Algorithms/Random Object Placer")]
     public class RandomObjectPlacerAlgorithm : MapGenerationAlgorithm
     {
-
         public override bool PostProcess(Map map, List<Chunk> usableChunks)
         {
             //This goes throw all of the map's chunks
@@ -34,10 +33,10 @@ namespace MapGeneration
                         switch (c.Type)
                         {
                             case TileType.Trap:
-                                InstantiateRandomObect<Trap>(ref objects,chunk,position);
+                                InstantiateRandomObject<Trap>(ref objects, chunk, position);
                                 break;
                             case TileType.Treasure:
-                                InstantiateRandomObect<Treasure>(ref objects,chunk,position);
+                                InstantiateRandomObject<Treasure>(ref objects, chunk, position);
                                 break;
                         }
 
@@ -49,7 +48,7 @@ namespace MapGeneration
             return true;
         }
 
-        private void InstantiateRandomObect<T>(ref List<GameplayObject> list, Chunk chunk,
+        private void InstantiateRandomObject<T>(ref List<GameplayObject> list, Chunk chunk,
             Vector3 position) where T : GameplayObject
         {
             list.Clear();

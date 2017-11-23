@@ -16,7 +16,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 88f213a205c1c9044bb92bc039b7a5b8, type: 2}
   - {fileID: 11400000, guid: 0e5f8478f8fbd2a468666f04d48a14d2, type: 2}
   - {fileID: 11400000, guid: 525be36b77b57f64b95dfee16d43b9d3, type: 2}
-  _gridSize: {x: 2, y: 1}
+  _gridSize: {x: 4, y: 4}
   _chunkSize: {x: 10, y: 8}
   _userSeed: 0
   __whitelistedChunks: []
