@@ -6,17 +6,10 @@ namespace MapGeneration
 {
     public class PlayerSpawner : MonoBehaviour
     {
-        [SerializeField] private GameObject __player;
-
-        public void Start()
+        public void GrabPlayer(GameObject player)
         {
-            GameObject player = GameObject.FindWithTag("Player");
-            if (player == null)
-                Instantiate(__player, transform.position, Quaternion.identity).transform.position = transform.position;
-            else
-            {
+            if (player != null)
                 player.transform.position = transform.position;
-            }
         }
     }
 }
