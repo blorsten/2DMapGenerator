@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using MapGeneration.Algorithm;
-using UnityEditor;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace MapGeneration.Algorithm

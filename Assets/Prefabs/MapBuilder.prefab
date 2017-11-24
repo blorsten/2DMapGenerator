@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DontDestroyOnLoadConfig: 0
-  _currentBlueprint: {fileID: 11400000, guid: da350cc2cc71d7a4ca26293eceadbfb0, type: 2}
+  _currentBlueprint: {fileID: 11400000, guid: 2bb18e7cb184ffa4bb5e5cfaad3bbc5e, type: 2}
   _preExistingMap: {fileID: 0}
   _savedSeeds: 
 --- !u!114 &114394862698149482

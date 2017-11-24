@@ -14,6 +14,8 @@ namespace MapGeneration
     public class MapCycler : Singleton<MapCycler>
     {
         private bool _isStartChunk;
+
+        [SerializeField] private bool _autoStart;
         [SerializeField] private GameObject __player;
 
         public GameObject Player { get; set; }
@@ -25,6 +27,12 @@ namespace MapGeneration
             base.Awake();
             Maps = new LinkedList<Guid>();
             MapBuilder.Instance.MapSpawned += OnMapSpawned;
+        }
+
+        void Start()
+        {
+            if (!MapBuilder.Instance.SavedMaps.Any() && _autoStart)
+                LoadNextMap();
         }
 
         private void OnMapSpawned(Map activeMap)

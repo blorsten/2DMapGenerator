@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc37a4d3022d22e4f8dda53e488456b8, type: 3}
+  m_Name: DemoGameBlueprint
+  m_EditorClassIdentifier: 
+  _algorithmStack:
+  - {fileID: 11400000, guid: 15226341bb4f718438db7e3bc6a4ee4c, type: 2}
+  - {fileID: 11400000, guid: f9d03f9ef5e573b4abaeb5d9a88760b4, type: 2}
+  - {fileID: 11400000, guid: 88f213a205c1c9044bb92bc039b7a5b8, type: 2}
+  - {fileID: 11400000, guid: 525be36b77b57f64b95dfee16d43b9d3, type: 2}
+  - {fileID: 11400000, guid: 980311384abc5bb46a46461349ad1e6f, type: 2}
+  - {fileID: 11400000, guid: 0e5f8478f8fbd2a468666f04d48a14d2, type: 2}
+  _gridSize: {x: 4, y: 4}
+  _chunkSize: {x: 10, y: 8}
+  _userSeed: 0
+  __whitelistedChunks: []
+  __blacklistedChunks: []
