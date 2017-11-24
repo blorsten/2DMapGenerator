@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using ListExstention;
+using MapGeneration.ConditionalChunks;
 using UnityEditor;
 
 namespace MapGeneration.Algorithm
@@ -40,12 +41,14 @@ namespace MapGeneration.Algorithm
 
         private void PlaceMatchingChunks(Map map, List<Chunk> usableChunks)
         {
+            List<Chunk> listToCheck = usableChunks.Where(chunk => !(chunk is ConditionalChunk) && !chunk.UsedByConditionalChunk).ToList();
+
             foreach (ChunkHolder chunkholder in _chunksToReplace)
             {
                 if (chunkholder == map.StartChunk)
                 {
                     map.Place(chunkholder,
-                        usableChunks.RandomEntry(chunk => 
+                        listToCheck.RandomEntry(chunk =>
                             chunkholder.ChunkOpenings.IsMatching(chunk.ChunkOpenings) &&
                             chunk.ChunkType == ChunkType.Start, map.Random));
                     continue;
@@ -54,14 +57,14 @@ namespace MapGeneration.Algorithm
                 if (chunkholder == map.EndChunk)
                 {
                     map.Place(chunkholder,
-                        usableChunks.RandomEntry(chunk => 
+                        listToCheck.RandomEntry(chunk => 
                             chunkholder.ChunkOpenings.IsMatching(chunk.ChunkOpenings) &&
                             chunk.ChunkType == ChunkType.End, map.Random));
                     continue;
                 }
 
                 map.Place(chunkholder,
-                    usableChunks.RandomEntry(chunk => 
+                    listToCheck.RandomEntry(chunk => 
                         chunkholder.ChunkOpenings.IsMatching(chunk.ChunkOpenings) &&
                         chunk.ChunkType == ChunkType.Default, map.Random));
             }

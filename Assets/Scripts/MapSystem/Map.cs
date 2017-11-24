@@ -16,18 +16,46 @@ namespace MapGeneration
     /// </summary>
     public class Map : MonoBehaviour
     {
+        private ChunkHolder _startChunk;
+        private ChunkHolder _endChunk;
+
         [SerializeField] private int _seed;
         [SerializeField] private MapBlueprint _mapBlueprint;
 
         public Guid ID { get; private set; }
         public Random Random { get; private set; }
         public ChunkHolder[,] Grid { get; set; }
-        public ChunkHolder StartChunk { get; set; }
-        public ChunkHolder EndChunk { get; set; }
+
         public MapDataSaver MapDataSaver { get; set; }
 
         public int Seed { get { return _seed; } private set { _seed = value; } }
         public MapBlueprint MapBlueprint { get { return _mapBlueprint; } private set { _mapBlueprint = value; } }
+
+        public ChunkHolder StartChunk
+        {
+            get { return _startChunk; }
+            set
+            {
+                if (_startChunk != null)
+                    _startChunk.ChunkType = ChunkType.Default;
+
+                _startChunk = value;
+                _startChunk.ChunkType = ChunkType.Start;
+            }
+        }
+
+        public ChunkHolder EndChunk
+        {
+            get { return _endChunk; }
+            set
+            {
+                if (_endChunk != null)
+                    _endChunk.ChunkType = ChunkType.Default;
+
+                _endChunk = value;
+                _endChunk.ChunkType = ChunkType.End;
+            }
+        }
 
         /// <summary>
         /// This initializes the map
@@ -65,7 +93,7 @@ namespace MapGeneration
         /// <returns>Wheter the chunk was placed or not</returns>
         public bool Place(ChunkHolder chunkHolder, Chunk chunk, bool forcePlace = false)
         {
-            if (chunkHolder.Prefab != null && !forcePlace)
+            if (chunkHolder.Prefab != null && !forcePlace || chunk == null)
                 return false;
 
             if (chunk is ConditionalChunk)

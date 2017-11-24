@@ -119,6 +119,7 @@ MonoBehaviour:
   _width: 10
   _height: 8
   _chunkType: 0
+  _usedByConditionalChunk: 1
   _chunkOpenings:
     _topOpen: 0
     _bottomOpen: 0

@@ -11,5 +11,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b993d3b9178cc6d47b5a32ff129f993f, type: 3}
   m_Name: TestCondtionalChunkPlacer
   m_EditorClassIdentifier: 
-  _chunkToPlace: {fileID: 114647674138403646, guid: d303e9905142dad438b640db275ddfb7,
-    type: 2}
+  _amountOfChunks: 1
