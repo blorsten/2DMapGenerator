@@ -31,7 +31,8 @@ namespace MapGeneration.ConditionalChunks
 
             foreach (var item in neighbors)
             {
-                if (item.Prefab != __chunkToCheck)
+                if (item.Prefab != __chunkToCheck || 
+                    !item.ChunkOpenings.IsMatching(_chunkToSpawn.ChunkOpenings))
                     return false;
             }
 
@@ -56,7 +57,7 @@ namespace MapGeneration.ConditionalChunks
                     newPos = new Vector2Int(newPos.x + 1, newPos.y);
                     break;
                 case PathAlgorithm.CardinalDirections.Right:
-                    newPos = new Vector2Int(newPos.x -1, newPos.y);
+                    newPos = new Vector2Int(newPos.x - 1, newPos.y);
                     break;
             }
 

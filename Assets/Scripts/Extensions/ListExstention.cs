@@ -20,7 +20,7 @@ namespace ListExstention
         /// <returns>item from list</returns>
         public static T RandomEntry<T>(this IList<T> l, Random r)
         {
-            return l[r.Range(0, l.Count)];
+            return !l.Any() ? default(T) : l[r.Range(0, l.Count)];
         }
 
         /// <summary>

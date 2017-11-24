@@ -38,6 +38,8 @@ namespace MapGeneration
         //Tells the type of the chunk
         [SerializeField] private ChunkType _chunkType;
 
+        [SerializeField] private bool _usedByConditionalChunk;
+
         //These fields tells what openings are open on the chunk
         [Header("Openings"), SerializeField] private ChunkOpenings _chunkOpenings;
 
@@ -102,6 +104,11 @@ namespace MapGeneration
             {
                 _chunkOpenings = value;
             }
+        }
+
+        public bool UsedByConditionalChunk
+        {
+            get { return _usedByConditionalChunk; }
         }
 
         public void OnDrawGizmos()
