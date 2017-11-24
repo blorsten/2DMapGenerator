@@ -19,15 +19,14 @@ namespace MapGeneration
         protected override void Awake()
         {
             base.Awake();
-            UpdateResources();
+            UpdateChunks();
             UpdateObjects();
         }
 
         /// <summary>
         /// Loads all chunks from resources
         /// </summary>
-        [ContextMenu("Update Chunks")]
-        public void UpdateResources()
+        public void UpdateChunks()
         {
             Chunks = new List<Chunk>();
             Chunks.AddRange(Resources.LoadAll<Chunk>("Chunks"));
@@ -36,11 +35,17 @@ namespace MapGeneration
         /// <summary>
         /// Loads all chunks from resources
         /// </summary>
-        [ContextMenu("Update Objects")]
         public void UpdateObjects()
         {
             Objects = new List<GameplayObject>();
-            Objects.AddRange(Resources.LoadAll<GameplayObject>("MapObjects"));
+            Objects.AddRange(Resources.LoadAll<GameplayObject>("Gameplay Objects"));
+        }
+
+        [ContextMenu("Update Resources")]
+        public void UpdateResoures()
+        {
+            UpdateChunks();
+            UpdateObjects();
         }
     }
 }

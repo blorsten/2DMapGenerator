@@ -10,7 +10,7 @@ namespace MapGeneration.ConditionalChunks
     /// Purpose:
     /// Creator:
     /// </summary>
-    [CreateAssetMenu(fileName = "Validate Neighbor", menuName = "MapGeneration/Conditional Chunks/ValidateNeighbor")]/// 
+    [CreateAssetMenu(fileName = "Validate Neighbor", menuName = "MapGeneration/Conditional Chunks/ValidateNeighbor")]
     public class ValidateNeighbor : ValidationEntry
     {
         [SerializeField]
