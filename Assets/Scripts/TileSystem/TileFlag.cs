@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace MapGeneration
 {
-    public enum TileType
+    public enum FlagType
     {
         None, Top, Bottom, Left, Right, Trap, Treasure, FlyingSpawn, GroundSpawn
     }
@@ -15,15 +15,15 @@ namespace MapGeneration
     public class TileFlag
     {
         [SerializeField] private Vector3Int _position;//The postion of the tile in the chunk
-        [SerializeField] private TileType _type;//The type if the tile
+        [SerializeField] private FlagType _type;//The type if the tile
         [SerializeField] private Chunk _chunk;//The chunk the tile is contained in
 
         //Properties
         public Vector3Int Position{get { return _position; }set { _position = value; }}
-        public TileType Type{get { return _type; }set { _type = value; }}
+        public FlagType Type{get { return _type; }set { _type = value; }}
         public Chunk Chunk{get { return _chunk; }set { _chunk = value; }}
 
-        public TileFlag(Vector3Int position, TileType type, Chunk chunk)
+        public TileFlag(Vector3Int position, FlagType type, Chunk chunk)
         {
             Position = position;
             Type = type;

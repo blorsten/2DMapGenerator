@@ -25,19 +25,19 @@ namespace MapGeneration.Algorithm
                     {
                         switch (c.Type)
                         {
-                            case TileType.Top:
+                            case FlagType.Top:
                                 if (c.Chunk.ChunkHolder.ChunkOpenings.TopConnection)
                                     c.Chunk.Enviorment.SetTile(c.Position, null);
                                 break;
-                            case TileType.Bottom:
+                            case FlagType.Bottom:
                                 if (c.Chunk.ChunkHolder.ChunkOpenings.BottomConnetion)
                                     c.Chunk.Enviorment.SetTile(c.Position, null);
                                 break;
-                            case TileType.Left:
+                            case FlagType.Left:
                                 if (c.Chunk.ChunkHolder.ChunkOpenings.LeftConnection)
                                     c.Chunk.Enviorment.SetTile(c.Position, null);
                                 break;
-                            case TileType.Right:
+                            case FlagType.Right:
                                 if (c.Chunk.ChunkHolder.ChunkOpenings.RightConnection)
                                     c.Chunk.Enviorment.SetTile(c.Position, null);
                                 break;

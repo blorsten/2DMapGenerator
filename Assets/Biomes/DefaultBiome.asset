@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ef9629bf6d4fa345b19a38af403d45a, type: 3}
+  m_Name: DefaultBiome
+  m_EditorClassIdentifier: 
+  edge:
+    middleSprite: {fileID: 21300000, guid: ea997e9640b1d674694ec8946b419fa4, type: 3}
+    topSprite: {fileID: 21300000, guid: ea997e9640b1d674694ec8946b419fa4, type: 3}
+    bottomSprite: {fileID: 21300000, guid: 31911403fc59aa34db0176aaa8f4ee1a, type: 3}
+    leftSprite: {fileID: 21300000, guid: 31911403fc59aa34db0176aaa8f4ee1a, type: 3}
+    rightSprite: {fileID: 21300000, guid: 31911403fc59aa34db0176aaa8f4ee1a, type: 3}
+  platform:
+    middleSprite: {fileID: 21300000, guid: 08d73b15f141ce24b93066597dcd88f2, type: 3}
+    topSprite: {fileID: 21300000, guid: d96f07aed44d81d40a77e1c71e531fd2, type: 3}
+    bottomSprite: {fileID: 21300000, guid: 08d73b15f141ce24b93066597dcd88f2, type: 3}
+    leftSprite: {fileID: 21300000, guid: e2251c1d540ace64698e452f1c184076, type: 3}
+    rightSprite: {fileID: 21300000, guid: d96f07aed44d81d40a77e1c71e531fd2, type: 3}
