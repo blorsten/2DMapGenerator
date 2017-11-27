@@ -43,7 +43,8 @@ namespace MapGeneration.Algorithm
                 {
                     for (int y = 0; y < _heigt; y++)
                     {
-                        chunk.Prefab.Enviorment.color = new Color(_noiseGrid[x, y], _noiseGrid[x, y], _noiseGrid[x, y]);
+                       
+                        chunk.Instance.Enviorment.color = new Color(_noiseGrid[x, y], _noiseGrid[x, y], _noiseGrid[x, y]);
                     }
                 }
             }
