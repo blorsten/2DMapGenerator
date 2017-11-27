@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace MapGeneration
+namespace MapGeneration.TileSystem
 {
     public enum TileType
     {

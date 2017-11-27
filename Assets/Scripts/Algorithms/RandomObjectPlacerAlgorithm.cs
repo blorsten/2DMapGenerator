@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using MapGeneration.Algorithm;
+using MapGeneration.TileSystem;
 using UnityEngine;
 using Random = UnityEngine.Random;
 

@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using MapGeneration.Extensions;
+using MapGeneration.TileSystem;
 using MapGeneration.Utils;
 
 

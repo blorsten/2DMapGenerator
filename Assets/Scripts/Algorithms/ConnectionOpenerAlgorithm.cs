@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using MapGeneration.TileSystem;
 using UnityEngine;
 
 namespace MapGeneration.Algorithm

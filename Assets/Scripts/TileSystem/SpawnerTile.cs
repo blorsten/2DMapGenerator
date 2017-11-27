@@ -1,39 +1,41 @@
-﻿using MapGeneration;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Tilemaps;
 
-[CreateAssetMenu(fileName = "Spawner Tile", menuName = "MapGeneration/Tiles/Spawner Tile")]
-public class SpawnerTile : TileBase
+namespace MapGeneration.TileSystem
 {
-    [SerializeField] protected Sprite _sprite;
-    [SerializeField] protected GameplayObject __objectToSpawn;
-
-    public override bool StartUp(Vector3Int position, ITilemap tilemap, GameObject go)
+    [CreateAssetMenu(fileName = "Spawner Tile", menuName = "MapGeneration/Tiles/Spawner Tile")]
+    public class SpawnerTile : TileBase
     {
-        Tilemap currentTilemap = tilemap.GetComponent<Tilemap>();
+        [SerializeField] protected Sprite Sprite;
+        [SerializeField] protected GameplayObject ObjectToSpawn;
 
-        if (currentTilemap.gameObject.activeInHierarchy && Application.isPlaying)
+        public override bool StartUp(Vector3Int position, ITilemap tilemap, GameObject go)
         {
-            if (!__objectToSpawn)
+            Tilemap currentTilemap = tilemap.GetComponent<Tilemap>();
+
+            if (currentTilemap.gameObject.activeInHierarchy && Application.isPlaying)
             {
-                Debug.LogWarning(string.Format("SpawnTile: {0} is missing a object to spawn reference.", name), this);
-                return false;
+                if (!ObjectToSpawn)
+                {
+                    Debug.LogWarning(string.Format("SpawnTile: {0} is missing a object to spawn reference.", name), this);
+                    return false;
+                }
+
+                GameplayObject newObj = Instantiate(ObjectToSpawn, currentTilemap.GetCellCenterWorld(position),
+                    Quaternion.identity, currentTilemap.transform);
+
+                newObj.Owner = currentTilemap.GetComponentInParent<Chunk>();
             }
 
-            GameplayObject newObj = Instantiate(__objectToSpawn, currentTilemap.GetCellCenterWorld(position),
-                Quaternion.identity, currentTilemap.transform);
-
-            newObj.Owner = currentTilemap.GetComponentInParent<Chunk>();
-        }
-
-        return base.StartUp(position, tilemap, go);
+            return base.StartUp(position, tilemap, go);
         
-    } 
+        } 
 
-    public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
-    {
-        base.GetTileData(position, tilemap, ref tileData);
-        tileData.sprite = Application.isPlaying ? null : _sprite;
-        tileData.colliderType = Tile.ColliderType.None;
+        public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
+        {
+            base.GetTileData(position, tilemap, ref tileData);
+            tileData.sprite = Application.isPlaying ? null : Sprite;
+            tileData.colliderType = Tile.ColliderType.None;
+        }
     }
 }

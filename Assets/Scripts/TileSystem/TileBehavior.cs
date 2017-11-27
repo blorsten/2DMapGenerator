@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace TileBehavior
+namespace MapGeneration.TileSystem
 {
     /// <summary>
     /// Purpose:

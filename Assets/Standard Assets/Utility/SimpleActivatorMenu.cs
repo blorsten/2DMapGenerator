@@ -7,7 +7,10 @@ namespace UnityStandardAssets.Utility
     {
         // An incredibly simple menu which, when given references
         // to gameobjects in the scene
+        // ReSharper disable once InconsistentNaming
+#pragma warning disable 618
         public GUIText camSwitchButton;
+#pragma warning restore 618
         public GameObject[] objects;
 
 
@@ -22,7 +25,7 @@ namespace UnityStandardAssets.Utility
         }
 
 
-        public void NextCamera()
+        public void NextCamera() 
         {
             int nextactiveobject = m_CurrentActiveObject + 1 >= objects.Length ? 0 : m_CurrentActiveObject + 1;
 
