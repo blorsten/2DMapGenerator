@@ -13,23 +13,23 @@ namespace MapGeneration
     [CreateAssetMenu(fileName = "Biome", menuName = "MapGeneration/Biome")]
     public class Biome : ScriptableObject
     {
-        public TileSprite edge;
-        public TileSprite platform;
+        public RuleBiomeSprites edge;
+        public RuleBiomeSprites platform;
 
 
-        public TileSprite GetTileSpite(TileType type)
+        public RuleBiomeSprites GetTileSpite(TileType type)
         {
-            TileSprite tileSprite = new TileSprite();
+            RuleBiomeSprites ruleBiomeSprites = new RuleBiomeSprites();
             switch (type)
             {
                 case TileType.Edge:
-                    tileSprite = edge;
+                    ruleBiomeSprites = edge;
                     break;
                 case TileType.Platform:
-                    tileSprite = platform;
+                    ruleBiomeSprites = platform;
                     break;
             }
-            return tileSprite;
+            return ruleBiomeSprites;
         }
     }
 

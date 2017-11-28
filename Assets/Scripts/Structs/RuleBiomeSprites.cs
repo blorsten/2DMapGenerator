@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public struct TileSprite
+public class RuleBiomeSprites
 {
+    [SerializeField] public int iD;
+    [SerializeField] public Color tint;
     [SerializeField] public Sprite middleSprite;
     [SerializeField] public Sprite topSprite;
     [SerializeField] public Sprite leftSprite;
