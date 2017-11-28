@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace MapGeneration.Algorithm
 {
@@ -15,7 +16,7 @@ namespace MapGeneration.Algorithm
         private float[,] _noiseGrid;
         private int _width;
         private int _heigt;
-        private int _scale = 20;
+        private int _scale = 50;
 
         public override bool Process(Map map, List<Chunk> usableChunks)
         {
@@ -39,15 +40,18 @@ namespace MapGeneration.Algorithm
         {
             foreach (ChunkHolder chunk in map.Grid)
             {
-                for (int x = 0; x < _width; x++)
+                if (chunk.Instance != null)
                 {
-                    for (int y = 0; y < _heigt; y++)
+                    for (int x = 0; x < chunk.Instance.Width; x++)
                     {
-                       
-                        chunk.Instance.Enviorment.color = new Color(_noiseGrid[x, y], _noiseGrid[x, y], _noiseGrid[x, y]);
+                        for (int y = 0; y < chunk.Instance.Height; y++)
+                        {
+                            chunk.Instance.BiomeValues[x, y] = _noiseGrid[x, y];
+                        }
                     }
                 }
             }
+
             return base.PostProcess(map, usableChunks);
         }
 
