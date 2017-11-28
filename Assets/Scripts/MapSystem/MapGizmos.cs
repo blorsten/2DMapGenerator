@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using MapGeneration;
-using MapGeneration.Extensions;
+using MapGeneration.Algorithm;
 using UnityEngine;
 
 namespace MapGeneration.Utils
@@ -10,12 +7,7 @@ namespace MapGeneration.Utils
     [ExecuteInEditMode]
     public class MapGizmos : MonoBehaviour
     {
-
-
-
         [SerializeField] private bool _drawBacktracking = true;
-
-        
 
         private Map _map;
 
@@ -47,26 +39,57 @@ namespace MapGeneration.Utils
             
         }
 
-
-
         private void DrawBackTracking(Chunk chunk)
         {
             if (chunk.ChunkHolder != null && _drawBacktracking && chunk.Enviorment)
             {
-                UnityEngine.Gizmos.color = Color.red;
-
                 if (chunk.ChunkHolder.ChunkOpenings.TopConnection)
-                    UnityEngine.Gizmos.DrawLine(chunk.transform.position,
-                        chunk.transform.position + Vector3.up * (chunk.Height / 2f));
+                    DrawBacktrackingLine(chunk, PathAlgorithm.CardinalDirections.Top, chunk.ChunkHolder.ChunkOpenings.TopConnectionType);
                 if (chunk.ChunkHolder.ChunkOpenings.BottomConnetion)
-                    UnityEngine.Gizmos.DrawLine(chunk.transform.position,
-                        chunk.transform.position + Vector3.down * (chunk.Height / 2f));
+                    DrawBacktrackingLine(chunk, PathAlgorithm.CardinalDirections.Bottom, chunk.ChunkHolder.ChunkOpenings.BottomConnectionType);
                 if (chunk.ChunkHolder.ChunkOpenings.RightConnection)
-                    UnityEngine.Gizmos.DrawLine(chunk.transform.position,
-                        chunk.transform.position + Vector3.right * (chunk.Width / 2f));
+                    DrawBacktrackingLine(chunk, PathAlgorithm.CardinalDirections.Right, chunk.ChunkHolder.ChunkOpenings.RightConnectionType);
                 if (chunk.ChunkHolder.ChunkOpenings.LeftConnection)
-                    UnityEngine.Gizmos.DrawLine(chunk.transform.position,
+                    DrawBacktrackingLine(chunk, PathAlgorithm.CardinalDirections.Left, chunk.ChunkHolder.ChunkOpenings.LeftConnectionType);
+            }
+        }
+
+        private void DrawBacktrackingLine(Chunk chunk, PathAlgorithm.CardinalDirections dir, ChunkOpenings.ConnectionType type)
+        {
+            Color chosenColor = Color.white;
+
+            switch (type)
+            {
+                case ChunkOpenings.ConnectionType.Default:
+                    chosenColor = MapBuilder.Settings.DefaultConnectionColor;
+                    break;
+                case ChunkOpenings.ConnectionType.Critical:
+                    chosenColor = MapBuilder.Settings.CriticalConnectionColor;
+                    break;
+            }
+
+            switch (dir)
+            {
+                case PathAlgorithm.CardinalDirections.Top:
+                    Gizmos.color = chosenColor;
+                    Gizmos.DrawLine(chunk.transform.position,
+                        chunk.transform.position + Vector3.up * (chunk.Height / 2f));
+                    break;
+                case PathAlgorithm.CardinalDirections.Bottom:
+                    Gizmos.color = chosenColor;
+                    Gizmos.DrawLine(chunk.transform.position,
+                        chunk.transform.position + Vector3.down * (chunk.Height / 2f));
+                    break;
+                case PathAlgorithm.CardinalDirections.Left:
+                    Gizmos.color = chosenColor;
+                    Gizmos.DrawLine(chunk.transform.position,
                         chunk.transform.position + Vector3.left * (chunk.Width / 2f));
+                    break;
+                case PathAlgorithm.CardinalDirections.Right:
+                    Gizmos.color = chosenColor;
+                    Gizmos.DrawLine(chunk.transform.position,
+                        chunk.transform.position + Vector3.right * (chunk.Width / 2f));
+                    break;
             }
         }
     }

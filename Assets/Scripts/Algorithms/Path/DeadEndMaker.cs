@@ -37,7 +37,7 @@ namespace MapGeneration.Algorithm
                 return false;
 
             //Backtacks all roads that has been created.
-            _roads.ForEach(BackTrackChunks);
+            _roads.ForEach(pairs => BackTrackChunks(pairs));
 
             return true;
         }

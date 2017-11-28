@@ -1,4 +1,5 @@
 ﻿using System;
+using MapGeneration.Algorithm;
 using UnityEngine;
 
 namespace MapGeneration
@@ -12,6 +13,12 @@ namespace MapGeneration
     public class ChunkOpenings
 #pragma warning restore 660,661
     {
+        public enum ConnectionType
+        {
+            Default,
+            Critical
+        }
+
         [SerializeField]
         private bool _topOpen;
         [SerializeField]
@@ -30,7 +37,7 @@ namespace MapGeneration
         public bool TopConnection
         {
             get { return _topConnection; }
-            set
+            private set
             {
                 _topConnection = value;
                 TopOpen = value;
@@ -40,7 +47,7 @@ namespace MapGeneration
         public bool BottomConnetion
         {
             get { return _bottomConnetion; }
-            set
+            private set
             {
                 _bottomConnetion = value;
                 BottomOpen = value;
@@ -50,7 +57,7 @@ namespace MapGeneration
         public bool LeftConnection
         {
             get { return _leftConnection; }
-            set
+            private set
             {
                 _leftConnection = value;
                 LeftOpen = value;
@@ -60,12 +67,17 @@ namespace MapGeneration
         public bool RightConnection
         {
             get { return _rightConnection; }
-            set
+            private set
             {
                 _rightConnection = value;
                 RightOpen = value;
             }
         }
+
+        public ConnectionType TopConnectionType { get; private set; }
+        public ConnectionType BottomConnectionType { get; private set; }
+        public ConnectionType LeftConnectionType { get; private set; }
+        public ConnectionType RightConnectionType { get; private set; }
 
         //Properties for opennings
         public bool TopOpen
@@ -146,6 +158,53 @@ namespace MapGeneration
                 isValid = false;
 
             return isValid;
+        }
+
+        public void SetConnectionAuto(PathAlgorithm.CardinalDirections dir, ChunkHolder next,
+            ConnectionType type = ConnectionType.Default, bool value = true)
+        {
+            switch (dir)
+            {
+                case PathAlgorithm.CardinalDirections.Top:
+                    SetConnection(PathAlgorithm.CardinalDirections.Top, type);
+                    next.ChunkOpenings.SetConnection(PathAlgorithm.CardinalDirections.Bottom, type);
+                    break;
+                case PathAlgorithm.CardinalDirections.Bottom:
+                    SetConnection(PathAlgorithm.CardinalDirections.Bottom, type);
+                    next.ChunkOpenings.SetConnection(PathAlgorithm.CardinalDirections.Top, type);
+                    break;
+                case PathAlgorithm.CardinalDirections.Left:
+                    SetConnection(PathAlgorithm.CardinalDirections.Left, type);
+                    next.ChunkOpenings.SetConnection(PathAlgorithm.CardinalDirections.Right, type);
+                    break;
+                case PathAlgorithm.CardinalDirections.Right:
+                    SetConnection(PathAlgorithm.CardinalDirections.Right, type);
+                    next.ChunkOpenings.SetConnection(PathAlgorithm.CardinalDirections.Left, type);
+                    break;
+            }
+        }
+
+        public void SetConnection(PathAlgorithm.CardinalDirections dir, ConnectionType type = ConnectionType.Default, bool value = true)
+        {
+            switch (dir)
+            {
+                case PathAlgorithm.CardinalDirections.Top:
+                    TopConnection = value;
+                    TopConnectionType = type;
+                    break;
+                case PathAlgorithm.CardinalDirections.Bottom:
+                    BottomConnetion = value;
+                    BottomConnectionType = type;
+                    break;
+                case PathAlgorithm.CardinalDirections.Left:
+                    LeftConnection = value;
+                    LeftConnectionType = type;
+                    break;
+                case PathAlgorithm.CardinalDirections.Right:
+                    RightConnection = value;
+                    RightConnectionType = type;
+                    break;
+            }
         }
     }
 }

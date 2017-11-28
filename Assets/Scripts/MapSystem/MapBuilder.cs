@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using MapGeneration.SaveSystem;
 using MapGeneration.Utils;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace MapGeneration
     public class MapBuilder : Singleton<MapBuilder>
     {
         private List<MapDataSaver> _savedMaps;
+        private static MapGenerationSettings _settings;
 
         [SerializeField] private MapBlueprint _currentBlueprint;
         [SerializeField] private Map _preExistingMap;
@@ -20,7 +22,9 @@ namespace MapGeneration
         public MapBlueprint CurrentBlueprint { get { return _currentBlueprint; } set { _currentBlueprint = value; } }
         public Map PreExistingMap { get { return _preExistingMap; } set { _preExistingMap = value; } }
         public List<int> SavedSeeds { get { return _savedSeeds; } set { _savedSeeds = value; } }
+
         public List<MapDataSaver> SavedMaps { get { return _savedMaps ?? (_savedMaps = new List<MapDataSaver>()); } }
+        public static MapGenerationSettings Settings { get { return _settings ?? (_settings = Resources.LoadAll<MapGenerationSettings>(String.Empty).FirstOrDefault()); } }
 
         public event Action<Map> MapSpawned;
 

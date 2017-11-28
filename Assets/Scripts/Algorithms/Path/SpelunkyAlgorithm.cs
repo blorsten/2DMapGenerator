@@ -48,7 +48,7 @@ namespace MapGeneration.Algorithm
             if (Road == null || Road != null && !Road.Any())
                 return false;
 
-            BackTrackChunks(Road);
+            BackTrackChunks(Road, ChunkOpenings.ConnectionType.Critical);
             return true;
         }
     }

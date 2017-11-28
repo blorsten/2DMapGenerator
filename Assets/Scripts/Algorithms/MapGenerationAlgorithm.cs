@@ -80,27 +80,10 @@ namespace MapGeneration.Algorithm
         /// <param name="dir">The direction the algorithm took</param>
         /// <param name="current">the current chunk</param>
         /// <param name="next">the next chunk in the queue</param>
-        protected void SetChunkConnections(PathAlgorithm.CardinalDirections dir, ChunkHolder current, ChunkHolder next)
+        /// <param name="type">The desired type of connection</param>
+        protected void SetChunkConnections(PathAlgorithm.CardinalDirections dir, ChunkHolder current, ChunkHolder next, ChunkOpenings.ConnectionType type = ChunkOpenings.ConnectionType.Default)
         {
-            switch (dir)
-            {
-                case PathAlgorithm.CardinalDirections.Top:
-                    current.ChunkOpenings.TopConnection = true;
-                    next.ChunkOpenings.BottomConnetion = true;
-                    break;
-                case PathAlgorithm.CardinalDirections.Bottom:
-                    current.ChunkOpenings.BottomConnetion = true;
-                    next.ChunkOpenings.TopConnection = true;
-                    break;
-                case PathAlgorithm.CardinalDirections.Left:
-                    current.ChunkOpenings.LeftConnection = true;
-                    next.ChunkOpenings.RightConnection = true;
-                    break;
-                case PathAlgorithm.CardinalDirections.Right:
-                    current.ChunkOpenings.RightConnection = true;
-                    next.ChunkOpenings.LeftConnection = true;
-                    break;
-            }
+            current.ChunkOpenings.SetConnectionAuto(dir, next, type);
         }
 
         /// <summary>

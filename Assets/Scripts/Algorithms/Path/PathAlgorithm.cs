@@ -17,7 +17,10 @@ namespace MapGeneration.Algorithm
         [Flags]
         public enum CardinalDirections
         {
-            Top, Bottom, Left, Right
+            Top,
+            Bottom,
+            Left,
+            Right
         }
 
         protected CardinalDirections NextDirection;
@@ -41,7 +44,8 @@ namespace MapGeneration.Algorithm
         /// </summary>
         /// <param name="chunks">Chunks to backtrack</param>
         /// <param name="directions">Directions to backtrack</param>
-        protected void BackTrackChunks(Queue<ChunkHolder> chunks, Queue<CardinalDirections> directions)
+        /// <param name="type">The desired connection type for for backtracking.</param>
+        protected void BackTrackChunks(Queue<ChunkHolder> chunks, Queue<CardinalDirections> directions, ChunkOpenings.ConnectionType type = ChunkOpenings.ConnectionType.Default)
         {
             CardinalDirections currentDirection = CardinalDirections.Bottom;
 
@@ -56,7 +60,7 @@ namespace MapGeneration.Algorithm
 
                 //Set a direction from current to previous.
                 if (currentChunk.Instance && chunks.Count > 0)
-                    SetChunkConnections(currentDirection, currentChunk, chunks.First());
+                    SetChunkConnections(currentDirection, currentChunk, chunks.First(), type);
             }
         }
 
@@ -64,7 +68,8 @@ namespace MapGeneration.Algorithm
         /// Backtraks both queues
         /// </summary>
         /// <param name="road"></param>
-        protected void BackTrackChunks(Queue<KeyValuePair<ChunkHolder, CardinalDirections?>> road)
+        /// <param name="type">The desired connection type for for backtracking.</param>
+        protected void BackTrackChunks(Queue<KeyValuePair<ChunkHolder, CardinalDirections?>> road, ChunkOpenings.ConnectionType type = ChunkOpenings.ConnectionType.Default)
         {
             //Dont make any connections if the road are not long enough.
             if (road.Count < 2)
@@ -82,7 +87,7 @@ namespace MapGeneration.Algorithm
                 if (currentChunk.Value != null)
                     currentDirection = currentChunk.Value.Value;
 
-                SetChunkConnections(currentDirection, current, currentChunk.Key);
+                SetChunkConnections(currentDirection, current, currentChunk.Key, type);
 
                 current = currentChunk.Key;
             }

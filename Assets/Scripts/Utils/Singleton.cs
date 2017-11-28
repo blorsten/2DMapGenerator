@@ -23,7 +23,7 @@ namespace MapGeneration
                 if (instance == null)
                 {
                     instance = (T)FindObjectOfType(typeof(T));
-
+                    
                     if (instance == null)
                     {
                         GameObject newInstance = new GameObject(typeof(T).ToString());

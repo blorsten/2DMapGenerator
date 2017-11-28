@@ -63,25 +63,7 @@ namespace MapGeneration.ConditionalChunks
 
             var newHolder = map.Grid[newPos.x, newPos.y];
 
-            switch (_direction)
-            {
-                case PathAlgorithm.CardinalDirections.Top:
-                    newHolder.ChunkOpenings.BottomConnetion = true;
-                    chunkHolder.ChunkOpenings.TopConnection = true;
-                    break;
-                case PathAlgorithm.CardinalDirections.Bottom:
-                    newHolder.ChunkOpenings.TopConnection = true;
-                    chunkHolder.ChunkOpenings.BottomConnetion = true;
-                    break;
-                case PathAlgorithm.CardinalDirections.Left:
-                    newHolder.ChunkOpenings.RightConnection = true;
-                    chunkHolder.ChunkOpenings.LeftConnection = true;
-                    break;
-                case PathAlgorithm.CardinalDirections.Right:
-                    newHolder.ChunkOpenings.LeftConnection = true;
-                    chunkHolder.ChunkOpenings.RightConnection = true;
-                    break;
-            }
+            chunkHolder.ChunkOpenings.SetConnectionAuto(_direction, newHolder);
 
             map.Place(newHolder, _chunkToSpawn);
         }
