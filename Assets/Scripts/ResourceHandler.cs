@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace MapGeneration
@@ -29,7 +30,7 @@ namespace MapGeneration
         public void UpdateChunks()
         {
             Chunks = new List<Chunk>();
-            Chunks.AddRange(Resources.LoadAll<Chunk>("Chunks"));
+            Chunks.AddRange(Resources.LoadAll<Chunk>(String.Empty));
         }
 
         /// <summary>
@@ -38,7 +39,7 @@ namespace MapGeneration
         public void UpdateObjects()
         {
             Objects = new List<GameplayObject>();
-            Objects.AddRange(Resources.LoadAll<GameplayObject>("Gameplay Objects"));
+            Objects.AddRange(Resources.LoadAll<GameplayObject>(String.Empty));
         }
 
         [ContextMenu("Update Resources")]
