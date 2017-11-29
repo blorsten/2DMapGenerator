@@ -33,7 +33,7 @@ namespace MapGeneration
 
         //Tells the height of the chunk
         [SerializeField] private int _height;
-        
+
         //Tells the type of the chunk
         [SerializeField] private ChunkType _chunkType;
 
@@ -58,9 +58,11 @@ namespace MapGeneration
 
 
         //Properties for generel properties
-        public int Width{ get { return _width; } set { _width = value; }}
-        public int Height{get { return _height; } set { _height = value; }}
-        public ChunkType ChunkType{get { return _chunkType; } set { _chunkType = value; }}
+        public int Width { get { return _width; } set { _width = value; } }
+        public int Height { get { return _height; } set { _height = value; } }
+        public ChunkType ChunkType { get { return _chunkType; } set { _chunkType = value; } }
+        private float[,] biomeValues;
+        public float[,] BiomeValues { get { return biomeValues; } set { biomeValues = value; } }
 
         public ChunkHolder ChunkHolder
         {
@@ -90,8 +92,8 @@ namespace MapGeneration
         //A list for the items in the chunk
         public List<GameObject> Items { get; set; }
 
-        public List<TileFlag> Connections{get { return _connections; } set { _connections = value; }}
-        public List<TileFlag> TileFlags{get { return _tileTileFlags; }set { _tileTileFlags = value; }}
+        public List<TileFlag> Connections { get { return _connections; } set { _connections = value; } }
+        public List<TileFlag> TileFlags { get { return _tileTileFlags; } set { _tileTileFlags = value; } }
 
         public ChunkOpenings ChunkOpenings
         {
@@ -109,6 +111,11 @@ namespace MapGeneration
         public bool UsedByConditionalChunk
         {
             get { return _usedByConditionalChunk; }
+        }
+
+        private void Awake()
+        {
+            biomeValues = new float[_width, _height];
         }
 
         public void OnDrawGizmos()
