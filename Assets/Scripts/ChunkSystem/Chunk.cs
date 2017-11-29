@@ -121,16 +121,16 @@ namespace MapGeneration
 
                     switch (c.Type)
                     {
-                        case TileType.Top:
+                        case FlagType.Top:
                             GizmoUtilities.DrawArrow(top, ArrowDirection.Up);
                             break;
-                        case TileType.Bottom:
+                        case FlagType.Bottom:
                             GizmoUtilities.DrawArrow(bottom, ArrowDirection.Down);
                             break;
-                        case TileType.Left:
+                        case FlagType.Left:
                             GizmoUtilities.DrawArrow(left, ArrowDirection.Left);
                             break;
-                        case TileType.Right:
+                        case FlagType.Right:
                             GizmoUtilities.DrawArrow(right, ArrowDirection.Right);
                             break;
                     }
@@ -146,16 +146,16 @@ namespace MapGeneration
 
                     switch (flag.Type)
                     {
-                        case TileType.Trap:
+                        case FlagType.Trap:
                             UnityEngine.Gizmos.DrawIcon(postition, TRAP_ICON_PATH, true);
                             break;
-                        case TileType.Treasure:
+                        case FlagType.Treasure:
                             UnityEngine.Gizmos.DrawIcon(postition, TREASURE_ICON_PATH, true);
                             break;
-                        case TileType.FlyingSpawn:
+                        case FlagType.FlyingSpawn:
                             UnityEngine.Gizmos.DrawIcon(postition, FLYING_ICON_PATH, true);
                             break;
-                        case TileType.GroundSpawn:
+                        case FlagType.GroundSpawn:
                             UnityEngine.Gizmos.DrawIcon(postition, GROUND_ICON_PATH, true);
                             break;
 

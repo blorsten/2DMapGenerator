@@ -27,30 +27,30 @@ namespace MapGeneration
             {
                 //If a chunk in the tiledata list allready this position, replace it else create new
                 TileFlag tileFlags = chunk.TileFlags.FirstOrDefault(x => x.Position == position);
-                TileType tileType = TileType.Top;
+                FlagType flagType = FlagType.Top;
 
                 switch (BrushTileFlag)
                 {
                     case BrushTileFlag.Treasure:
-                        tileType = TileType.Treasure;
+                        flagType = FlagType.Treasure;
                         break;
                     case BrushTileFlag.Trap:
-                        tileType = TileType.Trap;
+                        flagType = FlagType.Trap;
                         break;
                     case BrushTileFlag.GroundSpawn:
-                        tileType = TileType.GroundSpawn;
+                        flagType = FlagType.GroundSpawn;
                         break;
                     case BrushTileFlag.FlyingSpawn:
-                        tileType = TileType.FlyingSpawn;
+                        flagType = FlagType.FlyingSpawn;
                         break;
                 }
                 if (tileFlags != null)
                 {
-                    tileFlags.Type = tileType;
+                    tileFlags.Type = flagType;
                     tileFlags.Chunk = chunk;
                 }
                 else
-                    chunk.TileFlags.Add(new TileFlag(position,tileType,chunk));
+                    chunk.TileFlags.Add(new TileFlag(position,flagType,chunk));
             }
         }
 

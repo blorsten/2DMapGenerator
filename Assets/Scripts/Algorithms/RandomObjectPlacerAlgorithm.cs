@@ -33,10 +33,10 @@ namespace MapGeneration
 
                         switch (c.Type)
                         {
-                            case TileType.Trap:
+                            case FlagType.Trap:
                                 InstantiateRandomObject<Trap>(ref objects, chunk, position);
                                 break;
-                            case TileType.Treasure:
+                            case FlagType.Treasure:
                                 InstantiateRandomObject<Treasure>(ref objects, chunk, position);
                                 break;
                         }
