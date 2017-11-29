@@ -12,8 +12,6 @@ namespace MapGeneration.Algorithm
     /// Creator:
     /// Niels Justesen
     /// </summary>
-
-    [CreateAssetMenu(fileName = "New Chunk Placer", menuName = "MapGeneration/Algorithms/Chunk Placer")]
     public class ChunkPlacer : MapGenerationAlgorithm
     {
         private List<ChunkHolder> _chunksToReplace = new List<ChunkHolder>();
