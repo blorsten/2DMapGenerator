@@ -31,35 +31,35 @@ namespace MapGeneration
             {
                 //If a chunk in the tiledata list allready this position, replace it else create new
                 TileFlag connection = chunk.Connections.FirstOrDefault(x => x.Position == position);
-                TileType tileType = TileType.Top;
+                FlagType flagType = FlagType.Top;
 
                 switch (BrushTileType)
                 {
                     case BrushTileType.Top:
-                        tileType = TileType.Top;
+                        flagType = FlagType.Top;
                         chunk.ChunkOpenings.TopOpen = true;
                         break;
                     case BrushTileType.Bottom:
-                        tileType = TileType.Bottom;
+                        flagType = FlagType.Bottom;
                         chunk.ChunkOpenings.BottomOpen = true;
                         break;
                     case BrushTileType.Left:
-                        tileType = TileType.Left;
+                        flagType = FlagType.Left;
                         chunk.ChunkOpenings.LeftOpen = true;
                         break;
                     case BrushTileType.Right:
-                        tileType = TileType.Right;
+                        flagType = FlagType.Right;
                         chunk.ChunkOpenings.RightOpen = true;
                         break;
                 }
 
                 if (connection != null)
                 {
-                    connection.Type = tileType;
+                    connection.Type = flagType;
                     connection.Chunk = chunk;
                 }
                 else
-                    chunk.Connections.Add(new TileFlag(position, tileType, chunk));
+                    chunk.Connections.Add(new TileFlag(position, flagType, chunk));
             }
             base.Paint(gridLayout,brushTarget,position);
         }
@@ -77,22 +77,22 @@ namespace MapGeneration
                 TileFlag tileFlag = chunk.Connections.FirstOrDefault(x => x.Position == position);
                 if (tileFlag != null)
                 {
-                    TileType type = tileFlag.Type;
+                    FlagType type = tileFlag.Type;
                     chunk.Connections.Remove(tileFlag);
                     if (!chunk.Connections.Exists(x => x.Type == type))
                     {
                         switch (type)
                         {
-                            case TileType.Top:
+                            case FlagType.Top:
                                 chunk.ChunkOpenings.TopOpen = false;
                                 break;
-                            case TileType.Bottom:
+                            case FlagType.Bottom:
                                 chunk.ChunkOpenings.BottomOpen = false;
                                 break;
-                            case TileType.Left:
+                            case FlagType.Left:
                                 chunk.ChunkOpenings.LeftOpen = false;
                                 break;
-                            case TileType.Right:
+                            case FlagType.Right:
                                 chunk.ChunkOpenings.RightOpen = false;
                                 break;
                         }
