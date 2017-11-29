@@ -6,7 +6,7 @@ namespace MapGeneration
 {
     public class StaticBiomeSprites
     {
-        [SerializeField] public int iD;
+        [SerializeField] public string iD;
         [SerializeField] public Color tint;
         [SerializeField] public Sprite sprite;
     }

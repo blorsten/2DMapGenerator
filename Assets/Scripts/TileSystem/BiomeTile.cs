@@ -11,7 +11,7 @@ namespace MapGeneration
         [SerializeField] protected Tile.ColliderType _colliderType;
 
         protected Chunk _chunk;
-        protected int _biome;
+        protected string _biome;
 
         public override void RefreshTile(Vector3Int position, ITilemap tilemap)
         {
@@ -52,9 +52,9 @@ namespace MapGeneration
             }
         }
 
-        private int NoiceToBiome(float noice)
+        private string NoiceToBiome(float noice)
         {
-            return 0;
+            return "";
         }
     }
 }
