@@ -119,7 +119,6 @@ MonoBehaviour:
   _width: 10
   _height: 8
   _chunkType: 0
-  _usedByConditionalChunk: 1
   _chunkOpenings:
     _topOpen: 0
     _bottomOpen: 0
@@ -150,6 +149,7 @@ MonoBehaviour:
   _drawConnections: 1
   _drawEdges: 1
   _drawTileFlags: 1
+  _isStandaloneChunk: 0
 --- !u!114 &114776259122291328
 MonoBehaviour:
   m_ObjectHideFlags: 1

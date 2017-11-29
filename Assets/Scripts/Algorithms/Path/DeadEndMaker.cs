@@ -89,17 +89,13 @@ namespace MapGeneration.Algorithm
                 //Tries and do a drunkard walk on the marked chunk.
                 Queue<KeyValuePair<ChunkHolder, CardinalDirections?>> newRoad = base.StartWalk(map, usableChunks, startPosition);
 
+                _myMarkedChunks.Remove(startChunk);
+
                 //If it succeeded remove it from start candidates and add it to the main road.
                 if (newRoad != null)
-                {
-                    _myMarkedChunks.Remove(startChunk);
                     _roads.Add(newRoad);
-                } 
                 else 
-                {
-                    //If it failed to find a new road, dont count it as a dead end iteration.
-                    i--;
-                }
+                    i--; //If it failed to find a new road, dont count it as a dead end iteration.
             }
 
             //Now that we have made alot of dead ends, set the start and end to the first ones.

@@ -120,9 +120,12 @@ namespace MapGeneration.Algorithm
             if (nextPosition != null)
             {
                 ChunkHolder nextChunk = map.Grid[nextPosition.Value.x, nextPosition.Value.y];
+                ChunkHolder currChunkHolder = map.Grid[currentPos.x, currentPos.y];
+
+                bool isChunkValid = !(currChunkHolder.Prefab && !currChunkHolder.ChunkOpenings.IsOpen(NextDirection));
 
                 //if the next chunk isnt marked, continue the process
-                if (!MarkedChunks.Contains(nextChunk))
+                if (!MarkedChunks.Contains(nextChunk) && isChunkValid)
                 {
                     //set current position to the next position
                     currentPos = nextPosition.Value;

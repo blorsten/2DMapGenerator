@@ -40,7 +40,9 @@ namespace MapGeneration
                     _startChunk.ChunkType = ChunkType.Default;
 
                 _startChunk = value;
-                _startChunk.ChunkType = ChunkType.Start;
+
+                if (_startChunk != null)
+                    _startChunk.ChunkType = ChunkType.Start;
             }
         }
 
@@ -53,7 +55,9 @@ namespace MapGeneration
                     _endChunk.ChunkType = ChunkType.Default;
 
                 _endChunk = value;
-                _endChunk.ChunkType = ChunkType.End;
+
+                if (_endChunk != null)
+                    _endChunk.ChunkType = ChunkType.End;
             }
         }
 

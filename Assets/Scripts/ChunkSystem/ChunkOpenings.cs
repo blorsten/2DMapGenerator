@@ -206,5 +206,22 @@ namespace MapGeneration
                     break;
             }
         }
+
+        public bool IsOpen(PathAlgorithm.CardinalDirections dir)
+        {
+            switch (dir)
+            {
+                case PathAlgorithm.CardinalDirections.Top:
+                    return TopOpen;
+                case PathAlgorithm.CardinalDirections.Bottom:
+                    return BottomOpen;
+                case PathAlgorithm.CardinalDirections.Left:
+                    return LeftOpen;
+                case PathAlgorithm.CardinalDirections.Right:
+                    return RightOpen;
+            }
+
+            return false;
+        }
     }
 }

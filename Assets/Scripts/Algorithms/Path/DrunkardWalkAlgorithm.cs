@@ -82,6 +82,9 @@ namespace MapGeneration.Algorithm
                 }
             }
 
+            if (Road.All(pair => pair.Key == firstChunk))
+                return null;
+
             return Road;
         }
     }
