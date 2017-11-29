@@ -6,12 +6,12 @@ namespace MapGeneration.Algorithm
 {
     /// <summary>
     /// Purpose: 
-    /// Set biome on the generated map
+    /// Set biome on the generated map with perlin noise
     /// Creator:
     /// Niels Justesen
     /// </summary>
-    [CreateAssetMenu(fileName = "New Biome", menuName = "MapGeneration/Algorithms/Biome")]
-    public class BiomeAlgorithm : MapGenerationAlgorithm
+    [CreateAssetMenu(fileName = "New Perlin Noise", menuName = "MapGeneration/Algorithms/Perlin Noise Biome")]
+    public class PerlinNoiseBiome : MapGenerationAlgorithm
     {
         private float[,] _noiseGrid;
         private int _width;
@@ -43,7 +43,7 @@ namespace MapGeneration.Algorithm
                 if (chunk.Instance != null)
                 {
                     int width = chunk.Instance.Width;
-                    int height = chunk.Instance.Height;              
+                    int height = chunk.Instance.Height;
 
                     for (int x = 0; x < chunk.Instance.Width; x++)
                     {
