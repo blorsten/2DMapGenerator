@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace MapGeneration
@@ -32,6 +33,13 @@ namespace MapGeneration
         {
             get { return _biomes; }
             set { _biomes = value; }
+        }
+
+        public string NoiseToBiome(float noice)
+        { 
+            float index = Mathf.FloorToInt(Mathf.Clamp(noice * _biomes.Count,0, _biomes.Count - 1));
+            return _biomes[Mathf.Clamp((int)index,0, _biomes.Count-1)];
+
         }
     }
 }

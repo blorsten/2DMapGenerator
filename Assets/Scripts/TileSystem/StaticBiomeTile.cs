@@ -31,13 +31,13 @@ namespace MapGeneration
         public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
         {
             base.GetTileData(position, tilemap, ref tileData);
-            if (_currentSprites != null)
+            RefreshBiomeValues(position, tilemap);
+            if (_currentSprites != null && _currentSprites.iD != "")
             {
                 tileData.sprite = _currentSprites.sprite;
                 tilemap.GetComponent<Tilemap>().SetColor(position, _currentSprites.tint);
             }
-            else
-                Debug.LogWarning("Tile is missing sprites for the current biome");
+
         }
     }
 }

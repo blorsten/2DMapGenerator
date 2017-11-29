@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using MapGeneration.Extensions;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -16,12 +17,18 @@ namespace MapGeneration.Algorithm
         private float[,] _noiseGrid;
         private int _width;
         private int _heigt;
-        private int _scale = 50;
+        [SerializeField] private int _scale = 50;
+
+        private float xOffset;
+        private float yOffset;
 
         public override bool Process(Map map, List<Chunk> usableChunks)
         {
             _width = map.Grid.GetLength(0) * map.MapBlueprint.ChunkSize.x;
             _heigt = map.Grid.GetLength(1) * map.MapBlueprint.ChunkSize.y;
+
+            xOffset = map.Random.Range(0f, 999f);
+            yOffset = map.Random.Range(0f, 999f);
 
             _noiseGrid = new float[_width, _heigt];
 
@@ -50,17 +57,20 @@ namespace MapGeneration.Algorithm
                         for (int y = 0; y < chunk.Instance.Height; y++)
                         {
                             chunk.Instance.BiomeValues[x, y] = _noiseGrid[x + width * chunk.Position.x, y + height * chunk.Position.y];
+                            
                         }
                     }
+                    chunk.Instance.RefreshTilemaps();
                 }
             }
+            
             return base.PostProcess(map, usableChunks);
         }
 
         private float CalculateNoise(int x, int y)
         {
-            float xCoord = (float)x / _width * _scale;
-            float yCoord = (float)y / _heigt * _scale;
+            float xCoord = (float)x / _width * _scale + xOffset;
+            float yCoord = (float)y / _heigt * _scale + yOffset;
             return Mathf.PerlinNoise(xCoord, yCoord);
         }
     }

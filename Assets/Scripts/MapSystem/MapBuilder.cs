@@ -175,7 +175,7 @@ namespace MapGeneration
 
                     if (map.Grid[x, y] != null && map.Grid[x,y].Prefab != null) 
                         map.Grid[x, y].Instantiate(new Vector2(xPosition, yPosition), 
-                            map.transform);
+                            map.transform,map);
                 }
             }
 

@@ -46,15 +46,23 @@ namespace MapGeneration
                 //if a chunk is found, then get the current biome id and use it to get sprites
                 if (_chunk)
                 {
-                    _biome = NoiceToBiome(0f);
+                    _biome = NoiseToBiome(_chunk,position);
                     
                 }
             }
         }
 
-        private string NoiceToBiome(float noice)
+        private string NoiseToBiome(Chunk chunk, Vector3Int position)
         {
-            return "";
+            if(chunk.BiomeValues == null)
+                return "";
+
+            if (position.x >= chunk.BiomeValues.GetLength(0) || position.x < 0 ||
+                position.y >= chunk.BiomeValues.GetLength(1) || position.y < 0)
+            {
+                return "";
+            }
+            return MapBuilder.Settings.NoiseToBiome(chunk.BiomeValues[position.x, position.y]);
         }
     }
 }

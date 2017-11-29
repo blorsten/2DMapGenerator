@@ -16,8 +16,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 88f213a205c1c9044bb92bc039b7a5b8, type: 2}
   - {fileID: 11400000, guid: 980311384abc5bb46a46461349ad1e6f, type: 2}
   - {fileID: 11400000, guid: 525be36b77b57f64b95dfee16d43b9d3, type: 2}
-  _gridSize: {x: 4, y: 4}
+  - {fileID: 11400000, guid: e961bc7fa4bbe4f4cbfd85a682c80af7, type: 2}
+  _gridSize: {x: 15, y: 15}
   _chunkSize: {x: 10, y: 8}
   _userSeed: 0
-  __whitelistedChunks: []
+  __whitelistedChunks:
+  - {fileID: 114895966910665878, guid: 2c0b78ae8f17b1542b3d90b61d9df0ad, type: 2}
+  - {fileID: 114895966910665878, guid: 12c0920d3cf876b4187b1f219eec9594, type: 2}
+  - {fileID: 114895966910665878, guid: 8c4bc0dbdbdce1b42af0bb261ffd3e83, type: 2}
   __blacklistedChunks: []

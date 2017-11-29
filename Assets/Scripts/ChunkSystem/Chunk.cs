@@ -94,6 +94,7 @@ namespace MapGeneration
 
         public List<TileFlag> Connections { get { return _connections; } set { _connections = value; } }
         public List<TileFlag> TileFlags { get { return _tileTileFlags; } set { _tileTileFlags = value; } }
+        public Map Map { get; set; }
 
         public ChunkOpenings ChunkOpenings
         {
@@ -197,5 +198,16 @@ namespace MapGeneration
             }
 
         }
+
+        public void RefreshTilemaps()
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                Tilemap tilemap = transform.GetChild(i).gameObject.GetComponent<Tilemap>();
+                if(tilemap != null)
+                    tilemap.RefreshAllTiles();
+            }
+        }
+
     }
 }

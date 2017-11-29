@@ -11,4 +11,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 460330391b5bb1c4b882565c7f68a303, type: 3}
   m_Name: TestBiome
   m_EditorClassIdentifier: 
-  _noise: {fileID: 11400000, guid: 5b82b3acb26efe242b4c4f3856d6025f, type: 2}
+  _scale: 4

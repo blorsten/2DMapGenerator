@@ -69,7 +69,7 @@ namespace MapGeneration
             Seed = seed;
             MapBlueprint = mapBlueprint;
             Random = new Random(seed);
-            
+
             //Generate the map ID from the newly created random.
             ID = new Guid(RandomExtension.GenerateByteSeed(Random));
 
@@ -109,6 +109,7 @@ namespace MapGeneration
             }
 
             chunkHolder.Prefab = chunk;
+            chunk.Map = this;
             return true;
         }
 
@@ -210,6 +211,16 @@ namespace MapGeneration
                     Gizmos.DrawWireCube(new Vector3(xPosition,yPosition), chunkSize);
                 }
             }
+        }
+
+        public ChunkHolder GetChunkHolder(Vector2Int position)
+        {
+            if (Grid == null)
+                return null;
+            if ((position.x < 0 || position.x >= Grid.GetLength(0)) ||
+                (position.y < 0 || position.y >= Grid.GetLength(1)))
+                return null;
+            return Grid[position.x, position.y];
         }
     }
 }

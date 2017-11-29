@@ -14,14 +14,26 @@ MonoBehaviour:
   _defaultSprite: {fileID: 21300000, guid: 631d20febd118ab45a33030c50f8ce0c, type: 3}
   _colliderType: 0
   _biomesSprites:
-  - iD: 0
+  - iD: Default
     tint: {r: 1, g: 1, b: 1, a: 1}
     middleSprite: {fileID: 21300000, guid: 08d73b15f141ce24b93066597dcd88f2, type: 3}
     topSprite: {fileID: 21300000, guid: 631d20febd118ab45a33030c50f8ce0c, type: 3}
     leftSprite: {fileID: 21300000, guid: e2251c1d540ace64698e452f1c184076, type: 3}
     rightSprite: {fileID: 21300000, guid: d96f07aed44d81d40a77e1c71e531fd2, type: 3}
-  - iD: 1
+  - iD: Red
     tint: {r: 1, g: 0, b: 0, a: 1}
+    middleSprite: {fileID: 21300000, guid: 08d73b15f141ce24b93066597dcd88f2, type: 3}
+    topSprite: {fileID: 21300000, guid: 631d20febd118ab45a33030c50f8ce0c, type: 3}
+    leftSprite: {fileID: 21300000, guid: e2251c1d540ace64698e452f1c184076, type: 3}
+    rightSprite: {fileID: 21300000, guid: d96f07aed44d81d40a77e1c71e531fd2, type: 3}
+  - iD: Green
+    tint: {r: 0, g: 1, b: 0.21379304, a: 1}
+    middleSprite: {fileID: 21300000, guid: 08d73b15f141ce24b93066597dcd88f2, type: 3}
+    topSprite: {fileID: 21300000, guid: 631d20febd118ab45a33030c50f8ce0c, type: 3}
+    leftSprite: {fileID: 21300000, guid: e2251c1d540ace64698e452f1c184076, type: 3}
+    rightSprite: {fileID: 21300000, guid: d96f07aed44d81d40a77e1c71e531fd2, type: 3}
+  - iD: Blue
+    tint: {r: 0.24137926, g: 0, b: 1, a: 1}
     middleSprite: {fileID: 21300000, guid: 08d73b15f141ce24b93066597dcd88f2, type: 3}
     topSprite: {fileID: 21300000, guid: 631d20febd118ab45a33030c50f8ce0c, type: 3}
     leftSprite: {fileID: 21300000, guid: e2251c1d540ace64698e452f1c184076, type: 3}

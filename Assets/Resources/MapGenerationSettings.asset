@@ -13,3 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _defaultConnectionColor: {r: 0.38378054, g: 1, b: 0.27843142, a: 1}
   _criticalConnectionColor: {r: 1, g: 0.2794118, b: 0.2794118, a: 1}
+  _biomes:
+  - Default
+  - Red
+  - Blue
+  - Green
