@@ -40,7 +40,7 @@ namespace MapGeneration.Algorithm
 
         private void PlaceMatchingChunks(Map map, List<Chunk> usableChunks)
         {
-            List<Chunk> listToCheck = usableChunks.Where(chunk => !(chunk is ConditionalChunk) && !chunk.UsedByConditionalChunk).ToList();
+            List<Chunk> listToCheck = usableChunks.Where(chunk => !chunk.ConditionalChunk).ToList();
 
             foreach (ChunkHolder chunkholder in _chunksToReplace)
             {

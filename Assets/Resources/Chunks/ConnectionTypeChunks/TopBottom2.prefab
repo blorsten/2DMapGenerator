@@ -179,6 +179,7 @@ MonoBehaviour:
   _drawConnections: 1
   _drawEdges: 1
   _drawTileFlags: 1
+  _isStandaloneChunk: 1
 --- !u!114 &114712679399064358
 MonoBehaviour:
   m_ObjectHideFlags: 1

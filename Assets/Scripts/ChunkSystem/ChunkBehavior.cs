@@ -24,8 +24,10 @@ namespace MapGeneration
             {
                 if (!_chunk)
                     _chunk = GetComponent<Chunk>();
+
                 return _chunk;
             }
+            set { _chunk = value; }
         }
 
         public virtual void Start()

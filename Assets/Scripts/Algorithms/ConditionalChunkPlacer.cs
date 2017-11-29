@@ -18,19 +18,21 @@ namespace CondtionalChunkPlacer
 
             foreach (ChunkHolder chunkHolder in map.Grid)
             {
+                var holder = chunkHolder;
+
                 if (iterations >= _amountOfChunks)
                     break;
 
-                if (chunkHolder.ChunkType == ChunkType.End || chunkHolder.ChunkType == ChunkType.Start)
+                if (holder.ChunkType == ChunkType.End || holder.ChunkType == ChunkType.Start)
                     continue;
 
-                if (chunkHolder.ChunkOpenings.IsEmpty())
+                if (holder.ChunkOpenings.IsEmpty())
                     continue;
 
-                if (map.Place(chunkHolder,
+                if (map.Place(holder,
                     usableChunks.RandomEntry(chunk =>
-                        chunk is ConditionalChunk &&
-                        chunkHolder.ChunkOpenings.IsMatching(chunk.ChunkOpenings), map.Random), true))
+                        chunk.ConditionalChunk &&
+                        holder.ChunkOpenings.IsMatching(chunk.ChunkOpenings), map.Random), true))
                 {
                     iterations++;
                 }

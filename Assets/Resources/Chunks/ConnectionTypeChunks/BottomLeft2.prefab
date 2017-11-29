@@ -186,6 +186,7 @@ MonoBehaviour:
   _drawConnections: 1
   _drawEdges: 1
   _drawTileFlags: 1
+  _isStandaloneChunk: 1
 --- !u!19719996 &2113883504623829310
 TilemapCollider2D:
   m_ObjectHideFlags: 1

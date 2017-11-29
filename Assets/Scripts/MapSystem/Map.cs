@@ -96,9 +96,9 @@ namespace MapGeneration
             if (chunkHolder.Prefab != null && !forcePlace || chunk == null)
                 return false;
 
-            if (chunk is ConditionalChunk)
+            if (chunk.ConditionalChunk)
             {
-                if ((chunk as ConditionalChunk).Validate(this, chunkHolder))
+                if (chunk.ConditionalChunk.Validate(this, chunkHolder))
                 {
                     chunkHolder.Prefab = chunk;
                     chunkHolder.ChunkType = chunk.ChunkType;

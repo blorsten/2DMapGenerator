@@ -132,7 +132,6 @@ MonoBehaviour:
   _width: 10
   _height: 8
   _chunkType: 0
-  _usedByConditionalChunk: 0
   _chunkOpenings:
     _topOpen: 1
     _bottomOpen: 1
@@ -217,6 +216,7 @@ MonoBehaviour:
   _drawConnections: 1
   _drawEdges: 1
   _drawTileFlags: 1
+  _isStandaloneChunk: 1
 --- !u!19719996 &2113883505550029108
 TilemapCollider2D:
   m_ObjectHideFlags: 1

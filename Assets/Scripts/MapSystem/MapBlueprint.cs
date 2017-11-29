@@ -120,7 +120,9 @@ namespace MapGeneration
             }
 
             //Remove all chunks that doesnt fit the blueprint.
-            usableChunks.RemoveAll(chunk => !chunk.CompareSize(_chunkSize));
+            usableChunks.RemoveAll(chunk => 
+                                    !chunk.CompareSize(_chunkSize) || 
+                                    !chunk.IsStandaloneChunk);
 
             if (!usableChunks.Any())
             {

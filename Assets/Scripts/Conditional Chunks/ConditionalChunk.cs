@@ -4,13 +4,13 @@ using UnityEngine;
 namespace MapGeneration.ConditionalChunks
 {
     /// <summary>
-    /// Purpose:
-    /// Creator:
+    /// Purpose: Main component for conditional based chunks.
+    /// Creator: PW
     /// </summary>
-    public class ConditionalChunk : Chunk 
+    [RequireComponent(typeof(Chunk))]
+    public class ConditionalChunk : MonoBehaviour 
     {
-        [SerializeField, Header("Conditional Chunk")]
-        private List<ValidationEntry> _validationStack = new List<ValidationEntry>();
+        [SerializeField] private List<ValidationEntry> _validationStack = new List<ValidationEntry>();
 
         public bool Validate(Map map, ChunkHolder chunkHolder)
         {

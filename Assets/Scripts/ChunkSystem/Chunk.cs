@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using MapGeneration.ConditionalChunks;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using MapGeneration.Extensions;
@@ -27,17 +28,18 @@ namespace MapGeneration
         private const string GROUND_ICON_PATH = "Ground.png";
         private const string FLYING_ICON_PATH = "Flying.png";
 
+        private ConditionalChunk _conditionalChunk;
+
         //This sections is for generel properties 
-        [Header("Properties"), SerializeField]
-        private int _width;//Tells the width of the chunk
+        [Header("Properties")]
+        //Tells the width of the chunk
+        [SerializeField] private int _width;
 
         //Tells the height of the chunk
         [SerializeField] private int _height;
         
         //Tells the type of the chunk
         [SerializeField] private ChunkType _chunkType;
-
-        [SerializeField] private bool _usedByConditionalChunk;
 
         //These fields tells what openings are open on the chunk
         [Header("Openings"), SerializeField] private ChunkOpenings _chunkOpenings;
@@ -56,32 +58,14 @@ namespace MapGeneration
         [SerializeField] private bool _drawEdges = true;
         [SerializeField] private bool _drawTileFlags = true;
 
+        [SerializeField, Tooltip("Is this chunk dependendant on some other chunk?")]
+        private bool _isStandaloneChunk = true;
+
         //Properties for generel properties
         public int Width{ get { return _width; } set { _width = value; }}
         public int Height{get { return _height; } set { _height = value; }}
-        public ChunkType ChunkType{get { return _chunkType; } set { _chunkType = value; }}
-
-        public ChunkHolder ChunkHolder
-        {
-            get { return _chunkHolder; }
-            set { _chunkHolder = value; }
-        }
-
-        //Properties for references
-        public ChunkBehavior ChunkBehavior
-        {
-            get
-            {
-                if (!_chunkBehavior)
-                    _chunkBehavior = GetComponent<ChunkBehavior>();
-                return _chunkBehavior;
-            }
-            set
-            {
-                _chunkBehavior = value;
-            }
-        }
-
+        public ChunkType ChunkType { get { return _chunkType; } set { _chunkType = value; } }
+        public ChunkHolder ChunkHolder { get { return _chunkHolder; } set { _chunkHolder = value; } }
         public Tilemap Enviorment { get { return _enviorment; } set { _enviorment = value; } }
 
         public string ID { get; set; }//A ID to indentify the Chunk
@@ -89,25 +73,33 @@ namespace MapGeneration
         //A list for the items in the chunk
         public List<GameObject> Items { get; set; }
 
-        public List<TileFlag> Connections{get { return _connections; } set { _connections = value; }}
-        public List<TileFlag> TileFlags{get { return _tileTileFlags; }set { _tileTileFlags = value; }}
+        public List<TileFlag> Connections{ get { return _connections; } set { _connections = value; } }
+        public List<TileFlag> TileFlags{ get { return _tileTileFlags; } set { _tileTileFlags = value; } }
 
-        public ChunkOpenings ChunkOpenings
+        //Lazy loading properties
+        public ConditionalChunk ConditionalChunk { get { return _conditionalChunk ?? (_conditionalChunk = GetComponent<ConditionalChunk>()); } }
+
+        public ChunkOpenings ChunkOpenings { get { return _chunkOpenings; } set { _chunkOpenings = value; } }
+
+        public bool IsStandaloneChunk { get { return _isStandaloneChunk; } set { _isStandaloneChunk = value; } }
+
+        //Properties for references
+        public ChunkBehavior ChunkBehavior { get { return _chunkBehavior; } set { _chunkBehavior = value; } }
+
+        /// <summary>
+        /// When this components gets added or gets reset, grabs om references if it can.
+        /// </summary>
+        void Reset()
         {
-            get
-            {
-                return _chunkOpenings;
-            }
+            _enviorment = GetComponentInChildren<Tilemap>();
 
-            set
-            {
-                _chunkOpenings = value;
-            }
-        }
+            _chunkBehavior = GetComponent<ChunkBehavior>();
+            if (!_chunkBehavior)
+                _chunkBehavior = GetComponentInChildren<ChunkBehavior>();
 
-        public bool UsedByConditionalChunk
-        {
-            get { return _usedByConditionalChunk; }
+            if (_chunkBehavior)
+                _chunkBehavior.Chunk = this;
+
         }
 
         public void OnDrawGizmos()
