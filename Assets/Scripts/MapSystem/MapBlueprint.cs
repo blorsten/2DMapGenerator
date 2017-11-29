@@ -15,6 +15,8 @@ namespace MapGeneration
     {
         private readonly List<MapGenerationAlgorithm> _instancedAlgorithms = new List<MapGenerationAlgorithm>();
 
+        [SerializeField] private bool _findValidChunks = true;
+        [SerializeField] private bool _openConnections = true;
         [SerializeField] private List<MapGenerationAlgorithm> _algorithmStack;
         [SerializeField] private Vector2Int _gridSize = new Vector2Int(4,4);
         [SerializeField] private Vector2Int _chunkSize;
@@ -35,16 +37,22 @@ namespace MapGeneration
             if (!Validate())
                 return false;
 
+            //Get a list of all the usable chunks.
+            List<Chunk> usableChunks = GetUsableChunks();
+            if (usableChunks == null)
+                return false;
+
             //If we havent instantiated any of the used algorithms, do so.
             _instancedAlgorithms.Clear();
             foreach (var algorithm in _algorithmStack)
                 if (algorithm)
                     _instancedAlgorithms.Add(Instantiate(algorithm));
 
-            //Get a list of all the usable chunks.
-            List<Chunk> usableChunks = GetUsableChunks();
-            if (usableChunks == null)
-                return false;
+            if (_findValidChunks)
+                _instancedAlgorithms.Add(CreateInstance<ChunkPlacer>());
+
+            if (_openConnections)
+                _instancedAlgorithms.Add(CreateInstance<ConnectionOpenerAlgorithm>());    
 
             //If we got any algorithms, go through them and process them.
             if (_instancedAlgorithms != null && _instancedAlgorithms.Any())
