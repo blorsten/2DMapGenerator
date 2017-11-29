@@ -75,10 +75,7 @@ namespace MapGeneration
                 /*TODO Figure out why setting the tiledata.color dosen't change the color of the tile 
                 and why this does.*/
                 tilemap.GetComponent<Tilemap>().SetColor(position, _currentSprites.tint);
-            }
-            else
-                Debug.LogWarning("Tile is missing sprites for the current biome");
-
+            }            
         }
 
 

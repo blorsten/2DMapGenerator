@@ -10,8 +10,6 @@ namespace MapGeneration
         [SerializeField] protected Sprite _defaultSprite;
         [SerializeField] protected Tile.ColliderType _colliderType;
 
-
-        protected BiomeSprites _currentSprites;
         protected Chunk _chunk;
         protected int _biome;
 

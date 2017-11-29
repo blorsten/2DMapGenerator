@@ -3,13 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
-public class RuleBiomeSprites
+namespace MapGeneration
 {
-    [SerializeField] public int iD;
-    [SerializeField] public Color tint;
-    [SerializeField] public Sprite middleSprite;
-    [SerializeField] public Sprite topSprite;
-    [SerializeField] public Sprite leftSprite;
-    [SerializeField] public Sprite rightSprite;
+    [Serializable]
+    public class RuleBiomeSprites
+    {
+        [SerializeField] public int iD;
+        [SerializeField] public Color tint;
+        [SerializeField] public Sprite middleSprite;
+        [SerializeField] public Sprite topSprite;
+        [SerializeField] public Sprite leftSprite;
+        [SerializeField] public Sprite rightSprite;
+    }
 }

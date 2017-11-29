@@ -57,8 +57,6 @@ namespace MapGeneration
         [SerializeField] private bool _drawEdges = true;
         [SerializeField] private bool _drawTileFlags = true;
 
-        //TODO TEST FIELD, REMOVE LATER
-        public Biome biome;
 
         //Properties for generel properties
         public int Width{ get { return _width; } set { _width = value; }}
