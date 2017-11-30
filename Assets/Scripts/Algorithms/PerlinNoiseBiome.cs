@@ -17,7 +17,7 @@ namespace MapGeneration.Algorithm
         private float[,] _noiseGrid;
         private int _width;
         private int _heigt;
-        [SerializeField] private int _scale = 50;
+        [SerializeField] private int _variation = 1;
 
         private float xOffset;
         private float yOffset;
@@ -69,8 +69,8 @@ namespace MapGeneration.Algorithm
 
         private float CalculateNoise(int x, int y)
         {
-            float xCoord = (float)x / _width * _scale + xOffset;
-            float yCoord = (float)y / _heigt * _scale + yOffset;
+            float xCoord = (float)x / _width * _variation + xOffset;
+            float yCoord = (float)y / _heigt * _variation + yOffset;
             return Mathf.PerlinNoise(xCoord, yCoord);
         }
     }
