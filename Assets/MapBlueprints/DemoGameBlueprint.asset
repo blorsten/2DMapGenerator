@@ -11,6 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc37a4d3022d22e4f8dda53e488456b8, type: 3}
   m_Name: DemoGameBlueprint
   m_EditorClassIdentifier: 
+  FillEmptySpaces: 1
   FindValidChunks: 1
   OpenConnections: 1
   AlgorithmStack:
