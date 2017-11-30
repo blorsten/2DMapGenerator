@@ -86,7 +86,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 10
   _height: 8
-  _chunkType: 0
+  _chunkType: 6
   _chunkOpenings:
     _topOpen: 0
     _bottomOpen: 0

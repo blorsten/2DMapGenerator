@@ -11,7 +11,7 @@ namespace MapGeneration
 {
     public enum ChunkType
     {
-        Default, DeadEnd, Reward, Secret, Start, End
+        Default, DeadEnd, Reward, Secret, Start, End, Solid
     }
 
     /// <summary>
