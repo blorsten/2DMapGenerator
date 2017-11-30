@@ -11,15 +11,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc37a4d3022d22e4f8dda53e488456b8, type: 3}
   m_Name: DemoGameBlueprint
   m_EditorClassIdentifier: 
-  _findValidChunks: 1
-  _openConnections: 1
-  _algorithmStack:
+  FindValidChunks: 1
+  OpenConnections: 1
+  AlgorithmStack:
   - {fileID: 11400000, guid: 15226341bb4f718438db7e3bc6a4ee4c, type: 2}
   - {fileID: 11400000, guid: f9d03f9ef5e573b4abaeb5d9a88760b4, type: 2}
   - {fileID: 11400000, guid: 88f213a205c1c9044bb92bc039b7a5b8, type: 2}
   - {fileID: 11400000, guid: 0e5f8478f8fbd2a468666f04d48a14d2, type: 2}
-  _gridSize: {x: 4, y: 4}
-  _chunkSize: {x: 10, y: 8}
-  _userSeed: 0
-  __whitelistedChunks: []
-  __blacklistedChunks: []
+  GridSize: {x: 4, y: 4}
+  ChunkSize: {x: 10, y: 8}
+  WhitelistedChunks: []
+  BlacklistedChunks: []
+  UserSeed: 0

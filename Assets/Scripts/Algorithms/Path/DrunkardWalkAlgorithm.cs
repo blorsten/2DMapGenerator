@@ -26,10 +26,13 @@ namespace MapGeneration.Algorithm
 
             //This is where the walk starts.
             var chunks = map.Grid.Cast<ChunkHolder>().Where(holder => holder.ChunkOpenings.IsEmpty()).ToList();
-            Vector2Int startPoint = chunks.RandomEntry().Position;
+            ChunkHolder startChunk = chunks.RandomEntry(map.Random);
 
-            //The first chunk is marked.
-            StartWalk(map, usableChunks, startPoint);
+            if (startChunk != null)
+            {
+                //The first chunk is marked.
+                StartWalk(map, usableChunks, startChunk.Position);
+            }
 
             if (Road == null || Road != null && !Road.Any())
                 return false;
