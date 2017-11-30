@@ -22,6 +22,36 @@ namespace MapGeneration.Editor
         private Object _currentSelectedAlgorithm;
         private ReorderableList _algorithmStack;
 
+        public override void OnInspectorGUI()
+        {
+            serializedObject.Update();
+
+            //Auto settings
+            EditorGUILayout.LabelField("Automation Settings:", EditorStyles.boldLabel);
+            _context.FindValidChunks = EditorGUILayout.Toggle("Find Valid Chunks", _context.FindValidChunks);
+            _context.OpenConnections = EditorGUILayout.Toggle("Open Connections", _context.OpenConnections);
+
+            //Algorithm stack
+            GUILayout.Space(20);
+            EditorGUILayout.LabelField("Algorithm Stack:", EditorStyles.boldLabel);
+            _algorithmStack.DoLayoutList();
+            GUILayout.Space(10);
+            EditorExtension.DrawSerializedObject(_currentSelectedAlgorithm);
+
+            GUILayout.Space(20);
+            EditorGUILayout.LabelField("Size Settings:", EditorStyles.boldLabel);
+            _context.GridSize = EditorGUILayout.Vector2IntField("Grid", _context.GridSize);
+            _context.ChunkSize = EditorGUILayout.Vector2IntField("Chunk", _context.ChunkSize);
+
+            GUILayout.Space(20);
+            EditorGUILayout.LabelField("Chunk Conditions:", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(_whitelistedChunks, true);
+            EditorGUILayout.PropertyField(_blacklistedChunks, true);
+
+            EditorUtility.SetDirty(_context);
+            serializedObject.ApplyModifiedProperties();
+        }
+
         private void OnEnable()
         {
             _context = target as MapBlueprint;
@@ -38,7 +68,7 @@ namespace MapGeneration.Editor
             _algorithmStack.onAddDropdownCallback = OnAlgorithmStackAddElement;
             _algorithmStack.drawElementCallback = OnAlgorithmStackDrawElement;
         }
-        
+
         /// <summary>
         /// Called when a new element is about to get added to the algorithm stack, 
         /// meaning the plus button is clicked.
@@ -98,36 +128,6 @@ namespace MapGeneration.Editor
         {
             int index = _algorithmStack.serializedProperty.arraySize++;
             _algorithmStack.serializedProperty.GetArrayElementAtIndex(index).objectReferenceValue = (Object) userData;
-            serializedObject.ApplyModifiedProperties();
-        }
-
-        public override void OnInspectorGUI()
-        {
-            serializedObject.Update();
-
-            //Auto settings
-            EditorGUILayout.LabelField("Automation Settings:", EditorStyles.boldLabel);
-            _context.FindValidChunks = EditorGUILayout.Toggle("Find Valid Chunks", _context.FindValidChunks);
-            _context.OpenConnections = EditorGUILayout.Toggle("Open Connections", _context.OpenConnections);
-
-            //Algorithm stack
-            GUILayout.Space(20);
-            EditorGUILayout.LabelField("Algorithm Stack:", EditorStyles.boldLabel);
-            _algorithmStack.DoLayoutList();
-            GUILayout.Space(10);
-            EditorExtension.DrawSerializedObject(_currentSelectedAlgorithm);
-
-            GUILayout.Space(20);
-            EditorGUILayout.LabelField("Size Settings:", EditorStyles.boldLabel);
-            _context.GridSize = EditorGUILayout.Vector2IntField("Grid", _context.GridSize);
-            _context.ChunkSize = EditorGUILayout.Vector2IntField("Chunk", _context.ChunkSize);
-
-            GUILayout.Space(20);
-            EditorGUILayout.LabelField("Chunk Conditions:", EditorStyles.boldLabel);
-            EditorGUILayout.PropertyField(_whitelistedChunks, true);
-            EditorGUILayout.PropertyField(_blacklistedChunks, true);
-
-            EditorUtility.SetDirty(_context);
             serializedObject.ApplyModifiedProperties();
         }
     }
