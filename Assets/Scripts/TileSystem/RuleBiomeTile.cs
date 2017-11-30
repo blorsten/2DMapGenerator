@@ -38,9 +38,11 @@ namespace MapGeneration
                     _currentSprites = _biomesSprites.Count > 0
                         ? _biomesSprites.FirstOrDefault(x => x.iD == _biome)
                         : null;
-                }
-            //This checks the tiles neighbor status
-            _neighborType = GetNeightbotType(position, tilemap);
+
+                    //This checks the tiles neighbor status
+                    _neighborType = GetNeighborType(position, tilemap);
+            }
+            
         }
 
         public override void GetTileData(Vector3Int position, ITilemap tilemap,
@@ -51,7 +53,7 @@ namespace MapGeneration
             //This refeshes the values needed for the tile
             RefreshBiomeValues(position, tilemap);
 
-            if (_currentSprites != null)
+            if (_currentSprites != null && _currentSprites.iD != "")
             {
                 switch (_neighborType)
                 {
@@ -79,10 +81,26 @@ namespace MapGeneration
         }
 
 
-        private TileNeighborType GetNeightbotType(Vector3Int position, ITilemap tilemap)
+        private TileNeighborType GetNeighborType(Vector3Int position, ITilemap tilemap)
         {
             TileNeighborType type = 0;
-            TileBase top = tilemap.GetTile(position + new Vector3Int(0, 1, 0));
+            bool hasMap = _chunk != null && _chunk.Map != null;
+            TileBase top = null;
+
+            if (position.y + 1 >= _chunk.Height && hasMap)
+            {
+                Vector2Int topPostion = _chunk.ChunkHolder.Position + new Vector2Int(0, 1);
+                ChunkHolder chunkholder = _chunk.Map.GetChunkHolder(topPostion);
+                if (chunkholder != null && chunkholder.Instance)
+                {
+                    top = chunkholder.Instance.Enviorment.GetTile(new Vector3Int(position.x,0,position.z));
+                }
+
+            }
+            else
+                top = tilemap.GetTile(position + new Vector3Int(0, 1, 0));
+
+
             TileBase left = tilemap.GetTile(position + new Vector3Int(-1, 0, 0));
             TileBase right = tilemap.GetTile(position + new Vector3Int(1, 0, 0));
 

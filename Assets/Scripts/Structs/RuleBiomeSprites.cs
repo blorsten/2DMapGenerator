@@ -8,7 +8,7 @@ namespace MapGeneration
     [Serializable]
     public class RuleBiomeSprites
     {
-        [SerializeField] public int iD;
+        [SerializeField] public string iD;
         [SerializeField] public Color tint;
         [SerializeField] public Sprite middleSprite;
         [SerializeField] public Sprite topSprite;

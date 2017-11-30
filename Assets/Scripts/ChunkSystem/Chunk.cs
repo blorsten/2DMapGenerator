@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+ ﻿using System.Collections.Generic;
 using MapGeneration.ConditionalChunks;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -37,7 +37,7 @@ namespace MapGeneration
 
         //Tells the height of the chunk
         [SerializeField] private int _height;
-        
+
         //Tells the type of the chunk
         [SerializeField] private ChunkType _chunkType;
 
@@ -62,10 +62,33 @@ namespace MapGeneration
         private bool _isStandaloneChunk = true;
 
         //Properties for generel properties
-        public int Width{ get { return _width; } set { _width = value; }}
-        public int Height{get { return _height; } set { _height = value; }}
+        public int Width { get { return _width; } set { _width = value; } }
+        public int Height { get { return _height; } set { _height = value; } }
         public ChunkType ChunkType { get { return _chunkType; } set { _chunkType = value; } }
-        public ChunkHolder ChunkHolder { get { return _chunkHolder; } set { _chunkHolder = value; } }
+        private float[,] biomeValues;
+        public float[,] BiomeValues { get { return biomeValues; } set { biomeValues = value; } }
+
+        public ChunkHolder ChunkHolder
+        {
+            get { return _chunkHolder; }
+            set { _chunkHolder = value; }
+        }
+
+        //Properties for references
+        public ChunkBehavior ChunkBehavior
+        {
+            get
+            {
+                if (!_chunkBehavior)
+                    _chunkBehavior = GetComponent<ChunkBehavior>();
+                return _chunkBehavior;
+            }
+            set
+            {
+                _chunkBehavior = value;
+            }
+        }
+
         public Tilemap Enviorment { get { return _enviorment; } set { _enviorment = value; } }
 
         public string ID { get; set; }//A ID to indentify the Chunk
@@ -83,8 +106,7 @@ namespace MapGeneration
 
         public bool IsStandaloneChunk { get { return _isStandaloneChunk; } set { _isStandaloneChunk = value; } }
 
-        //Properties for references
-        public ChunkBehavior ChunkBehavior { get { return _chunkBehavior; } set { _chunkBehavior = value; } }
+		public Map Map { get; set; }
 
         /// <summary>
         /// When this components gets added or gets reset, grabs om references if it can.
@@ -100,6 +122,11 @@ namespace MapGeneration
             if (_chunkBehavior)
                 _chunkBehavior.Chunk = this;
 
+        }
+
+        private void Awake()
+        {
+            biomeValues = new float[_width, _height];
         }
 
         public void OnDrawGizmos()
@@ -181,5 +208,16 @@ namespace MapGeneration
             }
 
         }
+
+        public void RefreshTilemaps()
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                Tilemap tilemap = transform.GetChild(i).gameObject.GetComponent<Tilemap>();
+                if(tilemap != null)
+                    tilemap.RefreshAllTiles();
+            }
+        }
+
     }
 }

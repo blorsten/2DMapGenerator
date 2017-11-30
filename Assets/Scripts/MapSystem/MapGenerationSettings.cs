@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace MapGeneration
 {
@@ -12,6 +14,9 @@ namespace MapGeneration
         [SerializeField] private Color _defaultConnectionColor;
         [SerializeField] private Color _criticalConnectionColor;
 
+        [Header("Biome Setings")]
+        [SerializeField] private List<string> _biomes = new List<string>();
+
         public Color DefaultConnectionColor
         {
             get { return _defaultConnectionColor; }
@@ -22,6 +27,21 @@ namespace MapGeneration
         {
             get { return _criticalConnectionColor; }
             set { _criticalConnectionColor = value; }
+        }
+
+        public List<string> Biomes
+        {
+            get { return _biomes; }
+            set { _biomes = value; }
+        }
+
+        public string NoiseToBiome(float noice)
+        { 
+            int index = Mathf.CeilToInt(Mathf.Clamp(noice * _biomes.Count - 1, 0, _biomes.Count));
+            if (index >= _biomes.Count || index < 0)
+                return ""; 
+            return _biomes[index];
+
         }
     }
 }
