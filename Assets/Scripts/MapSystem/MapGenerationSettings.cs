@@ -37,8 +37,8 @@ namespace MapGeneration
 
         public string NoiseToBiome(float noice)
         { 
-            float index = Mathf.FloorToInt(Mathf.Clamp(noice * _biomes.Count,0, _biomes.Count - 1));
-            return _biomes[Mathf.Clamp((int)index,0, _biomes.Count-1)];
+            int index = Mathf.CeilToInt(Mathf.Clamp(noice * _biomes.Count - 1, 0, _biomes.Count));
+            return _biomes[index];
 
         }
     }
