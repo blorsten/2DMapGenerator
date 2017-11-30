@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using MapGeneration;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace MapBuilderEditor
 {
@@ -122,7 +124,8 @@ namespace MapBuilderEditor
             }
 
             //After we set edited to serialized object, mark it as dirty.
-            EditorUtility.SetDirty(_context);
+            EditorUtility.SetDirty(_context); 
+            EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
         }
     }
 }
