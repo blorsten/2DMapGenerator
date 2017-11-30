@@ -1,4 +1,5 @@
-﻿using MapGeneration.Algorithm;
+﻿using System.Collections.Generic;
+using MapGeneration.Algorithm;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
@@ -18,8 +19,7 @@ namespace MapGeneration.Editor
         private SerializedProperty _whitelistedChunks;
         private SerializedProperty _blacklistedChunks;
 
-        private SerializedProperty _currentSelectedAlgorithm;
-        private ReorderableList _algorithmStack;
+        private ReorderableAlgorithmStack _algorithmStack;
 
         public override void OnInspectorGUI()
         {
@@ -36,9 +36,8 @@ namespace MapGeneration.Editor
             {
                 GUILayout.Space(20);
                 EditorGUILayout.LabelField("Algorithm Stack:", EditorStyles.boldLabel);
-                _algorithmStack.DoLayoutList();
-                GUILayout.Space(10);
-                EditorExtension.DrawSerializedProperty(_currentSelectedAlgorithm);
+                _algorithmStack.List.DoLayoutList();
+                _algorithmStack.DrawSelectedAlgorithm();
             }
              
             GUILayout.Space(20);
@@ -60,74 +59,89 @@ namespace MapGeneration.Editor
             _context = target as MapBlueprint;
             _whitelistedChunks = serializedObject.FindProperty("WhitelistedChunks"); 
             _blacklistedChunks = serializedObject.FindProperty("BlacklistedChunks");
-
-            //Instantiate a new reorderablelist
-            _algorithmStack = new ReorderableList(
-                serializedObject,
-                serializedObject.FindProperty("AlgorithmStack"),
-                true, false, true, true);
-
-            //We need to hook some methods to events on the new reorderable list.
-            _algorithmStack.onAddDropdownCallback = OnAlgorithmStackAddElement;
-            _algorithmStack.drawElementCallback = OnAlgorithmStackDrawElement;
+            _algorithmStack = new ReorderableAlgorithmStack(serializedObject, serializedObject.FindProperty("AlgorithmStack"), _context.AlgorithmStack);
         }
 
-        /// <summary>
-        /// Called when a new element is about to get added to the algorithm stack, 
-        /// meaning the plus button is clicked.
-        /// </summary>
-        private void OnAlgorithmStackAddElement(Rect buttonRect, ReorderableList l)
+        public class ReorderableAlgorithmStack
         {
-            var menu = new GenericMenu(); //Create a clean context menu
+            public SerializedProperty SelectedElement { get; set; }
+            public ReorderableList List { get; set; }
 
-            //Lets find all the assets under the type MapGenerationAlgorithm.
-            var algorithms = AssetDatabaseExtension.FindAssetsByType<MapGenerationAlgorithm>();
-
-            //Add each of the found algorithms to the newly made context menu.
-            foreach (var algorithm in algorithms)
+            public ReorderableAlgorithmStack(SerializedObject serializedObject, SerializedProperty serializedProperty, List<AlgorithmStorage> stack, bool hideFooter = false)
             {
-                menu.AddItem(new GUIContent(algorithm.name), false, data =>
+                //Instantiate a new reorderablelist
+                List = new ReorderableList(
+                    serializedObject,
+                    serializedProperty,
+                    true, false, true, true);
+                
+                //We need to hook some methods to events on the new reorderable list.
+                List.onAddDropdownCallback = (rect, list) =>
                 {
-                    _context.AlgorithmStack.Add(new AlgorithmStorage(data as MapGenerationAlgorithm));
-                }, algorithm);  
+                    var menu = new GenericMenu(); //Create a clean context menu
+
+                    //Lets find all the assets under the type MapGenerationAlgorithm.
+                    var algorithms = AssetDatabaseExtension.FindAssetsByType<MapGenerationAlgorithm>();
+
+                    //Add each of the found algorithms to the newly made context menu.
+                    foreach (var algorithm in algorithms)
+                    {
+                        menu.AddItem(new GUIContent(algorithm.name), false, data =>
+                        {
+                            stack.Add(new AlgorithmStorage(data as MapGenerationAlgorithm));
+                        }, algorithm);
+                    }
+
+                    menu.ShowAsContext();
+                };
+
+                List.drawElementCallback = (rect, index, active, focused) =>
+                {
+                    //Lets create some offset for the elements.
+                    rect.y += 2;
+
+                    //First we grab an element from the algorithm stack
+                    var targetObject = List.serializedProperty.GetArrayElementAtIndex(index);
+
+                    var algorithmValue = targetObject.FindPropertyRelative("Algorithm");
+                    var toggleValue = targetObject.FindPropertyRelative("IsActive");
+
+                    float toggleWidth = 15;
+
+                    //Then we create an object field for the object.
+                    if (hideFooter)
+                        GUI.enabled = false;
+
+                    EditorGUI.PropertyField(new Rect(rect.x, rect.y, rect.width - (toggleWidth + 5), EditorGUIUtility.singleLineHeight),
+                        algorithmValue, GUIContent.none);
+
+                    if (hideFooter)
+                        GUI.enabled = true;
+
+                    EditorGUI.PropertyField(new Rect(rect.width + toggleWidth, rect.y, toggleWidth, EditorGUIUtility.singleLineHeight),
+                        toggleValue, GUIContent.none);
+
+                    //If this element is active we make it the current active algorithm.
+                    if (active)
+                        SelectedElement = algorithmValue;
+
+                    //If this element is in focus and active we make it go away with a key press.
+                    if (!hideFooter && focused && active && Event.current.keyCode == KeyCode.Delete && Event.current.type == EventType.KeyDown)
+                    {
+                        stack.RemoveAt(index);
+                        if (SelectedElement == algorithmValue)
+                            SelectedElement = null;
+                    }
+                };
+
+                if (hideFooter)
+                    List.drawFooterCallback += rect => { };
             }
 
-            menu.ShowAsContext();
-        }
-
-        /// <summary>
-        /// Called when the reorderable list draws an element.
-        /// </summary>
-        private void OnAlgorithmStackDrawElement(Rect rect, int index, bool isActive, bool isFocused)
-        {
-            //Lets create some offset for the elements.
-            rect.y += 2;
-
-            //First we grab an element from the algorithm stack
-            var targetObject = _algorithmStack.serializedProperty.GetArrayElementAtIndex(index);
-             
-            var algorithmValue = targetObject.FindPropertyRelative("Algorithm");
-            var toggleValue = targetObject.FindPropertyRelative("IsActive");
-
-            float toggleWidth = 15;
-
-            //Then we create an object field for the object.
-            EditorGUI.PropertyField(new Rect(rect.x, rect.y, rect.width - (toggleWidth + 5), EditorGUIUtility.singleLineHeight),
-                algorithmValue, GUIContent.none);
-
-            EditorGUI.PropertyField(new Rect(rect.width + toggleWidth, rect.y, toggleWidth, EditorGUIUtility.singleLineHeight),
-                toggleValue, GUIContent.none);
-
-            //If this element is active we make it the current active algorithm.
-            if (isActive)
-                _currentSelectedAlgorithm = algorithmValue;
-
-            //If this element is in focus and active we make it go away with a key press.
-            if (isFocused && isActive && Event.current.keyCode == KeyCode.Delete && Event.current.type == EventType.KeyDown)
+            public void DrawSelectedAlgorithm()
             {
-                _context.AlgorithmStack.RemoveAt(index);
-                if (_currentSelectedAlgorithm == algorithmValue)
-                    _currentSelectedAlgorithm = null;
+                GUILayout.Space(10);
+                EditorExtension.DrawSerializedProperty(SelectedElement);
             }
         }
     }

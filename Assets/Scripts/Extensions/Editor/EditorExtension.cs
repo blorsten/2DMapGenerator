@@ -10,7 +10,7 @@ namespace MapGeneration.Extensions
         /// </summary>
         public static void DrawSerializedProperty(SerializedProperty obj)
         {
-            if (obj != null)
+            if (obj != null && obj.objectReferenceValue != null)  
             {
                 SerializedObject serializedAlgorithm = new SerializedObject(obj.objectReferenceValue);
 
@@ -31,7 +31,7 @@ namespace MapGeneration.Extensions
 
                     EditorGUILayout.PropertyField(prop);
                 }
-
+                 
                 if (GUI.changed)
                     serializedAlgorithm.ApplyModifiedProperties();
             }

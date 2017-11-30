@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using MapGeneration;
+using MapGeneration.Editor;
 using MapGeneration.Extensions;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -24,6 +25,9 @@ namespace MapBuilderEditor
 
         private Vector2 _scrollPos;
         private MapBuilder _context; //Used to get hold of the serialized object in the inspector.
+
+        private MapBlueprintEditor.ReorderableAlgorithmStack _reorderableAlgorithmStack;
+        private SerializedObject _serializedBlueprint;
 
         void OnEnable()
         {
@@ -95,9 +99,27 @@ namespace MapBuilderEditor
             }
 
             GUILayout.Space(10);
-
+             
             //Also make it posible to change the blueprint.
             _context.CurrentBlueprint = EditorGUILayout.ObjectField("Current Blueprint", _context.CurrentBlueprint, typeof(MapBlueprint), true) as MapBlueprint;
+
+            GUILayout.Space(10);
+            EditorGUILayout.LabelField("Current Algorithm Stack:", EditorStyles.boldLabel);
+            if (_reorderableAlgorithmStack == null || _context.CurrentBlueprint != _serializedBlueprint.targetObject)
+            {
+                if (Event.current.type == EventType.Repaint)
+                {
+                    _serializedBlueprint = new SerializedObject(_context.CurrentBlueprint);
+                    _reorderableAlgorithmStack = new MapBlueprintEditor.ReorderableAlgorithmStack(_serializedBlueprint, _serializedBlueprint.FindProperty("AlgorithmStack"), _context.CurrentBlueprint.AlgorithmStack, true);
+                }
+            }
+            else
+            {
+                _reorderableAlgorithmStack.List.DoLayoutList();
+                GUILayout.Space(10);
+                _serializedBlueprint.ApplyModifiedProperties();
+            }
+
         }
 
         private void Generate(int seed = 0)
