@@ -45,7 +45,8 @@ namespace MapGeneration
         /// </summary>
         public Chunk Instantiate(Vector2 position, Map map)
         {
-            Instance = Object.Instantiate(Prefab,position,Quaternion.identity);
+            Instance = Object.Instantiate(Prefab, position, Quaternion.identity);
+            Instance.RecipeReference = Prefab;
             Instance.ChunkHolder = this;
             Instance.Map = map;
             return Instance;
@@ -57,6 +58,7 @@ namespace MapGeneration
         public Chunk Instantiate(Vector2 position, Transform parent, Map map)
         {
             Instance = Object.Instantiate(Prefab, position, Quaternion.identity,parent);
+            Instance.RecipeReference = Prefab;
             Instance.ChunkHolder = this;
             Instance.Map = map;
             return Instance;
