@@ -21,6 +21,7 @@ namespace MapGeneration
     /// Mikkel Nielsen
     /// </summary>
     [ExecuteInEditMode]
+    [SelectionBase]
     public class Chunk : MonoBehaviour
     {
         private const string TRAP_ICON_PATH = "Trap.png";

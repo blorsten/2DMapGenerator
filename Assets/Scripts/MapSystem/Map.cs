@@ -6,6 +6,7 @@ using Random = System.Random;
 using MapGeneration.Extensions;
 using MapGeneration.SaveSystem;
 using MapGeneration.ConditionalChunks;
+using MapGeneration.Utils;
 using UnityEngine;
 
 namespace MapGeneration
@@ -15,16 +16,22 @@ namespace MapGeneration
     /// Creator: PW
     /// </summary>
     public class Map : MonoBehaviour
-    {
+    { 
         private ChunkHolder _startChunk;
         private ChunkHolder _endChunk;
 
         [SerializeField] private int _seed;
-        [SerializeField] private MapBlueprint _mapBlueprint;
+        [SerializeField] private MapBlueprint _mapBlueprint; 
+        [SerializeField] private ChunkHolder2DArray _grid; 
 
         public Guid ID { get; private set; }
         public Random Random { get; private set; }
-        public ChunkHolder[,] Grid { get; set; }
+
+        public ChunkHolder2DArray Grid
+        {
+            get { return _grid; }
+            set { _grid = value; }
+        }
 
         public MapDataSaver MapDataSaver { get; set; }
 
@@ -71,13 +78,12 @@ namespace MapGeneration
         public void Initialize(int seed, MapBlueprint mapBlueprint, MapDataSaver mapDataSaver = null)
         {
             Seed = seed;
-            MapBlueprint = mapBlueprint;
+            MapBlueprint = mapBlueprint; 
             Random = new Random(seed);
-
             //Generate the map ID from the newly created random.
             ID = new Guid(RandomExtension.GenerateByteSeed(Random));
 
-            Grid = new ChunkHolder[mapBlueprint.GridSize.x,mapBlueprint.GridSize.y];
+            Grid = new ChunkHolder2DArray(mapBlueprint.GridSize.x, mapBlueprint.GridSize.y);
             for (int x = 0; x < Grid.GetLength(0); x++)
             {
                 for (int y = 0; y < Grid.GetLength(1); y++)

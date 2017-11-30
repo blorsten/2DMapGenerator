@@ -9,7 +9,7 @@ namespace MapGeneration.Utils
     {
         [SerializeField] private bool _drawBacktracking = true;
 
-        private Map _map;
+        [SerializeField] private Map _map; 
 
         public Map Map
         {
@@ -25,7 +25,7 @@ namespace MapGeneration.Utils
         public void OnDrawGizmos()
         {
             if (Map == null || Map.Grid == null)
-                return;
+                return; 
             for (int x = 0; x < Map.Grid.GetLength(0); x++)
             {
                 for (int y = 0; y < Map.Grid.GetLength(1); y++)
