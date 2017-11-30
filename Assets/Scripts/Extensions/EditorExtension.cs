@@ -8,11 +8,11 @@ namespace MapGeneration.Extensions
         /// <summary>
         /// Convers an object to a serialized object and tries to draw its own fields/properties.
         /// </summary>
-        public static void DrawSerializedObject(Object obj)
+        public static void DrawSerializedProperty(SerializedProperty obj)
         {
             if (obj != null)
             {
-                SerializedObject serializedAlgorithm = new SerializedObject(obj);
+                SerializedObject serializedAlgorithm = new SerializedObject(obj.objectReferenceValue);
 
                 bool hasDrawnHeader = false;
 

@@ -20,7 +20,7 @@ namespace MapGeneration
         [SerializeField] public bool FillEmptySpaces = true;
         [SerializeField] public bool FindValidChunks = true;
         [SerializeField] public bool OpenConnections = true;
-        [SerializeField] public List<MapGenerationAlgorithm> AlgorithmStack;
+        [SerializeField] public List<AlgorithmStorage> AlgorithmStack;
         [SerializeField] public Vector2Int GridSize = new Vector2Int(4, 4);
         [SerializeField] public Vector2Int ChunkSize = new Vector2Int(10, 8);
         [SerializeField] public List<Chunk> WhitelistedChunks; //List of all chunks it can use, if its empty it uses all.
@@ -45,8 +45,8 @@ namespace MapGeneration
             //If we havent instantiated any of the used algorithms, do so.
             _instancedAlgorithms.Clear();
             foreach (var algorithm in AlgorithmStack)
-                if (algorithm)
-                    _instancedAlgorithms.Add(Instantiate(algorithm));
+                if (algorithm.Algorithm && algorithm.IsActive)
+                    _instancedAlgorithms.Add(Instantiate(algorithm.Algorithm));
 
             if (FindValidChunks)
                 _instancedAlgorithms.Add(CreateInstance<ChunkPlacer>());
@@ -166,7 +166,7 @@ namespace MapGeneration
             }
 
             if (AlgorithmStack == null || (AlgorithmStack != null &&
-                                            AlgorithmStack.All(algorithm => algorithm == null)))
+                                            AlgorithmStack.All(algorithm => algorithm.Algorithm == null)))
             {
                 Debug.LogWarning(string.Format("MapBlueprint: {0} doesn't have any algorithms, " +
                                                "make sure to give it some.", name), this);

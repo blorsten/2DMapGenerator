@@ -4,12 +4,28 @@ using UnityEngine;
 
 namespace MapGeneration.Algorithm
 {
+    [Serializable]
+    public struct AlgorithmStorage
+    {
+        [SerializeField] public bool IsActive;
+        [SerializeField] public MapGenerationAlgorithm Algorithm;
+
+        public AlgorithmStorage(MapGenerationAlgorithm algorithm)
+        {
+            Algorithm = algorithm;
+            IsActive = true;
+        }
+    }
     /// <summary>
     /// Purpose:
     /// Creator:
     /// </summary>
+    /// 
+
     public class MapGenerationAlgorithm : ScriptableObject
     {
+        
+
         /// <summary>
         /// Process a given map
         /// </summary>

@@ -11,11 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc37a4d3022d22e4f8dda53e488456b8, type: 3}
   m_Name: Peters
   m_EditorClassIdentifier: 
+  FillEmptySpaces: 1
   FindValidChunks: 1
   OpenConnections: 1
-  AlgorithmStack:
-  - {fileID: 11400000, guid: 15226341bb4f718438db7e3bc6a4ee4c, type: 2}
-  - {fileID: 11400000, guid: 88f213a205c1c9044bb92bc039b7a5b8, type: 2}
   GridSize: {x: 4, y: 4}
   ChunkSize: {x: 10, y: 8}
   WhitelistedChunks: []

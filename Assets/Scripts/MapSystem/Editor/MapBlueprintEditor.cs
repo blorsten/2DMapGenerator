@@ -1,5 +1,4 @@
-﻿using System;
-using MapGeneration.Algorithm;
+﻿using MapGeneration.Algorithm;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
@@ -19,7 +18,7 @@ namespace MapGeneration.Editor
         private SerializedProperty _whitelistedChunks;
         private SerializedProperty _blacklistedChunks;
 
-        private Object _currentSelectedAlgorithm;
+        private SerializedProperty _currentSelectedAlgorithm;
         private ReorderableList _algorithmStack;
 
         public override void OnInspectorGUI()
@@ -33,12 +32,15 @@ namespace MapGeneration.Editor
             _context.OpenConnections = EditorGUILayout.Toggle("Open Connections", _context.OpenConnections);
 
             //Algorithm stack
-            GUILayout.Space(20);
-            EditorGUILayout.LabelField("Algorithm Stack:", EditorStyles.boldLabel);
-            _algorithmStack.DoLayoutList();
-            GUILayout.Space(10);
-            EditorExtension.DrawSerializedObject(_currentSelectedAlgorithm);
-
+            if (_algorithmStack != null)
+            {
+                GUILayout.Space(20);
+                EditorGUILayout.LabelField("Algorithm Stack:", EditorStyles.boldLabel);
+                _algorithmStack.DoLayoutList();
+                GUILayout.Space(10);
+                EditorExtension.DrawSerializedProperty(_currentSelectedAlgorithm);
+            }
+             
             GUILayout.Space(20);
             EditorGUILayout.LabelField("Size Settings:", EditorStyles.boldLabel);
             _context.GridSize = EditorGUILayout.Vector2IntField("Grid", _context.GridSize);
@@ -84,7 +86,10 @@ namespace MapGeneration.Editor
             //Add each of the found algorithms to the newly made context menu.
             foreach (var algorithm in algorithms)
             {
-                menu.AddItem(new GUIContent(algorithm.name), false, OnAlgorithmStackElementAdded, algorithm);
+                menu.AddItem(new GUIContent(algorithm.name), false, data =>
+                {
+                    _context.AlgorithmStack.Add(new AlgorithmStorage(data as MapGenerationAlgorithm));
+                }, algorithm);  
             }
 
             menu.ShowAsContext();
@@ -100,36 +105,30 @@ namespace MapGeneration.Editor
 
             //First we grab an element from the algorithm stack
             var targetObject = _algorithmStack.serializedProperty.GetArrayElementAtIndex(index);
+             
+            var algorithmValue = targetObject.FindPropertyRelative("Algorithm");
+            var toggleValue = targetObject.FindPropertyRelative("IsActive");
+
+            float toggleWidth = 15;
 
             //Then we create an object field for the object.
-            targetObject.objectReferenceValue = EditorGUI.ObjectField(
-                new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight), 
-                String.Empty, targetObject.objectReferenceValue, 
-                typeof(MapGenerationAlgorithm), 
-                false);
+            EditorGUI.PropertyField(new Rect(rect.x, rect.y, rect.width - (toggleWidth + 5), EditorGUIUtility.singleLineHeight),
+                algorithmValue, GUIContent.none);
+
+            EditorGUI.PropertyField(new Rect(rect.width + toggleWidth, rect.y, toggleWidth, EditorGUIUtility.singleLineHeight),
+                toggleValue, GUIContent.none);
 
             //If this element is active we make it the current active algorithm.
             if (isActive)
-                _currentSelectedAlgorithm = targetObject.objectReferenceValue;
+                _currentSelectedAlgorithm = algorithmValue;
 
             //If this element is in focus and active we make it go away with a key press.
             if (isFocused && isActive && Event.current.keyCode == KeyCode.Delete && Event.current.type == EventType.KeyDown)
             {
                 _context.AlgorithmStack.RemoveAt(index);
-                if (_currentSelectedAlgorithm == targetObject.objectReferenceValue)
+                if (_currentSelectedAlgorithm == algorithmValue)
                     _currentSelectedAlgorithm = null;
             }
-        }
-
-        /// <summary>
-        /// Called when an element gets added to the reorderable list.
-        /// </summary>
-        /// <param name="userData"></param>
-        private void OnAlgorithmStackElementAdded(object userData)
-        {
-            int index = _algorithmStack.serializedProperty.arraySize++;
-            _algorithmStack.serializedProperty.GetArrayElementAtIndex(index).objectReferenceValue = (Object) userData;
-            serializedObject.ApplyModifiedProperties();
         }
     }
 }
