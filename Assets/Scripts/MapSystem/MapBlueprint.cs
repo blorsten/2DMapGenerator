@@ -17,6 +17,7 @@ namespace MapGeneration
 
         //These needs to be serialized and public
         #region Custom Inspector Fields
+        [SerializeField] public bool FillEmptySpaces = true;
         [SerializeField] public bool FindValidChunks = true;
         [SerializeField] public bool OpenConnections = true;
         [SerializeField] public List<MapGenerationAlgorithm> AlgorithmStack;

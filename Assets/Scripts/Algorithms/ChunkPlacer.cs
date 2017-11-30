@@ -66,13 +66,15 @@ namespace MapGeneration.Algorithm
                         chunk.ChunkType == ChunkType.Default, map.Random));
             }
 
-
-            //Fills all voids in the map with solid chunks.
-            foreach (ChunkHolder holder in map.Grid)
+            if (map.MapBlueprint.FillEmptySpaces)
             {
-                if (holder.Prefab == null)
+                //Fills all voids in the map with solid chunks.
+                foreach (ChunkHolder holder in map.Grid)
                 {
-                    map.Place(holder, listToCheck.RandomEntry(chunk => chunk.ChunkType == ChunkType.Solid, map.Random));
+                    if (holder.Prefab == null)
+                    {
+                        map.Place(holder, listToCheck.RandomEntry(chunk => chunk.ChunkType == ChunkType.Solid, map.Random));
+                    }
                 }
             }
         }
