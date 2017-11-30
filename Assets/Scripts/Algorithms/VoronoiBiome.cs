@@ -1,8 +1,12 @@
-﻿using MapGeneration.Extensions;
+﻿using System;
+using MapGeneration.Extensions;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Linq;
+using Debug = UnityEngine.Debug;
+using Random = UnityEngine.Random;
 
 namespace MapGeneration.Algorithm
 {
@@ -18,9 +22,7 @@ namespace MapGeneration.Algorithm
         [SerializeField, Tooltip("Defines the number of biomes set on the map")] private int _nrOfPoints;
         private float[,] _noiseGrid;
         private int _width;
-        private int _heigt;
-
-        
+        private int _heigt;    
 
         public override bool Process(Map map, List<Chunk> usableChunks)
         {
@@ -37,14 +39,16 @@ namespace MapGeneration.Algorithm
             }
 
             //Set the random points in the grid
-            for (int i = 0; i < _nrOfPoints; i++)
+            for (int i = 1; i <= _nrOfPoints; i++)
             {
-                float noise = map.Random.Range(0.01f, 1f);
+                float noise = 1f / _nrOfPoints * i;
 
                 _noiseGrid[map.Random.Range(0, _width - 1), map.Random.Range(0, _heigt - 1)] = noise;
             }
 
-            _noiseGrid = VornonoiPopulation(_noiseGrid);
+
+            List<VornonoiData> reuseableList = new List<VornonoiData>();
+            _noiseGrid = VornonoiPopulation(_noiseGrid, ref reuseableList);
 
             return base.Process(map, usableChunks);
         }
@@ -57,7 +61,7 @@ namespace MapGeneration.Algorithm
                 {
                     int width = chunk.Instance.Width;
                     int height = chunk.Instance.Height;
-
+                    
                     for (int x = 0; x < chunk.Instance.Width; x++)
                     {
                         for (int y = 0; y < chunk.Instance.Height; y++)
@@ -66,13 +70,14 @@ namespace MapGeneration.Algorithm
                         }
                     }
                 }
+                if (chunk.Instance != null)
+                    chunk.Instance.RefreshTilemaps();
             }
             return base.PostProcess(map, usableChunks);
         }
 
-        private float[,] VornonoiPopulation(float[,] map)
+        private float[,] VornonoiPopulation(float[,] map, ref List<VornonoiData> reuseableList)
         {
-            List<VornonoiData> _dataToTouch = new List<VornonoiData>();
             for (int x = 0; x < _width; x++)
             {
                 for (int y = 0; y < _heigt; y++)
@@ -92,7 +97,7 @@ namespace MapGeneration.Algorithm
                                 if(map[pos.x,pos.y] == 0)
                                 {
                                     valid = true;
-                                    _dataToTouch.Add(new VornonoiData(new Vector2Int(x, y), map[x, y]));
+                                    reuseableList.Add(new VornonoiData(new Vector2Int(x, y), map[x, y]));
                                     break;
                                 }
                             }
@@ -101,12 +106,12 @@ namespace MapGeneration.Algorithm
                 }
             }
 
-            if (_dataToTouch.Count <= 0)
+            if (reuseableList.Count <= 0)
                 return map;
 
-            _dataToTouch.Sort((x, y) => x.Value.CompareTo(y.Value));
+            reuseableList.Sort((x, y) => x.Value.CompareTo(y.Value));
 
-            foreach (var data in _dataToTouch)
+            foreach (var data in reuseableList)
             {
                 for (int x = -1; x <= 1; x++)
                 {
@@ -120,8 +125,8 @@ namespace MapGeneration.Algorithm
                     }
                 }
             }
-            _dataToTouch.Clear();
-            return VornonoiPopulation(map);
+            reuseableList.Clear();
+            return VornonoiPopulation(map, ref reuseableList);
         }
     }
 
@@ -132,7 +137,7 @@ public struct VornonoiData
     public Vector2Int Position { get; set; }
     public float Value { get; set; }
 
-    public VornonoiData(Vector2Int postion, float value)
+    public VornonoiData(Vector2Int postion, float value) : this()
     {
         Position = postion;
         Value = value;
