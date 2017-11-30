@@ -11,17 +11,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc37a4d3022d22e4f8dda53e488456b8, type: 3}
   m_Name: Niels'Blueprint
   m_EditorClassIdentifier: 
+  _findValidChunks: 1
+  _openConnections: 1
   _algorithmStack:
   - {fileID: 11400000, guid: 15226341bb4f718438db7e3bc6a4ee4c, type: 2}
   - {fileID: 11400000, guid: 88f213a205c1c9044bb92bc039b7a5b8, type: 2}
-  - {fileID: 11400000, guid: 525be36b77b57f64b95dfee16d43b9d3, type: 2}
-  - {fileID: 11400000, guid: 980311384abc5bb46a46461349ad1e6f, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 11400000, guid: e961bc7fa4bbe4f4cbfd85a682c80af7, type: 2}
-  _gridSize: {x: 2, y: 1}
+  _gridSize: {x: 4, y: 4}
   _chunkSize: {x: 10, y: 8}
   _userSeed: 0
   __whitelistedChunks:
-  - {fileID: 114391264234651378, guid: 6d4b5c2e89dcd9d4a82c3d2756fcdbce, type: 2}
-  - {fileID: 114391264234651378, guid: ad6a7e647026d6c4ab1f867e93f6b5fa, type: 2}
-  - {fileID: 114391264234651378, guid: d4df5793ba55ce7469ddd000e72cf7f9, type: 2}
+  - {fileID: 114895966910665878, guid: 12c0920d3cf876b4187b1f219eec9594, type: 2}
+  - {fileID: 114895966910665878, guid: 8c4bc0dbdbdce1b42af0bb261ffd3e83, type: 2}
+  - {fileID: 114895966910665878, guid: 2c0b78ae8f17b1542b3d90b61d9df0ad, type: 2}
   __blacklistedChunks: []

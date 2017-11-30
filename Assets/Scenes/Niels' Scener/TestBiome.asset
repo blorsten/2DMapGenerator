@@ -11,4 +11,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 460330391b5bb1c4b882565c7f68a303, type: 3}
   m_Name: TestBiome
   m_EditorClassIdentifier: 
-  _scale: 4
+  _scale: 8
