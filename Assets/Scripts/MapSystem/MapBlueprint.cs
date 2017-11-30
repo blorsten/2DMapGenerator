@@ -10,23 +10,22 @@ namespace MapGeneration
     /// Purpose:
     /// Creator: Peter Witt
     /// </summary>
-    [CreateAssetMenu(fileName = "new Map Blueprint", menuName = "MapGeneration/CreateBlueprint")]
+    [CreateAssetMenu(fileName = "New Map Blueprint", menuName = "MapGeneration/CreateBlueprint")]
     public class MapBlueprint : ScriptableObject
     {
         private readonly List<MapGenerationAlgorithm> _instancedAlgorithms = new List<MapGenerationAlgorithm>();
 
-        [SerializeField] private bool _findValidChunks = true;
-        [SerializeField] private bool _openConnections = true;
-        [SerializeField] private List<MapGenerationAlgorithm> _algorithmStack;
-        [SerializeField] private Vector2Int _gridSize = new Vector2Int(4,4);
-        [SerializeField] private Vector2Int _chunkSize;
-        [SerializeField] private int _userSeed; 
-        [SerializeField] private List<Chunk> __whitelistedChunks; //List of all chunks it can use, if its empty it uses all.
-        [SerializeField] private List<Chunk> __blacklistedChunks; //List of all chunks it MAY not use, if its empty it uses all or whitelisted.
-
-        public Vector2Int GridSize { get { return _gridSize; }}
-        public Vector2Int ChunkSize { get { return _chunkSize; }}
-        public int UserSeed { get { return _userSeed; } }
+        //These needs to be serialized and public
+        #region Custom Inspector Fields
+        [SerializeField] public bool FindValidChunks = true;
+        [SerializeField] public bool OpenConnections = true;
+        [SerializeField] public List<MapGenerationAlgorithm> AlgorithmStack;
+        [SerializeField] public Vector2Int GridSize = new Vector2Int(4, 4);
+        [SerializeField] public Vector2Int ChunkSize = new Vector2Int(10, 8);
+        [SerializeField] public List<Chunk> WhitelistedChunks; //List of all chunks it can use, if its empty it uses all.
+        [SerializeField] public List<Chunk> BlacklistedChunks; //List of all chunks it MAY not use, if its empty it uses all or whitelisted.
+        [SerializeField] public int UserSeed;
+        #endregion
 
         /// <summary>
         /// Generates a map from the blueprint
@@ -44,14 +43,14 @@ namespace MapGeneration
 
             //If we havent instantiated any of the used algorithms, do so.
             _instancedAlgorithms.Clear();
-            foreach (var algorithm in _algorithmStack)
+            foreach (var algorithm in AlgorithmStack)
                 if (algorithm)
                     _instancedAlgorithms.Add(Instantiate(algorithm));
 
-            if (_findValidChunks)
+            if (FindValidChunks)
                 _instancedAlgorithms.Add(CreateInstance<ChunkPlacer>());
 
-            if (_openConnections)
+            if (OpenConnections)
                 _instancedAlgorithms.Add(CreateInstance<ConnectionOpenerAlgorithm>());    
 
             //If we got any algorithms, go through them and process them.
@@ -109,10 +108,10 @@ namespace MapGeneration
         {
             List<Chunk> usableChunks;
 
-            if (__whitelistedChunks != null && __whitelistedChunks.Any())
+            if (WhitelistedChunks != null && WhitelistedChunks.Any())
             {
                 //If there are any whitelisted chunks we have to take into account, do so.
-                usableChunks = __whitelistedChunks.ToList();
+                usableChunks = WhitelistedChunks.ToList();
             }
             else
             {
@@ -122,14 +121,14 @@ namespace MapGeneration
             }
 
             //If there is any blacklisted chunks, take them out.
-            if (__blacklistedChunks != null && __blacklistedChunks.Any())
+            if (BlacklistedChunks != null && BlacklistedChunks.Any())
             {
-                usableChunks = usableChunks.Except(__blacklistedChunks).ToList();
+                usableChunks = usableChunks.Except(BlacklistedChunks).ToList();
             }
 
             //Remove all chunks that doesnt fit the blueprint.
             usableChunks.RemoveAll(chunk => 
-                                    !chunk.CompareSize(_chunkSize) || 
+                                    !chunk.CompareSize(ChunkSize) || 
                                     !chunk.IsStandaloneChunk);
 
             if (!usableChunks.Any())
@@ -151,22 +150,22 @@ namespace MapGeneration
         {
             bool isUsable = true;
 
-            if (_gridSize == Vector2Int.zero || _gridSize.x == 0 || _gridSize.y == 0)
+            if (GridSize == Vector2Int.zero || GridSize.x == 0 || GridSize.y == 0)
             {
                 Debug.LogWarning(string.Format("MapBlueprint: {0} " +
                                                "has a invalid grid size.", name), this);
                 isUsable = false;
             }
 
-            if (_chunkSize == Vector2Int.zero || _chunkSize.x == 0 || _chunkSize.y == 0)
+            if (ChunkSize == Vector2Int.zero || ChunkSize.x == 0 || ChunkSize.y == 0)
             {
                 Debug.LogWarning(string.Format("MapBlueprint: {0} " +
                                                "has a invalid chunk size.", name), this);
                 isUsable = false;
             }
 
-            if (_algorithmStack == null || (_algorithmStack != null &&
-                                            _algorithmStack.All(algorithm => algorithm == null)))
+            if (AlgorithmStack == null || (AlgorithmStack != null &&
+                                            AlgorithmStack.All(algorithm => algorithm == null)))
             {
                 Debug.LogWarning(string.Format("MapBlueprint: {0} doesn't have any algorithms, " +
                                                "make sure to give it some.", name), this);
