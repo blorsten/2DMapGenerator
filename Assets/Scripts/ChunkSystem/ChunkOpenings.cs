@@ -19,90 +19,37 @@ namespace MapGeneration
             Critical
         }
 
-        [SerializeField]
-        private bool _topOpen;
-        [SerializeField]
-        private bool _bottomOpen;
-        [SerializeField]
-        private bool _leftOpen;
-        [SerializeField]
-        private bool _rightOpen;
+        [SerializeField] private bool _topOpen;
+        [SerializeField] private bool _bottomOpen;
+        [SerializeField] private bool _leftOpen;
+        [SerializeField] private bool _rightOpen;
 
-        private bool _topConnection;
-        private bool _bottomConnetion;
-        private bool _leftConnection;
-        private bool _rightConnection;
+        [SerializeField, HideInInspector] private bool _topConnection;
+        [SerializeField, HideInInspector] private bool _bottomConnetion;
+        [SerializeField, HideInInspector] private bool _leftConnection;
+        [SerializeField, HideInInspector] private bool _rightConnection;
+
+        [SerializeField, HideInInspector] private ConnectionType _topConnectionType;
+        [SerializeField, HideInInspector] private ConnectionType _bottomConnectionType;
+        [SerializeField, HideInInspector] private ConnectionType _leftConnectionType;
+        [SerializeField, HideInInspector] private ConnectionType _rightConnectionType;
 
         //These properties tells te chunk whick openings are used
-        public bool TopConnection
-        {
-            get { return _topConnection; }
-            private set
-            {
-                _topConnection = value;
-                TopOpen = value;
-            }
-        }
+        public bool TopConnection { get { return _topConnection; } private set { _topConnection = value; TopOpen = value; } }
+        public bool BottomConnetion { get { return _bottomConnetion; } private set { _bottomConnetion = value; BottomOpen = value; } }
+        public bool LeftConnection { get { return _leftConnection; } private set { _leftConnection = value; LeftOpen = value; } }
+        public bool RightConnection { get { return _rightConnection; } private set { _rightConnection = value; RightOpen = value; } }
 
-        public bool BottomConnetion
-        {
-            get { return _bottomConnetion; }
-            private set
-            {
-                _bottomConnetion = value;
-                BottomOpen = value;
-            }
-        }
-
-        public bool LeftConnection
-        {
-            get { return _leftConnection; }
-            private set
-            {
-                _leftConnection = value;
-                LeftOpen = value;
-            }
-        }
-
-        public bool RightConnection
-        {
-            get { return _rightConnection; }
-            private set
-            {
-                _rightConnection = value;
-                RightOpen = value;
-            }
-        }
-
-        public ConnectionType TopConnectionType { get; private set; }
-        public ConnectionType BottomConnectionType { get; private set; }
-        public ConnectionType LeftConnectionType { get; private set; }
-        public ConnectionType RightConnectionType { get; private set; }
+        public ConnectionType TopConnectionType { get { return _topConnectionType; } private set { _topConnectionType = value; } }
+        public ConnectionType BottomConnectionType { get { return _bottomConnectionType; } private set { _bottomConnectionType = value; } }
+        public ConnectionType LeftConnectionType { get { return _leftConnectionType; } private set { _leftConnectionType = value; } }
+        public ConnectionType RightConnectionType { get { return _rightConnectionType; } private set { _rightConnectionType = value; } }
 
         //Properties for opennings
-        public bool TopOpen
-        {
-            get { return _topOpen; }
-            set { _topOpen = value; }
-        }
-
-        public bool BottomOpen
-        {
-            get { return _bottomOpen; }
-            set { _bottomOpen = value; }
-        }
-
-        public bool LeftOpen
-        {
-            get { return _leftOpen; }
-            set { _leftOpen = value; }
-        }
-
-        public bool RightOpen
-        {
-            get { return _rightOpen; }
-            set { _rightOpen = value; }
-        }
+        public bool TopOpen {  get { return _topOpen; } set { _topOpen = value; } }
+        public bool BottomOpen { get { return _bottomOpen; } set { _bottomOpen = value; } }
+        public bool LeftOpen { get { return _leftOpen; } set { _leftOpen = value; } }
+        public bool RightOpen { get { return _rightOpen; } set { _rightOpen = value; } }
 
         public static bool operator == (ChunkOpenings a, ChunkOpenings b)
         {

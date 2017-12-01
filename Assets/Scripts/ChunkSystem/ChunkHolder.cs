@@ -15,6 +15,9 @@ namespace MapGeneration
         [SerializeField] private ChunkOpenings _chunkOpenings;
         [SerializeField] private Vector2Int _position;
 
+        [SerializeField, HideInInspector] private Chunk _instance;
+        [SerializeField, HideInInspector] private ChunkType _chunkType;
+
         public Vector2Int Position
         {
             get { return _position; }
@@ -26,7 +29,12 @@ namespace MapGeneration
             get { return __prefab; }
             set { __prefab = value; }
         }
-        public Chunk Instance { get; set; }
+
+        public Chunk Instance
+        {
+            get { return _instance; }
+            set { _instance = value; }
+        }
 
         public ChunkOpenings ChunkOpenings
         {
@@ -34,7 +42,11 @@ namespace MapGeneration
             set { _chunkOpenings = value; }
         }
 
-        public ChunkType ChunkType { get; set; }
+        public ChunkType ChunkType
+        {
+            get { return _chunkType; }
+            set { _chunkType = value; }
+        }
 
         public ChunkHolder(Vector2Int position)
         {
