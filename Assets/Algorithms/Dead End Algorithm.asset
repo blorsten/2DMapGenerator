@@ -11,5 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da1c1595ea6813b4585f5c44d26aef4f, type: 3}
   m_Name: Dead End Algorithm
   m_EditorClassIdentifier: 
-  _pathLength: 502
+  _pathLength: 251
   _nrOfDeadEnds: 9999

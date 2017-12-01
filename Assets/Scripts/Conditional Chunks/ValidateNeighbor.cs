@@ -31,8 +31,9 @@ namespace MapGeneration.ConditionalChunks
 
             foreach (var item in neighbors)
             {
-                if (item.Prefab != __chunkToCheck || 
-                    !item.ChunkOpenings.IsMatching(_chunkToSpawn.ChunkOpenings))
+                if (item.Prefab != __chunkToCheck ||
+                    !item.ChunkOpenings.IsMatching(_chunkToSpawn.ChunkOpenings) ||
+                    item.ChunkType != _chunkToSpawn.ChunkType)
                     return false;
             }
 
