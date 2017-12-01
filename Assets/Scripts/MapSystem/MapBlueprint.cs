@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using ChunkExtension;
 using MapGeneration.Algorithm;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace MapGeneration
 {
@@ -98,10 +100,6 @@ namespace MapGeneration
                 }
             foreach (var chunk in map.Grid)
             {
-                if (chunk.Instance.name == "BiomeFilledChunk(Clone)")
-                {
-                    
-                }
                 chunk.Instance.RefreshTilemaps();
             }
             return true;

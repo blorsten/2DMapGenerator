@@ -13,27 +13,27 @@ namespace MapGeneration.TileSystem
         {
             Tilemap currentTilemap = tilemap.GetComponent<Tilemap>();
 
-            if (currentTilemap.gameObject.activeInHierarchy && Application.isPlaying)
+            if (currentTilemap.gameObject.activeInHierarchy && Application.isPlaying &&
+                go != null)
             {
-                if (!ObjectToSpawn)
-                {
-                    Debug.LogWarning(string.Format("SpawnTile: {0} is missing a object to spawn reference.", name), this);
-                    return false;
-                }
-
-                GameplayObject newObj = Instantiate(ObjectToSpawn, currentTilemap.GetCellCenterWorld(position),
-                    Quaternion.identity, currentTilemap.transform);
-
-                newObj.Owner = currentTilemap.GetComponentInParent<Chunk>();
+                go.transform.position = currentTilemap.GetCellCenterWorld(position);
+                go.transform.parent = currentTilemap.transform;
+                GameplayObject gameplayObject = go.GetComponent<GameplayObject>();
+                if (gameplayObject != null)
+                    gameplayObject.Owner = currentTilemap.GetComponentInParent<Chunk>();
             }
 
             return base.StartUp(position, tilemap, go);
-        
-        } 
+
+        }
 
         public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
         {
-            base.GetTileData(position, tilemap, ref tileData);
+            if (!ObjectToSpawn)
+                Debug.LogWarning(string.Format("SpawnTile: {0} is missing a object to spawn reference.", name), this);
+            else if (Application.isPlaying && tileData.gameObject == null)
+                tileData.gameObject = ObjectToSpawn.gameObject;
+
             tileData.sprite = Application.isPlaying ? null : Sprite;
             tileData.colliderType = Tile.ColliderType.None;
         }

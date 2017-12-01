@@ -91,25 +91,18 @@ namespace MapGeneration
             TileNeighborType type = 0;
             bool hasMap = _chunk != null && _chunk.Map != null;
             TileBase top = null;
+            TileBase left = null;
+            TileBase right = null;
 
-            if (position.y + 1 >= _chunk.Height && hasMap)
-            {
-                Vector2Int topPostion = _chunk.ChunkHolder.Position + new Vector2Int(0, 1);
-                ChunkHolder chunkholder = _chunk.Map.GetChunkHolder(topPostion);
-                if (chunkholder != null && chunkholder.Instance)
-                {
-                    top = chunkholder.Instance.Enviorment.GetTile(new Vector3Int(position.x,0,position.z));
-                }
-
-            }
-            else
-                top = tilemap.GetTile(position + new Vector3Int(0, 1, 0));
+            bool topOutOfBounds =
+                !CheckNextChunk(position, new Vector3Int(0, 1, 0), ref top, tilemap);
+            bool leftOutOgBOunds =
+                !CheckNextChunk(position, new Vector3Int(-1, 0, 0), ref left, tilemap);
+            bool rightOutOfBounds =
+                !CheckNextChunk(position, new Vector3Int(1, 0, 0), ref right, tilemap);
 
 
-            TileBase left = tilemap.GetTile(position + new Vector3Int(-1, 0, 0));
-            TileBase right = tilemap.GetTile(position + new Vector3Int(1, 0, 0));
-
-            if (top && (left || right))
+            if (top && (left || right) || topOutOfBounds)
                 type = TileNeighborType.Middle;
 
             else if (!top && right && !left)
@@ -125,6 +118,41 @@ namespace MapGeneration
                 type = TileNeighborType.top;
 
             return type;
+        }
+
+        /// <summary>
+        /// Call this to check if the tile in the direction is in the current tilemap and if not
+        /// then return the tile in the next tilemap in the direction. Returns false if its out
+        /// of bounds of the chunk grid
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="direction"></param>
+        /// <param name="tile"></param>
+        /// <param name="tilemap"></param>
+        /// <returns></returns>
+        private bool CheckNextChunk(Vector3Int position, Vector3Int direction, ref TileBase tile, ITilemap tilemap)
+        {
+            bool hasMap = _chunk != null && _chunk.Map != null;
+
+
+            if ((position.x + direction.x >= _chunk.Width || position.x + direction.x < 0
+                || position.y + direction.y >= _chunk.Height || position.y + direction.y < 0 )
+                && hasMap)
+            {
+                Vector2Int newPosition = _chunk.ChunkHolder.Position + new Vector2Int(direction.x,direction.y);
+                ChunkHolder chunkholder = _chunk.Map.GetChunkHolder(newPosition);
+                if (chunkholder != null && chunkholder.Instance)
+                {
+                    tile = chunkholder.Instance.Enviorment.GetTile(new Vector3Int(0, position.y,
+                        position.z));
+                }
+                else
+                    return false;
+
+            }
+            else
+                tile = tilemap.GetTile(position + direction);
+            return true;
         }
 
         

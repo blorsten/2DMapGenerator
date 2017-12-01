@@ -110,17 +110,17 @@ namespace MapGeneration.Algorithm
 
             reuseableList.Sort((x, y) => x.Value.CompareTo(y.Value));
 
-            foreach (var data in reuseableList)
+            for (int i = 0; i < reuseableList.Count; i++)
             {
                 for (int x = -1; x <= 1; x++)
                 {
                     for (int y = -1; y <= 1; y++)
                     {
-                        Vector2Int pos = data.Position + new Vector2Int(x, y);
+                        Vector2Int pos = reuseableList[i].Position + new Vector2Int(x, y);
                         if ((x == 0 && y == 0) || pos.x < 0 || pos.y < 0 || pos.x >= _width || pos.y >= _heigt)
                             continue;
                         if (map[pos.x, pos.y] == 0)
-                            map[pos.x, pos.y] = data.Value;
+                            map[pos.x, pos.y] = reuseableList[i].Value;
                     }
                 }
             }
