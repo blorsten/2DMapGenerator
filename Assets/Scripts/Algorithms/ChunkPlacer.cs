@@ -60,10 +60,29 @@ namespace MapGeneration.Algorithm
                     continue;
                 }
 
-                map.Place(chunkholder,
-                    listToCheck.RandomEntry(chunk => 
+                Chunk placeCandidate;
+
+                if (chunkholder.Position == new Vector2Int(3, 1))
+                {
+                    
+                }
+
+                //If there are any candidates that match the chunkholder type chose them instead.
+                if (listToCheck.Any(chunk => chunk.ChunkType == chunkholder.ChunkType))
+                {
+                    placeCandidate = listToCheck.RandomEntry(chunk =>
                         chunkholder.ChunkOpenings.IsMatching(chunk.ChunkOpenings) &&
-                        chunk.ChunkType == ChunkType.Default, map.Random));
+                        chunk.ChunkType == chunkholder.ChunkType, map.Random);
+                }
+                else
+                {
+                    //If we dident find any of the specific type, find a default one.
+                    placeCandidate = listToCheck.RandomEntry(chunk =>
+                            chunkholder.ChunkOpenings.IsMatching(chunk.ChunkOpenings) &&
+                            chunk.ChunkType == ChunkType.Default, map.Random);
+                }
+
+                map.Place(chunkholder, placeCandidate);
             }
 
             if (map.MapBlueprint.FillEmptySpaces)

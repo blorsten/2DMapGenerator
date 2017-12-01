@@ -98,9 +98,11 @@ namespace MapGeneration
                                 name), this);
                     }
                 }
+
             foreach (var chunk in map.Grid)
             {
-                chunk.Instance.RefreshTilemaps();
+                if (chunk.Instance)
+                    chunk.Instance.RefreshTilemaps();
             }
             return true;
         }

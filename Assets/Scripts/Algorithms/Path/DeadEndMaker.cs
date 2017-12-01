@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using MapGeneration.Extensions;
 using System.Linq;
@@ -35,6 +36,37 @@ namespace MapGeneration.Algorithm
 
             if (_roads == null || _roads != null && !_roads.Any())
                 return false;
+
+            //Creates a list of the types a deadend can have
+            List<ChunkType> types = new List<ChunkType>();
+            foreach (ChunkType item in Enum.GetValues(typeof(ChunkType)))
+            {
+                types.Add(item);
+            }
+            types.Remove(ChunkType.End);
+            types.Remove(ChunkType.Start);
+            types.Remove(ChunkType.Default);
+            types.Remove(ChunkType.Solid);
+
+            //Finds all the chunkholders in _roads and adds them to a sepperate list
+            List<ChunkHolder> chunkHolders = new List<ChunkHolder>();
+            foreach (Queue<KeyValuePair<ChunkHolder, CardinalDirections?>> item in _roads)
+            {
+                foreach (KeyValuePair<ChunkHolder, CardinalDirections?> pair in item)
+                {
+                    chunkHolders.Add(pair.Key);
+                }
+            }
+
+            //Sets the chunktype of each deadend to a random type.
+            foreach (ChunkHolder holder in chunkHolders)
+            {
+                if (holder.ChunkOpenings.IsDeadEnd() && holder != map.StartChunk || holder != map.EndChunk)
+                {
+                    ChunkType newType = types[map.Random.Range(0, types.Count)];
+                    holder.ChunkType = newType;
+                }
+            }
 
             //Backtacks all roads that has been created.
             _roads.ForEach(pairs => BackTrackChunks(pairs));

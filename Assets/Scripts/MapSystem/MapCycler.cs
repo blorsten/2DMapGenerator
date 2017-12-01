@@ -110,16 +110,21 @@ namespace MapGeneration
         {
             if (!Player)
                 Player = Instantiate(__player);
-
             if (isStartChunk)
             {
-                PlayerSpawner plySpawner = map.StartChunk.Instance.GetComponentInChildren<PlayerSpawner>();
-                plySpawner.GrabPlayer(Player);
+                if (map.StartChunk.Instance)
+                {
+                    PlayerSpawner plySpawner = map.StartChunk.Instance.GetComponentInChildren<PlayerSpawner>();
+                    plySpawner.GrabPlayer(Player);
+                }
             }
             else
             {
-                PlayerSpawner plySpawner = map.EndChunk.Instance.GetComponentInChildren<PlayerSpawner>();
-                plySpawner.GrabPlayer(Player);
+                if (map.EndChunk.Instance)
+                {
+                    PlayerSpawner plySpawner = map.EndChunk.Instance.GetComponentInChildren<PlayerSpawner>();
+                    plySpawner.GrabPlayer(Player);
+                }
             }
         }
     }
