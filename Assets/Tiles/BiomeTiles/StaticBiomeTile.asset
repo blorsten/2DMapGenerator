@@ -18,11 +18,11 @@ MonoBehaviour:
     tint: {r: 1, g: 1, b: 1, a: 1}
     sprite: {fileID: 21300000, guid: 4ff8f1dea59f9e24c89c3280d4808c93, type: 3}
   - iD: Red
-    tint: {r: 1, g: 0, b: 0, a: 1}
+    tint: {r: 1, g: 0.7254902, b: 0.7254902, a: 1}
     sprite: {fileID: 21300000, guid: 4ff8f1dea59f9e24c89c3280d4808c93, type: 3}
   - iD: Blue
-    tint: {r: 0, g: 0.04827571, b: 1, a: 1}
+    tint: {r: 0.7254902, g: 0.7254902, b: 1, a: 1}
     sprite: {fileID: 21300000, guid: 4ff8f1dea59f9e24c89c3280d4808c93, type: 3}
   - iD: Green
-    tint: {r: 0, g: 1, b: 0.2965517, a: 1}
+    tint: {r: 0.7254902, g: 1, b: 0.8068965, a: 1}
     sprite: {fileID: 21300000, guid: 4ff8f1dea59f9e24c89c3280d4808c93, type: 3}

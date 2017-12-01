@@ -23,6 +23,8 @@ MonoBehaviour:
     Algorithm: {fileID: 11400000, guid: 88f213a205c1c9044bb92bc039b7a5b8, type: 2}
   - IsActive: 1
     Algorithm: {fileID: 11400000, guid: 0e5f8478f8fbd2a468666f04d48a14d2, type: 2}
+  - IsActive: 1
+    Algorithm: {fileID: 11400000, guid: 3d59222cee8b2404b83c6389ffbcfaf8, type: 2}
   GridSize: {x: 4, y: 4}
   ChunkSize: {x: 10, y: 8}
   WhitelistedChunks: []
