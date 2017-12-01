@@ -107,6 +107,7 @@ namespace MapGeneration
         {
             if (chunkHolder.Prefab != null && !forcePlace || chunk == null)
                 return false;
+            
 
             if (chunk.ConditionalChunk)
             {
@@ -114,6 +115,7 @@ namespace MapGeneration
                 {
                     chunkHolder.Prefab = chunk;
                     chunkHolder.ChunkType = chunk.ChunkType;
+
                     return true;
                 }
 

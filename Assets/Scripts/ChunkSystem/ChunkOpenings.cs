@@ -170,5 +170,23 @@ namespace MapGeneration
 
             return false;
         }
+        public bool IsDeadEnd()
+        {
+            bool isValid = false;
+
+            if (TopOpen && !RightOpen &&  !BottomOpen &&  !LeftOpen)
+                isValid = true;
+            
+            if (!TopOpen && RightOpen && !BottomOpen && !LeftOpen)
+                isValid = true;
+            
+            if (!TopOpen && !RightOpen && BottomOpen && !LeftOpen)
+                isValid = true;
+            
+            if (!TopOpen && !RightOpen && !BottomOpen && LeftOpen)
+                isValid = true;
+            
+            return isValid;
+        }
     }
 }
