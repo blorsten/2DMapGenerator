@@ -96,7 +96,14 @@ namespace MapGeneration
                                 name), this);
                     }
                 }
-
+            foreach (var chunk in map.Grid)
+            {
+                if (chunk.Instance.name == "BiomeFilledChunk(Clone)")
+                {
+                    
+                }
+                chunk.Instance.RefreshTilemaps();
+            }
             return true;
         }
 

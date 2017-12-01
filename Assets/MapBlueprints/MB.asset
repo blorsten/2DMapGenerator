@@ -16,9 +16,17 @@ MonoBehaviour:
   OpenConnections: 1
   AlgorithmStack:
   - IsActive: 1
+    Algorithm: {fileID: 11400000, guid: 15226341bb4f718438db7e3bc6a4ee4c, type: 2}
+  - IsActive: 1
     Algorithm: {fileID: 11400000, guid: 88f213a205c1c9044bb92bc039b7a5b8, type: 2}
-  GridSize: {x: 4, y: 4}
+  - IsActive: 1
+    Algorithm: {fileID: 11400000, guid: 3d59222cee8b2404b83c6389ffbcfaf8, type: 2}
+  GridSize: {x: 25, y: 25}
   ChunkSize: {x: 10, y: 8}
-  WhitelistedChunks: []
+  WhitelistedChunks:
+  - {fileID: 114895966910665878, guid: 12c0920d3cf876b4187b1f219eec9594, type: 2}
+  - {fileID: 114895966910665878, guid: 8c4bc0dbdbdce1b42af0bb261ffd3e83, type: 2}
+  - {fileID: 114895966910665878, guid: 2c0b78ae8f17b1542b3d90b61d9df0ad, type: 2}
+  - {fileID: 114941419155164888, guid: 1a6248842d283db4084e3f9d13650e0f, type: 2}
   BlacklistedChunks: []
   UserSeed: 0

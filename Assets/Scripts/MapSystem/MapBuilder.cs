@@ -67,6 +67,7 @@ namespace MapGeneration
 
             //Creating the new map.
             Map map = new GameObject(mapBlueprint.name).AddComponent<Map>();
+            map.Tilemaps.Clear();
             map.gameObject.AddComponent<MapGizmos>().Map = map;
             map.Initialize(chosenSeed, mapBlueprint);
 
@@ -176,6 +177,7 @@ namespace MapGeneration
                     if (map.Grid[x, y] != null && map.Grid[x,y].Prefab != null) 
                         map.Grid[x, y].Instantiate(new Vector2(xPosition, yPosition), 
                             map.transform,map);
+
                 }
             }
 

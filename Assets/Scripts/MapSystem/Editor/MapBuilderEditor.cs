@@ -148,7 +148,8 @@ namespace MapBuilderEditor
 
             //After we set edited to serialized object, mark it as dirty.
             EditorUtility.SetDirty(_context); 
-            EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
+            if(!Application.isPlaying)
+                EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
         }
     }
 }

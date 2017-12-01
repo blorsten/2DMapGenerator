@@ -11,6 +11,11 @@ namespace MapGeneration
         [SerializeField] public string iD;
         [SerializeField] public Color tint;
         [SerializeField] public Sprite sprite;
+
+        public StaticBiomeSprites()
+        {
+            tint = Color.white;
+        }
     }
 
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: StaticBiomeTile
   m_EditorClassIdentifier: 
   _defaultSprite: {fileID: 21300000, guid: 4ff8f1dea59f9e24c89c3280d4808c93, type: 3}
-  _colliderType: 0
+  _colliderType: 1
   _biomesSprites:
   - iD: Default
     tint: {r: 1, g: 1, b: 1, a: 1}

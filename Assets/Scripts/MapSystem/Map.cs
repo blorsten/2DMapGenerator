@@ -8,6 +8,7 @@ using MapGeneration.SaveSystem;
 using MapGeneration.ConditionalChunks;
 using MapGeneration.Utils;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace MapGeneration
 {
@@ -37,6 +38,7 @@ namespace MapGeneration
 
         public int Seed { get { return _seed; } private set { _seed = value; } }
         public MapBlueprint MapBlueprint { get { return _mapBlueprint; } private set { _mapBlueprint = value; } }
+        public Dictionary<GameObject,Chunk> Tilemaps = new Dictionary<GameObject, Chunk>();
 
         public ChunkHolder StartChunk
         {

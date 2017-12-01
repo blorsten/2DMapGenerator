@@ -80,7 +80,12 @@ namespace MapGeneration
             }            
         }
 
-
+        /// <summary>
+        /// Call this to get the current neighbor status
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="tilemap"></param>
+        /// <returns></returns>
         private TileNeighborType GetNeighborType(Vector3Int position, ITilemap tilemap)
         {
             TileNeighborType type = 0;

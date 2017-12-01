@@ -14,5 +14,10 @@ namespace MapGeneration
         [SerializeField] public Sprite topSprite;
         [SerializeField] public Sprite leftSprite;
         [SerializeField] public Sprite rightSprite;
+
+        public RuleBiomeSprites()
+        {
+            tint = Color.white;
+        }
     }
 }
