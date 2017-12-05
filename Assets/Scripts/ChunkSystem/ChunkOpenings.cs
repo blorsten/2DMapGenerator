@@ -6,7 +6,9 @@ namespace MapGeneration
 {
     /// <summary>
     /// Purpose:
+    /// To give each chunk some openings, to be used in any way
     /// Creator:
+    /// MP
     /// </summary>
     [Serializable]
 #pragma warning disable 660,661
@@ -154,6 +156,11 @@ namespace MapGeneration
             }
         }
 
+        /// <summary>
+        /// Returns true if the parameter input is open
+        /// </summary>
+        /// <param name="dir">The direction to check</param>
+        /// <returns></returns>
         public bool IsOpen(PathAlgorithm.CardinalDirections dir)
         {
             switch (dir)
@@ -170,6 +177,11 @@ namespace MapGeneration
 
             return false;
         }
+
+        /// <summary>
+        /// Returns true if the chunk is a dead end
+        /// </summary>
+        /// <returns></returns>
         public bool IsDeadEnd()
         {
             bool isValid = false;

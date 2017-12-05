@@ -16,14 +16,22 @@ namespace MapGeneration.Algorithm
     [CreateAssetMenu(fileName = "New Spelunky Walk", menuName = "MapGeneration/Algorithms/Spelunky Walk")]
     public class SpelunkyAlgorithm : PathAlgorithm
     {
+        /// <summary>
+        /// Sets a path from the top, that goes to the bottom of the map, when one bottom side wall is reached the job is done
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="usableChunks"></param>
+        /// <returns></returns>
         public override bool Process(Map map, List<Chunk> usableChunks)
         {
-            //set the statpoint in the top row of the map grid
+            //set the startpoint in the top row of the map grid
             Vector2Int startPoint = new Vector2Int(map.Random.Range(0, map.MapBlueprint.GridSize.x), map.MapBlueprint.GridSize.y - 1);
             
             //The first chunk is marked.
             ChunkHolder firstChunk = map.Grid[startPoint.x, startPoint.y];
             MarkedChunks.Enqueue(firstChunk);
+
+            //map start chunk set
             map.StartChunk = firstChunk;
             Road.Enqueue(new KeyValuePair<ChunkHolder, CardinalDirections?>(firstChunk, null));
 
@@ -31,6 +39,7 @@ namespace MapGeneration.Algorithm
 
             //Establish candidates for directions to take
             ResetDirectionCandidates();
+
             DirectionCandidates.Remove(CardinalDirections.Top);
 
             //If there are no more candidates, the work is done.

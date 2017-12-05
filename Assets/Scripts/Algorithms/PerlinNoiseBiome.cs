@@ -19,17 +19,27 @@ namespace MapGeneration.Algorithm
         private int _heigt;
         [SerializeField] private int _variation = 1;
 
+        //Offsets for randomness
         private float xOffset;
         private float yOffset;
 
+        /// <summary>
+        /// In Process the grid gets all its biome values
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="usableChunks"></param>
+        /// <returns></returns>
         public override bool Process(Map map, List<Chunk> usableChunks)
         {
+            //Get map size
             _width = map.Grid.GetLength(0) * map.MapBlueprint.ChunkSize.x;
             _heigt = map.Grid.GetLength(1) * map.MapBlueprint.ChunkSize.y;
 
+            //Randomness applied
             xOffset = map.Random.Range(0f, 999f);
             yOffset = map.Random.Range(0f, 999f);
 
+            //Instantiate grid with map siza values
             _noiseGrid = new float[_width, _heigt];
 
             for (int x = 0; x < _width; x++)
@@ -43,6 +53,12 @@ namespace MapGeneration.Algorithm
             return base.Process(map, usableChunks);
         }
 
+        /// <summary>
+        /// In PostProcess the instances of all chunks get their biome values
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="usableChunks"></param>
+        /// <returns></returns>
         public override bool PostProcess(Map map, List<Chunk> usableChunks)
         {
             foreach (ChunkHolder chunk in map.Grid)
@@ -67,6 +83,12 @@ namespace MapGeneration.Algorithm
             return base.PostProcess(map, usableChunks);
         }
 
+        /// <summary>
+        /// Populates a coordinate with the perlin noise Algorithm
+        /// </summary>
+        /// <param name="x">X-Coordinate</param>
+        /// <param name="y">Y-Coordinate</param>
+        /// <returns></returns>
         private float CalculateNoise(int x, int y)
         {
             float xCoord = (float)x / _width * _variation + xOffset;
