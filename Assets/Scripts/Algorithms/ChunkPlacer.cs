@@ -14,10 +14,12 @@ namespace MapGeneration.Algorithm
     /// </summary>
     public class ChunkPlacer : MapGenerationAlgorithm
     {
+        //List of the chunkholder prefabs, that needs a chunk
         private List<ChunkHolder> _chunksToReplace = new List<ChunkHolder>();
 
         public override bool Process(Map map, List<Chunk> usableChunks)
         {
+            //Reset the list before use
             _chunksToReplace.Clear();
 
             FindChunksToReplace(map);
@@ -25,6 +27,10 @@ namespace MapGeneration.Algorithm
             return base.Process(map, usableChunks);
         }
 
+        /// <summary>
+        /// Finds all the chunkholders that needs a prefab
+        /// </summary>
+        /// <param name="map">The map to be used</param>
         private void FindChunksToReplace(Map map)
         {
             foreach (ChunkHolder chunk in map.Grid)
@@ -36,12 +42,18 @@ namespace MapGeneration.Algorithm
             }
         }
 
+        /// <summary>
+        /// Places chunks in the chunkholders, whith a matching cunk type
+        /// </summary>
+        /// <param name="map">The map to be used</param>
+        /// <param name="usableChunks">All chunks or the chunks form the White List</param>
         private void PlaceMatchingChunks(Map map, List<Chunk> usableChunks)
         {
             List<Chunk> listToCheck = usableChunks.Where(chunk => !chunk.ConditionalChunk).ToList();
 
             foreach (ChunkHolder chunkholder in _chunksToReplace)
             {
+                //If the chunkholder that has been found is of the type start, place a start chunk there
                 if (chunkholder == map.StartChunk)
                 {
                     map.Place(chunkholder,
@@ -51,6 +63,7 @@ namespace MapGeneration.Algorithm
                     continue;
                 }
 
+                //If the chunkholder that has been found is of the type end, place an end chunk there
                 if (chunkholder == map.EndChunk)
                 {
                     map.Place(chunkholder,
@@ -61,11 +74,6 @@ namespace MapGeneration.Algorithm
                 }
 
                 Chunk placeCandidate;
-
-                if (chunkholder.Position == new Vector2Int(3, 1))
-                {
-                    
-                }
 
                 //If there are any candidates that match the chunkholder type chose them instead.
                 if (listToCheck.Any(chunk => chunk.ChunkType == chunkholder.ChunkType))
@@ -82,6 +90,7 @@ namespace MapGeneration.Algorithm
                             chunk.ChunkType == ChunkType.Default, map.Random);
                 }
 
+                //Places the actual prefab in the map
                 map.Place(chunkholder, placeCandidate);
             }
 
