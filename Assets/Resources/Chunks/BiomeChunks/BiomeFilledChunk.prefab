@@ -93,6 +93,14 @@ MonoBehaviour:
     _bottomOpen: 0
     _leftOpen: 0
     _rightOpen: 0
+    _topConnection: 0
+    _bottomConnetion: 0
+    _leftConnection: 0
+    _rightConnection: 0
+    _topConnectionType: 0
+    _bottomConnectionType: 0
+    _leftConnectionType: 0
+    _rightConnectionType: 0
   _connections: []
   _tileTileFlags: []
   _chunkBehavior: {fileID: 0}
@@ -104,7 +112,17 @@ MonoBehaviour:
       _bottomOpen: 0
       _leftOpen: 0
       _rightOpen: 0
+      _topConnection: 0
+      _bottomConnetion: 0
+      _leftConnection: 0
+      _rightConnection: 0
+      _topConnectionType: 0
+      _bottomConnectionType: 0
+      _leftConnectionType: 0
+      _rightConnectionType: 0
     _position: {x: 0, y: 0}
+    _instance: {fileID: 0}
+    _chunkType: 0
   _drawConnections: 1
   _drawEdges: 1
   _drawTileFlags: 1
@@ -961,6 +979,6 @@ Tilemap:
     e33: 1
   m_TileRefreshArray:
   - serializedVersion: 1
-    m_DirtyIndex: 144
+    m_DirtyIndex: 0
   - serializedVersion: 1
     m_DirtyIndex: 0

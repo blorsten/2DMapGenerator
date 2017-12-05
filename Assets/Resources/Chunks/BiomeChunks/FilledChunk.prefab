@@ -84,6 +84,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0b6ce6d609e4c048893132c6fcb3c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _conditionalChunk: {fileID: 0}
   _width: 10
   _height: 8
   _chunkType: 6
@@ -92,14 +93,41 @@ MonoBehaviour:
     _bottomOpen: 0
     _leftOpen: 0
     _rightOpen: 0
+    _topConnection: 0
+    _bottomConnetion: 0
+    _leftConnection: 0
+    _rightConnection: 0
+    _topConnectionType: 0
+    _bottomConnectionType: 0
+    _leftConnectionType: 0
+    _rightConnectionType: 0
   _connections: []
   _tileTileFlags: []
   _chunkBehavior: {fileID: 0}
   _enviorment: {fileID: 8195094282487141402}
+  _chunkHolder:
+    __prefab: {fileID: 0}
+    _chunkOpenings:
+      _topOpen: 0
+      _bottomOpen: 0
+      _leftOpen: 0
+      _rightOpen: 0
+      _topConnection: 0
+      _bottomConnetion: 0
+      _leftConnection: 0
+      _rightConnection: 0
+      _topConnectionType: 0
+      _bottomConnectionType: 0
+      _leftConnectionType: 0
+      _rightConnectionType: 0
+    _position: {x: 0, y: 0}
+    _instance: {fileID: 0}
+    _chunkType: 0
   _drawConnections: 1
   _drawEdges: 1
   _drawTileFlags: 1
   _isStandaloneChunk: 1
+  _recipeReference: {fileID: 0}
 --- !u!19719996 &2113883506779264918
 TilemapCollider2D:
   m_ObjectHideFlags: 1
