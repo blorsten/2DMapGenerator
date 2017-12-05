@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace MapGeneration.Extensions
 {
@@ -13,7 +10,6 @@ namespace MapGeneration.Extensions
         Right
     }
 
-
     public static class GizmoUtilities
     {
         /// <summary>
@@ -22,7 +18,7 @@ namespace MapGeneration.Extensions
         /// <param name="position">The origin position</param>
         /// <param name="direction">The direction of the arrow</param>
         /// <param name="size">The size of the arrow</param>
-        public static void DrawArrow(Vector3 position, ArrowDirection direction,float size = .5f)
+        public static void DrawArrow(Vector3 position, ArrowDirection direction, float size = .5f)
         {
             Vector3 shaftPosition = Vector3.zero;//The middle part of the arrow
             Vector3 leftPosition = Vector3.zero;//The left side of the arrow

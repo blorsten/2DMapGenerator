@@ -12,10 +12,16 @@ namespace MapGeneration.SaveSystem
     /// </summary>
     public struct VariableInfo
     {
+        //The kind of bindings on fields/properties we look for in the types.
         private const BindingFlags VariablesBindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
 
+        //The type we loaded.
         public Type Type { get; private set; }
+
+        //Dictionary filled with all the properties and their default data.
         public Dictionary<PropertyInfo, object> PropertiesInfos { get; private set; }
+
+        //Dictionary filled with all the fields and their default data.
         public Dictionary<FieldInfo, object> FieldInfos { get; private set; }
 
         public VariableInfo(Type type) : this()
@@ -23,6 +29,11 @@ namespace MapGeneration.SaveSystem
             Type = type;
         }
 
+        /// <summary>
+        /// Given a specific monobehaviour type, read all the fields/properties and load their
+        /// data + default values.
+        /// </summary>
+        /// <param name="monoBehaviour">Specific monobehaviour type to research.</param>
         public void Load(MonoBehaviour monoBehaviour)
         {
             FieldInfos = Type.GetFields(VariablesBindingFlags)

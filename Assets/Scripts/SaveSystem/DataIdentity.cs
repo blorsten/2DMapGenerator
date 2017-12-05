@@ -15,6 +15,11 @@ namespace MapGeneration.SaveSystem
         public Random Random { get; set; }
         public bool IsDirty { get; set; }
 
+        /// <summary>
+        /// Make the data identity ready for loading and saving by creating its id.
+        /// </summary>
+        /// <param name="random"></param>
+        /// <param name="guid"></param>
         public virtual void Initialize(Random random, Guid guid = default(Guid))
         {
             Random = random;

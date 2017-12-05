@@ -2,28 +2,39 @@
 
 namespace MapGeneration
 {
+    /// <summary>
+    /// Implementation of Singleton design pattern that supports Unity's <see cref="MonoBehaviour"/>
+    /// </summary>
+    /// <typeparam name="T">The type which this singleton is of.</typeparam>
     public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
-        private static bool _isQuitting;
+        //If true then the application is closing.
+        private static bool _isQuitting; 
 
+        //Should the single object persist between scene loading.
         public bool DontDestroyOnLoadConfig = true;
 
+        //Reference to the instanced singleton object.
         private static T instance;
 
-        /**
-       Returns the instance of this singleton.
-        */
+        /// <summary>
+        /// Returns the instance of this singleton.
+        /// </summary>
         public static T Instance
         {
             get
             {
+                //If the application is closing dont try to create a new singleton object.
                 if (_isQuitting)
                     return null;
 
+                //If we havent created a new instance, try to do so.
                 if (instance == null)
                 {
+                    //First try and find an already instantiated instnace.
                     instance = (T)FindObjectOfType(typeof(T));
                     
+                    //If that dident work create a new one.
                     if (instance == null)
                     {
                         GameObject newInstance = new GameObject(typeof(T).ToString());

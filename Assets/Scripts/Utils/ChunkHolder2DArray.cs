@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace MapGeneration.Utils
 {
+    /// <summary>
+    /// A Unity serializable 2D array that holds chunkholders.
+    /// </summary>
     [Serializable]
     public class ChunkHolder2DArray : IEnumerable<ChunkHolder>
     {
@@ -49,6 +52,11 @@ namespace MapGeneration.Utils
             set { _rows[rowIndex].ColumnsArray[colIndex] = value; }
         }
 
+        /// <summary>
+        /// Gets the number of either rows or columns.
+        /// </summary>
+        /// <param name="p0">If 0 then rows length, If 1 then columns length.</param>
+        /// <returns></returns>
         public int GetLength(int p0)
         {
             if (p0 == 0)

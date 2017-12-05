@@ -227,6 +227,11 @@ namespace MapGeneration
             }
         }
 
+        /// <summary>
+        /// Gets a chunkholder on a specific position in the <see cref="Grid"/>
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
         public ChunkHolder GetChunkHolder(Vector2Int position)
         {
             if (Grid == null)

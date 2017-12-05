@@ -8,6 +8,9 @@ using UnityEngine;
 
 namespace MapGeneration
 {
+    /// <summary>
+    /// Root of the whole system, this manager/builder generates, saved & loads map.
+    /// </summary>
     public class MapBuilder : Singleton<MapBuilder>
     {
         private List<MapDataSaver> _savedMaps;
@@ -26,12 +29,15 @@ namespace MapGeneration
         public List<MapDataSaver> SavedMaps { get { return _savedMaps ?? (_savedMaps = new List<MapDataSaver>()); } }
         public static MapGenerationSettings Settings { get { return _settings ?? (_settings = Resources.LoadAll<MapGenerationSettings>(String.Empty).FirstOrDefault()); } }
 
+        /// <summary>
+        /// Event is invoked a frame after a map has been spawned.
+        /// </summary>
         public event Action<Map> MapSpawned;
 
         protected override void Awake()
         {
             base.Awake();
-
+            
             //If we generated a map in editor make it active when running the game.
             if (PreExistingMap)
             {
@@ -221,6 +227,10 @@ namespace MapGeneration
             }
         }
 
+        /// <summary>
+        /// Invokes the <see cref="MapSpawned"/> event a frame after this method has been called.
+        /// </summary>
+        /// <param name="map">The map that has been spawned</param>
         private IEnumerator InvokeMapSpawned(Map map)
         {
             yield return null;

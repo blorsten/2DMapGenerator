@@ -3,6 +3,9 @@ using UnityEngine.Tilemaps;
 
 namespace MapGeneration.TileSystem
 {
+    /// <summary>
+    /// Custom tile that spawns a object on start.
+    /// </summary>
     [CreateAssetMenu(fileName = "Spawner Tile", menuName = "MapGeneration/Tiles/Spawner Tile")]
     public class SpawnerTile : TileBase
     {
@@ -11,8 +14,10 @@ namespace MapGeneration.TileSystem
 
         public override bool StartUp(Vector3Int position, ITilemap tilemap, GameObject go)
         {
+            //Grabs the tilemap that this tile belongs to.
             Tilemap currentTilemap = tilemap.GetComponent<Tilemap>();
 
+            //If the game is playing and we have a valid tilemap, position the spawned gameobject.
             if (currentTilemap.gameObject.activeInHierarchy && Application.isPlaying &&
                 go != null)
             {
@@ -24,7 +29,6 @@ namespace MapGeneration.TileSystem
             }
 
             return base.StartUp(position, tilemap, go);
-
         }
 
         public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)

@@ -1,9 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace MapGeneration
 {
+    /// <summary>
+    /// Door used in the demo to switch between maps.
+    /// </summary>
     [RequireComponent(typeof(Collider2D))]
     [RequireComponent(typeof(GameplayObject))]
     public class PlayerSpawner : MonoBehaviour

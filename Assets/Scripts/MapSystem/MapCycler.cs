@@ -13,8 +13,10 @@ namespace MapGeneration
     /// </summary>
     public class MapCycler : Singleton<MapCycler>
     {
+        //Used to mark if the next end/start chunks should grab the player.
         private bool _isStartChunk;
 
+        //Is it the map cyclers job to start the game or a third party?
         [SerializeField] private bool _autoStart;
         [SerializeField] private GameObject __player;
 

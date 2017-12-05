@@ -34,11 +34,26 @@ namespace ListExstention
             return RandomEntry(l, new Random());
         }
 
+        /// <summary>
+        /// Returns a randon item from list
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="l">List</param>
+        /// <param name="predicate">The predicate used in the filtration of the list.</param>
+        /// <returns></returns>
         public static T RandomEntry<T>(this IList<T> l, Func<T, bool> predicate)
         {
             return l.Where(predicate).ToList().RandomEntry();
         }
 
+        /// <summary>
+        /// Returns a randon item from list
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="l">List</param>
+        /// <param name="predicate">The predicate used in the filtration of the list.</param>
+        /// <param name="r">Random instance</param>
+        /// <returns></returns>
         public static T RandomEntry<T>(this IList<T> l, Func<T, bool> predicate, Random r)
         {
             return l.Where(predicate).ToList().RandomEntry(r);
