@@ -119,7 +119,7 @@ namespace MapGeneration
             if (WhitelistedChunks != null && WhitelistedChunks.Any())
             {
                 //If there are any whitelisted chunks we have to take into account, do so.
-                usableChunks = WhitelistedChunks.ToList();
+                usableChunks = WhitelistedChunks.Where(chunk => chunk).ToList();
             }
             else
             {
@@ -131,7 +131,7 @@ namespace MapGeneration
             //If there is any blacklisted chunks, take them out.
             if (BlacklistedChunks != null && BlacklistedChunks.Any())
             {
-                usableChunks = usableChunks.Except(BlacklistedChunks).ToList();
+                usableChunks = usableChunks.Where(chunk => chunk).Except(BlacklistedChunks).ToList();
             }
 
             //Remove all chunks that doesnt fit the blueprint.
