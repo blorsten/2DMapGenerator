@@ -130,7 +130,7 @@ namespace MapGeneration
         }
 
         /// <summary>
-        /// Generates a map form current blueprint
+        /// Generates a map from current blueprint
         /// </summary>
         /// <returns>Map</returns>
         public Map Generate()
@@ -138,6 +138,11 @@ namespace MapGeneration
             return Generate(CurrentBlueprint);
         }
 
+        /// <summary>
+        /// Generates a map from current blueprint and a specified seed.
+        /// </summary>
+        /// <param name="seed"></param>
+        /// <returns></returns>
         public Map Generate(int seed)
         {
             return Generate(CurrentBlueprint, seed);

@@ -88,7 +88,6 @@ namespace MapGeneration
         private TileNeighborType GetNeighborType(Vector3Int position, ITilemap tilemap)
         {
             TileNeighborType type = 0;
-            bool hasMap = _chunk != null && _chunk.Map != null;
             TileBase top = null;
             TileBase left = null;
             TileBase right = null;
@@ -99,7 +98,6 @@ namespace MapGeneration
                 !CheckNextChunk(position, new Vector3Int(-1, 0, 0), ref left, tilemap);
             bool rightOutOfBounds =
                 !CheckNextChunk(position, new Vector3Int(1, 0, 0), ref right, tilemap);
-
 
             if (top && (left || right) || topOutOfBounds)
                 type = TileNeighborType.Middle;

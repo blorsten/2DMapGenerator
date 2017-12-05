@@ -13,9 +13,11 @@ namespace MapGeneration.ConditionalChunks
     [CreateAssetMenu(fileName = "Validate Neighbor", menuName = "MapGeneration/Conditional Chunks/ValidateNeighbor")]
     public class ValidateNeighbor : ValidationEntry
     {
+        //The direction it checks.
         [SerializeField]
         private PathAlgorithm.CardinalDirections _direction;
 
+        //What chunk type are we looking for in the direction.
         [SerializeField, Tooltip("Leave empty if neighbor should be empty")]
         private GameObject __chunkToCheck;
 

@@ -5,16 +5,19 @@ using Object = UnityEngine.Object;
 namespace MapGeneration
 {
     /// <summary>
-    /// Purpose:
-    /// Creator:
+    /// Holds data about a positon in the <see cref="Map.Grid"/>
+    /// before and after spawning.
     /// </summary>
     [Serializable]
     public class ChunkHolder
     {
+        //The prefab recipe on what to instantiate when its spawned.
         [SerializeField] private Chunk __prefab;
+
         [SerializeField] private ChunkOpenings _chunkOpenings;
         [SerializeField] private Vector2Int _position;
 
+        //Reference to the instantiated chunk when spawned.
         [SerializeField, HideInInspector] private Chunk _instance;
         [SerializeField, HideInInspector] private ChunkType _chunkType;
 

@@ -24,11 +24,13 @@ namespace MapGeneration
     [SelectionBase]
     public class Chunk : MonoBehaviour
     {
+        //Paths to the gizmo icons.
         private const string TRAP_ICON_PATH = "Trap.png";
         private const string TREASURE_ICON_PATH = "Treasure.png";
         private const string GROUND_ICON_PATH = "Ground.png";
         private const string FLYING_ICON_PATH = "Flying.png";
 
+        //Grid filled with the values used by biome algorithms.
         private float[,] _biomeValues;
 
         [SerializeField, HideInInspector] private ConditionalChunk _conditionalChunk;
@@ -72,6 +74,22 @@ namespace MapGeneration
         public ChunkType ChunkType { get { return _chunkType; } set { _chunkType = value; } }
         public float[,] BiomeValues { get { return _biomeValues; } set { _biomeValues = value; } }
 
+        public Map Map { get; set; }
+        public string ID { get; set; } //A ID to indentify the Chunk
+        public List<GameObject> Items { get; set; } //A list for the items in the chunk
+
+        //Reference to the object that this chunk was created from.
+        public Chunk RecipeReference { get { return _recipeReference; } set { _recipeReference = value; } } 
+
+        public Tilemap Enviorment { get { return _enviorment; } set { _enviorment = value; } }
+        public List<TileFlag> Connections{ get { return _connections; } set { _connections = value; } }
+        public List<TileFlag> TileFlags{ get { return _tileTileFlags; } set { _tileTileFlags = value; } }
+        public ChunkOpenings ChunkOpenings { get { return _chunkOpenings; } set { _chunkOpenings = value; } }
+        public bool IsStandaloneChunk { get { return _isStandaloneChunk; } set { _isStandaloneChunk = value; } }
+
+        //Lazy loading properties
+        public ConditionalChunk ConditionalChunk { get { return _conditionalChunk ?? (_conditionalChunk = GetComponent<ConditionalChunk>()); } }
+
         public ChunkHolder ChunkHolder
         {
             get { return _chunkHolder; }
@@ -92,22 +110,6 @@ namespace MapGeneration
                 _chunkBehavior = value;
             }
         }
-
-        public Map Map { get; set; }
-        public string ID { get; set; } //A ID to indentify the Chunk
-        public List<GameObject> Items { get; set; } //A list for the items in the chunk
-
-        //Reference to the object that this chunk was created from.
-        public Chunk RecipeReference { get { return _recipeReference; } set { _recipeReference = value; } } 
-
-        public Tilemap Enviorment { get { return _enviorment; } set { _enviorment = value; } }
-        public List<TileFlag> Connections{ get { return _connections; } set { _connections = value; } }
-        public List<TileFlag> TileFlags{ get { return _tileTileFlags; } set { _tileTileFlags = value; } }
-        public ChunkOpenings ChunkOpenings { get { return _chunkOpenings; } set { _chunkOpenings = value; } }
-        public bool IsStandaloneChunk { get { return _isStandaloneChunk; } set { _isStandaloneChunk = value; } }
-
-        //Lazy loading properties
-        public ConditionalChunk ConditionalChunk { get { return _conditionalChunk ?? (_conditionalChunk = GetComponent<ConditionalChunk>()); } }
 
         /// <summary>
         /// When this components gets added or gets reset, grabs om references if it can.
@@ -210,6 +212,9 @@ namespace MapGeneration
 
         }
 
+        /// <summary>
+        /// Goes through the chunks tilemap(s) and refreshes all tiles.
+        /// </summary>
         public void RefreshTilemaps()
         {
             for (int i = 0; i < transform.childCount; i++)

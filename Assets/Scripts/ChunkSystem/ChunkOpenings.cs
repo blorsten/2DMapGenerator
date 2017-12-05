@@ -74,6 +74,10 @@ namespace MapGeneration
             return !(a == b);
         }
 
+        /// <summary>
+        /// Checks if these chunk openings are all closed.
+        /// </summary>
+        /// <returns>Return true if all the openings are closed.</returns>
         public bool IsEmpty()
         {
             bool isValid = true;
@@ -90,6 +94,11 @@ namespace MapGeneration
             return isValid;
         }
 
+        /// <summary>
+        /// Checks if these chunk openings match up with another one.
+        /// </summary>
+        /// <param name="b">Chunksopenings to check on.</param>
+        /// <returns>If they got the completely same openings it returns true.</returns>
         public bool IsMatching(ChunkOpenings b)
         {
             bool isValid = true;
@@ -109,6 +118,13 @@ namespace MapGeneration
             return isValid;
         }
 
+        /// <summary>
+        /// Sets a connection between this chunkopening and another chunk holders chunk connections.
+        /// </summary>
+        /// <param name="dir">Which way is the connection.</param>
+        /// <param name="next">What chunkholder is the connection going to.</param>
+        /// <param name="type">What type of connection is it?</param>
+        /// <param name="value">Is the connection closed or open?</param>
         public void SetConnectionAuto(PathAlgorithm.CardinalDirections dir, ChunkHolder next,
             ConnectionType type = ConnectionType.Default, bool value = true)
         {
@@ -133,6 +149,13 @@ namespace MapGeneration
             }
         }
 
+        /// <summary>
+        /// Takes a direction and sets a connection state for that direction while setting a 
+        /// specified connection type.
+        /// </summary>
+        /// <param name="dir">Which direction is the connection.</param>
+        /// <param name="type">Type of connection.</param>
+        /// <param name="value">Is the connection open or closed.</param>
         public void SetConnection(PathAlgorithm.CardinalDirections dir, ConnectionType type = ConnectionType.Default, bool value = true)
         {
             switch (dir)
