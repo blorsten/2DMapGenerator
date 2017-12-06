@@ -60,7 +60,6 @@ namespace MapGeneration
                 else
                     chunk.Connections.Add(new TileFlag(position, flagType, chunk));
             }
-            base.Paint(gridLayout,brushTarget,position);
         }
 
 
@@ -99,7 +98,6 @@ namespace MapGeneration
 
                 }
             }
-            base.Erase(gridLayout,brushTarget,position);
 
         }
     }

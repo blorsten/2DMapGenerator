@@ -211,20 +211,7 @@ namespace MapGeneration
         /// </summary>
         public void OnDrawGizmos()
         {
-            Vector2 gridSize = MapBlueprint.GridSize;
-            Vector2 chunkSize = MapBlueprint.ChunkSize;
             
-            for (int x = 0; x < gridSize.x; x++)
-            {
-                for (int y = 0; y < gridSize.y; y++)
-                {
-
-                    float xPosition = transform.position.x + chunkSize.x * x + chunkSize.x / 2;
-                    float yPosition = transform.position.y + chunkSize.y * y + chunkSize.y / 2;
-
-                    Gizmos.DrawWireCube(new Vector3(xPosition,yPosition), chunkSize);
-                }
-            }
         }
 
         /// <summary>

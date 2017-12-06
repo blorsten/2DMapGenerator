@@ -181,10 +181,8 @@ namespace MapGeneration
             {
                 for (int y = 0; y < gridSize.y; y++)
                 {
-                    float xPosition = transform.position.x + chunkSize.x * x
-                        + chunkSize.x / 2;
-                    float yPosition = transform.position.y + chunkSize.y * y
-                        + chunkSize.y / 2;
+                    float xPosition = map.transform.position.x + chunkSize.x * x;
+                    float yPosition = map.transform.position.y + chunkSize.y * y;
 
                     if (map.Grid[x, y] != null && map.Grid[x,y].Prefab != null) 
                         map.Grid[x, y].Instantiate(new Vector2(xPosition, yPosition), 

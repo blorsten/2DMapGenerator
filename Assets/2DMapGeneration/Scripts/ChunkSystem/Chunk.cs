@@ -199,10 +199,10 @@ namespace MapGeneration
                 Vector2 gridSize = new Vector2(Width, Height);
                 Vector2 cellSize = Enviorment.cellSize;
 
-                float yMin = transform.position.y - gridSize.y * cellSize.y / 2;
-                float yMax = transform.position.y + gridSize.y * cellSize.y / 2;
-                float xMin = transform.position.x - gridSize.x * cellSize.x / 2;
-                float xMax = transform.position.x + gridSize.x * cellSize.x / 2;
+                float yMin = transform.position.y;
+                float yMax = transform.position.y + gridSize.y;
+                float xMin = transform.position.x;
+                float xMax = transform.position.x + gridSize.x;
 
                 UnityEngine.Gizmos.DrawLine(new Vector3(xMin, yMin), new Vector3(xMin, yMax));
                 UnityEngine.Gizmos.DrawLine(new Vector3(xMax, yMin), new Vector3(xMax, yMax));
