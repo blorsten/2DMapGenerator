@@ -13,7 +13,7 @@ namespace MapGeneration
     /// </summary>
     public class MapBuilder : Singleton<MapBuilder>
     {
-        private List<MapDataSaver> _savedMaps;
+        [SerializeField, HideInInspector] private List<MapDataSaver> _savedMaps;
         private static MapGenerationSettings _settings;
 
         [SerializeField] private MapBlueprint _currentBlueprint;
@@ -90,7 +90,7 @@ namespace MapGeneration
             //Now that the map is fully made, spawn it.
             Spawn(map);
 
-            ActiveMap = map;
+            ActiveMap = map; 
 
             return map;
         }
@@ -106,6 +106,8 @@ namespace MapGeneration
 
             //Creating the new map.
             Map map = new GameObject(existingMap.MapBlueprint.name).AddComponent<Map>();
+            map.Tilemaps.Clear();
+            map.gameObject.AddComponent<MapGizmos>().Map = map;
 
             //If save data from active map before making this new one.
             if (ActiveMap.MapDataSaver == existingMap && existingMap.Map)

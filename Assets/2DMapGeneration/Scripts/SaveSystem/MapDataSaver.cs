@@ -33,6 +33,9 @@ namespace MapGeneration.SaveSystem
         public int MapSeed { get; set; }
         public MapBlueprint MapBlueprint { get; set; }
 
+        //Checks and see if theres any data saved.
+        public bool HasSavedData { get { return _savedFieldInfos.Any() || _savedPropertyInfos.Any(); } }
+
         public MapDataSaver(Map map)
         {
             Map = map;
@@ -122,6 +125,10 @@ namespace MapGeneration.SaveSystem
             {
                 //Try and grab the speicified component from the di obj.
                 Component comp = identity.GetComponent(persistentDataClass.Type);
+
+                //If the component has been deleted carry on.
+                if (!comp)
+                    continue;
 
                 foreach (KeyValuePair<FieldInfo, object> fieldInfo in persistentDataClass.FieldInfos)
                 {

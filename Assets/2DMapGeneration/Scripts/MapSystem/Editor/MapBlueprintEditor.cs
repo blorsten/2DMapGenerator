@@ -25,6 +25,10 @@ namespace MapGeneration.Editor
         {
             serializedObject.Update();
 
+            _context.UserSeed = EditorGUILayout.IntField("Predefined Seed:", _context.UserSeed);
+
+            GUILayout.Space(20);
+
             //Auto settings
             EditorGUILayout.LabelField("Automation Settings:", EditorStyles.boldLabel);
             _context.FillEmptySpaces = EditorGUILayout.Toggle("Fill Empty Spaces", _context.FillEmptySpaces);
@@ -93,6 +97,12 @@ namespace MapGeneration.Editor
                     }
 
                     menu.ShowAsContext();
+                };
+
+                List.onRemoveCallback = list =>
+                {
+                    stack.RemoveAt(list.index);
+                    SelectedElement = null;
                 };
 
                 List.drawElementCallback = (rect, index, active, focused) =>

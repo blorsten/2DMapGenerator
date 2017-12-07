@@ -186,7 +186,7 @@ namespace MapGeneration.ChunkSystem
             //This draws connections
             if (_drawOpenings && Environment)
             {
-                UnityEngine.Gizmos.color = new Color(231f / 255f, 76f / 255f, 60f / 255f);
+                Gizmos.color = new Color(231f / 255f, 76f / 255f, 60f / 255f);
 
                 foreach (var c in Openings)
                 {
