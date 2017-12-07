@@ -4,6 +4,7 @@ using System.Linq;
 using MapGeneration;
 using MapGeneration.Editor;
 using MapGeneration.Extensions;
+using MapGeneration.SaveSystem;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -53,6 +54,7 @@ namespace MapBuilderEditor
                     EditorGUILayout.LabelField("Seed History:", EditorStyles.boldLabel);
                     if (GUILayout.Button("CLEAR"))
                     {
+                        _context.SavedMaps.Clear();
                         _context.SavedSeeds.Clear();
                         EditorUtility.SetDirty(_context);
                     }
@@ -78,10 +80,14 @@ namespace MapBuilderEditor
                             fontStyle = _context.PreExistingMap && savedSeed == _context.PreExistingMap.Seed ? FontStyle.BoldAndItalic : FontStyle.Normal
                         });
 
+                        //Try and see if theres any saved data.
+                        MapDataSaver foundData = _context.SavedMaps.FirstOrDefault(saver => saver.MapSeed == savedSeed);
+                        if (foundData != null && foundData.HasSavedData)
+                            if (GUILayout.Button("CLEAR DATA", GUILayout.Width(100)))
+                                _context.SavedMaps.Remove(foundData);
+
                         if (GUILayout.Button("LOAD", GUILayout.Width(50)))
-                        {
                             Generate(savedSeed);
-                        }
                     }
                     GUILayout.EndHorizontal();
                 }
@@ -115,7 +121,10 @@ namespace MapBuilderEditor
                     if (Event.current.type == EventType.Repaint)
                     {
                         _serializedBlueprint = new SerializedObject(_context.CurrentBlueprint);
-                        _reorderableAlgorithmStack = new MapBlueprintEditor.ReorderableAlgorithmStack(_serializedBlueprint, _serializedBlueprint.FindProperty("AlgorithmStack"), _context.CurrentBlueprint.AlgorithmStack, true);
+                        _reorderableAlgorithmStack =
+                            new MapBlueprintEditor.ReorderableAlgorithmStack(_serializedBlueprint,
+                                _serializedBlueprint.FindProperty("AlgorithmStack"),
+                                _context.CurrentBlueprint.AlgorithmStack, true);
                     }
                 }
                 else
@@ -135,9 +144,12 @@ namespace MapBuilderEditor
                 _context.ActiveMap != _context.PreExistingMap)
                 DestroyImmediate(_context.PreExistingMap.gameObject);
 
-            //Set the preexisting map to the one we just generated.
-            _context.PreExistingMap = _context.Generate(seed);
-            
+            //Try to find a MapDataSaver with that seed.
+            MapDataSaver foundDataSaver = _context.SavedMaps.FirstOrDefault(saver => saver.MapSeed == seed);
+
+            //Set the preexisting map to the one we just generated, or take an existing saved map.
+            _context.PreExistingMap = foundDataSaver != null ? _context.Generate(foundDataSaver) : _context.Generate(seed);
+
             if (!_context.PreExistingMap)
                 return;
 

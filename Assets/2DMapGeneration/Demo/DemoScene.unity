@@ -144,7 +144,6 @@ MonoBehaviour:
   - {fileID: 114895966910665878, guid: 2c0b78ae8f17b1542b3d90b61d9df0ad, type: 2}
   - {fileID: 114222823847141162, guid: 8c4bc0dbdbdce1b42af0bb261ffd3e83, type: 2}
   - {fileID: 114941419155164888, guid: 1a6248842d283db4084e3f9d13650e0f, type: 2}
-  - {fileID: 0}
   - {fileID: 114718726627187758, guid: 025a4e1d18d3cde458fa69389035b69d, type: 2}
   - {fileID: 114698469850314928, guid: a0282d8cbc36ccd46ac8ee31219ac05f, type: 2}
   - {fileID: 114190886797659328, guid: 760bbf340375a5140888d58204b3922d, type: 2}
@@ -204,7 +203,7 @@ MonoBehaviour:
   DontDestroyOnLoadConfig: 1
   _currentBlueprint: {fileID: 11400000, guid: 92bbac4052344e94ca26ab15a61ab4fc, type: 2}
   _preExistingMap: {fileID: 0}
-  _savedSeeds: f20100005801000027000000d1020000d70300006d0000009a03000028000000c2020000470100002c0100002d030000d2030000
+  _savedSeeds: 
 --- !u!4 &830544120
 Transform:
   m_ObjectHideFlags: 0
