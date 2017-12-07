@@ -1,13 +1,11 @@
- ﻿using System.Collections.Generic;
-using MapGeneration.ConditionalChunks;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using MapGeneration.Extensions;
 using MapGeneration.TileSystem;
 using MapGeneration.Utils;
 
 
-namespace MapGeneration
+namespace MapGeneration.ChunkSystem
 {
     public enum ChunkType
     {

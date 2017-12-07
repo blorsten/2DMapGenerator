@@ -1,12 +1,7 @@
-﻿using System;
-using MapGeneration.Extensions;
+﻿using MapGeneration.Extensions;
 using System.Collections.Generic;
-using System.Diagnostics;
+using MapGeneration.ChunkSystem;
 using UnityEngine;
-using UnityEngine.Tilemaps;
-using System.Linq;
-using Debug = UnityEngine.Debug;
-using Random = UnityEngine.Random;
 
 namespace MapGeneration.Algorithm
 {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MapGeneration
+namespace MapGeneration.Utils
 {
     /// <summary>
     /// Implementation of Singleton design pattern that supports Unity's <see cref="MonoBehaviour"/>

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using MapGeneration.ChunkSystem;
 using MapGeneration.TileSystem;
-using UnityEngine;
 
 namespace MapGeneration.Algorithm
 {

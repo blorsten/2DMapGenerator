@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MapGeneration.Extensions;
 using System.Linq;
+using MapGeneration.ChunkSystem;
 
 namespace MapGeneration.Algorithm
 {

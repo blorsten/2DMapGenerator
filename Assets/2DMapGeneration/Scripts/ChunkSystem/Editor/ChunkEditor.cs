@@ -1,4 +1,4 @@
-﻿using MapGeneration;
+﻿using MapGeneration.ChunkSystem;
 using UnityEditor;
 using UnityEngine;
 

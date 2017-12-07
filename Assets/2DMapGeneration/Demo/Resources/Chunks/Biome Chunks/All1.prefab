@@ -71,7 +71,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1539065574631884}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.940766, y: 19.432133, z: 0}
+  m_LocalPosition: {x: 16.333986, y: 10.136474, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4574254642541322}
@@ -219,10 +219,7 @@ MonoBehaviour:
   - _position: {x: 9, y: 2, z: 0}
     _type: 4
     _chunk: {fileID: 114895966910665878}
-  _tileTileFlags:
-  - _position: {x: 2, y: 5, z: 0}
-    _type: 6
-    _chunk: {fileID: 114895966910665878}
+  _tileTileFlags: []
   _chunkBehavior: {fileID: 114619477973525462}
   _enviorment: {fileID: 8195094279520969900}
   _chunkHolder:

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using ChunkExtension;
 using MapGeneration.Algorithm;
+using MapGeneration.ChunkSystem;
+using MapGeneration.Extensions;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 

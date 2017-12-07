@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using MapGeneration.ChunkSystem;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace MapGeneration
+namespace MapGeneration.TileSystem
 {
     public abstract class BiomeTile : TileBase
     {

@@ -2,7 +2,7 @@
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace MapGeneration
+namespace MapGeneration.ChunkSystem
 {
     /// <summary>
     /// Holds data about a positon in the <see cref="Map.Grid"/>

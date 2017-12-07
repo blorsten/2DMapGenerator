@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
-using ListExstention;
-using MapGeneration;
-using MapGeneration.Algorithm;
-using MapGeneration.ConditionalChunks;
+using MapGeneration.ChunkSystem;
+using MapGeneration.Extensions;
 using UnityEngine;
 
-namespace CondtionalChunkPlacer
+namespace MapGeneration.Algorithm
 {
     [CreateAssetMenu(fileName = "New Condtional Chunk Placer", menuName = "2D Map Generation/Algorithms/Condional Chunk Placer")]
     public class ConditionalChunkPlacer : MapGenerationAlgorithm

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using MapGeneration.ChunkSystem;
 using MapGeneration.Extensions;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 namespace MapGeneration.Algorithm
 {

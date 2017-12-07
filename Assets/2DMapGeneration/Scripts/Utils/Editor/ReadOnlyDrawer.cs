@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace MapGeneration.Editor
+namespace MapGeneration.Editor.Utils
 {
     /// <summary>
     /// Autor: SwissArmyLib - Archon Interactive

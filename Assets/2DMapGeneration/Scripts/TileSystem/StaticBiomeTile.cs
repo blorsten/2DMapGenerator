@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace MapGeneration
+namespace MapGeneration.TileSystem
 {
     [CreateAssetMenu(fileName = "New Static Biome Tile", menuName = "2D Map Generation/Tiles/Static Biome")]
     public class StaticBiomeTile : BiomeTile

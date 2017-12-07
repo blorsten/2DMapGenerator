@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MapGeneration.Extensions
+namespace MapGeneration.Utils
 {
     public enum ArrowDirection
     {

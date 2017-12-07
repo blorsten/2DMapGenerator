@@ -1,8 +1,7 @@
-﻿using UnityEngine;
-using System.Linq;
+﻿using System.Linq;
 using System.Collections.Generic;
-using ListExstention;
-using MapGeneration.ConditionalChunks;
+using MapGeneration.ChunkSystem;
+using MapGeneration.Extensions;
 
 namespace MapGeneration.Algorithm
 {

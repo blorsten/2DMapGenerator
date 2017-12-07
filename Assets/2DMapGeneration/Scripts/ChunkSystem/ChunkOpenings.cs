@@ -2,7 +2,7 @@
 using MapGeneration.Algorithm;
 using UnityEngine;
 
-namespace MapGeneration
+namespace MapGeneration.ChunkSystem
 {
     /// <summary>
     /// Purpose:

@@ -1,7 +1,7 @@
-﻿using MapGeneration;
+﻿using MapGeneration.ChunkSystem;
 using UnityEngine;
 
-namespace ChunkExtension
+namespace MapGeneration.Extensions
 {
     /// <summary>
     /// Purpose: Extension class used for utility method for chunks.

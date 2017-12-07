@@ -1,4 +1,5 @@
 ﻿using System;
+using MapGeneration.ChunkSystem;
 using UnityEngine;
 
 namespace MapGeneration.TileSystem

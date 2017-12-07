@@ -1,5 +1,5 @@
-﻿using System;
-using MapGeneration.Algorithm;
+﻿using MapGeneration.Algorithm;
+using MapGeneration.ChunkSystem;
 using UnityEngine;
 
 namespace MapGeneration.Utils

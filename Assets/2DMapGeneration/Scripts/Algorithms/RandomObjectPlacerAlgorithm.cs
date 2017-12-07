@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using MapGeneration.Algorithm;
+﻿using System.Collections.Generic;
+using MapGeneration.ChunkSystem;
 using MapGeneration.TileSystem;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace MapGeneration
+namespace MapGeneration.Algorithm
 {
     [CreateAssetMenu(fileName = "New Random Object Placer", menuName = "2D Map Generation/Algorithms/Random Object Placer")]
     public class RandomObjectPlacerAlgorithm : MapGenerationAlgorithm

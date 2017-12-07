@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using MapGeneration;
+using MapGeneration.ChunkSystem;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace MapGeneration
+namespace MapGeneration.TileSystem
 {
 
     [CreateAssetMenu(fileName = "New Rule Biome Tile", menuName = "2D Map Generation/Tiles/Rule Biome")]

@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System;
 using System.Linq;
-using MapGeneration.Extensions;
 
-namespace ListExstention
+namespace MapGeneration.Extensions
 {
     /// <summary>
     /// Purpose:
