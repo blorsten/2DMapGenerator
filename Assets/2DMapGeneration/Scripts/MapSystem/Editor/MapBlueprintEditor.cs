@@ -95,6 +95,12 @@ namespace MapGeneration.Editor
                     menu.ShowAsContext();
                 };
 
+                List.onRemoveCallback = list =>
+                {
+                    stack.RemoveAt(list.index);
+                    SelectedElement = null;
+                };
+
                 List.drawElementCallback = (rect, index, active, focused) =>
                 {
                     //Lets create some offset for the elements.
