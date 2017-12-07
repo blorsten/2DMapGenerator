@@ -25,6 +25,10 @@ namespace MapGeneration.Editor
         {
             serializedObject.Update();
 
+            _context.UserSeed = EditorGUILayout.IntField("Predefined Seed:", _context.UserSeed);
+
+            GUILayout.Space(20);
+
             //Auto settings
             EditorGUILayout.LabelField("Automation Settings:", EditorStyles.boldLabel);
             _context.FillEmptySpaces = EditorGUILayout.Toggle("Fill Empty Spaces", _context.FillEmptySpaces);
