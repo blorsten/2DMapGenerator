@@ -20,7 +20,7 @@ namespace MapGeneration.ChunkSystem
     /// </summary>
     [ExecuteInEditMode]
     [SelectionBase]
-    public class Chunk : MonoBehaviour, ISerializationCallbackReceiver
+    public class Chunk : MonoBehaviour
     {
         //Paths to the gizmo icons.
         private const string TRAP_ICON_PATH = "Trap.png";
@@ -99,12 +99,7 @@ namespace MapGeneration.ChunkSystem
         public List<GameObject> Items { get; set; } 
 
         //Reference to the object that this chunk was created from.
-        public Chunk RecipeReference { get { return _recipeReference; } set { _recipeReference = value; } } 
-
-        /// <summary>
-        /// The chunks environment, a environment is the main tilemap.
-        /// </summary>
-        public Tilemap Environment { get { return _environment; } set { _environment = value; } }
+        public Chunk RecipeReference { get { return _recipeReference; } set { _recipeReference = value; } }
 
         /// <summary>
         /// This list stores the chunks openings.
@@ -130,6 +125,24 @@ namespace MapGeneration.ChunkSystem
         /// This is used to get the gameobject's conditionalChunk components if it has any.
         /// </summary>
         public ConditionalChunk ConditionalChunk { get { return _conditionalChunk ?? (_conditionalChunk = GetComponent<ConditionalChunk>()); } }
+
+        /// <summary>
+        /// The chunks environment, a environment is the main tilemap.
+        /// </summary>
+        public Tilemap Environment
+        {
+            get
+            {
+                if (!_environment)
+                {
+                    Debug.LogError(string.Format("{0} needs an environment reference.", RecipeReference), RecipeReference);
+                    Destroy(gameObject);
+                }
+
+                return _environment; 
+            }
+            set { _environment = value; }
+        }
 
         /// <summary>
         /// This is a reference to the chunks ChunkHolder
@@ -176,7 +189,7 @@ namespace MapGeneration.ChunkSystem
         private void Awake()
         {
             _biomeValues = new float[_width, _height];
-        }
+        } 
 
         /// <summary>
         /// This draws the chunks gizmos like where the chunks openings are located.
@@ -272,15 +285,6 @@ namespace MapGeneration.ChunkSystem
                 if(tilemap != null)
                     tilemap.RefreshAllTiles();
             }
-        }
-
-        public void OnBeforeSerialize()
-        {
-        }
-
-        public void OnAfterDeserialize()
-        {
-            RefreshTilemaps();
         }
     }
 }
