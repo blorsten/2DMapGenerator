@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc37a4d3022d22e4f8dda53e488456b8, type: 3}
+  m_Name: DemoBP
+  m_EditorClassIdentifier: 
+  FillEmptySpaces: 1
+  FindValidChunks: 1
+  OpenConnections: 1
+  AlgorithmStack:
+  - IsActive: 1
+    Algorithm: {fileID: 11400000, guid: 8ed398590d8d35a4086eabd1ac2a4428, type: 2}
+  - IsActive: 1
+    Algorithm: {fileID: 11400000, guid: d53824712e804b840b483b3178081437, type: 2}
+  - IsActive: 1
+    Algorithm: {fileID: 11400000, guid: 22bdf2afe6cf257489076ec5393f840c, type: 2}
+  - IsActive: 1
+    Algorithm: {fileID: 11400000, guid: 54316434c85809648b0bbb89073b04dd, type: 2}
+  - IsActive: 1
+    Algorithm: {fileID: 11400000, guid: ac07f739b6cec7c48a24b65ad6ce629a, type: 2}
+  GridSize: {x: 4, y: 4}
+  ChunkSize: {x: 10, y: 8}
+  WhitelistedChunks: []
+  BlacklistedChunks: []
+  UserSeed: 0
