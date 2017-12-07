@@ -73,10 +73,9 @@ namespace MapGeneration.Algorithm
                         for (int y = 0; y < chunk.Instance.Height; y++)
                         {
                             chunk.Instance.BiomeValues[x, y] = Mathf.Clamp01(_noiseGrid[x + width * chunk.Position.x, y + height * chunk.Position.y]);
-                            
                         }
                     }
-                    chunk.Instance.RefreshTilemaps();
+                    chunk.Instance.RefreshTilemaps(); 
                 }
             }
             

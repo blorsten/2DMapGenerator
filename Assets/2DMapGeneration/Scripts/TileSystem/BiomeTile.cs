@@ -53,15 +53,15 @@ namespace MapGeneration.TileSystem
 
             //Here the biome values are reset and if the gameobject is present in the active map's
             //tilemap dictionary, then get the values
-            _biome = "";
+            _biome = ""; 
             _chunk = null;
             if (MapBuilder.Instance && MapBuilder.Instance.ActiveMap &&
                 MapBuilder.Instance.ActiveMap.Tilemaps.ContainsKey(_gameObject))
             {
-                _chunk = MapBuilder.Instance.ActiveMap.Tilemaps[_gameObject];
+                _chunk = MapBuilder.Instance.ActiveMap.Tilemaps[_gameObject]; 
                 _biome = NoiseToBiome(_chunk, position);
             }
-        }
+        } 
 
         /// <summary>
         /// THis is used to check if the gameobjects if not in the tilemaps dictionary in the 

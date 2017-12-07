@@ -84,7 +84,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1608750204653428}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.117813, y: 8.034931, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4108661531206774}
@@ -133,7 +133,31 @@ MonoBehaviour:
     _bottomConnectionType: 0
     _leftConnectionType: 0
     _rightConnectionType: 0
-  _connections:
+  _openings:
+  - _position: {x: 9, y: 5, z: 0}
+    _type: 4
+    _chunk: {fileID: 114222823847141162}
+  - _position: {x: 9, y: 4, z: 0}
+    _type: 4
+    _chunk: {fileID: 114222823847141162}
+  - _position: {x: 9, y: 3, z: 0}
+    _type: 4
+    _chunk: {fileID: 114222823847141162}
+  - _position: {x: 9, y: 2, z: 0}
+    _type: 4
+    _chunk: {fileID: 114222823847141162}
+  - _position: {x: 0, y: 2, z: 0}
+    _type: 3
+    _chunk: {fileID: 114222823847141162}
+  - _position: {x: 0, y: 3, z: 0}
+    _type: 3
+    _chunk: {fileID: 114222823847141162}
+  - _position: {x: 0, y: 4, z: 0}
+    _type: 3
+    _chunk: {fileID: 114222823847141162}
+  - _position: {x: 0, y: 5, z: 0}
+    _type: 3
+    _chunk: {fileID: 114222823847141162}
   - _position: {x: 2, y: 0, z: 0}
     _type: 2
     _chunk: {fileID: 114222823847141162}
@@ -170,36 +194,12 @@ MonoBehaviour:
   - _position: {x: 7, y: 7, z: 0}
     _type: 1
     _chunk: {fileID: 114222823847141162}
-  - _position: {x: 0, y: 5, z: 0}
-    _type: 3
-    _chunk: {fileID: 114222823847141162}
-  - _position: {x: 0, y: 4, z: 0}
-    _type: 3
-    _chunk: {fileID: 114222823847141162}
-  - _position: {x: 0, y: 3, z: 0}
-    _type: 3
-    _chunk: {fileID: 114222823847141162}
-  - _position: {x: 0, y: 2, z: 0}
-    _type: 3
-    _chunk: {fileID: 114222823847141162}
-  - _position: {x: 9, y: 5, z: 0}
-    _type: 4
-    _chunk: {fileID: 114222823847141162}
-  - _position: {x: 9, y: 4, z: 0}
-    _type: 4
-    _chunk: {fileID: 114222823847141162}
-  - _position: {x: 9, y: 3, z: 0}
-    _type: 4
-    _chunk: {fileID: 114222823847141162}
-  - _position: {x: 9, y: 2, z: 0}
-    _type: 4
-    _chunk: {fileID: 114222823847141162}
   _tileTileFlags:
   - _position: {x: 8, y: 2, z: 0}
     _type: 6
     _chunk: {fileID: 114222823847141162}
   _chunkBehavior: {fileID: 114272385071699628}
-  _enviorment: {fileID: 8195094282194350772}
+  _environment: {fileID: 8195094282194350772}
   _chunkHolder:
     __prefab: {fileID: 0}
     _chunkOpenings:
@@ -218,7 +218,7 @@ MonoBehaviour:
     _position: {x: 0, y: 0}
     _instance: {fileID: 0}
     _chunkType: 0
-  _drawConnections: 1
+  _drawOpenings: 1
   _drawEdges: 1
   _drawTileFlags: 1
   _isStandaloneChunk: 1

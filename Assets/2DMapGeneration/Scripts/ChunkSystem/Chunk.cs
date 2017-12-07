@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using MapGeneration.TileSystem;
 using MapGeneration.Utils;
+using UnityEditor;
+using UnityEditor.Callbacks;
 
 
 namespace MapGeneration.ChunkSystem
@@ -29,22 +31,22 @@ namespace MapGeneration.ChunkSystem
         private const string FLYING_ICON_PATH = "Flying.png";
 
         //Grid filled with the values used by biome algorithms.
-        private float[,] _biomeValues;
+        [SerializeField, HideInInspector] private Float2DArray _biomeValues;
 
         [SerializeField, HideInInspector] private ConditionalChunk _conditionalChunk;
 
         //This sections is for generel properties 
-        [Header("Properties")]
         //Tells the width of the chunk
-        [SerializeField] private int _width;
+        [Header("Properties")]
+        [SerializeField] private int _width; 
 
         //Tells the height of the chunk
         [SerializeField] private int _height;
 
         //Tells the type of the chunk
-        [SerializeField] private ChunkType _chunkType;
+        [SerializeField] private ChunkType _chunkType; 
 
-        //These fields tells what openings are open on the chunk
+        //These fields tells what openings are open on the chunk 
         [Header("Openings"), SerializeField] private ChunkOpenings _chunkOpenings;
 
         //This is a list of TileFlags in the chunk
@@ -82,7 +84,7 @@ namespace MapGeneration.ChunkSystem
         /// <summary>
         /// This double array is to determine what biome every tile are in.
         /// </summary>
-        public float[,] BiomeValues { get { return _biomeValues; } set { _biomeValues = value; } }
+        public Float2DArray BiomeValues { get { return _biomeValues; } set { _biomeValues = value; } }
 
         /// <summary>
         /// This is a reference to the map the chunks is in.
@@ -107,7 +109,7 @@ namespace MapGeneration.ChunkSystem
         public List<TileFlag> Openings{ get { return _openings; } set { _openings = value; } }
 
         /// <summary>
-        /// This list stores TileFlag.
+        /// This list stores TileFlag. 
         /// </summary>
         public List<TileFlag> TileFlags{ get { return _tileTileFlags; } set { _tileTileFlags = value; } }
 
@@ -135,8 +137,10 @@ namespace MapGeneration.ChunkSystem
             {
                 if (!_environment)
                 {
-                    Debug.LogError(string.Format("{0} needs an environment reference.", RecipeReference), RecipeReference);
-                    Destroy(gameObject);
+                    if (RecipeReference)
+                        Debug.LogWarning(string.Format("{0} needs an environment reference.", RecipeReference.name), RecipeReference.gameObject);
+                    else
+                        Debug.LogWarning(string.Format("{0} needs an environment reference.", name), this);
                 }
 
                 return _environment; 
@@ -186,10 +190,13 @@ namespace MapGeneration.ChunkSystem
 
         }
 
+        /// <summary>
+        /// Instantiate needed collections such as biome values.
+        /// </summary>
         private void Awake()
         {
-            _biomeValues = new float[_width, _height];
-        } 
+            _biomeValues = new Float2DArray(_width, _height); 
+        }
 
         /// <summary>
         /// This draws the chunks gizmos like where the chunks openings are located.
@@ -285,6 +292,15 @@ namespace MapGeneration.ChunkSystem
                 if(tilemap != null)
                     tilemap.RefreshAllTiles();
             }
+        }
+
+        /// <summary>
+        /// When the game isnt playing make sure all the tiles are refreshed after compilation.
+        /// </summary>
+        void OnEnable()
+        {
+            if (!Application.isPlaying)
+                RefreshTilemaps(); 
         }
     }
 }

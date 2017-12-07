@@ -60,11 +60,11 @@ namespace MapGeneration.Algorithm
                     for (int x = 0; x < chunk.Instance.Width; x++)
                     {
                         for (int y = 0; y < chunk.Instance.Height; y++)
-                        {
+                        { 
                             chunk.Instance.BiomeValues[x, y] = _noiseGrid[x + width * chunk.Position.x, y + height * chunk.Position.y];
                         }
                     }
-                }
+                }   
             }
             return base.PostProcess(map, usableChunks);
         }

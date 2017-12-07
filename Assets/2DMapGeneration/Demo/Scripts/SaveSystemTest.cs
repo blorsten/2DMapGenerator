@@ -11,7 +11,7 @@ namespace MapGeneration
 
         void Start()
         {
-            Debug.Log(_testField);
+            _testField += _testField;
         }
     } 
 }

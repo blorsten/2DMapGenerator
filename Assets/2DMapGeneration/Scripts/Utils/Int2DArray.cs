@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using MapGeneration.ChunkSystem;
 using UnityEngine;
 
 namespace MapGeneration.Utils
@@ -11,7 +10,7 @@ namespace MapGeneration.Utils
     /// A Unity serializable 2D array that holds chunkholders.
     /// </summary>
     [Serializable]
-    public class ChunkHolder2DArray : IEnumerable<ChunkHolder>
+    public class Int2DArray : IEnumerable<int>
     {
         [SerializeField, HideInInspector] private int _rowsLength;
         [SerializeField, HideInInspector] private int _columnsLength;
@@ -19,23 +18,23 @@ namespace MapGeneration.Utils
         [Serializable]
         public class Columns
         {
-            [SerializeField, HideInInspector] private ChunkHolder[] _columnsArray;
+            [SerializeField, HideInInspector] private int[] _columnsArray;
 
             public Columns(int columnsLength)
             {
-                ColumnsArray = new ChunkHolder[columnsLength];
+                ColumnsArray = new int[columnsLength];
             }
 
-            public ChunkHolder[] ColumnsArray
+            public int[] ColumnsArray
             {
-                get { return _columnsArray; } 
+                get { return _columnsArray; }
                 set { _columnsArray = value; }
             }
         }
 
         [SerializeField, HideInInspector] private Columns[] _rows;
         
-        public ChunkHolder2DArray(int rowsLength, int columnsLength)
+        public Int2DArray(int rowsLength, int columnsLength)
         {
             _rows = new Columns[rowsLength];
             for (var i = 0; i < _rows.Length; i++)
@@ -47,7 +46,7 @@ namespace MapGeneration.Utils
             _columnsLength = columnsLength;
         }
 
-        public ChunkHolder this[int rowIndex, int colIndex]
+        public int this[int rowIndex, int colIndex]
         {
             get { return _rows[rowIndex].ColumnsArray[colIndex]; }
             set { _rows[rowIndex].ColumnsArray[colIndex] = value; }
@@ -69,7 +68,7 @@ namespace MapGeneration.Utils
             return 0;
         }
 
-        public IEnumerator<ChunkHolder> GetEnumerator()
+        public IEnumerator<int> GetEnumerator()
         {
             return _rows.SelectMany(columns => columns.ColumnsArray.Select(arg1 => arg1)).GetEnumerator();
         }

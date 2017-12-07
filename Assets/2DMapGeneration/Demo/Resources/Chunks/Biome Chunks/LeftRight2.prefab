@@ -97,7 +97,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1858673011113304}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.9447603, y: 23.945248, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4819855182885208}
@@ -146,7 +146,7 @@ MonoBehaviour:
     _bottomConnectionType: 0
     _leftConnectionType: 0
     _rightConnectionType: 0
-  _connections:
+  _openings:
   - _position: {x: 9, y: 5, z: 0}
     _type: 4
     _chunk: {fileID: 114698469850314928}
@@ -159,21 +159,21 @@ MonoBehaviour:
   - _position: {x: 9, y: 2, z: 0}
     _type: 4
     _chunk: {fileID: 114698469850314928}
-  - _position: {x: 0, y: 2, z: 0}
-    _type: 3
-    _chunk: {fileID: 114698469850314928}
-  - _position: {x: 0, y: 3, z: 0}
+  - _position: {x: 0, y: 5, z: 0}
     _type: 3
     _chunk: {fileID: 114698469850314928}
   - _position: {x: 0, y: 4, z: 0}
     _type: 3
     _chunk: {fileID: 114698469850314928}
-  - _position: {x: 0, y: 5, z: 0}
+  - _position: {x: 0, y: 3, z: 0}
+    _type: 3
+    _chunk: {fileID: 114698469850314928}
+  - _position: {x: 0, y: 2, z: 0}
     _type: 3
     _chunk: {fileID: 114698469850314928}
   _tileTileFlags: []
   _chunkBehavior: {fileID: 114015444675052704}
-  _enviorment: {fileID: 8195094281614567242}
+  _environment: {fileID: 8195094281614567242}
   _chunkHolder:
     __prefab: {fileID: 0}
     _chunkOpenings:
@@ -192,7 +192,7 @@ MonoBehaviour:
     _position: {x: 0, y: 0}
     _instance: {fileID: 0}
     _chunkType: 0
-  _drawConnections: 1
+  _drawOpenings: 1
   _drawEdges: 1
   _drawTileFlags: 1
   _isStandaloneChunk: 1

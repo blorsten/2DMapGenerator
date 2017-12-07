@@ -18,7 +18,7 @@ namespace MapGeneration.TileSystem
             left,
             Right
         }
-
+         
         [SerializeField] private List<RuleBiomeSprites> _biomesSprites 
             = new List<RuleBiomeSprites>();
 
