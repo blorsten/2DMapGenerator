@@ -137,7 +137,7 @@ namespace MapGeneration.TileSystem
                 ChunkHolder chunkholder = _chunk.Map.GetChunkHolder(newPosition);
                 if (chunkholder != null && chunkholder.Instance)
                 {
-                    tile = chunkholder.Instance.Enviorment.GetTile(new Vector3Int(0, position.y,
+                    tile = chunkholder.Instance.Environment.GetTile(new Vector3Int(0, position.y,
                         position.z));
                 }
                 else

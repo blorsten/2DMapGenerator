@@ -6,20 +6,30 @@ using UnityEngine;
 
 namespace MapGeneration
 {
-    public enum BrushTileType
+    /// <summary>
+    /// This enum is used to dertermine what direction of the connection
+    /// </summary>
+    public enum ConnectionType
     {
         Top, Bottom, Left, Right
     }
 
     /// <summary>
-    /// This brush is used to place tiles in a chunks tiledata list
+    /// This brush is used to place chunk openings in chunks.
     /// </summary>
-    [CustomGridBrush(false, true, false, "ConnectionBrush")]
-    public class ConnectionBrush : GridBrush
+    [CustomGridBrush(false, true, false, "ChunkOpeningsBrush")]
+    public class ChunkOpeningsBrush : GridBrush
     {
         //The current tiletype, when be used when a tile is placed
-        public BrushTileType BrushTileType { get; set; }
+        public ConnectionType ConnectionType { get; set; }
         
+        /// <summary>
+        /// This is called when the brush is painting, it tries to get a chunk on the current 
+        /// tilemap and if it does, then it places a chunk opening in the currect position
+        /// </summary>
+        /// <param name="gridLayout"></param>
+        /// <param name="brushTarget"></param>
+        /// <param name="position"></param>
         public override void Paint(GridLayout gridLayout, GameObject brushTarget, Vector3Int position)
         {
             //This tries to get a chunk component from the brush target
@@ -30,24 +40,24 @@ namespace MapGeneration
             if (chunk)
             {
                 //If a chunk in the tiledata list allready this position, replace it else create new
-                TileFlag connection = chunk.Connections.FirstOrDefault(x => x.Position == position);
+                TileFlag connection = chunk.Openings.FirstOrDefault(x => x.Position == position);
                 FlagType flagType = FlagType.Top;
 
-                switch (BrushTileType)
+                switch (ConnectionType)
                 {
-                    case BrushTileType.Top:
+                    case ConnectionType.Top:
                         flagType = FlagType.Top;
                         chunk.ChunkOpenings.TopOpen = true;
                         break;
-                    case BrushTileType.Bottom:
+                    case ConnectionType.Bottom:
                         flagType = FlagType.Bottom;
                         chunk.ChunkOpenings.BottomOpen = true;
                         break;
-                    case BrushTileType.Left:
+                    case ConnectionType.Left:
                         flagType = FlagType.Left;
                         chunk.ChunkOpenings.LeftOpen = true;
                         break;
-                    case BrushTileType.Right:
+                    case ConnectionType.Right:
                         flagType = FlagType.Right;
                         chunk.ChunkOpenings.RightOpen = true;
                         break;
@@ -59,11 +69,17 @@ namespace MapGeneration
                     connection.Chunk = chunk;
                 }
                 else
-                    chunk.Connections.Add(new TileFlag(position, flagType, chunk));
+                    chunk.Openings.Add(new TileFlag(position, flagType, chunk));
             }
         }
 
-
+        /// <summary>
+        /// This is called when the brush is erasing, it tries to get a chunk on the current 
+        /// tilemap and if it does, then it removes a chunk opening in the currect position
+        /// </summary>
+        /// <param name="gridLayout"></param>
+        /// <param name="brushTarget"></param>
+        /// <param name="position"></param>
         public override void Erase(GridLayout gridLayout, GameObject brushTarget, Vector3Int position)
         {
             //This tries to get a chunk component from the brush target
@@ -73,12 +89,12 @@ namespace MapGeneration
             //If a chunk is found, erase a tile in the postion
             if (chunk)
             {
-                TileFlag tileFlag = chunk.Connections.FirstOrDefault(x => x.Position == position);
+                TileFlag tileFlag = chunk.Openings.FirstOrDefault(x => x.Position == position);
                 if (tileFlag != null)
                 {
                     FlagType type = tileFlag.Type;
-                    chunk.Connections.Remove(tileFlag);
-                    if (!chunk.Connections.Exists(x => x.Type == type))
+                    chunk.Openings.Remove(tileFlag);
+                    if (!chunk.Openings.Exists(x => x.Type == type))
                     {
                         switch (type)
                         {

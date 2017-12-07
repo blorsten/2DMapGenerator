@@ -4,6 +4,9 @@ using UnityEngine.Tilemaps;
 
 namespace MapGeneration.TileSystem
 {
+    /// <summary>
+    /// This is the root class for all biome related tiles.
+    /// </summary>
     public abstract class BiomeTile : TileBase
     {
         [SerializeField] protected Sprite _defaultSprite;
@@ -13,6 +16,11 @@ namespace MapGeneration.TileSystem
         protected string _biome;
         protected GameObject _gameObject;
 
+        /// <summary>
+        /// This is called when a tile is refreshed and it
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="tilemap"></param>
         public override void RefreshTile(Vector3Int position, ITilemap tilemap)
         {
             base.RefreshTile(position, tilemap);

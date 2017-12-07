@@ -7,20 +7,20 @@ using MapGeneration.Utils;
 
 namespace MapGeneration.ChunkSystem
 {
+    /// <summary>
+    /// This enum is used to determine the chunks type
+    /// </summary>
     public enum ChunkType
     {
         Default, DeadEnd, Reward, Secret, Start, End, Solid
     }
 
     /// <summary>
-    /// Purpose:
-    /// To Store the chunk's data.
-    /// Creator:
-    /// Mikkel Nielsen
+    /// This calss stores the chunk's data.
     /// </summary>
     [ExecuteInEditMode]
     [SelectionBase]
-    public class Chunk : MonoBehaviour
+    public class Chunk : MonoBehaviour, ISerializationCallbackReceiver
     {
         //Paths to the gizmo icons.
         private const string TRAP_ICON_PATH = "Trap.png";
@@ -48,16 +48,16 @@ namespace MapGeneration.ChunkSystem
         [Header("Openings"), SerializeField] private ChunkOpenings _chunkOpenings;
 
         //This is a list of TileFlags in the chunk
-        [SerializeField, ReadOnly] private List<TileFlag> _connections = new List<TileFlag>();
+        [SerializeField, ReadOnly] private List<TileFlag> _openings = new List<TileFlag>();
 
         [SerializeField, ReadOnly] private List<TileFlag> _tileTileFlags = new List<TileFlag>();
 
         //This section is for refernces
         [Header("Refernces"), SerializeField] private ChunkBehavior _chunkBehavior;
-        [SerializeField] private Tilemap _enviorment;
+        [SerializeField] private Tilemap _environment;
         [SerializeField, HideInInspector] private ChunkHolder _chunkHolder;
 
-        [Header("Draw Booleans"), SerializeField] private bool _drawConnections = true;
+        [Header("Draw Booleans"), SerializeField] private bool _drawOpenings = true;
         [SerializeField] private bool _drawEdges = true;
         [SerializeField] private bool _drawTileFlags = true;
 
@@ -67,34 +67,82 @@ namespace MapGeneration.ChunkSystem
         [SerializeField, HideInInspector] private Chunk _recipeReference;
 
         //Properties for generel properties
+        /// <summary>
+        /// This stores the chunks width in tiles
+        /// </summary>
         public int Width { get { return _width; } set { _width = value; } }
+        /// <summary>
+        /// This stores the chunks heigth in tiles
+        /// </summary>
         public int Height { get { return _height; } set { _height = value; } }
+        /// <summary>
+        /// This stores the chunk's type
+        /// </summary>
         public ChunkType ChunkType { get { return _chunkType; } set { _chunkType = value; } }
+        /// <summary>
+        /// This double array is to determine what biome every tile are in.
+        /// </summary>
         public float[,] BiomeValues { get { return _biomeValues; } set { _biomeValues = value; } }
 
+        /// <summary>
+        /// This is a reference to the map the chunks is in.
+        /// </summary>
         public Map Map { get; set; }
-        public string ID { get; set; } //A ID to indentify the Chunk
-        public List<GameObject> Items { get; set; } //A list for the items in the chunk
+        /// <summary>
+        /// A ID to indentify the Chunk
+        /// </summary>
+        public string ID { get; set; }
+
+        /// <summary>
+        /// A list for the items in the chunk
+        /// </summary>
+        public List<GameObject> Items { get; set; } 
 
         //Reference to the object that this chunk was created from.
         public Chunk RecipeReference { get { return _recipeReference; } set { _recipeReference = value; } } 
 
-        public Tilemap Enviorment { get { return _enviorment; } set { _enviorment = value; } }
-        public List<TileFlag> Connections{ get { return _connections; } set { _connections = value; } }
+        /// <summary>
+        /// The chunks environment, a environment is the main tilemap.
+        /// </summary>
+        public Tilemap Environment { get { return _environment; } set { _environment = value; } }
+
+        /// <summary>
+        /// This list stores the chunks openings.
+        /// </summary>
+        public List<TileFlag> Openings{ get { return _openings; } set { _openings = value; } }
+
+        /// <summary>
+        /// This list stores TileFlag.
+        /// </summary>
         public List<TileFlag> TileFlags{ get { return _tileTileFlags; } set { _tileTileFlags = value; } }
+
+        /// <summary>
+        /// This class is used to determine what sides has openings.
+        /// </summary>
         public ChunkOpenings ChunkOpenings { get { return _chunkOpenings; } set { _chunkOpenings = value; } }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public bool IsStandaloneChunk { get { return _isStandaloneChunk; } set { _isStandaloneChunk = value; } }
 
-        //Lazy loading properties
+        /// <summary>
+        /// This is used to get the gameobject's conditionalChunk components if it has any.
+        /// </summary>
         public ConditionalChunk ConditionalChunk { get { return _conditionalChunk ?? (_conditionalChunk = GetComponent<ConditionalChunk>()); } }
 
+        /// <summary>
+        /// This is a reference to the chunks ChunkHolder
+        /// </summary>
         public ChunkHolder ChunkHolder
         {
             get { return _chunkHolder; }
             set { _chunkHolder = value; }
         }
 
-        //Properties for references
+        /// <summary>
+        /// This is a reference to the chunk's ChunkBehavior
+        /// </summary>
         public ChunkBehavior ChunkBehavior
         {
             get
@@ -110,11 +158,11 @@ namespace MapGeneration.ChunkSystem
         }
 
         /// <summary>
-        /// When this components gets added or gets reset, grabs om references if it can.
+        /// When this components gets added or gets reset, grab all references if possible.
         /// </summary>
         void Reset()
         {
-            _enviorment = GetComponentInChildren<Tilemap>();
+            _environment = GetComponentInChildren<Tilemap>();
 
             _chunkBehavior = GetComponent<ChunkBehavior>();
             if (!_chunkBehavior)
@@ -130,17 +178,20 @@ namespace MapGeneration.ChunkSystem
             _biomeValues = new float[_width, _height];
         }
 
+        /// <summary>
+        /// This draws the chunks gizmos like where the chunks openings are located.
+        /// </summary>
         public void OnDrawGizmos()
         {
             //This draws connections
-            if (_drawConnections && Enviorment)
+            if (_drawOpenings && Environment)
             {
                 UnityEngine.Gizmos.color = new Color(231f / 255f, 76f / 255f, 60f / 255f);
 
-                foreach (var c in Connections)
+                foreach (var c in Openings)
                 {
-                    Vector3 cellPosition = Enviorment.GetCellCenterWorld(c.Position);
-                    Vector2 cellSize = Enviorment.cellSize;
+                    Vector3 cellPosition = Environment.GetCellCenterWorld(c.Position);
+                    Vector2 cellSize = Environment.cellSize;
 
                     Vector3 top = new Vector3(cellPosition.x, cellPosition.y + cellSize.y / 2);
                     Vector3 bottom = new Vector3(cellPosition.x, cellPosition.y - cellSize.y / 2);
@@ -166,11 +217,11 @@ namespace MapGeneration.ChunkSystem
             }
 
             //This draws tile flags
-            if (_drawTileFlags && Enviorment)
+            if (_drawTileFlags && Environment)
             {
                 foreach (var flag in TileFlags)
                 {
-                    Vector3 postition = Enviorment.GetCellCenterWorld(flag.Position);
+                    Vector3 postition = Environment.GetCellCenterWorld(flag.Position);
 
                     switch (flag.Type)
                     {
@@ -191,11 +242,11 @@ namespace MapGeneration.ChunkSystem
                 }
             }
             //This draws edges
-            if (_drawEdges && Enviorment)
+            if (_drawEdges && Environment)
             {
                 UnityEngine.Gizmos.color = Color.white;
                 Vector2 gridSize = new Vector2(Width, Height);
-                Vector2 cellSize = Enviorment.cellSize;
+                Vector2 cellSize = Environment.cellSize;
 
                 float yMin = transform.position.y;
                 float yMax = transform.position.y + gridSize.y;
@@ -223,5 +274,13 @@ namespace MapGeneration.ChunkSystem
             }
         }
 
+        public void OnBeforeSerialize()
+        {
+        }
+
+        public void OnAfterDeserialize()
+        {
+            RefreshTilemaps();
+        }
     }
 }

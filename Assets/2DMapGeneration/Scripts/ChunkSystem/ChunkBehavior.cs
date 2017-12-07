@@ -4,10 +4,7 @@ using UnityEngine;
 namespace MapGeneration.ChunkSystem
 {
     /// <summary>
-    /// Purpose:
-    /// To add behavior to the chunks, such as close exits or more.
-    /// Creator:
-    /// Niels Justesen
+    /// behavior to the chunk
     /// </summary>
     public class ChunkBehavior : MonoBehaviour
     {

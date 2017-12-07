@@ -5,7 +5,7 @@ using Object = UnityEngine.Object;
 namespace MapGeneration.ChunkSystem
 {
     /// <summary>
-    /// Holds data about a positon in the <see cref="Map.Grid"/>
+    /// Holds data about a position in the <see cref="Map.Grid"/>
     /// before and after spawning.
     /// </summary>
     [Serializable]

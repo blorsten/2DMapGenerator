@@ -2,11 +2,17 @@
 using UnityEditor;
 using UnityEngine;
 
+/// <summary>
+/// This class is used to show information for the TileFlagBrush in the inspector
+/// </summary>
 [CustomEditor(typeof(TileFlagBrush))]
 public class TileFlagBrushEditor : GridBrushEditor
 {
     public TileFlagBrush Brush { get { return (target as TileFlagBrush); } }
 
+    /// <summary>
+    /// This handles the brush's inspector items.
+    /// </summary>
     public override void OnPaintInspectorGUI()
     {
         base.OnPaintInspectorGUI();

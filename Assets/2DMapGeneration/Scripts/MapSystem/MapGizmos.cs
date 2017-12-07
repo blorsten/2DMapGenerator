@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace MapGeneration.Utils
 {
+    /// <summary>
+    /// This component is used to draw map related gizmos.
+    /// </summary>
     [ExecuteInEditMode]
     public class MapGizmos : MonoBehaviour
     {
@@ -11,6 +14,9 @@ namespace MapGeneration.Utils
 
         [SerializeField] private Map _map; 
 
+        /// <summary>
+        /// A reference to the current map.
+        /// </summary>
         public Map Map
         {
             get
@@ -22,6 +28,9 @@ namespace MapGeneration.Utils
             set { _map = value; }
         }
 
+        /// <summary>
+        /// This draws the maps gizmos.
+        /// </summary>
         public void OnDrawGizmos()
         {
             if (Map == null || Map.Grid == null)
@@ -54,9 +63,13 @@ namespace MapGeneration.Utils
             Gizmos.DrawLine(new Vector3(xMin, yMax), new Vector3(xMin, yMin));
         }
 
+        /// <summary>
+        /// Call this to draw the used connections.
+        /// </summary>
+        /// <param name="chunk"></param>
         private void DrawBackTracking(Chunk chunk)
         {
-            if (chunk.ChunkHolder != null && _drawBacktracking && chunk.Enviorment)
+            if (chunk.ChunkHolder != null && _drawBacktracking && chunk.Environment)
             {
                 if (chunk.ChunkHolder.ChunkOpenings.TopConnection)
                     DrawBacktrackingLine(chunk, PathAlgorithm.CardinalDirections.Top, chunk.ChunkHolder.ChunkOpenings.TopConnectionType);
@@ -69,6 +82,12 @@ namespace MapGeneration.Utils
             }
         }
 
+        /// <summary>
+        /// Call this to draw a backtracking line.
+        /// </summary>
+        /// <param name="chunk"></param>
+        /// <param name="dir"></param>
+        /// <param name="type"></param>
         private void DrawBacktrackingLine(Chunk chunk, PathAlgorithm.CardinalDirections dir, ChunkOpenings.ConnectionType type)
         {
             Color chosenColor = Color.white;

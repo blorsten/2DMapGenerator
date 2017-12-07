@@ -16,7 +16,7 @@ namespace MapGeneration
         {
             var prefab = AssetDatabase.LoadAssetAtPath("Assets/2DMapGeneration/Templates/New Chunk.prefab", typeof(GameObject)) as GameObject;
             var newGo = Instantiate(prefab, Vector3.zero, Quaternion.identity);
-            newGo.GetComponent<Chunk>().Enviorment = newGo.GetComponentInChildren<Tilemap>(); 
+            newGo.GetComponent<Chunk>().Environment = newGo.GetComponentInChildren<Tilemap>(); 
 
         }
     }

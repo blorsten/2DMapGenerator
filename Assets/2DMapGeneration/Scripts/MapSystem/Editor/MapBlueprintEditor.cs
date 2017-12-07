@@ -29,7 +29,7 @@ namespace MapGeneration.Editor
             EditorGUILayout.LabelField("Automation Settings:", EditorStyles.boldLabel);
             _context.FillEmptySpaces = EditorGUILayout.Toggle("Fill Empty Spaces", _context.FillEmptySpaces);
             _context.FindValidChunks = EditorGUILayout.Toggle("Find Valid Chunks", _context.FindValidChunks);
-            _context.OpenConnections = EditorGUILayout.Toggle("Open Connections", _context.OpenConnections);
+            _context.OpenConnections = EditorGUILayout.Toggle("Open Openings", _context.OpenConnections);
 
             //Algorithm stack
             if (_algorithmStack != null)

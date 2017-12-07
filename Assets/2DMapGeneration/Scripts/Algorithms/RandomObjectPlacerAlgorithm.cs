@@ -25,7 +25,7 @@ namespace MapGeneration.Algorithm
                     //This goes through all of the chunks tiles and removes the used connection tiles
                     foreach (var c in map.Grid[x, y].Instance.TileFlags)
                     {
-                        var position = map.Grid[x, y].Instance.Enviorment
+                        var position = map.Grid[x, y].Instance.Environment
                             .GetCellCenterWorld(c.Position);
                         Chunk chunk = map.Grid[x, y].Instance;
 

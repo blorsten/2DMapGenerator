@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace MapGeneration.TileSystem
 {
+    /// <summary>
+    /// A enum to determine the a FlagTypes
+    /// </summary>
     public enum FlagType
     {
         None, Top, Bottom, Left, Right, Trap, Treasure, FlyingSpawn, GroundSpawn
