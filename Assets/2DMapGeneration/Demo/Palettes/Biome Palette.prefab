@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4550752457092926}
   - component: {fileID: 2569400266182866260}
   m_Layer: 31
-  m_Name: BiomePalette
+  m_Name: Biome Palette
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -141,15 +141,6 @@ Tilemap:
   m_GameObject: {fileID: 1230850373789746}
   m_Enabled: 1
   m_Tiles:
-  - first: {x: -14, y: -11, z: 0}
-    second:
-      m_TileIndex: 1
-      m_TileSpriteIndex: 1
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 2
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 0
-      m_ColliderType: 2
   - first: {x: -13, y: -11, z: 0}
     second:
       m_TileIndex: 1
@@ -172,19 +163,19 @@ Tilemap:
   m_TileAssetArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 2
+  - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: e380a7b6ed21f3c44bff303c98b0417f, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 11bbbdcbdff79fc4c904f7387c189bfa, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 2
+  - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: 631d20febd118ab45a33030c50f8ce0c, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: 4ff8f1dea59f9e24c89c3280d4808c93, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 3
+  - m_RefCount: 2
     m_Data:
       e00: 1
       e01: 0
@@ -207,7 +198,7 @@ Tilemap:
     m_Data: {r: 0, g: 0, b: 4.9451294e-27, a: 3.9297e-41}
   - m_RefCount: 1
     m_Data: {r: 1, g: 0.7254902, b: 0.7254902, a: 1}
-  - m_RefCount: 2
+  - m_RefCount: 1
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}

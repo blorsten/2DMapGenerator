@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4699617117554602}
   - component: {fileID: 2569400265736658998}
   m_Layer: 31
-  m_Name: MainPalette
+  m_Name: Main Palette
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -639,7 +639,7 @@ Tilemap:
   - m_RefCount: 35
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   - m_RefCount: 1
-    m_Data: {r: 0.7230876, g: 0.37631753, b: 0.3867374, a: 1}
+    m_Data: {r: 0.7421377, g: 0.43092945, b: 0.46553203, a: 1}
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: -1, y: -7, z: 0}
