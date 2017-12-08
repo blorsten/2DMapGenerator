@@ -38,36 +38,6 @@ namespace MapGeneration
         public MapBlueprint MapBlueprint { get { return _mapBlueprint; } private set { _mapBlueprint = value; } }
         public Dictionary<GameObject,Chunk> Tilemaps = new Dictionary<GameObject, Chunk>();
 
-        //Delete!!!!!!!!!
-        private int index;
-
-        public void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                float[,] yes = VoronoiBiome.History[index];
-                index++;
-                foreach (ChunkHolder chunk in Grid)
-                {
-                    if (chunk.Instance != null)
-                    {
-                        int width = chunk.Instance.Width;
-                        int height = chunk.Instance.Height;
-
-                        for (int x = 0; x < chunk.Instance.Width; x++)
-                        {
-                            for (int y = 0; y < chunk.Instance.Height; y++)
-                            {
-                                chunk.Instance.BiomeValues[x, y] = yes[x + width * chunk.Position.x, y + height * chunk.Position.y];
-                                chunk.Instance.RefreshTilemaps();
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        //Delete!!!!!!!!!!!!
-
         public ChunkHolder StartChunk
         {
             get { return _startChunk; }

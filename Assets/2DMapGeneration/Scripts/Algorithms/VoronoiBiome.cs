@@ -20,7 +20,13 @@ namespace MapGeneration.Algorithm
         private int _width;
         private int _heigt;    
 
-        public static List<float[,]> History = new List<float[,]>();//Delete!!!
+        private List<Vector2Int> _directionsToCheck = new List<Vector2Int>()
+        {
+            new Vector2Int(-1,0),
+            new Vector2Int(1,0),
+            new Vector2Int(0,-1),
+            new Vector2Int(0,1)
+        };
 
         public override bool Process(Map map, List<Chunk> usableChunks)
         {
@@ -49,7 +55,6 @@ namespace MapGeneration.Algorithm
 
             List<VornonoiData> data = new List<VornonoiData>();
 
-            History = new List<float[,]>();//Delete
             _noiseGrid = VornonoiPopulation(_noiseGrid, ref data);
 
             return base.Process(map, usableChunks);
@@ -84,30 +89,26 @@ namespace MapGeneration.Algorithm
                 {
                     if (map[x, y] > 0)
                     {
-                        bool valid = false;
-                        for (int i = -1; i <= 1; i += 2)
+
+                        for (int i = 0; i < _directionsToCheck.Count; i++)
                         {
-                            if (valid)
-                                break;
-                            for (int j = -1; j < 1; j += 2)
-                            {
-                                Vector2Int pos = new Vector2Int(x + i, y + j);
-                                if ((i == 0 && j == 0) || pos.x < 0 || pos.y < 0 || pos.x >= _width || pos.y >= _heigt)
-                                    continue;
-                                if (map[pos.x, pos.y] == 0 && !data.Exists(
+                            Vector2Int directions = _directionsToCheck[i];
+                            Vector2Int pos = new Vector2Int(x + directions.x, y + directions.y);
+
+                            if (pos.x < 0 || pos.y < 0 || pos.x >= _width || pos.y >= _heigt)
+                                continue;
+
+                            if (map[pos.x, pos.y] == 0 && !data.Exists(
                                     o => o.Position.x == pos.x && o.Position.y == pos.y))
-                                {
-                                    valid = true;
-                                    data.Add(new VornonoiData(new Vector2Int(x, y), map[x, y]));
-                                    break;
-                                }
+                            {
+                                data.Add(new VornonoiData(new Vector2Int(x, y), map[x, y]));
+                                break;
                             }
                         }
+
                     }
                 }
             }
-
-            History.Add((float[,])map.Clone());//Delete!!!
 
             if (data.Count <= 0)
                 return map;
@@ -116,18 +117,16 @@ namespace MapGeneration.Algorithm
 
             for (int i = 0; i < data.Count; i++)
             {
-                for (int x = -1; x <= 1; x += 2)
+                for (int j = 0; j < _directionsToCheck.Count; j++)
                 {
-                    for (int y = -1; y <= 1; y =+ 2)
+                    Vector2Int directions = _directionsToCheck[j];
+                    Vector2Int pos = data[i].Position + directions;
+
+                    if (pos.x < 0 || pos.y < 0 || pos.x >= _width || pos.y >= _heigt)
+                        continue;
+                    if (map[pos.x, pos.y] == 0)
                     {
-                        Vector2Int pos = data[i].Position + new Vector2Int(x, y);
-                        if ((x == 0 && y == 0) || pos.x < 0 || pos.y < 0 || pos.x >= _width || pos.y >= _heigt)
-                            continue;
-                        if (map[pos.x, pos.y] == 0)
-                        {
-                            map[pos.x, pos.y] = data[i].Value;
-                        }
-                        
+                        map[pos.x, pos.y] = data[i].Value;
                     }
                 }
             }

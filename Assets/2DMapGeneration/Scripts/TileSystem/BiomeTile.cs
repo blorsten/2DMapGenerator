@@ -70,12 +70,13 @@ namespace MapGeneration.TileSystem
         } 
 
         /// <summary>
-        /// THis is used to check if the gameobjects if not in the tilemaps dictionary in the 
+        /// This is used to check if the gameobjects if not in the tilemaps dictionary in the 
         /// active map, if not, then add the gameobect and it's chunk
         /// </summary>
         /// <param name="go"></param>
         private void CheckTilemaps(GameObject go)
         {
+            var test = MapBuilder.Instance;
             if (MapBuilder.Instance == null || MapBuilder.Instance.ActiveMap == null || go == null)
                 return;
             if (!MapBuilder.Instance.ActiveMap.Tilemaps.ContainsKey(go))

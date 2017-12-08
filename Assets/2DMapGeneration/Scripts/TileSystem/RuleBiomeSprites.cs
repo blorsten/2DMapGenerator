@@ -10,15 +10,11 @@ namespace MapGeneration.TileSystem
     public class RuleBiomeSprites
     {
         [SerializeField] public string ID;
-        [SerializeField] public Color Tint;
+        [SerializeField] public Color Tint = Color.white;
         [SerializeField] public Sprite MiddleSprite;
         [SerializeField] public Sprite TopSprite;
         [SerializeField] public Sprite LeftSprite;
         [SerializeField] public Sprite RightSprite;
 
-        public RuleBiomeSprites()
-        {
-            Tint = Color.white;
-        }
     }
 }

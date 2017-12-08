@@ -14,15 +14,15 @@ MonoBehaviour:
   _defaultSprite: {fileID: 21300000, guid: 4ff8f1dea59f9e24c89c3280d4808c93, type: 3}
   _colliderType: 1
   _biomesSprites:
-  - iD: Default
-    tint: {r: 1, g: 1, b: 1, a: 1}
-    sprite: {fileID: 21300000, guid: 4ff8f1dea59f9e24c89c3280d4808c93, type: 3}
-  - iD: Red
-    tint: {r: 1, g: 0.7254902, b: 0.7254902, a: 1}
-    sprite: {fileID: 21300000, guid: 4ff8f1dea59f9e24c89c3280d4808c93, type: 3}
-  - iD: Blue
-    tint: {r: 0.7254902, g: 0.7254902, b: 1, a: 1}
-    sprite: {fileID: 21300000, guid: 4ff8f1dea59f9e24c89c3280d4808c93, type: 3}
-  - iD: Green
-    tint: {r: 0.7254902, g: 1, b: 0.8068965, a: 1}
-    sprite: {fileID: 21300000, guid: 4ff8f1dea59f9e24c89c3280d4808c93, type: 3}
+  - ID: Default
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    Sprite: {fileID: 21300000, guid: 4ff8f1dea59f9e24c89c3280d4808c93, type: 3}
+  - ID: Red
+    Tint: {r: 1, g: 0.49264705, b: 0.49264705, a: 1}
+    Sprite: {fileID: 21300000, guid: 4ff8f1dea59f9e24c89c3280d4808c93, type: 3}
+  - ID: Blue
+    Tint: {r: 0.53914803, g: 0.47794116, b: 1, a: 1}
+    Sprite: {fileID: 21300000, guid: 4ff8f1dea59f9e24c89c3280d4808c93, type: 3}
+  - ID: Green
+    Tint: {r: 0.375, g: 1, b: 0.53448266, a: 1}
+    Sprite: {fileID: 21300000, guid: 4ff8f1dea59f9e24c89c3280d4808c93, type: 3}

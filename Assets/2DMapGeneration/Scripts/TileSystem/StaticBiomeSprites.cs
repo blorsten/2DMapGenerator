@@ -10,13 +10,9 @@ namespace MapGeneration.TileSystem
     public class StaticBiomeSprites
     {
         [SerializeField] public string ID;
-        [SerializeField] public Color Tint;
+        [SerializeField] public Color Tint = Color.white;
         [SerializeField] public Sprite Sprite;
 
-        public StaticBiomeSprites()
-        {
-            Tint = Color.white;
-        }
     }
 
 }
