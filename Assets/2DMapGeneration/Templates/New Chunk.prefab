@@ -74,7 +74,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4812203299513282}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4794036450448816
 Transform:
@@ -87,7 +87,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4812203299513282}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4812203299513282
 Transform:
@@ -99,8 +99,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4363417727349846}
   - {fileID: 4794036450448816}
+  - {fileID: 4363417727349846}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -115,6 +115,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0b6ce6d609e4c048893132c6fcb3c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _biomeValues:
+    _rowsLength: 1
+    _columnsLength: 1
+    _rows:
+    - _columnsArray:
+      - 0
   _conditionalChunk: {fileID: 0}
   _width: 1
   _height: 1
@@ -132,10 +138,10 @@ MonoBehaviour:
     _bottomConnectionType: 0
     _leftConnectionType: 0
     _rightConnectionType: 0
-  _connections: []
+  _openings: []
   _tileTileFlags: []
   _chunkBehavior: {fileID: 0}
-  _enviorment: {fileID: 0}
+  _environment: {fileID: 0}
   _chunkHolder:
     __prefab: {fileID: 0}
     _chunkOpenings:
@@ -154,7 +160,7 @@ MonoBehaviour:
     _position: {x: 0, y: 0}
     _instance: {fileID: 0}
     _chunkType: 0
-  _drawConnections: 1
+  _drawOpenings: 1
   _drawEdges: 1
   _drawTileFlags: 1
   _isStandaloneChunk: 1

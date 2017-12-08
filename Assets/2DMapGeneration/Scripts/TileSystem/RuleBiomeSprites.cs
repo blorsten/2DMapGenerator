@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace MapGeneration.TileSystem
 {
+    /// <summary>
+    /// This class is used to store biome data for a rule biome tile
+    /// </summary>
     [Serializable]
     public class RuleBiomeSprites
     {

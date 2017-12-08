@@ -55,8 +55,7 @@ namespace MapGeneration.ChunkSystem
         [SerializeField, ReadOnly] private List<TileFlag> _tileTileFlags = new List<TileFlag>();
 
         //This section is for refernces
-        [Header("Refernces"), SerializeField] private ChunkBehavior _chunkBehavior;
-        [SerializeField] private Tilemap _environment;
+        [Header("References"),SerializeField] private Tilemap _environment;
         [SerializeField, HideInInspector] private ChunkHolder _chunkHolder;
 
         [Header("Draw Booleans"), SerializeField] private bool _drawOpenings = true;
@@ -157,22 +156,6 @@ namespace MapGeneration.ChunkSystem
             set { _chunkHolder = value; }
         }
 
-        /// <summary>
-        /// This is a reference to the chunk's ChunkBehavior
-        /// </summary>
-        public ChunkBehavior ChunkBehavior
-        {
-            get
-            {
-                if (!_chunkBehavior)
-                    _chunkBehavior = GetComponent<ChunkBehavior>();
-                return _chunkBehavior;
-            }
-            set
-            {
-                _chunkBehavior = value;
-            }
-        }
 
         /// <summary>
         /// When this components gets added or gets reset, grab all references if possible.
@@ -180,13 +163,6 @@ namespace MapGeneration.ChunkSystem
         void Reset()
         {
             _environment = GetComponentInChildren<Tilemap>();
-
-            _chunkBehavior = GetComponent<ChunkBehavior>();
-            if (!_chunkBehavior)
-                _chunkBehavior = GetComponentInChildren<ChunkBehavior>();
-
-            if (_chunkBehavior)
-                _chunkBehavior.Chunk = this;
 
         }
 

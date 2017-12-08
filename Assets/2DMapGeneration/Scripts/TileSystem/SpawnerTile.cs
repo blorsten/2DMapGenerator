@@ -13,6 +13,13 @@ namespace MapGeneration.TileSystem
         [SerializeField] protected Sprite Sprite;
         [SerializeField] protected GameplayObject ObjectToSpawn;
 
+        /// <summary>
+        /// This spawns a object
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="tilemap"></param>
+        /// <param name="go"></param>
+        /// <returns></returns>
         public override bool StartUp(Vector3Int position, ITilemap tilemap, GameObject go)
         {
             //Grabs the tilemap that this tile belongs to.
@@ -32,6 +39,12 @@ namespace MapGeneration.TileSystem
             return base.StartUp(position, tilemap, go);
         }
 
+        /// <summary>
+        /// This sets the tiles data, which are used to draw the tile
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="tilemap"></param>
+        /// <param name="tileData"></param>
         public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
         {
             if (!ObjectToSpawn)

@@ -17,7 +17,7 @@ namespace MapGeneration.TileSystem
         protected GameObject _gameObject;
 
         /// <summary>
-        /// This is called when a tile is refreshed and it
+        /// This is called when a tile is refreshed and it refreshes it self and it's neighbors
         /// </summary>
         /// <param name="position"></param>
         /// <param name="tilemap"></param>
@@ -36,6 +36,12 @@ namespace MapGeneration.TileSystem
             }
         }
 
+        /// <summary>
+        /// This set default values for the tile
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="tilemap"></param>
+        /// <param name="tileData"></param>
         public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
         {
             tileData.sprite = _defaultSprite;

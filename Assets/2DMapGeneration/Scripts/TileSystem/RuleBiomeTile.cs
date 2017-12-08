@@ -6,10 +6,15 @@ using UnityEngine.Tilemaps;
 
 namespace MapGeneration.TileSystem
 {
-
+    /// <summary>
+    /// This tile will change it's sprite relative to it's neighbors 
+    /// </summary>
     [CreateAssetMenu(fileName = "New Rule Biome Tile", menuName = "2D Map Generation/Tiles/Rule Biome")]
     public class RuleBiomeTile : BiomeTile
     {
+        /// <summary>
+        /// This enum is used to determine the neighbor type
+        /// </summary>
         private enum TileNeighborType
         {
             Middle,
@@ -25,6 +30,11 @@ namespace MapGeneration.TileSystem
         private RuleBiomeSprites _currentSprites;
         private TileNeighborType _neighborType;
 
+        /// <summary>
+        /// This is called when the tile is refreshed
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="tilemap"></param>
         protected override void RefreshBiomeValues(Vector3Int position, ITilemap tilemap)
         {
             base.RefreshBiomeValues(position, tilemap);
@@ -42,6 +52,12 @@ namespace MapGeneration.TileSystem
             
         }
 
+        /// <summary>
+        /// This set the tile's data which are used to draw it
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="tilemap"></param>
+        /// <param name="tileData"></param>
         public override void GetTileData(Vector3Int position, ITilemap tilemap,
             ref TileData tileData)
         {
