@@ -53,6 +53,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4388246048290084}
+  - component: {fileID: 114885731345157130}
   - component: {fileID: 114398715410969646}
   m_Layer: 0
   m_Name: TestObj
@@ -168,10 +169,10 @@ MonoBehaviour:
   _height: 5
   _chunkType: 0
   _chunkOpenings:
-    _topOpen: 0
-    _bottomOpen: 0
-    _leftOpen: 0
-    _rightOpen: 0
+    _topOpen: 1
+    _bottomOpen: 1
+    _leftOpen: 1
+    _rightOpen: 1
     _topConnection: 0
     _bottomConnetion: 0
     _leftConnection: 0
@@ -206,6 +207,17 @@ MonoBehaviour:
   _drawTileFlags: 1
   _isStandaloneChunk: 1
   _recipeReference: {fileID: 0}
+--- !u!114 &114885731345157130
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1743559499292770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f60627f4252f6bb4e80ab9ff226ae40e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!19719996 &2113883504803958722
 TilemapCollider2D:
   m_ObjectHideFlags: 1
