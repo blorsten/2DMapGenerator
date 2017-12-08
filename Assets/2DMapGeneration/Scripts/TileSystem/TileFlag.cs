@@ -5,7 +5,7 @@ using UnityEngine;
 namespace MapGeneration.TileSystem
 {
     /// <summary>
-    /// A enum to determine the a FlagTypes
+    /// A enum to determine a FlagTypes
     /// </summary>
     public enum FlagType
     {

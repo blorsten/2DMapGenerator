@@ -87,7 +87,7 @@ namespace MapGeneration.TileSystem
         }
 
         /// <summary>
-        /// Call this to gety the noise value
+        /// Call this to get the noise value
         /// </summary>
         /// <param name="chunk"></param>
         /// <param name="position"></param>
