@@ -1,5 +1,6 @@
 ﻿using MapGeneration.Extensions;
 using System.Collections.Generic;
+using System.Linq;
 using MapGeneration.ChunkSystem;
 using UnityEngine;
 
@@ -19,6 +20,8 @@ namespace MapGeneration.Algorithm
         private int _width;
         private int _heigt;    
 
+        public static List<float[,]> History = new List<float[,]>();//Delete!!!
+
         public override bool Process(Map map, List<Chunk> usableChunks)
         {
             _width = map.Grid.GetLength(0) * map.MapBlueprint.ChunkSize.x;
@@ -33,17 +36,21 @@ namespace MapGeneration.Algorithm
                 }
             }
 
+
             //Set the random points in the grid
             for (int i = 1; i <= _nrOfPoints; i++)
             {
                 float noise = 1f / _nrOfPoints * i;
+                int x = map.Random.Range(0, _width - 1);
+                int y = map.Random.Range(0, _heigt - 1);
 
-                _noiseGrid[map.Random.Range(0, _width - 1), map.Random.Range(0, _heigt - 1)] = noise;
+                _noiseGrid[x, y] = noise;
             }
 
+            List<VornonoiData> data = new List<VornonoiData>();
 
-            List<VornonoiData> reuseableList = new List<VornonoiData>();
-            _noiseGrid = VornonoiPopulation(_noiseGrid, ref reuseableList);
+            History = new List<float[,]>();//Delete
+            _noiseGrid = VornonoiPopulation(_noiseGrid, ref data);
 
             return base.Process(map, usableChunks);
         }
@@ -69,7 +76,7 @@ namespace MapGeneration.Algorithm
             return base.PostProcess(map, usableChunks);
         }
 
-        private float[,] VornonoiPopulation(float[,] map, ref List<VornonoiData> reuseableList)
+        private float[,] VornonoiPopulation(float[,] map, ref List<VornonoiData> data)
         {
             for (int x = 0; x < _width; x++)
             {
@@ -78,20 +85,20 @@ namespace MapGeneration.Algorithm
                     if (map[x, y] > 0)
                     {
                         bool valid = false;
-                        for (int i = -1; i <= 1; i++)
+                        for (int i = -1; i <= 1; i += 2)
                         {
                             if (valid)
                                 break;
-                            for (int j = -1; j < 1; j++)
+                            for (int j = -1; j < 1; j += 2)
                             {
                                 Vector2Int pos = new Vector2Int(x + i, y + j);
                                 if ((i == 0 && j == 0) || pos.x < 0 || pos.y < 0 || pos.x >= _width || pos.y >= _heigt)
                                     continue;
-                                if(map[pos.x,pos.y] == 0 && !reuseableList.Exists(
+                                if (map[pos.x, pos.y] == 0 && !data.Exists(
                                     o => o.Position.x == pos.x && o.Position.y == pos.y))
                                 {
                                     valid = true;
-                                    reuseableList.Add(new VornonoiData(new Vector2Int(x, y), map[x, y]));
+                                    data.Add(new VornonoiData(new Vector2Int(x, y), map[x, y]));
                                     break;
                                 }
                             }
@@ -100,27 +107,32 @@ namespace MapGeneration.Algorithm
                 }
             }
 
-            if (reuseableList.Count <= 0)
+            History.Add((float[,])map.Clone());//Delete!!!
+
+            if (data.Count <= 0)
                 return map;
 
-            reuseableList.Sort((x, y) => x.Value.CompareTo(y.Value));
+            data.Sort((x, y) => x.Value.CompareTo(y.Value));
 
-            for (int i = 0; i < reuseableList.Count; i++)
+            for (int i = 0; i < data.Count; i++)
             {
-                for (int x = -1; x <= 1; x++)
+                for (int x = -1; x <= 1; x += 2)
                 {
-                    for (int y = -1; y <= 1; y++)
+                    for (int y = -1; y <= 1; y =+ 2)
                     {
-                        Vector2Int pos = reuseableList[i].Position + new Vector2Int(x, y);
+                        Vector2Int pos = data[i].Position + new Vector2Int(x, y);
                         if ((x == 0 && y == 0) || pos.x < 0 || pos.y < 0 || pos.x >= _width || pos.y >= _heigt)
                             continue;
                         if (map[pos.x, pos.y] == 0)
-                            map[pos.x, pos.y] = reuseableList[i].Value;
+                        {
+                            map[pos.x, pos.y] = data[i].Value;
+                        }
+                        
                     }
                 }
             }
-            reuseableList.Clear();
-            return VornonoiPopulation(map, ref reuseableList);
+            data.Clear();
+            return VornonoiPopulation(map, ref data);
         }
     }
 
