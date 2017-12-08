@@ -5,8 +5,8 @@ using UnityEngine;
 namespace MapGeneration.ChunkSystem
 {
     /// <summary>
-    /// Purpose:
-    /// Creator:
+    /// Example validationEntry that needs en empty space in a given direction, then if that is the
+    /// case, place another chunk in that spot
     /// </summary>
     [CreateAssetMenu(fileName = "New Validate Neighbor", menuName = "2D Map Generation/Conditional Chunks/Validate Neighbor")]
     public class ValidateNeighbor : ValidationEntry
@@ -22,6 +22,12 @@ namespace MapGeneration.ChunkSystem
         [SerializeField, Header("On Approved")]
         private Chunk _chunkToSpawn;
 
+        /// <summary>
+        /// Validated the space in the given direction
+        /// </summary>
+        /// <param name="map">Map</param>
+        /// <param name="chunkHolder">Chunkholder</param>
+        /// <returns></returns>
         public override bool Validate(Map map, ChunkHolder chunkHolder)
         {
             var neighbors = map.GetNeighbor(chunkHolder, _direction);
@@ -40,6 +46,11 @@ namespace MapGeneration.ChunkSystem
             return true;
         }
 
+        /// <summary>
+        /// Spawns the other chunk if validation was successful
+        /// </summary>
+        /// <param name="map">Current map</param>
+        /// <param name="chunkHolder">Current chunkholder</param>
         public override void Approved(Map map, ChunkHolder chunkHolder)
         {
             base.Approved(map, chunkHolder);
@@ -51,12 +62,15 @@ namespace MapGeneration.ChunkSystem
                 case PathAlgorithm.CardinalDirections.Top:
                     newPos = new Vector2Int(newPos.x, newPos.y + 1);
                     break;
+
                 case PathAlgorithm.CardinalDirections.Bottom:
                     newPos = new Vector2Int(newPos.x, newPos.y - 1);
                     break;
+
                 case PathAlgorithm.CardinalDirections.Left:
                     newPos = new Vector2Int(newPos.x + 1, newPos.y);
                     break;
+
                 case PathAlgorithm.CardinalDirections.Right:
                     newPos = new Vector2Int(newPos.x - 1, newPos.y);
                     break;
