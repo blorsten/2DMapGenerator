@@ -61,6 +61,9 @@ namespace MapGeneration.SaveSystem
             var components = Map.GetComponentsInChildren<MonoBehaviour>();
             foreach (MonoBehaviour monoBehaviour in components)
             {
+                if (!monoBehaviour)
+                    continue;
+
                 //Grab their type.
                 Type monoType = monoBehaviour.GetType();
 

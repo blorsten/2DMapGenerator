@@ -212,11 +212,20 @@ namespace MapGeneration
 
             if (Application.isPlaying)
             {
+                //If we're trying to despawn an active map, just destroy all its children instead.
+                if (ActiveMap == map)
+                    GameObjectUtils.DestroyChildren(map.gameObject);
+
                 //Destroying all instances of the spawned chunks
                 Destroy(map.gameObject);
             }
             else
+            {
+                if (ActiveMap == map)
+                    GameObjectUtils.DestroyChildren(map.gameObject, true);
+
                 DestroyImmediate(map.gameObject);
+            }
         }
 
         private void CleanupFailedMap(Map map)
