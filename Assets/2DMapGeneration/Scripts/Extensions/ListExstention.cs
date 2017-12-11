@@ -5,8 +5,7 @@ using System.Linq;
 namespace MapGeneration.Extensions
 {
     /// <summary>
-    /// Purpose:
-    /// Creator:
+    /// An extension for the .net interface IList.
     /// </summary>
     public static class ListExstention 
     {

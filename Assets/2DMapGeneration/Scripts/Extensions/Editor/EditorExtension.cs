@@ -3,10 +3,13 @@ using UnityEngine;
 
 namespace MapGeneration.Extensions
 {
+    /// <summary>
+    /// An extension for the unity editor.
+    /// </summary>
     public static class EditorExtension
     {
         /// <summary>
-        /// Convers an object to a serialized object and tries to draw its own fields/properties.
+        /// Converts an object to a serialized object and tries to draw its own fields/properties.
         /// </summary>
         public static void DrawSerializedProperty(SerializedProperty obj)
         {

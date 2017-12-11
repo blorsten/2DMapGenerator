@@ -7,8 +7,7 @@ using UnityEngine;
 namespace MapGeneration.Editor
 {
     /// <summary>
-    /// Purpose: Custom inspector UI for Map component.
-    /// Creator: MP
+    /// Custom inspector UI for Map component.
     /// </summary>
     [CustomEditor(typeof(Map))]
     public class MapEditor : UnityEditor.Editor
@@ -20,6 +19,9 @@ namespace MapGeneration.Editor
             _context = target as Map;
         }
 
+        /// <summary>
+        /// This draws the custom editor for a map.
+        /// </summary>
         public override void OnInspectorGUI()
         {
             EditorGUILayout.LabelField("Info:", EditorStyles.boldLabel);

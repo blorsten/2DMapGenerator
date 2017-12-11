@@ -6,13 +6,23 @@ using Random = System.Random;
 namespace MapGeneration.SaveSystem
 {
     /// <summary>
-    /// Purpose: Used to find certain game objects that needs saving.
-    /// Creator: MP
+    /// This class used to find certain game objects that needs saving.
     /// </summary>
     public class DataIdentity : MonoBehaviour 
     {
+        /// <summary>
+        /// The data's id.
+        /// </summary>
         public Guid Id { get; set; }
+
+        /// <summary>
+        /// The data's Random.
+        /// </summary>
         public Random Random { get; set; }
+
+        /// <summary>
+        /// The data's dirty status.
+        /// </summary>
         public bool IsDirty { get; set; }
 
         /// <summary>

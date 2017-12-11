@@ -2,6 +2,9 @@
 
 namespace MapGeneration.Utils
 {
+    /// <summary>
+    /// Is used ti declare arrow type.
+    /// </summary>
     public enum ArrowDirection
     {
         Up,
@@ -10,6 +13,9 @@ namespace MapGeneration.Utils
         Right
     }
 
+    /// <summary>
+    /// This class is for extra functions for unity's Gizmos.
+    /// </summary>
     public static class GizmoUtilities
     {
         /// <summary>

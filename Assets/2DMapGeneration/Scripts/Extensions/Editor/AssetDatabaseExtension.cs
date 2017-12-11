@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace MapGeneration.Extensions
 {
+    /// <summary>
+    /// An extension for unity's asset database.
+    /// </summary>
     public static class AssetDatabaseExtension
     {
         /// <summary>

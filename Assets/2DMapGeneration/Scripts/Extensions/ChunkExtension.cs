@@ -4,8 +4,7 @@ using UnityEngine;
 namespace MapGeneration.Extensions
 {
     /// <summary>
-    /// Purpose: Extension class used for utility method for chunks.
-    /// Creator: MP
+    /// An Extension class used for utility method for chunks.
     /// </summary>
     public static class ChunkExtension
     {

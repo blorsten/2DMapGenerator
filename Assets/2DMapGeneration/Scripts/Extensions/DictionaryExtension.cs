@@ -2,6 +2,9 @@
 
 namespace MapGeneration.Extensions
 {
+    /// <summary>
+    /// An extension for the .net class dictionary.
+    /// </summary>
     public static class DictionaryExtension
     {
         /// <summary>

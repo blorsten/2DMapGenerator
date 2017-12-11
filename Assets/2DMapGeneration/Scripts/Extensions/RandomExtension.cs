@@ -2,6 +2,9 @@
 
 namespace MapGeneration.Extensions
 {
+    /// <summary>
+    /// An extension for unity random class.
+    /// </summary>
     public static class RandomExtension
     {
         /// <summary>

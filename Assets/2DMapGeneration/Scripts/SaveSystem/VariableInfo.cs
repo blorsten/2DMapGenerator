@@ -7,8 +7,7 @@ using UnityEngine;
 namespace MapGeneration.SaveSystem
 {
     /// <summary>
-    /// Purpose: Struct used to save different types found by <see cref="MapDataSaver"/>
-    /// Creator: MP
+    /// This Struct is used to save different types found by <see cref="MapDataSaver"/>
     /// </summary>
     public struct VariableInfo
     {

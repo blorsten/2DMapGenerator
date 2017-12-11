@@ -3,8 +3,7 @@
 namespace MapGeneration.SaveSystem
 {
     /// <summary>
-    /// Purpose: Used to mark variables that needs saving.
-    /// Creator: MP
+    /// This class is used to mark variables that needs saving.
     /// </summary>
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
     public class PersistentData : Attribute

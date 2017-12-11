@@ -9,8 +9,7 @@ using MapGeneration.Extensions;
 namespace MapGeneration.Editor
 {
     /// <summary>
-    /// Purpose: Draws a custom inspector for map blueprints.
-    /// Creator: MP
+    /// Draws a custom inspector for map blueprints.
     /// </summary>
     [CustomEditor(typeof(MapBlueprint))]
     public class MapBlueprintEditor : UnityEditor.Editor
@@ -21,6 +20,9 @@ namespace MapGeneration.Editor
 
         private ReorderableAlgorithmStack _algorithmStack;
 
+        /// <summary>
+        /// This draws the custom inspector for the map-blueprint.
+        /// </summary>
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
@@ -66,11 +68,28 @@ namespace MapGeneration.Editor
             _algorithmStack = new ReorderableAlgorithmStack(serializedObject, serializedObject.FindProperty("AlgorithmStack"), _context.AlgorithmStack);
         }
 
+        /// <summary>
+        /// A class for the algorithm stack that is able to be reordered.
+        /// </summary>
         public class ReorderableAlgorithmStack
         {
+            /// <summary>
+            /// The selected element.
+            /// </summary>
             public SerializedProperty SelectedElement { get; set; }
+
+            /// <summary>
+            /// The list containing the algorithms. 
+            /// </summary>
             public ReorderableList List { get; set; }
 
+            /// <summary>
+            /// Constructs the algorithm stack.
+            /// </summary>
+            /// <param name="serializedObject"></param>
+            /// <param name="serializedProperty"></param>
+            /// <param name="stack"></param>
+            /// <param name="hideFooter"></param>
             public ReorderableAlgorithmStack(SerializedObject serializedObject, SerializedProperty serializedProperty, List<AlgorithmStorage> stack, bool hideFooter = false)
             {
                 //Instantiate a new reorderablelist
@@ -148,6 +167,9 @@ namespace MapGeneration.Editor
                     List.drawFooterCallback += rect => { };
             }
 
+            /// <summary>
+            /// This draws the selected element's serialized data.
+            /// </summary>
             public void DrawSelectedAlgorithm()
             {
                 GUILayout.Space(10);

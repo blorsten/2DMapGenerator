@@ -7,35 +7,59 @@ using UnityEngine;
 namespace MapGeneration.SaveSystem
 {
     /// <summary>
-    /// Purpose: Used on maps to save its childs persistent data.
-    /// Creator: MP
+    /// This class is Used on maps to save its chi persistent data.
     /// </summary>
     public class MapDataSaver
     {
-        //List containing all the found types and their variable data.
+        /// <summary>
+        /// List containing all the found types and their variable data.
+        /// </summary>
         private List<VariableInfo> _savedTypes;
 
-        //List containing all the DataIdentities saved data.
+        /// <summary>
+        /// List containing all the DataIdentities saved data.
+        /// </summary>
         private readonly List<VariableData<FieldInfo>> _savedFieldInfos;
 
-        //Same thing goes for properties.
+        /// <summary>
+        /// List containing all the DataIdentities saved properties.
+        /// </summary>
         private readonly List<VariableData<PropertyInfo>> _savedPropertyInfos;
 
-        //List used to mark the IDs of DataIdentities that has been modified.
+        /// <summary>
+        /// List used to mark the IDs of DataIdentities that has been modified.
+        /// </summary>
         private readonly List<Guid> _dirtyIds;
 
-        //Reference to the map that this data saver belongs to.
+        /// <summary>
+        /// Reference to the map that this data saver belongs to.
+        /// </summary>
         public Map Map { get; set; }
 
-        //ID of the map that this saver belongs to.
+        /// <summary>
+        /// ID of the map that this saver belongs to.
+        /// </summary>
         public Guid MapId { get; set; }
 
+        /// <summary>
+        /// The map's seed.
+        /// </summary>
         public int MapSeed { get; set; }
+
+        /// <summary>
+        /// Reference to the map's blueprint.
+        /// </summary>
         public MapBlueprint MapBlueprint { get; set; }
 
-        //Checks and see if theres any data saved.
+        /// <summary>
+        /// Checks and see if theres any data saved.
+        /// </summary>
         public bool HasSavedData { get { return _savedFieldInfos.Any() || _savedPropertyInfos.Any(); } }
 
+        /// <summary>
+        /// Constructs the map.
+        /// </summary>
+        /// <param name="map"></param>
         public MapDataSaver(Map map)
         {
             Map = map;
