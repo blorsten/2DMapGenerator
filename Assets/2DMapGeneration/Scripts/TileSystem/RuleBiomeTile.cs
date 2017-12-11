@@ -43,7 +43,7 @@ namespace MapGeneration.TileSystem
                 if (_chunk)
                 {
                     _currentSprites = _biomesSprites.Count > 0
-                        ? _biomesSprites.FirstOrDefault(x => x.iD == _biome)
+                        ? _biomesSprites.FirstOrDefault(x => x.ID == _biome)
                         : null;
 
                     //This checks the tiles neighbor status
@@ -66,30 +66,30 @@ namespace MapGeneration.TileSystem
             //This refeshes the values needed for the tile
             RefreshBiomeValues(position, tilemap);
 
-            if (_currentSprites != null && _currentSprites.iD != "")
+            if (_currentSprites != null && _currentSprites.ID != "")
             {
                 switch (_neighborType)
                 {
                     case TileNeighborType.Middle:
-                        tileData.sprite = _currentSprites.middleSprite;
+                        tileData.sprite = _currentSprites.MiddleSprite;
                         break;
                     case TileNeighborType.top:
-                        tileData.sprite = _currentSprites.topSprite;
+                        tileData.sprite = _currentSprites.TopSprite;
                         break;
                     case TileNeighborType.left:
-                        tileData.sprite = _currentSprites.leftSprite;
+                        tileData.sprite = _currentSprites.LeftSprite;
                         break;
                     case TileNeighborType.Right:
-                        tileData.sprite = _currentSprites.rightSprite;
+                        tileData.sprite = _currentSprites.RightSprite;
                         break;
                     case TileNeighborType.bottom:
-                        tileData.sprite = _currentSprites.middleSprite;
+                        tileData.sprite = _currentSprites.MiddleSprite;
                         break;
 
                 }
                 /*TODO Figure out why setting the tiledata.color dosen't change the color of the tile 
                 and why this does.*/
-                tilemap.GetComponent<Tilemap>().SetColor(position, _currentSprites.tint);
+                tilemap.GetComponent<Tilemap>().SetColor(position, _currentSprites.Tint);
             }            
         }
 

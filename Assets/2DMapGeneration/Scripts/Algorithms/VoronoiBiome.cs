@@ -1,15 +1,15 @@
 ﻿using MapGeneration.Extensions;
 using System.Collections.Generic;
+using System.Linq;
+using MapGeneration;
 using MapGeneration.ChunkSystem;
 using UnityEngine;
 
 namespace MapGeneration.Algorithm
 {
     /// <summary>
-    /// Purpose: 
-    /// Set biome on the generated map with diamond square
-    /// Creator:
-    /// Niels Justesen og Mikkel Bruun
+    /// Sets biome on the generated map with diamond square algortihm.
+    /// <a href="https://en.wikipedia.org/wiki/Voronoi_diagram">See Source</a>
     /// </summary>
     [CreateAssetMenu(fileName = "New Voronoir Biome", menuName = "2D Map Generation/Algorithms/Voronoi Biome")]
     public class VoronoiBiome : MapGenerationAlgorithm
@@ -19,6 +19,20 @@ namespace MapGeneration.Algorithm
         private int _width;
         private int _heigt;    
 
+        private List<Vector2Int> _directionsToCheck = new List<Vector2Int>()
+        {
+            new Vector2Int(-1,0),
+            new Vector2Int(1,0),
+            new Vector2Int(0,-1),
+            new Vector2Int(0,1)
+        };
+
+        /// <summary>
+        /// Starts the process of this algorithm.
+        /// </summary>
+        /// <param name="map">The map to operate on.</param>
+        /// <param name="usableChunks">What chunks can the placer use.</param>
+        /// <returns>Returns true if the succeeded</returns>
         public override bool Process(Map map, List<Chunk> usableChunks)
         {
             _width = map.Grid.GetLength(0) * map.MapBlueprint.ChunkSize.x;
@@ -33,21 +47,31 @@ namespace MapGeneration.Algorithm
                 }
             }
 
+
             //Set the random points in the grid
             for (int i = 1; i <= _nrOfPoints; i++)
             {
                 float noise = 1f / _nrOfPoints * i;
+                int x = map.Random.Range(0, _width - 1);
+                int y = map.Random.Range(0, _heigt - 1);
 
-                _noiseGrid[map.Random.Range(0, _width - 1), map.Random.Range(0, _heigt - 1)] = noise;
+                _noiseGrid[x, y] = noise;
             }
 
+            List<VornonoiData> data = new List<VornonoiData>();
 
-            List<VornonoiData> reuseableList = new List<VornonoiData>();
-            _noiseGrid = VornonoiPopulation(_noiseGrid, ref reuseableList);
+            _noiseGrid = VornonoiPopulation(_noiseGrid, ref data);
 
             return base.Process(map, usableChunks);
         }
 
+        /// <summary>
+        /// Goes through all the instantiated chunkholders and sets a biome value to the ones it
+        /// calculated in the process phase.
+        /// </summary>
+        /// <param name="map">The map to operate on.</param>
+        /// <param name="usableChunks">What chunks can the placer use.</param>
+        /// <returns>Returns true if the succeeded</returns>
         public override bool PostProcess(Map map, List<Chunk> usableChunks)
         {
             foreach (ChunkHolder chunk in map.Grid)
@@ -69,7 +93,7 @@ namespace MapGeneration.Algorithm
             return base.PostProcess(map, usableChunks);
         }
 
-        private float[,] VornonoiPopulation(float[,] map, ref List<VornonoiData> reuseableList)
+        private float[,] VornonoiPopulation(float[,] map, ref List<VornonoiData> data)
         {
             for (int x = 0; x < _width; x++)
             {
@@ -77,63 +101,76 @@ namespace MapGeneration.Algorithm
                 {
                     if (map[x, y] > 0)
                     {
-                        bool valid = false;
-                        for (int i = -1; i <= 1; i++)
+
+                        for (int i = 0; i < _directionsToCheck.Count; i++)
                         {
-                            if (valid)
-                                break;
-                            for (int j = -1; j < 1; j++)
-                            {
-                                Vector2Int pos = new Vector2Int(x + i, y + j);
-                                if ((i == 0 && j == 0) || pos.x < 0 || pos.y < 0 || pos.x >= _width || pos.y >= _heigt)
-                                    continue;
-                                if(map[pos.x,pos.y] == 0 && !reuseableList.Exists(
+                            Vector2Int directions = _directionsToCheck[i];
+                            Vector2Int pos = new Vector2Int(x + directions.x, y + directions.y);
+
+                            if (pos.x < 0 || pos.y < 0 || pos.x >= _width || pos.y >= _heigt)
+                                continue;
+
+                            if (map[pos.x, pos.y] == 0 && !data.Exists(
                                     o => o.Position.x == pos.x && o.Position.y == pos.y))
-                                {
-                                    valid = true;
-                                    reuseableList.Add(new VornonoiData(new Vector2Int(x, y), map[x, y]));
-                                    break;
-                                }
+                            {
+                                data.Add(new VornonoiData(new Vector2Int(x, y), map[x, y]));
+                                break;
                             }
                         }
+
                     }
                 }
             }
 
-            if (reuseableList.Count <= 0)
+            if (data.Count <= 0)
                 return map;
 
-            reuseableList.Sort((x, y) => x.Value.CompareTo(y.Value));
+            data.Sort((x, y) => x.Value.CompareTo(y.Value));
 
-            for (int i = 0; i < reuseableList.Count; i++)
+            for (int i = 0; i < data.Count; i++)
             {
-                for (int x = -1; x <= 1; x++)
+                for (int j = 0; j < _directionsToCheck.Count; j++)
                 {
-                    for (int y = -1; y <= 1; y++)
+                    Vector2Int directions = _directionsToCheck[j];
+                    Vector2Int pos = data[i].Position + directions;
+
+                    if (pos.x < 0 || pos.y < 0 || pos.x >= _width || pos.y >= _heigt)
+                        continue;
+                    if (map[pos.x, pos.y] == 0)
                     {
-                        Vector2Int pos = reuseableList[i].Position + new Vector2Int(x, y);
-                        if ((x == 0 && y == 0) || pos.x < 0 || pos.y < 0 || pos.x >= _width || pos.y >= _heigt)
-                            continue;
-                        if (map[pos.x, pos.y] == 0)
-                            map[pos.x, pos.y] = reuseableList[i].Value;
+                        map[pos.x, pos.y] = data[i].Value;
                     }
                 }
             }
-            reuseableList.Clear();
-            return VornonoiPopulation(map, ref reuseableList);
+            data.Clear();
+            return VornonoiPopulation(map, ref data);
         }
     }
 
-}
-
-public struct VornonoiData
-{
-    public Vector2Int Position { get; set; }
-    public float Value { get; set; }
-
-    public VornonoiData(Vector2Int postion, float value) : this()
+    /// <summary>
+    /// Holds date of a position and what scalar value it has.
+    /// </summary>
+    public struct VornonoiData
     {
-        Position = postion;
-        Value = value;
+        /// <summary>
+        /// Position in the <see cref="Map.Grid"/>.
+        /// </summary>
+        public Vector2Int Position { get; set; }
+
+        /// <summary>
+        /// A scalar value between 0 and 1 that decides a specific biome.
+        /// </summary>
+        public float Value { get; set; }
+
+        /// <summary>
+        /// Construct a voronoi data object that has a grid position and scalar value.
+        /// </summary>
+        /// <param name="postion"></param>
+        /// <param name="value"></param>
+        public VornonoiData(Vector2Int postion, float value) : this()
+        {
+            Position = postion;
+            Value = value;
+        }
     }
 }

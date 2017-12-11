@@ -6,16 +6,19 @@ using MapGeneration.Extensions;
 namespace MapGeneration.Algorithm
 {
     /// <summary>
-    /// Purpose:
-    /// find all chunks and replace them with a playable inviroment.
-    /// Creator:
-    /// Niels Justesen
+    /// Finds all chunksholders and fills them with a matching chunk.
     /// </summary>
     public class ChunkPlacer : MapGenerationAlgorithm
     {
         //List of the chunkholder prefabs, that needs a chunk
         private List<ChunkHolder> _chunksToReplace = new List<ChunkHolder>();
 
+        /// <summary>
+        /// Starts the process of finding empty chunkholders and find matching chunks.
+        /// </summary>
+        /// <param name="map">The map to operate on.</param>
+        /// <param name="usableChunks">What chunks can the placer use.</param>
+        /// <returns>Returns true if the succeeded</returns>
         public override bool Process(Map map, List<Chunk> usableChunks)
         {
             //Reset the list before use

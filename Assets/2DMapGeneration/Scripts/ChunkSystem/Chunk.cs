@@ -10,7 +10,7 @@ using UnityEditor.Callbacks;
 namespace MapGeneration.ChunkSystem
 {
     /// <summary>
-    /// This enum is used to determine the chunks type
+    /// This enum is used to determine the chunks type.
     /// </summary>
     public enum ChunkType
     {
@@ -18,7 +18,7 @@ namespace MapGeneration.ChunkSystem
     }
 
     /// <summary>
-    /// This calss stores the chunk's data.
+    /// This class stores the chunk's data.
     /// </summary>
     [ExecuteInEditMode]
     [SelectionBase]
@@ -35,26 +35,26 @@ namespace MapGeneration.ChunkSystem
 
         [SerializeField, HideInInspector] private ConditionalChunk _conditionalChunk;
 
-        //This sections is for generel properties 
-        //Tells the width of the chunk
+        //This sections is for generel properties.
+        //Tells the width of the chunk.
         [Header("Properties")]
         [SerializeField] private int _width; 
 
-        //Tells the height of the chunk
+        //Tells the height of the chunk.
         [SerializeField] private int _height;
 
-        //Tells the type of the chunk
+        //Tells the type of the chunk.
         [SerializeField] private ChunkType _chunkType; 
 
-        //These fields tells what openings are open on the chunk 
+        //These fields tells what openings are open on the chunk.
         [Header("Openings"), SerializeField] private ChunkOpenings _chunkOpenings;
 
-        //This is a list of TileFlags in the chunk
+        //This is a list of TileFlags in the chunk.
         [SerializeField, ReadOnly] private List<TileFlag> _openings = new List<TileFlag>();
 
         [SerializeField, ReadOnly] private List<TileFlag> _tileTileFlags = new List<TileFlag>();
 
-        //This section is for refernces
+        //This section is for references.
         [Header("References"),SerializeField] private Tilemap _environment;
         [SerializeField, HideInInspector] private ChunkHolder _chunkHolder;
 
@@ -67,17 +67,16 @@ namespace MapGeneration.ChunkSystem
 
         [SerializeField, HideInInspector] private Chunk _recipeReference;
 
-        //Properties for generel properties
         /// <summary>
-        /// This stores the chunks width in tiles
+        /// This stores the chunks width in tiles.
         /// </summary>
         public int Width { get { return _width; } set { _width = value; } }
         /// <summary>
-        /// This stores the chunks heigth in tiles
+        /// This stores the chunks height in tiles.
         /// </summary>
         public int Height { get { return _height; } set { _height = value; } }
         /// <summary>
-        /// This stores the chunk's type
+        /// This stores the chunk's type.
         /// </summary>
         public ChunkType ChunkType { get { return _chunkType; } set { _chunkType = value; } }
         /// <summary>
@@ -90,12 +89,12 @@ namespace MapGeneration.ChunkSystem
         /// </summary>
         public Map Map { get; set; }
         /// <summary>
-        /// A ID to indentify the Chunk
+        /// A ID to identify the Chunk.
         /// </summary>
         public string ID { get; set; }
 
         /// <summary>
-        /// A list for the items in the chunk
+        /// A list for the items in the chunk.
         /// </summary>
         public List<GameObject> Items { get; set; } 
 
@@ -118,7 +117,7 @@ namespace MapGeneration.ChunkSystem
         public ChunkOpenings ChunkOpenings { get { return _chunkOpenings; } set { _chunkOpenings = value; } }
 
         /// <summary>
-        /// 
+        /// If this is true, then the chunk is not depended external object
         /// </summary>
         public bool IsStandaloneChunk { get { return _isStandaloneChunk; } set { _isStandaloneChunk = value; } }
 
@@ -148,7 +147,7 @@ namespace MapGeneration.ChunkSystem
         }
 
         /// <summary>
-        /// This is a reference to the chunks ChunkHolder
+        /// This is a reference to the chunks ChunkHolder.
         /// </summary>
         public ChunkHolder ChunkHolder
         {
@@ -212,7 +211,7 @@ namespace MapGeneration.ChunkSystem
                 }
             }
 
-            //This draws tile flags
+            //This draws tile flags.
             if (_drawTileFlags && Environment)
             {
                 foreach (var flag in TileFlags)
@@ -237,7 +236,7 @@ namespace MapGeneration.ChunkSystem
                     }
                 }
             }
-            //This draws edges
+            //This draws edges.
             if (_drawEdges && Environment)
             {
                 UnityEngine.Gizmos.color = Color.white;
@@ -271,7 +270,7 @@ namespace MapGeneration.ChunkSystem
         }
 
         /// <summary>
-        /// When the game isnt playing make sure all the tiles are refreshed after compilation.
+        /// When the game isn't playing make sure all the tiles are refreshed after compilation.
         /// </summary>
         void OnEnable()
         {

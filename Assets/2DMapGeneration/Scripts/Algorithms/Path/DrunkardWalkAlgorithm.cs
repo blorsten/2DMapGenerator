@@ -7,11 +7,8 @@ using MapGeneration.Extensions;
 namespace MapGeneration.Algorithm
 {
     /// <summary>
-    /// Purpose:
-    /// make a path for the MapBuilder to fill with chunks
-    /// Creator:
-    /// Niels Justesen
-    /// Mathias Prisfeldt
+    /// Starts at a random position in the map grid and starts a walk from there.
+    /// <a href="http://pcg.wikidot.com/pcg-algorithm:drunkard-walk">See Source</a>
     /// </summary>
     [CreateAssetMenu(fileName = "New Drunkard Walk", menuName = "2D Map Generation/Algorithms/Drunkard Walk")]
     public class DrunkardWalkAlgorithm : PathAlgorithm
@@ -19,6 +16,12 @@ namespace MapGeneration.Algorithm
         //Number of times the algorithms creates a marked chunk.
         [SerializeField] private int _pathLength = 10;
 
+        /// <summary>
+        /// Starts a Drunkard Walk until it reaches a dead end or <see cref="_pathLength"/> is reached.
+        /// </summary>
+        /// <param name="map">The map to operate on.</param>
+        /// <param name="usableChunks">What chunks can the placer use.</param>
+        /// <returns>Returns true if the succeeded</returns>
         public override bool Process(Map map, List<Chunk> usableChunks)
         {
             bool success = base.Process(map, usableChunks);

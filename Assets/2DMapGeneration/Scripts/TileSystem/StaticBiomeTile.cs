@@ -26,11 +26,11 @@ namespace MapGeneration.TileSystem
         {
             base.RefreshBiomeValues(position, tilemap);
 
-            //if a chunk is found, then get the current biome id and use it to get sprites
+            //if a chunk is found, then get the current biome ID and use it to get sprites
             if (_chunk)
             {
                 _currentSprites = _biomesSprites.Count > 0
-                    ? _biomesSprites.FirstOrDefault(x => x.iD == _biome)
+                    ? _biomesSprites.FirstOrDefault(x => x.ID == _biome)
                     : null;
             }
         }
@@ -45,10 +45,10 @@ namespace MapGeneration.TileSystem
         {
             base.GetTileData(position, tilemap, ref tileData);
             RefreshBiomeValues(position, tilemap);
-            if (_currentSprites != null && _currentSprites.iD != "")
+            if (_currentSprites != null && _currentSprites.ID != "")
             {
-                tileData.sprite = _currentSprites.sprite;
-                tilemap.GetComponent<Tilemap>().SetColor(position, _currentSprites.tint);
+                tileData.sprite = _currentSprites.Sprite;
+                tilemap.GetComponent<Tilemap>().SetColor(position, _currentSprites.Tint);
             }
 
         }

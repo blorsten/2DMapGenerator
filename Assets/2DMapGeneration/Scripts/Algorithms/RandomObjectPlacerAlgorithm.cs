@@ -6,9 +6,19 @@ using Random = UnityEngine.Random;
 
 namespace MapGeneration.Algorithm
 {
+    /// <summary>
+    /// Algortihm that goes through all instantiated <see cref="ChunkHolder"/> and tries to instantiate a matching
+    /// <see cref="GameplayObject"/>.
+    /// </summary>
     [CreateAssetMenu(fileName = "New Random Object Placer", menuName = "2D Map Generation/Algorithms/Random Object Placer")]
     public class RandomObjectPlacerAlgorithm : MapGenerationAlgorithm
     {
+        /// <summary>
+        /// Starts the process of the algortihm.
+        /// </summary>
+        /// <param name="map">The map to operate on.</param>
+        /// <param name="usableChunks">What chunks can the placer use.</param>
+        /// <returns>Returns true if the succeeded</returns>
         public override bool PostProcess(Map map, List<Chunk> usableChunks)
         {
             //This goes throw all of the map's chunks

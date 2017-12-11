@@ -8,12 +8,13 @@ using UnityEngine;
 namespace MapGeneration.Algorithm
 {
     /// <summary>
-    /// Purpose: Base class for all path algortihms.
-    /// Creator: MP & NJ
+    /// Base class for all path algortihms.
     /// </summary>
     public class PathAlgorithm : MapGenerationAlgorithm
     {
-        //Compass directions used for choosing where to go next.
+        /// <summary>
+        /// Compass directions used by the path algortihm for indicating where it goes.
+        /// </summary>
         [Flags]
         public enum CardinalDirections
         {
@@ -32,6 +33,12 @@ namespace MapGeneration.Algorithm
         //Collection used to store all the directions the path algorithm can take.
         protected List<CardinalDirections> DirectionCandidates;
 
+        /// <summary>
+        /// Resets the path algortihm.
+        /// </summary>
+        /// <param name="map">The map to operate on.</param>
+        /// <param name="usableChunks">What chunks can the placer use.</param>
+        /// <returns>Returns true if the succeeded</returns>
         public override bool Process(Map map, List<Chunk> usableChunks)
         {
             bool success = base.Process(map, usableChunks);
