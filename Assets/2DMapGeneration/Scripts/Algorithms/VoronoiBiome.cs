@@ -1,16 +1,15 @@
 ﻿using MapGeneration.Extensions;
 using System.Collections.Generic;
 using System.Linq;
+using MapGeneration;
 using MapGeneration.ChunkSystem;
 using UnityEngine;
 
 namespace MapGeneration.Algorithm
 {
     /// <summary>
-    /// Purpose: 
-    /// Set biome on the generated map with diamond square
-    /// Creator:
-    /// Niels Justesen og Mikkel Bruun
+    /// Sets biome on the generated map with diamond square algortihm.
+    /// <a href="https://en.wikipedia.org/wiki/Voronoi_diagram">See Source</a>
     /// </summary>
     [CreateAssetMenu(fileName = "New Voronoir Biome", menuName = "2D Map Generation/Algorithms/Voronoi Biome")]
     public class VoronoiBiome : MapGenerationAlgorithm
@@ -28,6 +27,12 @@ namespace MapGeneration.Algorithm
             new Vector2Int(0,1)
         };
 
+        /// <summary>
+        /// Starts the process of this algorithm.
+        /// </summary>
+        /// <param name="map">The map to operate on.</param>
+        /// <param name="usableChunks">What chunks can the placer use.</param>
+        /// <returns>Returns true if the succeeded</returns>
         public override bool Process(Map map, List<Chunk> usableChunks)
         {
             _width = map.Grid.GetLength(0) * map.MapBlueprint.ChunkSize.x;
@@ -60,6 +65,13 @@ namespace MapGeneration.Algorithm
             return base.Process(map, usableChunks);
         }
 
+        /// <summary>
+        /// Goes through all the instantiated chunkholders and sets a biome value to the ones it
+        /// calculated in the process phase.
+        /// </summary>
+        /// <param name="map">The map to operate on.</param>
+        /// <param name="usableChunks">What chunks can the placer use.</param>
+        /// <returns>Returns true if the succeeded</returns>
         public override bool PostProcess(Map map, List<Chunk> usableChunks)
         {
             foreach (ChunkHolder chunk in map.Grid)
@@ -135,16 +147,30 @@ namespace MapGeneration.Algorithm
         }
     }
 
-}
-
-public struct VornonoiData
-{
-    public Vector2Int Position { get; set; }
-    public float Value { get; set; }
-
-    public VornonoiData(Vector2Int postion, float value) : this()
+    /// <summary>
+    /// Holds date of a position and what scalar value it has.
+    /// </summary>
+    public struct VornonoiData
     {
-        Position = postion;
-        Value = value;
+        /// <summary>
+        /// Position in the <see cref="Map.Grid"/>.
+        /// </summary>
+        public Vector2Int Position { get; set; }
+
+        /// <summary>
+        /// A scalar value between 0 and 1 that decides a specific biome.
+        /// </summary>
+        public float Value { get; set; }
+
+        /// <summary>
+        /// Construct a voronoi data object that has a grid position and scalar value.
+        /// </summary>
+        /// <param name="postion"></param>
+        /// <param name="value"></param>
+        public VornonoiData(Vector2Int postion, float value) : this()
+        {
+            Position = postion;
+            Value = value;
+        }
     }
 }

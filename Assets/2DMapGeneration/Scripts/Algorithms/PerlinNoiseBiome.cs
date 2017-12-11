@@ -6,10 +6,8 @@ using UnityEngine;
 namespace MapGeneration.Algorithm
 {
     /// <summary>
-    /// Purpose: 
-    /// Set biome on the generated map with perlin noise
-    /// Creator:
-    /// Niels Justesen
+    /// Sets biome on the generated map with the perlin noise algortihm.
+    /// <a href="http://flafla2.github.io/2014/08/09/perlinnoise.html">See Source</a>
     /// </summary>
     [CreateAssetMenu(fileName = "New Perlin Noise", menuName = "2D Map Generation/Algorithms/Perlin Noise Biome")]
     public class PerlinNoiseBiome : MapGenerationAlgorithm
@@ -26,9 +24,9 @@ namespace MapGeneration.Algorithm
         /// <summary>
         /// In Process the grid gets all its biome values
         /// </summary>
-        /// <param name="map"></param>
-        /// <param name="usableChunks"></param>
-        /// <returns></returns>
+        /// <param name="map">The map to operate on.</param>
+        /// <param name="usableChunks">What chunks can the placer use.</param>
+        /// <returns>Returns true if the succeeded</returns>
         public override bool Process(Map map, List<Chunk> usableChunks)
         {
             //Get map size
@@ -56,9 +54,9 @@ namespace MapGeneration.Algorithm
         /// <summary>
         /// In PostProcess the instances of all chunks get their biome values
         /// </summary>
-        /// <param name="map"></param>
-        /// <param name="usableChunks"></param>
-        /// <returns></returns>
+        /// <param name="map">The map to operate on.</param>
+        /// <param name="usableChunks">What chunks can the placer use.</param>
+        /// <returns>Returns true if the succeeded</returns>
         public override bool PostProcess(Map map, List<Chunk> usableChunks)
         {
             foreach (ChunkHolder chunk in map.Grid)

@@ -5,28 +5,38 @@ using UnityEngine;
 
 namespace MapGeneration.Algorithm
 {
+    /// <summary>
+    /// Struct that contains a algortihm and its active state.
+    /// </summary>
     [Serializable]
     public struct AlgorithmStorage
     {
+        /// <summary>
+        /// The active state of the <see cref="Algorithm"/>
+        /// </summary>
         [SerializeField] public bool IsActive;
+
+        /// <summary>
+        /// The chosen algortihm.
+        /// </summary>
         [SerializeField] public MapGenerationAlgorithm Algorithm;
 
+        /// <summary>
+        /// Constructs a struct object that contains an algortihm and sets its active state to true.
+        /// </summary>
+        /// <param name="algorithm"></param>
         public AlgorithmStorage(MapGenerationAlgorithm algorithm)
         {
             Algorithm = algorithm;
             IsActive = true;
         }
     }
+    
     /// <summary>
-    /// Purpose:
-    /// Creator:
+    /// Base class for all algorithms.
     /// </summary>
-    /// 
-
     public class MapGenerationAlgorithm : ScriptableObject
     {
-        
-
         /// <summary>
         /// Process a given map
         /// </summary>

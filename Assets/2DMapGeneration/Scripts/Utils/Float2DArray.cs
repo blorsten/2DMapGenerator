@@ -7,7 +7,7 @@ using UnityEngine;
 namespace MapGeneration.Utils
 {
     /// <summary>
-    /// A Unity serializable 2D array that holds chunkholders.
+    /// A Unity serializable 2D array that holds ints.
     /// </summary>
     [Serializable]
     public class Float2DArray : IEnumerable<float>
@@ -15,16 +15,26 @@ namespace MapGeneration.Utils
         [SerializeField, HideInInspector] private int _rowsLength;
         [SerializeField, HideInInspector] private int _columnsLength;
 
+        /// <summary>
+        /// Class used by <see cref="MapGeneration.Utils.Float2DArray"/> for containing columns of float(s).
+        /// </summary>
         [Serializable]
         public class Columns
         {
             [SerializeField, HideInInspector] private float[] _columnsArray;
 
+            /// <summary>
+            /// Constructs a column of float(s).
+            /// </summary>
+            /// <param name="columnsLength">Desired length of the column.</param>
             public Columns(int columnsLength)
             {
                 ColumnsArray = new float[columnsLength];
             }
 
+            /// <summary>
+            /// Property for containing the column.
+            /// </summary>
             public float[] ColumnsArray
             {
                 get { return _columnsArray; }
@@ -33,19 +43,30 @@ namespace MapGeneration.Utils
         }
 
         [SerializeField, HideInInspector] private Columns[] _rows;
-        
+
+        /// <summary>
+        /// Constructs a 2D Array for int(s).
+        /// </summary>
+        /// <param name="rowsLength">Desired amount of rows in the array.</param>
+        /// <param name="columnsLength">Desired length of the columns.</param>
         public Float2DArray(int rowsLength, int columnsLength)
         {
             _rows = new Columns[rowsLength];
             for (var i = 0; i < _rows.Length; i++)
             {
-                _rows[i] = new Columns(columnsLength); 
+                _rows[i] = new Columns(columnsLength);
             }
 
             _rowsLength = rowsLength;
             _columnsLength = columnsLength;
         }
 
+        /// <summary>
+        /// Array accessor for the 2D Array, reflects the original way to access a array on.
+        /// </summary>
+        /// <param name="rowIndex">Row index.</param>
+        /// <param name="colIndex">Column index.</param>
+        /// <returns>Returns the found float on this array position.</returns>
         public float this[int rowIndex, int colIndex]
         {
             get { return _rows[rowIndex].ColumnsArray[colIndex]; }
@@ -64,10 +85,14 @@ namespace MapGeneration.Utils
 
             if (p0 == 1)
                 return _columnsLength;
-                
+
             return 0;
         }
 
+        /// <summary>
+        /// Selects all columns and calculates a enumerator for them all.
+        /// </summary>
+        /// <returns>Returns an enumerator for the 2D array.</returns>
         public IEnumerator<float> GetEnumerator()
         {
             return _rows.SelectMany(columns => columns.ColumnsArray.Select(arg1 => arg1)).GetEnumerator();
