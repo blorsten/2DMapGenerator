@@ -5,16 +5,16 @@ using UnityEngine;
 namespace MapGeneration.ChunkSystem
 {
     /// <summary>
-    /// Purpose:
-    /// To give each chunk some openings, to be used in any way
-    /// Creator:
-    /// MP
+    /// Holds dat about a chunks openings, connections and connection type.
     /// </summary>
     [Serializable]
 #pragma warning disable 660,661
     public class ChunkOpenings
 #pragma warning restore 660,661
     {
+        /// <summary>
+        /// Used to define the type of a connection.
+        /// </summary>
         public enum ConnectionType
         {
             Default,
@@ -36,23 +36,72 @@ namespace MapGeneration.ChunkSystem
         [SerializeField, HideInInspector] private ConnectionType _leftConnectionType;
         [SerializeField, HideInInspector] private ConnectionType _rightConnectionType;
 
-        //These properties tells te chunk whick openings are used
+        /// <summary>
+        /// If true the top connections is there.
+        /// </summary>
         public bool TopConnection { get { return _topConnection; } private set { _topConnection = value; TopOpen = value; } }
+
+        /// <summary>
+        /// If true the bottom connection is there.
+        /// </summary>
         public bool BottomConnetion { get { return _bottomConnetion; } private set { _bottomConnetion = value; BottomOpen = value; } }
+
+        /// <summary>
+        /// If true the left connections is there.
+        /// </summary>
         public bool LeftConnection { get { return _leftConnection; } private set { _leftConnection = value; LeftOpen = value; } }
+
+        /// <summary>
+        /// If true the right connection is there.
+        /// </summary>
         public bool RightConnection { get { return _rightConnection; } private set { _rightConnection = value; RightOpen = value; } }
 
+        /// <summary>
+        /// Defines what kind of connection type top is.
+        /// </summary>
         public ConnectionType TopConnectionType { get { return _topConnectionType; } private set { _topConnectionType = value; } }
+
+        /// <summary>
+        /// Defines what kind of connection type bottom is.
+        /// </summary>
         public ConnectionType BottomConnectionType { get { return _bottomConnectionType; } private set { _bottomConnectionType = value; } }
+
+        /// <summary>
+        /// Defines what kind of connection type left is.
+        /// </summary>
         public ConnectionType LeftConnectionType { get { return _leftConnectionType; } private set { _leftConnectionType = value; } }
+
+        /// <summary>
+        /// Defines what kind of connection type right is.
+        /// </summary>
         public ConnectionType RightConnectionType { get { return _rightConnectionType; } private set { _rightConnectionType = value; } }
 
-        //Properties for opennings
+        /// <summary>
+        /// If true top is open.
+        /// </summary>
         public bool TopOpen {  get { return _topOpen; } set { _topOpen = value; } }
+
+        /// <summary>
+        /// If true bottom is open.
+        /// </summary>
         public bool BottomOpen { get { return _bottomOpen; } set { _bottomOpen = value; } }
+
+        /// <summary>
+        /// If true left is open.
+        /// </summary>
         public bool LeftOpen { get { return _leftOpen; } set { _leftOpen = value; } }
+
+        /// <summary>
+        /// If true right is open.
+        /// </summary>
         public bool RightOpen { get { return _rightOpen; } set { _rightOpen = value; } }
 
+        /// <summary>
+        /// Equality operator between two chunkopenings.
+        /// </summary>
+        /// <param name="a">This chunkopenings.</param>
+        /// <param name="b">The other one to check on.</param>
+        /// <returns>Returns true if all their openings are the same.</returns>
         public static bool operator == (ChunkOpenings a, ChunkOpenings b)
         {
             bool isValid = true;
@@ -69,6 +118,12 @@ namespace MapGeneration.ChunkSystem
             return isValid;
         }
 
+        /// <summary>
+        /// Inequality operator between two chunkopenings.
+        /// </summary>
+        /// <param name="a">This chunkopenings.</param>
+        /// <param name="b">The other one to check on.</param>
+        /// <returns>Returns true if one of their openings are <b>NOT</b> the same.</returns>
         public static bool operator !=(ChunkOpenings a, ChunkOpenings b)
         {
             return !(a == b);
