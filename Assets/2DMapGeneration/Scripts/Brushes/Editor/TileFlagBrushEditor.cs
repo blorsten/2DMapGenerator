@@ -2,24 +2,29 @@
 using UnityEditor;
 using UnityEngine;
 
-/// <summary>
-/// This class is used to show information for the TileFlagBrush in the inspector
-/// </summary>
-[CustomEditor(typeof(TileFlagBrush))]
-public class TileFlagBrushEditor : GridBrushEditor
+namespace MapGeneration.Editor
 {
-    public TileFlagBrush Brush { get { return (target as TileFlagBrush); } }
-
     /// <summary>
-    /// This handles the brush's inspector items.
+    /// This class is used to show information for the TileFlagBrush in the inspector
     /// </summary>
-    public override void OnPaintInspectorGUI()
+    [CustomEditor(typeof(TileFlagBrush))]
+    public class TileFlagBrushEditor : GridBrushEditor
     {
-        base.OnPaintInspectorGUI();
-        GUILayout.BeginHorizontal();
-        //This shows a dropdown menu that tells the brush what type of tile it will place
-        Brush.BrushTileFlag =
-            (BrushTileFlag)EditorGUILayout.EnumPopup("TileFlag type", Brush.BrushTileFlag);
-        GUILayout.EndHorizontal();
+        public TileFlagBrush Brush { get { return (target as TileFlagBrush); } }
+
+        /// <summary>
+        /// This handles the brush's inspector items.
+        /// </summary>
+        public override void OnPaintInspectorGUI()
+        {
+            base.OnPaintInspectorGUI();
+            GUILayout.BeginHorizontal();
+            //This shows a dropdown menu that tells the brush what type of tile it will place
+            Brush.BrushTileFlag =
+                (BrushTileFlag)EditorGUILayout.EnumPopup("TileFlag type", Brush.BrushTileFlag);
+            GUILayout.EndHorizontal();
+        }
     }
 }
+
+

@@ -10,7 +10,7 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace MapBuilderEditor
+namespace MapGeneration.Editor
 {
     /// <summary>
     /// Purpose: Custom Inspector UI for Map Builder
@@ -18,7 +18,7 @@ namespace MapBuilderEditor
     /// </summary>
     [CustomEditor(typeof(MapBuilder))]
     [Serializable]
-    public class MapBuilderEditor : Editor
+    public class MapBuilderEditor : UnityEditor.Editor
     {
         private const int MAX_SAVED_SEEDS = Int32.MaxValue;
         private const int SCROLLVIEW_LIMIT = 5;
