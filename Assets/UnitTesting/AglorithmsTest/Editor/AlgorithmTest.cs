@@ -12,17 +12,17 @@ public class AlgorithmTest
     private const string MAPBUILER_TEST_BLUEPRINT_PATH =
         "Assets/UnitTesting/AglorithmsTest/AlgorithmBPTest.asset";
 
-    MapBlueprint _bp;
-    SpelunkyAlgorithm _spelunky;
-    DrunkardWalkAlgorithm _drunkard;
-    DeadEndMaker _deadEndMaker;
-    PerlinNoiseBiome _perlinNoise;
-    VoronoiBiome _voronoi;
+    private readonly MapBlueprint _recipeBp;
+    private MapBlueprint _bp;
+    private readonly SpelunkyAlgorithm _spelunky;
+    private readonly DrunkardWalkAlgorithm _drunkard;
+    private readonly DeadEndMaker _deadEndMaker;
+    private readonly PerlinNoiseBiome _perlinNoise;
+    private readonly VoronoiBiome _voronoi;
 
     public AlgorithmTest()
     {
-        MapBuilder.Instance.CurrentBlueprint = AssetDatabase.LoadAssetAtPath<MapBlueprint>(MAPBUILER_TEST_BLUEPRINT_PATH);
-        _bp = MapBuilder.Instance.CurrentBlueprint;
+        _recipeBp = AssetDatabase.LoadAssetAtPath<MapBlueprint>(MAPBUILER_TEST_BLUEPRINT_PATH);
         _spelunky = SpelunkyAlgorithm.CreateInstance<SpelunkyAlgorithm>();
         _drunkard = DrunkardWalkAlgorithm.CreateInstance<DrunkardWalkAlgorithm>();
         _deadEndMaker = DeadEndMaker.CreateInstance<DeadEndMaker>();
@@ -30,9 +30,16 @@ public class AlgorithmTest
         _voronoi = VoronoiBiome.CreateInstance<VoronoiBiome>();
     }
 
+    private void ResetInstances()
+    {
+        MapBuilder.Instance.CurrentBlueprint = _bp = Object.Instantiate(_recipeBp);
+    }
+     
     [Test]
     public void Algorithm_In_Stack()
     {
+        ResetInstances();
+
         AlgorithmStorage storage = new AlgorithmStorage(_spelunky);
         _bp.AlgorithmStack.Add(storage);
 
@@ -42,6 +49,8 @@ public class AlgorithmTest
     [Test]
     public void ChunkPlacer_Execution()
     {
+        ResetInstances();
+
         AlgorithmStorage spelunkyStorage = new AlgorithmStorage(_spelunky);
 
         _bp.AlgorithmStack.Add(spelunkyStorage);
@@ -54,6 +63,8 @@ public class AlgorithmTest
     [Test]
     public void Spelunky_Algorithm_Execution()
     {
+        ResetInstances();
+
         AlgorithmStorage storage = new AlgorithmStorage(_spelunky);
         _bp.AlgorithmStack.Add(storage);
 
@@ -65,6 +76,8 @@ public class AlgorithmTest
     [Test]
     public void DrunkardWalk_Algorithm_Execution()
     {
+        ResetInstances();
+
         AlgorithmStorage storage = new AlgorithmStorage(_drunkard);
         _bp.AlgorithmStack.Add(storage);
 
@@ -76,6 +89,8 @@ public class AlgorithmTest
     [Test]
     public void DeadEndMaker_Algorithm()
     {
+        ResetInstances();
+
         AlgorithmStorage spelunkyStorage = new AlgorithmStorage(_spelunky);
         AlgorithmStorage deadEndStorage = new AlgorithmStorage(_deadEndMaker);
         _bp.AlgorithmStack.Add(spelunkyStorage);
@@ -89,6 +104,8 @@ public class AlgorithmTest
     [Test]
     public void Biome_In_Stack()
     {
+        ResetInstances();
+
         AlgorithmStorage spelunkyStorage = new AlgorithmStorage(_spelunky);
         AlgorithmStorage deadEndStorage = new AlgorithmStorage(_deadEndMaker);
         AlgorithmStorage biomeStorage = new AlgorithmStorage(_perlinNoise);
@@ -105,6 +122,8 @@ public class AlgorithmTest
     [Test]
     public void Perlin_Noise_Biome_Execution()
     {
+        ResetInstances();
+
         AlgorithmStorage spelunkyStorage = new AlgorithmStorage(_spelunky);
         AlgorithmStorage deadEndStorage = new AlgorithmStorage(_deadEndMaker);
         AlgorithmStorage biomeStorage = new AlgorithmStorage(_perlinNoise);
@@ -121,6 +140,8 @@ public class AlgorithmTest
     [Test]
     public void Voronoi_Biome_Execution()
     {
+        ResetInstances();
+
         AlgorithmStorage spelunkyStorage = new AlgorithmStorage(_spelunky);
         AlgorithmStorage deadEndStorage = new AlgorithmStorage(_deadEndMaker);
         AlgorithmStorage biomeStorage = new AlgorithmStorage(_voronoi);
