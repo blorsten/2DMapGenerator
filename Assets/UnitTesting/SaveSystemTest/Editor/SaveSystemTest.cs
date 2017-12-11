@@ -31,7 +31,7 @@ public class SaveSystemTest
     {
         Map newMap = MapBuilder.Instance.Generate();
 
-        newMap.GetComponentInChildren<SaveSystemTestScript>().TestInt = 1337;
+        newMap.GetComponentInChildren<SaveSystemTestScript>().TestInt = Int32.MaxValue; 
 
         newMap.MapDataSaver.SavePersistentData();
 
@@ -43,11 +43,11 @@ public class SaveSystemTest
     {
         MapDataSaver newMap = MapBuilder.Instance.Generate().MapDataSaver;
 
-        newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestInt = 1337;
+        newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestInt = Int32.MaxValue;
 
         Map secondMap = MapBuilder.Instance.Generate(newMap);
 
-        Assert.AreEqual(1337, secondMap.GetComponentInChildren<SaveSystemTestScript>().TestInt);
+        Assert.AreEqual(Int32.MaxValue, secondMap.GetComponentInChildren<SaveSystemTestScript>().TestInt);
     }
 
     [Test]
@@ -55,7 +55,7 @@ public class SaveSystemTest
     {
         MapDataSaver newMap = MapBuilder.Instance.Generate().MapDataSaver;
 
-        newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestInt = 1337;
+        newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestInt = Int32.MaxValue;
 
         Assert.IsFalse(newMap.HasSavedData);
 
@@ -65,7 +65,7 @@ public class SaveSystemTest
 
         newMap.LoadPersistentData();
 
-        Assert.AreEqual(1337, newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestInt);
+        Assert.AreEqual(Int32.MaxValue, newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestInt);
     }
 
     [Test]
@@ -73,7 +73,7 @@ public class SaveSystemTest
     {
         MapDataSaver newMap = MapBuilder.Instance.Generate().MapDataSaver;
 
-        newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestIntProp = 1337;
+        newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestIntProp = Int32.MaxValue;
 
         Assert.IsFalse(newMap.HasSavedData);
 
@@ -83,7 +83,7 @@ public class SaveSystemTest
 
         newMap.LoadPersistentData();
 
-        Assert.AreEqual(1337, newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestIntProp);
+        Assert.AreEqual(Int32.MaxValue, newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestIntProp);
     }
 
     [Test]
@@ -127,7 +127,7 @@ public class SaveSystemTest
     {
         MapDataSaver newMap = MapBuilder.Instance.Generate().MapDataSaver;
 
-        newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestFloat = 13.37f;
+        newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestFloat = Single.MaxValue;
 
         Assert.IsFalse(newMap.HasSavedData);
 
@@ -137,7 +137,7 @@ public class SaveSystemTest
 
         newMap.LoadPersistentData();
 
-        Assert.AreEqual(13.37f, newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestFloat);
+        Assert.AreEqual(Single.MaxValue, newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestFloat);
     }
 
     [Test]
@@ -145,7 +145,7 @@ public class SaveSystemTest
     {
         MapDataSaver newMap = MapBuilder.Instance.Generate().MapDataSaver;
 
-        newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestFloatProp = 13.37f;
+        newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestFloatProp = Single.MaxValue;
 
         Assert.IsFalse(newMap.HasSavedData);
 
@@ -155,7 +155,7 @@ public class SaveSystemTest
 
         newMap.LoadPersistentData();
 
-        Assert.AreEqual(13.37f, newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestFloatProp);
+        Assert.AreEqual(Single.MaxValue, newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestFloatProp);
     }
 
     [Test]
@@ -163,7 +163,7 @@ public class SaveSystemTest
     {
         MapDataSaver newMap = MapBuilder.Instance.Generate().MapDataSaver;
 
-        newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestDouble = 1337;
+        newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestDouble = Double.MaxValue;
 
         Assert.IsFalse(newMap.HasSavedData);
 
@@ -173,7 +173,7 @@ public class SaveSystemTest
 
         newMap.LoadPersistentData();
 
-        Assert.AreEqual(1337, newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestDouble);
+        Assert.AreEqual(Double.MaxValue, newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestDouble);
     }
 
     [Test]
@@ -181,7 +181,7 @@ public class SaveSystemTest
     {
         MapDataSaver newMap = MapBuilder.Instance.Generate().MapDataSaver;
 
-        newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestDoubleProp = 1337;
+        newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestDoubleProp = Double.MaxValue;
 
         Assert.IsFalse(newMap.HasSavedData);
 
@@ -191,7 +191,7 @@ public class SaveSystemTest
 
         newMap.LoadPersistentData();
 
-        Assert.AreEqual(1337, newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestDoubleProp);
+        Assert.AreEqual(Double.MaxValue, newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestDoubleProp);
     }
 
     [Test]
@@ -199,7 +199,7 @@ public class SaveSystemTest
     {
         MapDataSaver newMap = MapBuilder.Instance.Generate().MapDataSaver;
 
-        newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestByte = 137;
+        newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestByte = Byte.MaxValue;
 
         Assert.IsFalse(newMap.HasSavedData);
 
@@ -209,7 +209,7 @@ public class SaveSystemTest
 
         newMap.LoadPersistentData();
 
-        Assert.AreEqual(137, newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestByte);
+        Assert.AreEqual(Byte.MaxValue, newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestByte);
     }
 
     [Test]
@@ -217,7 +217,7 @@ public class SaveSystemTest
     {
         MapDataSaver newMap = MapBuilder.Instance.Generate().MapDataSaver;
 
-        newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestByteProp = 137;
+        newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestByteProp = Byte.MaxValue;
 
         Assert.IsFalse(newMap.HasSavedData);
 
@@ -227,7 +227,7 @@ public class SaveSystemTest
 
         newMap.LoadPersistentData();
 
-        Assert.AreEqual(137, newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestByteProp);
+        Assert.AreEqual(Byte.MaxValue, newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestByteProp);
     }
 
     [Test]
@@ -235,7 +235,7 @@ public class SaveSystemTest
     {
         MapDataSaver newMap = MapBuilder.Instance.Generate().MapDataSaver;
 
-        newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestChar = 'm';
+        newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestChar = Char.MaxValue;
 
         Assert.IsFalse(newMap.HasSavedData);
 
@@ -245,7 +245,7 @@ public class SaveSystemTest
 
         newMap.LoadPersistentData();
 
-        Assert.AreEqual('m', newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestChar);
+        Assert.AreEqual(Char.MaxValue, newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestChar);
     }
 
     [Test]
@@ -253,7 +253,7 @@ public class SaveSystemTest
     {
         MapDataSaver newMap = MapBuilder.Instance.Generate().MapDataSaver;
 
-        newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestCharProp = 'm';
+        newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestCharProp = Char.MaxValue;
 
         Assert.IsFalse(newMap.HasSavedData);
 
@@ -263,7 +263,7 @@ public class SaveSystemTest
 
         newMap.LoadPersistentData();
 
-        Assert.AreEqual('m', newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestCharProp);
+        Assert.AreEqual(Char.MaxValue, newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestCharProp);
     }
 
     [Test]
@@ -271,7 +271,7 @@ public class SaveSystemTest
     {
         MapDataSaver newMap = MapBuilder.Instance.Generate().MapDataSaver;
 
-        newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestDecimal = 525;
+        newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestDecimal = Decimal.MaxValue;
 
         Assert.IsFalse(newMap.HasSavedData);
 
@@ -281,7 +281,7 @@ public class SaveSystemTest
 
         newMap.LoadPersistentData();
 
-        Assert.AreEqual(525, newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestDecimal);
+        Assert.AreEqual(Decimal.MaxValue, newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestDecimal);
     }
 
     [Test]
@@ -289,7 +289,7 @@ public class SaveSystemTest
     {
         MapDataSaver newMap = MapBuilder.Instance.Generate().MapDataSaver;
 
-        newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestDecimalProp = 525;
+        newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestDecimalProp = Decimal.MaxValue;
 
         Assert.IsFalse(newMap.HasSavedData);
 
@@ -299,7 +299,7 @@ public class SaveSystemTest
 
         newMap.LoadPersistentData();
 
-        Assert.AreEqual(525, newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestDecimalProp);
+        Assert.AreEqual(Decimal.MaxValue, newMap.Map.GetComponentInChildren<SaveSystemTestScript>().TestDecimalProp);
     }
 
     [Test]
