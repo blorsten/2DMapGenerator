@@ -11,7 +11,7 @@ using MapGeneration;
 public class ResourceHandlerTest
 {
     [Test]
-    public void LoadChunks()
+    public void Load_Chunks()
     {
         List<Chunk> loadedChunks = new List<Chunk>();
         loadedChunks.AddRange(Resources.LoadAll<Chunk>(string.Empty));
@@ -22,7 +22,7 @@ public class ResourceHandlerTest
     }
 
     [Test]
-    public void LoadObjects()
+    public void Load_Objects()
     {
         List<GameplayObject> loadedObjects = new List<GameplayObject>();
         loadedObjects.AddRange(Resources.LoadAll<GameplayObject>(string.Empty));
@@ -33,7 +33,7 @@ public class ResourceHandlerTest
     }
 
     [Test]
-    public void LoadedCorrecChunks()
+    public void Loaded_Correct_Chunks()
     {
         ResourceHandler.Instance.UpdateChunks();
 
@@ -43,7 +43,7 @@ public class ResourceHandlerTest
     }
 
     [Test]
-    public void LoadedCorrectObjects()
+    public void Loaded_Correct_Objects()
     {
         ResourceHandler.Instance.UpdateObjects();
 
@@ -53,7 +53,7 @@ public class ResourceHandlerTest
     }
 
     [Test]
-    public void DidNotLoadChunksDuplicates()
+    public void Did_Not_Load_Chunks_Duplicate()
     {
         ResourceHandler.Instance.UpdateChunks();
 
@@ -61,7 +61,7 @@ public class ResourceHandlerTest
     }
 
     [Test]
-    public void DidNotLoadOjectsDuplicates()
+    public void Did_Not_Load_Ojects_Duplicate()
     {
         ResourceHandler.Instance.UpdateObjects();
 
@@ -69,7 +69,7 @@ public class ResourceHandlerTest
     }
 
     [Test]
-    public void SetLoadedChunks()
+    public void Set_Loaded_Chunks()
     {
         ResourceHandler.Instance.UpdateChunks();
 
@@ -77,7 +77,7 @@ public class ResourceHandlerTest
     }
 
     [Test]
-    public void SetLoadedObjects()
+    public void Set_Loaded_Objects()
     {
         ResourceHandler.Instance.UpdateObjects();
 
