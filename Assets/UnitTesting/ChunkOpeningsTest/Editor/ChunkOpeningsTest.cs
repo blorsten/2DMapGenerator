@@ -89,13 +89,32 @@ public class ChunkOpeningsTest
     {
         ChunkOpenings opening1 = new ChunkOpenings();
         ChunkOpenings opening2 = new ChunkOpenings();
+        ChunkOpenings opening3 = new ChunkOpenings();
+        ChunkOpenings opening4 = new ChunkOpenings();
+
+
+        opening1.TopOpen = true;
+        opening1.BottomOpen = true;
+        opening1.LeftOpen = true;
+        opening1.RightOpen = true;
 
         opening2.TopOpen = true;
-        opening2.LeftOpen = true;
-        opening1.TopOpen = true;
 
-        Assert.IsTrue(opening1.IsMatching(opening2));
+        opening3.BottomOpen = true;
+        opening3.TopOpen = true;
 
+        opening4.LeftOpen = true;
+        opening4.RightOpen = true;
+        opening4.BottomOpen = true;
+
+        Assert.IsTrue(opening2.IsMatching(opening1));
+        Assert.IsTrue(opening3.IsMatching(opening1));
+        Assert.IsTrue(opening4.IsMatching(opening1));
+        Assert.IsTrue(opening2.IsMatching(opening3));
+        Assert.IsFalse(opening1.IsMatching(opening2));
+        Assert.IsFalse(opening1.IsMatching(opening3));
+        Assert.IsFalse(opening1.IsMatching(opening4));
+        Assert.IsFalse(opening3.IsMatching(opening2));
     }
 
     [Test]
