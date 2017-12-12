@@ -8,10 +8,7 @@ using MapGeneration.ChunkSystem;
 namespace MapGeneration.Algorithm
 {
     /// <summary>
-    /// Purpose:
-    /// Make dead end path out from the first path made by and algorithm
-    /// Creator:
-    /// NJ og MP
+    /// Creates deadends for the map.
     /// </summary>
     [CreateAssetMenu(fileName = "New Dead End Maker", menuName = "2D Map Generation/Algorithms/Dead End Maker")]
     public class DeadEndMaker : DrunkardWalkAlgorithm
@@ -24,6 +21,12 @@ namespace MapGeneration.Algorithm
         //How many entanglements can the dead end maker make.
         [SerializeField] private int _nrOfDeadEnds = 2;
 
+        /// <summary>
+        /// This finds valid places to create dead ends and tries to create them.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="usableChunks"></param>
+        /// <returns></returns>
         public override bool Process(Map map, List<Chunk> usableChunks)
         {
             //Reset all collections

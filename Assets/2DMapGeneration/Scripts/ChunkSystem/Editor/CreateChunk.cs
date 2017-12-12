@@ -6,11 +6,13 @@ using UnityEngine.Tilemaps;
 namespace MapGeneration
 {
     /// <summary>
-    /// Purpose:
-    /// Creator:
+    /// This class is used to instantiate a new chunk.
     /// </summary>
     public class CreateChunk : MonoBehaviour
     {
+        /// <summary>
+        /// This method instantiates a new chunk.
+        /// </summary>
         [MenuItem("GameObject/2D Map Generation/Chunk", false, 0)]
         public static void CreateDefaultChunk()
         {

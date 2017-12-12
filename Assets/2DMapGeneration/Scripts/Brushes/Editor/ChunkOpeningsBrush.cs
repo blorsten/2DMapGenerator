@@ -7,7 +7,7 @@ using UnityEngine;
 namespace MapGeneration
 {
     /// <summary>
-    /// This enum is used to dertermine what direction of the connection
+    /// This enum is used to determine what direction of the connection
     /// </summary>
     public enum ConnectionType
     {
@@ -20,12 +20,14 @@ namespace MapGeneration
     [CustomGridBrush(false, true, false, "ChunkOpeningsBrush")]
     public class ChunkOpeningsBrush : GridBrush
     {
-        //The current tiletype, when be used when a tile is placed
+        /// <summary>
+        /// The current tiletype, when be used when a tile is placed.
+        /// </summary>
         public ConnectionType ConnectionType { get; set; }
         
         /// <summary>
         /// This is called when the brush is painting, it tries to get a chunk on the current 
-        /// tilemap and if it does, then it places a chunk opening in the currect position
+        /// tilemap and if it does, then it places a chunk opening in the current position
         /// </summary>
         /// <param name="gridLayout"></param>
         /// <param name="brushTarget"></param>
@@ -39,7 +41,7 @@ namespace MapGeneration
             //If a chunk was found, place a tile in the tiledata list
             if (chunk)
             {
-                //If a chunk in the tiledata list allready this position, replace it else create new
+                //If a chunk in the tiledata list already this position, replace it else create new
                 TileFlag connection = chunk.Openings.FirstOrDefault(x => x.Position == position);
                 FlagType flagType = FlagType.Top;
 
@@ -75,7 +77,7 @@ namespace MapGeneration
 
         /// <summary>
         /// This is called when the brush is erasing, it tries to get a chunk on the current 
-        /// tilemap and if it does, then it removes a chunk opening in the currect position
+        /// tilemap and if it does, then it removes a chunk opening in the current position
         /// </summary>
         /// <param name="gridLayout"></param>
         /// <param name="brushTarget"></param>
@@ -86,7 +88,7 @@ namespace MapGeneration
             Chunk chunk = brushTarget.GetComponent<Chunk>() ??
                           brushTarget.GetComponentInParent<Chunk>();
            
-            //If a chunk is found, erase a tile in the postion
+            //If a chunk is found, erase a tile in the position
             if (chunk)
             {
                 TileFlag tileFlag = chunk.Openings.FirstOrDefault(x => x.Position == position);

@@ -7,11 +7,7 @@ using MapGeneration.ChunkSystem;
 namespace MapGeneration.Algorithm
 {
     /// <summary>
-    /// Purpose: 
-    /// make a path simular to spenlunkys algorithm, with a critical path, that is always open
-    /// Creator: 
-    /// Niels Justesen
-    /// Mathias Prisfeldt
+    /// Makes a path similar to spenlunky's algorithm, with a critical path, that is always open
     /// </summary>
     [CreateAssetMenu(fileName = "New Spelunky Walk", menuName = "2D Map Generation/Algorithms/Spelunky Walk")]
     public class SpelunkyAlgorithm : PathAlgorithm

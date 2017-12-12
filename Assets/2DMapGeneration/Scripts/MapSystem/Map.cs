@@ -23,21 +23,48 @@ namespace MapGeneration
         [SerializeField] private MapBlueprint _mapBlueprint; 
         [SerializeField] private ChunkHolder2DArray _grid; 
 
+        /// <summary>
+        /// The maps ID.
+        /// </summary>
         public Guid ID { get; private set; }
+
+        /// <summary>
+        /// The unity random this maps is using.
+        /// </summary>
         public Random Random { get; private set; }
 
+        /// <summary>
+        /// The maps grid.
+        /// </summary>
         public ChunkHolder2DArray Grid
         {
             get { return _grid; }
             set { _grid = value; }
         }
 
+        /// <summary>
+        /// This is used to save map data.
+        /// </summary>
         public MapDataSaver MapDataSaver { get; set; }
 
+        /// <summary>
+        /// The seed the maps uses for it's random unity class.
+        /// </summary>
         public int Seed { get { return _seed; } private set { _seed = value; } }
+
+        /// <summary>
+        /// The blueprint used to create this map.
+        /// </summary>
         public MapBlueprint MapBlueprint { get { return _mapBlueprint; } private set { _mapBlueprint = value; } }
+
+        /// <summary>
+        /// This dictionary is used by the tiles to quickly lookup what chunk is their's.
+        /// </summary>
         public Dictionary<GameObject,Chunk> Tilemaps = new Dictionary<GameObject, Chunk>();
 
+        /// <summary>
+        /// A property to get the start chunk in the map.
+        /// </summary>
         public ChunkHolder StartChunk
         {
             get { return _startChunk; }
@@ -53,6 +80,9 @@ namespace MapGeneration
             }
         }
 
+        /// <summary>
+        /// A property to get the end chunk in the map.
+        /// </summary>
         public ChunkHolder EndChunk
         {
             get { return _endChunk; }

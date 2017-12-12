@@ -8,8 +8,7 @@ using UnityEngine;
 namespace MapGeneration
 {
     /// <summary>
-    /// Purpose: Creates a game flow
-    /// Creator: MP & NJ
+    /// This class is used to get a game flow.
     /// </summary>
     public class MapCycler : Singleton<MapCycler>
     {
@@ -20,8 +19,19 @@ namespace MapGeneration
         [SerializeField] private bool _autoStart;
         [SerializeField] private GameObject __player;
 
+        /// <summary>
+        /// A reference to the player.
+        /// </summary>
         public GameObject Player { get; set; }
+
+        /// <summary>
+        /// A list contained IDs for maps.
+        /// </summary>
         public LinkedList<Guid> Maps { get; set; }
+
+        /// <summary>
+        /// A reference to the current map.
+        /// </summary>
         public LinkedListNode<Guid> CurrentMap { get; set; }
 
         protected override void Awake()

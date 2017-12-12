@@ -7,7 +7,7 @@ using UnityEngine;
 namespace MapGeneration
 {
     /// <summary>
-    /// This enum is used to dertermine what kind of tileflag should be placed.
+    /// This enum is used to determine what kind of tileflag should be placed.
     /// </summary>
     public enum BrushTileFlag
     {
@@ -15,7 +15,7 @@ namespace MapGeneration
     }
 
     /// <summary>
-    /// This brush is used to place tileflags other than openings.
+    /// This brush is used to place tileflags except openings.
     /// </summary>
     [CustomGridBrush(false, true, false, "TileFlagBrush")]
     public class TileFlagBrush : GridBrush
@@ -40,7 +40,7 @@ namespace MapGeneration
 
             if (chunk)
             {
-                //If a chunk in the tiledata list allready this position, replace it else create new
+                //If a chunk in the tiledata list already this position, replace it else create new
                 TileFlag tileFlags = chunk.TileFlags.FirstOrDefault(x => x.Position == position);
                 FlagType flagType = FlagType.Top;
 
@@ -71,7 +71,7 @@ namespace MapGeneration
 
         /// <summary>
         /// This is called when the brush is erasing, it tries to get a chunk on the current 
-        /// tilemap and if it does, then it removes a tile falg in the currect position
+        /// tilemap and if it does, then it removes a tile flag in the current position
         /// </summary>
         /// <param name="gridLayout"></param>
         /// <param name="brushTarget"></param>
@@ -82,7 +82,7 @@ namespace MapGeneration
             Chunk chunk = brushTarget.GetComponent<Chunk>() ??
                           brushTarget.GetComponentInParent<Chunk>();
 
-            //If a chunk is found, erase a tile in the postion
+            //If a chunk is found, erase a tile in the position
             if (chunk)
             {
                 TileFlag tileFlag = chunk.TileFlags.FirstOrDefault(x => x.Position == position);

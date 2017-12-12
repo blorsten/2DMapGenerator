@@ -20,14 +20,38 @@ namespace MapGeneration
         [SerializeField] private Map _preExistingMap;
         [SerializeField] private List<int> _savedSeeds = new List<int>();
 
+        /// <summary>
+        /// A property for the active map.
+        /// </summary>
         public Map ActiveMap { get; set; }
 
+        /// <summary>
+        /// The current used mapBlueprint.
+        /// </summary>
         public MapBlueprint CurrentBlueprint { get { return _currentBlueprint; } set { _currentBlueprint = value; } }
+
+        /// <summary>
+        /// A reference for the instantiated map.
+        /// </summary>
         public Map PreExistingMap { get { return _preExistingMap; } set { _preExistingMap = value; } }
+
+        /// <summary>
+        /// A list of seed used prior to the current seed.
+        /// </summary>
         public List<int> SavedSeeds { get { return _savedSeeds; } set { _savedSeeds = value; } }
 
-        public List<MapDataSaver> SavedMaps { get { return _savedMaps ?? (_savedMaps = new List<MapDataSaver>()); } }
-        public static MapGenerationSettings Settings { get { return _settings ?? (_settings = AssetDatabase.LoadAssetAtPath<MapGenerationSettings>("Assets/2DMapGeneration/MapGenerationSettings.asset")); } }
+        /// <summary>
+        /// A list of saved map data.
+        /// </summary>
+        public List<MapDataSaver> SavedMaps { get { return _savedMaps ?? 
+                    (_savedMaps = new List<MapDataSaver>()); } }
+
+        /// <summary>
+        /// A reference to the map generation settings.
+        /// </summary>
+        public static MapGenerationSettings Settings { get { return _settings ?? 
+                    (_settings = AssetDatabase.LoadAssetAtPath<MapGenerationSettings>
+                    ("Assets/2DMapGeneration/MapGenerationSettings.asset")); } }
 
         /// <summary>
         /// Event is invoked a frame after a map has been spawned.
@@ -95,6 +119,11 @@ namespace MapGeneration
             return map;
         }
 
+        /// <summary>
+        /// Generated a map from existing map data.
+        /// </summary>
+        /// <param name="existingMap"></param>
+        /// <returns></returns>
         public Map Generate(MapDataSaver existingMap)
         {
             if (existingMap == null)

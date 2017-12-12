@@ -19,14 +19,49 @@ namespace MapGeneration
 
         //These needs to be serialized and public
         #region Custom Inspector Fields
+        /// <summary>
+        /// Should be true if the empty chunks should be filled.
+        /// </summary>
         [SerializeField] public bool FillEmptySpaces = true;
+
+        /// <summary>
+        /// IF true, then only valid find valid chunks.
+        /// </summary>
         [SerializeField] public bool FindValidChunks = true;
+
+        /// <summary>
+        /// Should be true if used connections should be open.
+        /// </summary>
         [SerializeField] public bool OpenConnections = true;
+
+        /// <summary>
+        /// The algorithm stack.
+        /// </summary>
         [SerializeField] public List<AlgorithmStorage> AlgorithmStack = new List<AlgorithmStorage>();
+
+        /// <summary>
+        /// This cells the mapBlueprint how big the maps grid should be.
+        /// </summary>
         [SerializeField] public Vector2Int GridSize = new Vector2Int(4, 4);
+
+        /// <summary>
+        /// This tells the mapBlueprint how big the chunks should be.
+        /// </summary>
         [SerializeField] public Vector2Int ChunkSize = new Vector2Int(10, 8);
-        [SerializeField] public List<Chunk> WhitelistedChunks; //List of all chunks it can use, if its empty it uses all.
-        [SerializeField] public List<Chunk> BlacklistedChunks; //List of all chunks it MAY not use, if its empty it uses all or whitelisted.
+
+        /// <summary>
+        /// List of all chunks it can use, if its empty it uses all.
+        /// </summary>
+        [SerializeField] public List<Chunk> WhitelistedChunks;
+
+        /// <summary>
+        /// List of all chunks it MAY not use, if its empty it uses all or whitelisted.
+        /// </summary>
+        [SerializeField] public List<Chunk> BlacklistedChunks; 
+
+        /// <summary>
+        /// A user defined seed.
+        /// </summary>
         [SerializeField] public int UserSeed;
         #endregion
 

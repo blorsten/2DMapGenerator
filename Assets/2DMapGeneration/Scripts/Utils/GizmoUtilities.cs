@@ -3,7 +3,7 @@
 namespace MapGeneration.Utils
 {
     /// <summary>
-    /// Is used ti declare arrow type.
+    /// Is used to declare arrow type.
     /// </summary>
     public enum ArrowDirection
     {
@@ -30,7 +30,7 @@ namespace MapGeneration.Utils
             Vector3 leftPosition = Vector3.zero;//The left side of the arrow
             Vector3 rightPosition = Vector3.zero;//The right side of the arrow
 
-            //This takes the diretion parameter and sets the postions for an arrow corresponding with the diretion
+            //This takes the direction parameter and sets the position for an arrow corresponding with the drection
             switch (direction)
             {
                 case ArrowDirection.Up:

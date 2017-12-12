@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 namespace MapGeneration.TileSystem
 {
     /// <summary>
-    /// Custom tile that spawns a object on start.
+    /// Custom tile that spawns an object on start.
     /// </summary>
     [CreateAssetMenu(fileName = "New Spawner Tile", menuName = "2D Map Generation/Tiles/Spawner")]
     public class SpawnerTile : TileBase

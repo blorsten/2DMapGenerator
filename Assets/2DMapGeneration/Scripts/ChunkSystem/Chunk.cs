@@ -71,6 +71,7 @@ namespace MapGeneration.ChunkSystem
         /// This stores the chunks width in tiles.
         /// </summary>
         public int Width { get { return _width; } set { _width = value; } }
+
         /// <summary>
         /// This stores the chunks height in tiles.
         /// </summary>
@@ -79,6 +80,7 @@ namespace MapGeneration.ChunkSystem
         /// This stores the chunk's type.
         /// </summary>
         public ChunkType ChunkType { get { return _chunkType; } set { _chunkType = value; } }
+
         /// <summary>
         /// This double array is to determine what biome every tile are in.
         /// </summary>
@@ -88,6 +90,7 @@ namespace MapGeneration.ChunkSystem
         /// This is a reference to the map the chunks is in.
         /// </summary>
         public Map Map { get; set; }
+
         /// <summary>
         /// A ID to identify the Chunk.
         /// </summary>
@@ -96,9 +99,11 @@ namespace MapGeneration.ChunkSystem
         /// <summary>
         /// A list for the items in the chunk.
         /// </summary>
-        public List<GameObject> Items { get; set; } 
+        public List<GameObject> Items { get; set; }
 
-        //Reference to the object that this chunk was created from.
+        /// <summary>
+        /// Reference to the object that this chunk was created from.
+        /// </summary>
         public Chunk RecipeReference { get { return _recipeReference; } set { _recipeReference = value; } }
 
         /// <summary>

@@ -17,7 +17,7 @@ namespace MapGeneration.TileSystem
         protected GameObject _gameObject;
 
         /// <summary>
-        /// This is called when a tile is refreshed and it refreshes it self and it's neighbors
+        /// This is called something has changed on the tile and it refreshes itself and it's neighbors
         /// </summary>
         /// <param name="position"></param>
         /// <param name="tilemap"></param>
