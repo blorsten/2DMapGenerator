@@ -9,8 +9,7 @@ using Debug = UnityEngine.Debug;
 namespace MapGeneration
 {
     /// <summary>
-    /// Purpose:
-    /// Creator: Peter Witt
+    /// Map blueprint is the class that builds a map.
     /// </summary>
     [CreateAssetMenu(fileName = "New Map Blueprint", menuName = "2D Map Generation/Blueprint")]
     public class MapBlueprint : ScriptableObject 

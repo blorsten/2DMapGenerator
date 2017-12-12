@@ -13,8 +13,7 @@ using UnityEngine.SceneManagement;
 namespace MapGeneration.Editor
 {
     /// <summary>
-    /// Purpose: Custom Inspector UI for Map Builder
-    /// Creator: MP
+    /// Custom Inspector UI for Map Builder
     /// </summary>
     [CustomEditor(typeof(MapBuilder))]
     [Serializable]

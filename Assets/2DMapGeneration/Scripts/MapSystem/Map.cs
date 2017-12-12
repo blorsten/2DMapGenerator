@@ -11,8 +11,7 @@ using UnityEngine;
 namespace MapGeneration
 {
     /// <summary>
-    /// Purpose: Holds all data and behaviour of a map.
-    /// Creator: PW
+    /// Holds all data and behaviour of a map.
     /// </summary>
     public class Map : MonoBehaviour
     { 
