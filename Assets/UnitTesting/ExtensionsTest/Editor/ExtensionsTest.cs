@@ -1,26 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using MapGeneration;
 using MapGeneration.Algorithm;
 using MapGeneration.ChunkSystem;
 using MapGeneration.Extensions;
 using NUnit.Framework;
+using UnityEditor;
 using UnityEngine;
-using Object = UnityEngine.Object;
+using UnityEngine.Tilemaps;
 
 [TestFixture(Author = "MP", Category = "Extensions")]
 public class ExtensionTest
 {
+    private readonly Chunk _chunk = 
+        AssetDatabase.LoadAssetAtPath<Chunk>("Assets/UnitTesting/ExtensionsTest/ExtensionsTestChunk.prefab");
+
     #region Chunk Extension Compare Size Two Chunks
 
     [Test]
     public void Chunk_Extension_Compare_Size_Two_Chunks_Same_Size()
     {
-        Chunk firstChunk = new GameObject().AddComponent<Chunk>();
+        Chunk firstChunk = Object.Instantiate(_chunk);
         firstChunk.Width = 10;
         firstChunk.Height = 10;
 
-        Chunk secondChunk = new GameObject().AddComponent<Chunk>();
+        Chunk secondChunk = Object.Instantiate(_chunk);
         secondChunk.Width = 10;
         secondChunk.Height = 10;
 
@@ -30,11 +33,11 @@ public class ExtensionTest
     [Test]
     public void Chunk_Extension_Compare_Size_Two_Chunks_Not_Same_Size()
     {
-        Chunk firstChunk = new GameObject().AddComponent<Chunk>();
+        Chunk firstChunk = Object.Instantiate(_chunk);
         firstChunk.Width = 5;
         firstChunk.Height = 5;
 
-        Chunk secondChunk = new GameObject().AddComponent<Chunk>();
+        Chunk secondChunk = Object.Instantiate(_chunk);
         secondChunk.Width = 10;
         secondChunk.Height = 10;
 
@@ -44,11 +47,11 @@ public class ExtensionTest
     [Test]
     public void Chunk_Extension_Compare_Size_Two_Chunks_Same_Width_Not_Same_Height()
     {
-        Chunk firstChunk = new GameObject().AddComponent<Chunk>();
+        Chunk firstChunk = Object.Instantiate(_chunk);
         firstChunk.Width = 5;
         firstChunk.Height = 5;
 
-        Chunk secondChunk = new GameObject().AddComponent<Chunk>();
+        Chunk secondChunk = Object.Instantiate(_chunk);
         secondChunk.Width = 5;
         secondChunk.Height = 10;
 
@@ -58,11 +61,11 @@ public class ExtensionTest
     [Test]
     public void Chunk_Extension_Compare_Size_Two_Chunks_Same_Height_Not_Same_Width()
     {
-        Chunk firstChunk = new GameObject().AddComponent<Chunk>();
+        Chunk firstChunk = Object.Instantiate(_chunk);
         firstChunk.Width = 10;
         firstChunk.Height = 10;
 
-        Chunk secondChunk = new GameObject().AddComponent<Chunk>();
+        Chunk secondChunk = Object.Instantiate(_chunk);
         secondChunk.Width = 5;
         secondChunk.Height = 10;
 
@@ -76,7 +79,7 @@ public class ExtensionTest
     [Test]
     public void Chunk_Extension_Compare_Size_Int_Same_Size()
     {
-        Chunk firstChunk = new GameObject().AddComponent<Chunk>();
+        Chunk firstChunk = Object.Instantiate(_chunk);
         firstChunk.Width = 10;
         firstChunk.Height = 10;
 
@@ -86,7 +89,7 @@ public class ExtensionTest
     [Test]
     public void Chunk_Extension_Compare_Size_Int_Not_Same_Size()
     {
-        Chunk firstChunk = new GameObject().AddComponent<Chunk>();
+        Chunk firstChunk = Object.Instantiate(_chunk);
         firstChunk.Width = 5;
         firstChunk.Height = 5;
 
@@ -96,7 +99,7 @@ public class ExtensionTest
     [Test]
     public void Chunk_Extension_Compare_Size_Int_Same_Width_Not_Same_Height()
     {
-        Chunk firstChunk = new GameObject().AddComponent<Chunk>();
+        Chunk firstChunk = Object.Instantiate(_chunk);
         firstChunk.Width = 5;
         firstChunk.Height = 5;
 
@@ -106,7 +109,7 @@ public class ExtensionTest
     [Test]
     public void Chunk_Extension_Compare_Size_Int_Same_Height_Not_Same_Width()
     {
-        Chunk firstChunk = new GameObject().AddComponent<Chunk>();
+        Chunk firstChunk = Object.Instantiate(_chunk);
         firstChunk.Width = 10;
         firstChunk.Height = 10;
 
@@ -120,7 +123,7 @@ public class ExtensionTest
     [Test]
     public void Chunk_Extension_Compare_Size_Vector2Int_Same_Size()
     {
-        Chunk firstChunk = new GameObject().AddComponent<Chunk>();
+        Chunk firstChunk = Object.Instantiate(_chunk);
         firstChunk.Width = 10;
         firstChunk.Height = 10;
 
@@ -130,7 +133,7 @@ public class ExtensionTest
     [Test]
     public void Chunk_Extension_Compare_Size_Vector2Int_Not_Same_Size()
     {
-        Chunk firstChunk = new GameObject().AddComponent<Chunk>();
+        Chunk firstChunk = Object.Instantiate(_chunk);
         firstChunk.Width = 5;
         firstChunk.Height = 5;
 
@@ -140,7 +143,7 @@ public class ExtensionTest
     [Test]
     public void Chunk_Extension_Compare_Size_Vector2Int_Same_Width_Not_Same_Height()
     {
-        Chunk firstChunk = new GameObject().AddComponent<Chunk>();
+        Chunk firstChunk = Object.Instantiate(_chunk);
         firstChunk.Width = 5;
         firstChunk.Height = 5;
 
@@ -150,7 +153,7 @@ public class ExtensionTest
     [Test]
     public void Chunk_Extension_Compare_Size_Vector2Int_Same_Height_Not_Same_Width()
     {
-        Chunk firstChunk = new GameObject().AddComponent<Chunk>();
+        Chunk firstChunk = Object.Instantiate(_chunk);
         firstChunk.Width = 10;
         firstChunk.Height = 10;
 
