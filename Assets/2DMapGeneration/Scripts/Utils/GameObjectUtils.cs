@@ -14,10 +14,12 @@ namespace MapGeneration.Utils
         /// <param name="immediate">Should it destroy them immediatly?</param>
         public static void DestroyChildren(GameObject go, bool immediate = false)
         {
-            for (int i = 0; i < go.transform.childCount; i++)
+            int childCount = go.transform.childCount;
+
+            for (int i = 0; i < childCount; i++)
             {
                 if (immediate)
-                    Object.DestroyImmediate(go.transform.GetChild(i).gameObject);
+                    Object.DestroyImmediate(go.transform.GetChild(0).gameObject);
                 else
                     Object.Destroy(go.transform.GetChild(i).gameObject);
             }
