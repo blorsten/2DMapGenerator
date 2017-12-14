@@ -1,0 +1,142 @@
+@startuml
+actor user as "User"
+participant builder as "Map Builder"
+participant blueprint as "Map Blueprint"
+participant map as "NewMap : Map"
+participant mds as "Map Data Saver"
+participant ChunkHolder as "Chunk Holder"
+participant algo as "Algorithm"
+participant goUtils as "Game Object Utilities"
+    
+activate user
+user -> builder: Generate()
+activate builder
+opt "[mapBlueprint != null]"
+builder -> map: << create >>
+builder <<-- map: NewMap
+builder -> map: Tilemaps.Clear()
+builder <<-- map:
+builder -> map: AddComponent(MapGizmos)
+builder <<-- map: MapGizmos
+builder -> map: Initialize(ChosenSeed, MapBlueprint)
+activate map
+activate ChunkHolder
+loop "[for each empty space in map grid]"
+map -> ChunkHolder: << create >>
+map <<-- ChunkHolder: ChunkHolder
+end
+deactivate ChunkHolder
+activate mds
+map -> mds: << create >>
+map <<-- mds: MapDataSaver
+builder <<-- map:
+deactivate map
+deactivate mds
+builder -> blueprint: Generate(NewMap)
+activate blueprint
+blueprint -> blueprint: Validate()
+alt "[validation succeded]"
+blueprint -> blueprint: GetUsableChunks()
+alt "[usableChunks is not empty]"
+blueprint -> blueprint: InstancedAlgorithms.Clear()
+loop "[for each algorithm in algorithm stack]"
+opt "[if algorithm is valid and active]"
+blueprint -> blueprint: InstancedAlgortihms.Add(Algorithm)
+end
+end
+
+opt "[if find valid chunks is true]"
+blueprint -> blueprint: InstancedAlgorithms.Add(ChunkPlacer)
+end
+
+opt "[if open connections is true]"
+blueprint -> blueprint: InstancedAlgorithms.Add(ConnectionOpenerAlgorithm)
+end
+
+opt "[instanced algortihms are not empty]"
+loop "[for each algorithm in instanced algrotihms]"
+activate algo
+blueprint -> algo: Process(NewMap, UsableChunks)
+alt "[if algorithm succeeded]"
+blueprint <<-- algo: true
+else "[if algorithm failed]"
+blueprint <<-- algo: false
+end
+deactivate algo
+end
+end
+
+builder <<-- blueprint: true
+else "[usableChunks is empty]"
+builder <<-- blueprint: false
+end
+
+else "[validation failed]"
+builder <<-- blueprint: false
+end
+
+
+
+deactivate blueprint
+
+alt "[generation succeeded]"
+builder -> builder: Save(NewMap)
+activate builder
+builder --> builder: SavedMaps.Add(NewMap.MapDataSaver)
+deactivate builder
+
+builder -> builder: Spawn(NewMap)
+activate builder
+
+opt "[oldMap != null]"
+builder -> builder: Despawn(OldMap)
+activate builder
+
+
+opt "[if newMap's map data saver is valid]"
+builder -> mds: SavePersistentData()
+activate mds
+mds -> mds: SavedPropertyInfos.Clear()
+mds -> mds: SavedFieldInfos.Clear()
+mds -> mds: DirtyIds.Clear()
+loop "[for each DataIdentity in children]"
+mds -> mds: SavePersistentData(Child)
+end
+builder <<-- mds:
+deactivate mds
+end
+alt "[application is playing]"
+alt "[only destroy children]"
+builder -> goUtils: DestroyChildren(NewMap.GameObject)
+else "destroy root game object"
+builder -> builder: Destroy(NewMap.GameObject)
+end
+
+else "[application is not playing]"
+alt "[only destroy children]"
+builder -> goUtils: DestroyChildren(NewMap.GameObject, true)
+else "destroy root game object"
+builder -> builder: DestroyImmediate(NewMap.GameObject)
+end
+end
+deactivate builder
+
+loop "[for each not empty chunkHolder in map.grid]"
+builder -> ChunkHolder: Instantiate(XPosition, YPosition, NewMap.Transform, NewMap)
+end
+builder -> blueprint: StartPostProcess(NewMap)
+builder -> mds: LoadPersistentData()
+builder ->> builder: StartCoroutine(InvokeMapSpawned(NewMap))
+end
+deactivate builder
+
+user <<-- builder: NewMap
+else "[generation failed]"
+builder -> builder: CleanuUpFailedMap(NewMap)
+user <<-- builder: null
+end
+deactivate builder
+deactivate user
+
+end
+@enduml
