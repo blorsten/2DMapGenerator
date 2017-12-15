@@ -5,6 +5,7 @@ using NUnit.Framework;
 using System.Collections;
 using MapGeneration;
 using MapGeneration.Algorithm;
+using MapGeneration.ChunkSystem;
 
 [TestFixture(Author = "Niels", Category = "PathAlgorithms")]
 public class AlgorithmTest
@@ -70,7 +71,7 @@ public class AlgorithmTest
 
         MapBuilder.Instance.Generate(_bp);
 
-        Assert.IsTrue(MapBuilder.Instance.ActiveMap);
+        Assert.IsNotNull(MapBuilder.Instance.ActiveMap);
     }
 
     [Test]
@@ -134,7 +135,18 @@ public class AlgorithmTest
 
         MapBuilder.Instance.Generate(_bp);
 
-        Assert.IsTrue(MapBuilder.Instance.ActiveMap);
+        foreach (ChunkHolder item in MapBuilder.Instance.ActiveMap.Grid)
+        {
+            int width = item.Instance.BiomeValues.GetLength(0);
+            for (int i = 0; i < width; i++)
+            {
+                int height = item.Instance.BiomeValues.GetLength(1);
+                for (int j = 0; j < height; j++)
+                {
+                    Assert.Greater(item.Instance.BiomeValues[i, j], 0);
+                }
+            }
+        }
     }
 
     [Test]
@@ -152,6 +164,18 @@ public class AlgorithmTest
 
         MapBuilder.Instance.Generate(_bp);
 
-        Assert.IsTrue(MapBuilder.Instance.ActiveMap);
+        foreach (ChunkHolder item in MapBuilder.Instance.ActiveMap.Grid)
+        {
+            int width = item.Instance.BiomeValues.GetLength(0);
+            for (int i = 0; i < width; i++)
+            {
+                int height = item.Instance.BiomeValues.GetLength(1);
+                for (int j = 0; j < height; j++)
+                {
+                    Assert.IsTrue(item.Instance.BiomeValues[i, j] >= 0);
+                    Assert.IsTrue(item.Instance.BiomeValues[i, j] <= 1);
+                }
+            }
+        }
     }
 }
