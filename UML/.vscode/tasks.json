@@ -6,7 +6,7 @@
         {
             "label": "Compile current file",
             "type": "shell",
-            "command": "java -jar plantuml.jar -verbose ${file}"
+            "command": "java -jar '${workspaceRoot}\\plantuml.jar' -verbose '${file}'"
         }
     ]
 }
