@@ -205,7 +205,7 @@ namespace MapGeneration
 
             //Lets destroy the old map if there was one.
             if (oldMap != null)
-                Despawn(oldMap);
+                Despawn(oldMap, oldMap == map);
 
             for (int x = 0; x < gridSize.x; x++)
             {
@@ -233,7 +233,8 @@ namespace MapGeneration
         /// Despawns a map from the world
         /// </summary>
         /// <param name="map">map</param>
-        public void Despawn(Map map)
+        /// <param name="onlyChildren">Should it only despawn the children and not the map itself?</param>
+        public void Despawn(Map map, bool onlyChildren = false)
         {
             //If the new map isn't the same as the old one, save its data before despawning.
             if (map && map.MapDataSaver != null && map.MapDataSaver != ActiveMap.MapDataSaver)
@@ -241,11 +242,19 @@ namespace MapGeneration
 
             if (Application.isPlaying)
             {
-                //Destroying all instances of the spawned chunks
-                Destroy(map.gameObject);
+                //If we're trying to despawn an active map, just destroy all its children instead.
+                if (onlyChildren)
+                    GameObjectUtils.DestroyChildren(map.gameObject);
+                else
+                    Destroy(map.gameObject); //Destroying all instances of the spawned chunks
             }
             else
-                DestroyImmediate(map.gameObject);
+            {
+                if (onlyChildren)
+                    GameObjectUtils.DestroyChildren(map.gameObject, true);
+                else
+                    DestroyImmediate(map.gameObject);
+            }
         }
 
         private void CleanupFailedMap(Map map)
