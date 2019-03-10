@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -13,7 +13,7 @@ namespace MapGeneration.TileSystem
     {
 
         [SerializeField]
-        private List<StaticBiomeSprites> _biomesSprites= new List<StaticBiomeSprites>();
+        private List<StaticBiomeSprites> _biomesSprites = new List<StaticBiomeSprites>();
 
         private StaticBiomeSprites _currentSprites;
 
@@ -29,9 +29,9 @@ namespace MapGeneration.TileSystem
             //if a chunk is found, then get the current biome ID and use it to get sprites
             if (_chunk)
             {
-                _currentSprites = _biomesSprites.Count > 0
-                    ? _biomesSprites.FirstOrDefault(x => x.ID == _biome)
-                    : null;
+                _currentSprites = _biomesSprites.Count > 0 ?
+                    _biomesSprites.FirstOrDefault(x => x.ID == _biome) :
+                    null;
             }
         }
 
@@ -54,4 +54,3 @@ namespace MapGeneration.TileSystem
         }
     }
 }
-

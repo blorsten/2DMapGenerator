@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace MapGeneration.Extensions
@@ -19,9 +19,9 @@ namespace MapGeneration.Extensions
         /// <returns></returns>
         public static object GetDefaultValue(this Type type)
         {
-            return type.IsValueType
-                ? TypeDefaults.GetOrAdd(type, Activator.CreateInstance(type))
-                : null;
+            return type.IsValueType ?
+                TypeDefaults.GetOrAdd(type, Activator.CreateInstance(type)) :
+                null;
         }
     }
 }

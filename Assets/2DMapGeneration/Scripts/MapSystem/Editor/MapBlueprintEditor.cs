@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using MapGeneration.Algorithm;
 using UnityEditor;
 using UnityEditorInternal;
@@ -45,7 +45,7 @@ namespace MapGeneration.Editor
                 _algorithmStack.List.DoLayoutList();
                 _algorithmStack.DrawSelectedAlgorithm();
             }
-             
+
             GUILayout.Space(20);
             EditorGUILayout.LabelField("Size Settings:", EditorStyles.boldLabel);
             _context.GridSize = EditorGUILayout.Vector2IntField("Grid", _context.GridSize);
@@ -63,7 +63,7 @@ namespace MapGeneration.Editor
         private void OnEnable()
         {
             _context = target as MapBlueprint;
-            _whitelistedChunks = serializedObject.FindProperty("WhitelistedChunks"); 
+            _whitelistedChunks = serializedObject.FindProperty("WhitelistedChunks");
             _blacklistedChunks = serializedObject.FindProperty("BlacklistedChunks");
             _algorithmStack = new ReorderableAlgorithmStack(serializedObject, serializedObject.FindProperty("AlgorithmStack"), _context.AlgorithmStack);
         }
@@ -97,7 +97,7 @@ namespace MapGeneration.Editor
                     serializedObject,
                     serializedProperty,
                     true, false, true, true);
-                
+
                 //We need to hook some methods to events on the new reorderable list.
                 List.onAddDropdownCallback = (rect, list) =>
                 {

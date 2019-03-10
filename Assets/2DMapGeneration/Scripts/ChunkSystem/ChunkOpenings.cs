@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using MapGeneration.Algorithm;
 using UnityEngine;
 
@@ -79,7 +79,7 @@ namespace MapGeneration.ChunkSystem
         /// <summary>
         /// If true top is open.
         /// </summary>
-        public bool TopOpen {  get { return _topOpen; } set { _topOpen = value; } }
+        public bool TopOpen { get { return _topOpen; } set { _topOpen = value; } }
 
         /// <summary>
         /// If true bottom is open.
@@ -102,10 +102,10 @@ namespace MapGeneration.ChunkSystem
         /// <param name="a">This chunkopenings.</param>
         /// <param name="b">The other one to check on.</param>
         /// <returns>Returns true if all their openings are the same.</returns>
-        public static bool operator == (ChunkOpenings a, ChunkOpenings b)
+        public static bool operator ==(ChunkOpenings a, ChunkOpenings b)
         {
             bool isValid = true;
-            
+
             if (a.TopOpen != b.TopOpen)
                 isValid = false;
             if (a.RightOpen != b.RightOpen)
@@ -264,18 +264,18 @@ namespace MapGeneration.ChunkSystem
         {
             bool isValid = false;
 
-            if (TopOpen && !RightOpen &&  !BottomOpen &&  !LeftOpen)
+            if (TopOpen && !RightOpen && !BottomOpen && !LeftOpen)
                 isValid = true;
-            
+
             if (!TopOpen && RightOpen && !BottomOpen && !LeftOpen)
                 isValid = true;
-            
+
             if (!TopOpen && !RightOpen && BottomOpen && !LeftOpen)
                 isValid = true;
-            
+
             if (!TopOpen && !RightOpen && !BottomOpen && LeftOpen)
                 isValid = true;
-            
+
             return isValid;
         }
     }

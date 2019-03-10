@@ -1,4 +1,4 @@
-﻿using MapGeneration;
+using MapGeneration;
 using UnityEditor;
 using UnityEngine;
 
@@ -25,10 +25,8 @@ namespace MapGeneration.Editor
 
             //This shows a dropdown menu that tells the brush what type of tile it will place.
             Brush.BrushTileFlag =
-                (BrushTileFlag)EditorGUILayout.EnumPopup("TileFlag type", Brush.BrushTileFlag);
+                (BrushTileFlag) EditorGUILayout.EnumPopup("TileFlag type", Brush.BrushTileFlag);
             GUILayout.EndHorizontal();
         }
     }
 }
-
-

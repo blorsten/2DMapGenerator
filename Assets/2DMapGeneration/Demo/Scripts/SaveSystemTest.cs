@@ -1,4 +1,4 @@
-﻿using MapGeneration.SaveSystem;
+using MapGeneration.SaveSystem;
 using UnityEngine;
 
 namespace MapGeneration
@@ -13,5 +13,5 @@ namespace MapGeneration
         {
             _testField += _testField;
         }
-    } 
+    }
 }

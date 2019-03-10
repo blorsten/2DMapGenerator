@@ -1,4 +1,4 @@
-﻿using MapGeneration.ChunkSystem;
+using MapGeneration.ChunkSystem;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 

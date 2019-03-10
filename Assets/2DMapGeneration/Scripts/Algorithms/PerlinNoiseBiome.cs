@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using MapGeneration.ChunkSystem;
 using MapGeneration.Extensions;
 using UnityEngine;
@@ -12,7 +12,7 @@ namespace MapGeneration.Algorithm
     [CreateAssetMenu(fileName = "New Perlin Noise", menuName = "2D Map Generation/Algorithms/Perlin Noise Biome")]
     public class PerlinNoiseBiome : MapGenerationAlgorithm
     {
-        private float[,] _noiseGrid;
+        private float[, ] _noiseGrid;
         private int _width;
         private int _heigt;
         [SerializeField] private int _variation = 1;
@@ -73,10 +73,10 @@ namespace MapGeneration.Algorithm
                             chunk.Instance.BiomeValues[x, y] = Mathf.Clamp01(_noiseGrid[x + width * chunk.Position.x, y + height * chunk.Position.y]);
                         }
                     }
-                    chunk.Instance.RefreshTilemaps(); 
+                    chunk.Instance.RefreshTilemaps();
                 }
             }
-            
+
             return base.PostProcess(map, usableChunks);
         }
 
@@ -88,8 +88,8 @@ namespace MapGeneration.Algorithm
         /// <returns></returns>
         private float CalculateNoise(int x, int y)
         {
-            float xCoord = (float)x / _width * _variation + xOffset;
-            float yCoord = (float)y / _heigt * _variation + yOffset;
+            float xCoord = (float) x / _width * _variation + xOffset;
+            float yCoord = (float) y / _heigt * _variation + yOffset;
             return Mathf.PerlinNoise(xCoord, yCoord);
         }
     }

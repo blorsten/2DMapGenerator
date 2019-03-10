@@ -1,4 +1,4 @@
-﻿using MapGeneration.ChunkSystem;
+using MapGeneration.ChunkSystem;
 using UnityEngine;
 
 namespace MapGeneration
@@ -56,4 +56,3 @@ namespace MapGeneration
         }
     }
 }
-

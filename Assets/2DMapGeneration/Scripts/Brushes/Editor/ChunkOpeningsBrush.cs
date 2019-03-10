@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using MapGeneration.ChunkSystem;
 using MapGeneration.TileSystem;
 using UnityEditor;
@@ -11,7 +11,10 @@ namespace MapGeneration
     /// </summary>
     public enum ConnectionType
     {
-        Top, Bottom, Left, Right
+        Top,
+        Bottom,
+        Left,
+        Right
     }
 
     /// <summary>
@@ -24,7 +27,7 @@ namespace MapGeneration
         /// The current tiletype, when be used when a tile is placed.
         /// </summary>
         public ConnectionType ConnectionType { get; set; }
-        
+
         /// <summary>
         /// This is called when the brush is painting, it tries to get a chunk on the current 
         /// tilemap and if it does, then it places a chunk opening in the current position
@@ -36,8 +39,8 @@ namespace MapGeneration
         {
             //This tries to get a chunk component from the brush target
             Chunk chunk = brushTarget.GetComponent<Chunk>() ??
-                          brushTarget.GetComponentInParent<Chunk>();
-            
+                brushTarget.GetComponentInParent<Chunk>();
+
             //If a chunk was found, place a tile in the tiledata list
             if (chunk)
             {
@@ -86,8 +89,8 @@ namespace MapGeneration
         {
             //This tries to get a chunk component from the brush target
             Chunk chunk = brushTarget.GetComponent<Chunk>() ??
-                          brushTarget.GetComponentInParent<Chunk>();
-           
+                brushTarget.GetComponentInParent<Chunk>();
+
             //If a chunk is found, erase a tile in the position
             if (chunk)
             {
@@ -122,5 +125,3 @@ namespace MapGeneration
     }
 
 }
-
-

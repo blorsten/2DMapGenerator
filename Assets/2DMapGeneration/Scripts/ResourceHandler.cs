@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using MapGeneration.ChunkSystem;
 using MapGeneration.Utils;
@@ -12,7 +12,7 @@ namespace MapGeneration
     [ExecuteInEditMode]
     public class ResourceHandler : Singleton<ResourceHandler>
     {
-        [SerializeField]private List<Chunk> _chunks;
+        [SerializeField] private List<Chunk> _chunks;
         [SerializeField] private List<GameplayObject> _objects;
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace MapGeneration
         /// <summary>
         /// A list for the gameplay objects.
         /// </summary>
-        public List<GameplayObject> Objects{get { return _objects; }private set { _objects = value; }}
+        public List<GameplayObject> Objects { get { return _objects; } private set { _objects = value; } }
 
         protected override void Awake()
         {

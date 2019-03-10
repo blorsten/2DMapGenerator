@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using MapGeneration.Algorithm;
 using MapGeneration.ChunkSystem;
@@ -14,13 +14,13 @@ namespace MapGeneration
     /// Holds all data and behaviour of a map.
     /// </summary>
     public class Map : MonoBehaviour
-    { 
+    {
         private ChunkHolder _startChunk;
         private ChunkHolder _endChunk;
 
         [SerializeField] private int _seed;
-        [SerializeField] private MapBlueprint _mapBlueprint; 
-        [SerializeField] private ChunkHolder2DArray _grid; 
+        [SerializeField] private MapBlueprint _mapBlueprint;
+        [SerializeField] private ChunkHolder2DArray _grid;
 
         /// <summary>
         /// The maps ID.
@@ -59,7 +59,7 @@ namespace MapGeneration
         /// <summary>
         /// This dictionary is used by the tiles to quickly lookup what chunk is their's.
         /// </summary>
-        public Dictionary<GameObject,Chunk> Tilemaps = new Dictionary<GameObject, Chunk>();
+        public Dictionary<GameObject, Chunk> Tilemaps = new Dictionary<GameObject, Chunk>();
 
         /// <summary>
         /// A property to get the start chunk in the map.
@@ -107,7 +107,7 @@ namespace MapGeneration
         public void Initialize(int seed, MapBlueprint mapBlueprint, MapDataSaver mapDataSaver = null)
         {
             Seed = seed;
-            MapBlueprint = mapBlueprint; 
+            MapBlueprint = mapBlueprint;
             Random = new Random(seed);
             //Generate the map ID from the newly created random.
             ID = new Guid(RandomExtension.GenerateByteSeed(Random));
@@ -117,7 +117,7 @@ namespace MapGeneration
             {
                 for (int y = 0; y < Grid.GetLength(1); y++)
                 {
-                    Grid[x,y] = new ChunkHolder(new Vector2Int(x,y));
+                    Grid[x, y] = new ChunkHolder(new Vector2Int(x, y));
                 }
             }
 
@@ -134,7 +134,6 @@ namespace MapGeneration
         {
             if (chunkHolder.Prefab != null && !forcePlace || chunk == null)
                 return false;
-            
 
             if (chunk.ConditionalChunk)
             {
@@ -165,7 +164,7 @@ namespace MapGeneration
             {
                 for (int y = 0; y < Grid.GetLength(1); y++)
                 {
-                    if(Grid[x,y] == chunkHolder)
+                    if (Grid[x, y] == chunkHolder)
                         return new Vector2Int(x, y);
                 }
             }
@@ -179,7 +178,7 @@ namespace MapGeneration
         /// <returns>array with neighbors</returns>
         public List<ChunkHolder> GetNeighbor(ChunkHolder chunkHolder)
         {
-            return GetNeighbor(chunkHolder, 
+            return GetNeighbor(chunkHolder,
                 PathAlgorithm.CardinalDirections.Top |
                 PathAlgorithm.CardinalDirections.Bottom |
                 PathAlgorithm.CardinalDirections.Right |
@@ -203,21 +202,21 @@ namespace MapGeneration
                 {
                     if (Grid[x, y] == chunkHolder)
                     {
-                        if(directions == PathAlgorithm.CardinalDirections.Top &&
+                        if (directions == PathAlgorithm.CardinalDirections.Top &&
                             y + 1 < Grid.GetLength(1))
-                            listToReturn.Add(Grid[x,y+1]);
+                            listToReturn.Add(Grid[x, y + 1]);
 
-                        if(directions == PathAlgorithm.CardinalDirections.Bottom &&
+                        if (directions == PathAlgorithm.CardinalDirections.Bottom &&
                             y - 1 > -1)
-                            listToReturn.Add(Grid[x,y-1]);
+                            listToReturn.Add(Grid[x, y - 1]);
 
-                        if(directions == PathAlgorithm.CardinalDirections.Right &&
+                        if (directions == PathAlgorithm.CardinalDirections.Right &&
                             x - 1 > -1)
-                            listToReturn.Add(Grid[x -1, y]);
+                            listToReturn.Add(Grid[x - 1, y]);
 
                         if (directions == PathAlgorithm.CardinalDirections.Left &&
-                            x +1 < Grid.GetLength(0))
-                            listToReturn.Add(Grid[x +1, y]);
+                            x + 1 < Grid.GetLength(0))
+                            listToReturn.Add(Grid[x + 1, y]);
 
                         done = true;
                     }
@@ -238,7 +237,7 @@ namespace MapGeneration
         /// </summary>
         public void OnDrawGizmos()
         {
-            
+
         }
 
         /// <summary>

@@ -1,9 +1,9 @@
-﻿using UnityEngine;
-using UnityEditor;
-using UnityEngine.TestTools;
-using NUnit.Framework;
 using System.Collections;
 using MapGeneration;
+using NUnit.Framework;
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.TestTools;
 
 public class CreateChunkTest
 {

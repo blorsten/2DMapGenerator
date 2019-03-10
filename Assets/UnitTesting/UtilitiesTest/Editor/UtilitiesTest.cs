@@ -1,8 +1,8 @@
-﻿using UnityEngine;
-using NUnit.Framework;
 using System.Linq;
 using MapGeneration.ChunkSystem;
 using MapGeneration.Utils;
+using NUnit.Framework;
+using UnityEngine;
 
 [TestFixture(Author = "MP", Category = "Utils")]
 public class UtilitiesTest
@@ -10,7 +10,7 @@ public class UtilitiesTest
     [Test]
     public void ChunkHolder_2D_Array_Instantiation()
     {
-        ChunkHolder2DArray newArray = new ChunkHolder2DArray(2,2);
+        ChunkHolder2DArray newArray = new ChunkHolder2DArray(2, 2);
         Assert.IsNotNull(newArray);
     }
 
@@ -166,7 +166,7 @@ public class UtilitiesTest
         Assert.IsTrue(father.transform.childCount == 5);
 
         GameObjectUtils.DestroyChildren(father.gameObject, true);
-         
+
         Assert.IsTrue(father.transform.childCount == 0);
     }
 

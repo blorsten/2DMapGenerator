@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Tilemaps;
+using System.Collections.Generic;
 using MapGeneration.TileSystem;
 using MapGeneration.Utils;
 using UnityEditor;
 using UnityEditor.Callbacks;
-
+using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace MapGeneration.ChunkSystem
 {
@@ -14,7 +13,13 @@ namespace MapGeneration.ChunkSystem
     /// </summary>
     public enum ChunkType
     {
-        Default, DeadEnd, Reward, Secret, Start, End, Solid
+        Default,
+        DeadEnd,
+        Reward,
+        Secret,
+        Start,
+        End,
+        Solid
     }
 
     /// <summary>
@@ -38,13 +43,13 @@ namespace MapGeneration.ChunkSystem
         //This sections is for generel properties.
         //Tells the width of the chunk.
         [Header("Properties")]
-        [SerializeField] private int _width; 
+        [SerializeField] private int _width;
 
         //Tells the height of the chunk.
         [SerializeField] private int _height;
 
         //Tells the type of the chunk.
-        [SerializeField] private ChunkType _chunkType; 
+        [SerializeField] private ChunkType _chunkType;
 
         //These fields tells what openings are open on the chunk.
         [Header("Openings"), SerializeField] private ChunkOpenings _chunkOpenings;
@@ -55,7 +60,7 @@ namespace MapGeneration.ChunkSystem
         [SerializeField, ReadOnly] private List<TileFlag> _tileTileFlags = new List<TileFlag>();
 
         //This section is for references.
-        [Header("References"),SerializeField] private Tilemap _environment;
+        [Header("References"), SerializeField] private Tilemap _environment;
         [SerializeField, HideInInspector] private ChunkHolder _chunkHolder;
 
         [Header("Draw Booleans"), SerializeField] private bool _drawOpenings = true;
@@ -109,12 +114,12 @@ namespace MapGeneration.ChunkSystem
         /// <summary>
         /// This list stores the chunks openings.
         /// </summary>
-        public List<TileFlag> Openings{ get { return _openings; } set { _openings = value; } }
+        public List<TileFlag> Openings { get { return _openings; } set { _openings = value; } }
 
         /// <summary>
         /// This list stores TileFlag. 
         /// </summary>
-        public List<TileFlag> TileFlags{ get { return _tileTileFlags; } set { _tileTileFlags = value; } }
+        public List<TileFlag> TileFlags { get { return _tileTileFlags; } set { _tileTileFlags = value; } }
 
         /// <summary>
         /// This class is used to determine what sides has openings.
@@ -146,7 +151,7 @@ namespace MapGeneration.ChunkSystem
                         Debug.LogWarning(string.Format("{0} needs an environment reference.", name), this);
                 }
 
-                return _environment; 
+                return _environment;
             }
             set { _environment = value; }
         }
@@ -159,7 +164,6 @@ namespace MapGeneration.ChunkSystem
             get { return _chunkHolder; }
             set { _chunkHolder = value; }
         }
-
 
         /// <summary>
         /// When this components gets added or gets reset, grab all references if possible.
@@ -175,7 +179,7 @@ namespace MapGeneration.ChunkSystem
         /// </summary>
         private void Awake()
         {
-            _biomeValues = new Float2DArray(_width, _height); 
+            _biomeValues = new Float2DArray(_width, _height);
         }
 
         /// <summary>
@@ -269,7 +273,7 @@ namespace MapGeneration.ChunkSystem
             for (int i = 0; i < transform.childCount; i++)
             {
                 Tilemap tilemap = transform.GetChild(i).gameObject.GetComponent<Tilemap>();
-                if(tilemap != null)
+                if (tilemap != null)
                     tilemap.RefreshAllTiles();
             }
         }
@@ -280,7 +284,7 @@ namespace MapGeneration.ChunkSystem
         void OnEnable()
         {
             if (!Application.isPlaying)
-                RefreshTilemaps(); 
+                RefreshTilemaps();
         }
     }
 }

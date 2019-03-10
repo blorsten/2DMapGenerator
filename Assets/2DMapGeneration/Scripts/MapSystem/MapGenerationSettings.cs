@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace MapGeneration
@@ -6,7 +6,7 @@ namespace MapGeneration
     /// <summary>
     /// Keeps all the settings for the map generation system.
     /// </summary>
-    public class MapGenerationSettings : ScriptableObject 
+    public class MapGenerationSettings : ScriptableObject
     {
         [Header("Gizmo Settings:")]
         [SerializeField] private Color _defaultConnectionColor;
@@ -48,7 +48,7 @@ namespace MapGeneration
         /// <param name="noice"></param>
         /// <returns></returns>
         public string NoiseToBiome(float noice)
-        { 
+        {
             int index = Mathf.CeilToInt(Mathf.Clamp(noice * _biomes.Count - 1, 0, _biomes.Count - 1));
             return _biomes[index];
 

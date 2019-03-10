@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -19,7 +19,7 @@ namespace MapGeneration.Extensions
             List<T> assets = new List<T>();
 
             string[] guids = AssetDatabase.FindAssets(string.Format("t:{0}", typeof(T)));
-            
+
             foreach (string guid in guids)
             {
                 string assetPath = AssetDatabase.GUIDToAssetPath(guid);

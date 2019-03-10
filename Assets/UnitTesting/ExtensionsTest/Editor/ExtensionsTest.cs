@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using MapGeneration;
 using MapGeneration.Algorithm;
 using MapGeneration.ChunkSystem;
@@ -11,10 +11,10 @@ using UnityEngine.Tilemaps;
 [TestFixture(Author = "MP", Category = "Extensions")]
 public class ExtensionTest
 {
-    private readonly Chunk _chunk = 
+    private readonly Chunk _chunk =
         AssetDatabase.LoadAssetAtPath<Chunk>("Assets/UnitTesting/ExtensionsTest/ExtensionsTestChunk.prefab");
 
-    #region Chunk Extension Compare Size Two Chunks
+#region Chunk Extension Compare Size Two Chunks
 
     [Test]
     public void Chunk_Extension_Compare_Size_Two_Chunks_Same_Size()
@@ -72,9 +72,9 @@ public class ExtensionTest
         Assert.IsFalse(firstChunk.CompareSize(secondChunk));
     }
 
-    #endregion
+#endregion
 
-    #region Chunk Extension Compare Size With Int
+#region Chunk Extension Compare Size With Int
 
     [Test]
     public void Chunk_Extension_Compare_Size_Int_Same_Size()
@@ -116,9 +116,9 @@ public class ExtensionTest
         Assert.IsFalse(firstChunk.CompareSize(5, 10));
     }
 
-    #endregion
+#endregion
 
-    #region Chunk Extension Compare Size With Vector2Int
+#region Chunk Extension Compare Size With Vector2Int
 
     [Test]
     public void Chunk_Extension_Compare_Size_Vector2Int_Same_Size()
@@ -160,17 +160,16 @@ public class ExtensionTest
         Assert.IsFalse(firstChunk.CompareSize(new Vector2Int(5, 10)));
     }
 
-    #endregion
+#endregion
 
-    #region Dictionary Extension
+#region Dictionary Extension
     [Test]
     public void Dictionary_Extension_Get_Or_Add_Getted()
     {
         Dictionary<int, string> dictionary = new Dictionary<int, string>
-        {
-            {1, "test1"},
-            {2, "test2"},
-            {3, "test3"}
+        { { 1, "test1" },
+            { 2, "test2" },
+            { 3, "test3" }
         };
 
         dictionary.GetOrAdd(3, "test3");
@@ -181,19 +180,18 @@ public class ExtensionTest
     public void Dictionary_Extension_Get_Or_Add_Added()
     {
         Dictionary<int, string> dictionary = new Dictionary<int, string>
-        {
-            {1, "test1"},
-            {2, "test2"},
-            {3, "test3"}
+        { { 1, "test1" },
+            { 2, "test2" },
+            { 3, "test3" }
         };
 
         dictionary.GetOrAdd(4, "test3");
         Assert.IsTrue(dictionary.Count == 4);
         Assert.IsTrue(dictionary.ContainsKey(4));
     }
-    #endregion
+#endregion
 
-    #region List Extension Predined Random
+#region List Extension Predined Random
     [Test]
     public void List_Extension_Random_Entry_Predefined_Random()
     {
@@ -217,18 +215,17 @@ public class ExtensionTest
             3
         };
 
-        Assert.AreEqual(2, newList.RandomEntry(i => i >= 2,new System.Random(1)));
+        Assert.AreEqual(2, newList.RandomEntry(i => i >= 2, new System.Random(1)));
     }
-    #endregion
+#endregion
 
-    #region Random Extensions
+#region Random Extensions
     [Test]
     public void Random_Extension_Generate_Byte_Seed_Predined_Random()
     {
         System.Random newRandom = new System.Random(1);
 
-        byte[] expectedSeed =
-        {
+        byte[] expectedSeed = {
             93,
             53,
             244,
@@ -279,14 +276,14 @@ public class ExtensionTest
         System.Random newRandom = new System.Random(1);
         Assert.AreEqual(new Vector2Int(2, 1), newRandom.Range(new Vector2Int(1, 1), new Vector2Int(5, 5)));
     }
-    #endregion
-     
+#endregion
+
     [Test]
     public void Type_Extension_Get_Default_Value()
     {
         Assert.AreEqual(default(int), typeof(int).GetDefaultValue());
         Assert.AreEqual(default(float), typeof(float).GetDefaultValue());
         Assert.AreEqual(null, typeof(ChunkOpenings).GetDefaultValue());
-        Assert.AreEqual(new AlgorithmStorage(null) {IsActive = false}, typeof(AlgorithmStorage).GetDefaultValue());
+        Assert.AreEqual(new AlgorithmStorage(null) { IsActive = false }, typeof(AlgorithmStorage).GetDefaultValue());
     }
 }

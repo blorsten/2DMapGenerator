@@ -1,4 +1,4 @@
-﻿using UnityEditor;
+using UnityEditor;
 using UnityEngine;
 
 namespace MapGeneration
@@ -21,10 +21,8 @@ namespace MapGeneration
             GUILayout.BeginHorizontal();
             //This shows a dropdown menu that tells the brush what type of tile it will place
             Brush.ConnectionType =
-                (ConnectionType)EditorGUILayout.EnumPopup("TileFlag type", Brush.ConnectionType);
+                (ConnectionType) EditorGUILayout.EnumPopup("TileFlag type", Brush.ConnectionType);
             GUILayout.EndHorizontal();
         }
     }
 }
-
-

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using MapGeneration.ChunkSystem;
@@ -105,7 +105,7 @@ namespace MapGeneration.Algorithm
         /// </summary>
         protected void ResetDirectionCandidates()
         {
-            DirectionCandidates = ((CardinalDirections[])Enum.GetValues(typeof(CardinalDirections))).ToList();
+            DirectionCandidates = ((CardinalDirections[]) Enum.GetValues(typeof(CardinalDirections))).ToList();
         }
 
         /// <summary>
@@ -115,7 +115,7 @@ namespace MapGeneration.Algorithm
         /// <param name="usableChunks">All usable chunks.</param>
         /// <param name="currentPos"></param>
         /// <returns>Returns the chunkholder it found and what direction it took. Is null if it dident find a new chunkholder.</returns>
-        protected KeyValuePair<ChunkHolder, CardinalDirections?>? FindNextChunk(Map map, List<Chunk> usableChunks, ref Vector2Int currentPos)
+        protected KeyValuePair<ChunkHolder, CardinalDirections?> ? FindNextChunk(Map map, List<Chunk> usableChunks, ref Vector2Int currentPos)
         {
             //find the next direction among the candidates.
             NextDirection = DirectionCandidates[map.Random.Range(0, DirectionCandidates.Count)];

@@ -1,4 +1,4 @@
-﻿using MapGeneration.Algorithm;
+using MapGeneration.Algorithm;
 using MapGeneration.ChunkSystem;
 using UnityEngine;
 
@@ -12,7 +12,7 @@ namespace MapGeneration.Utils
     {
         [SerializeField] private bool _drawBacktracking = true;
 
-        [SerializeField] private Map _map; 
+        [SerializeField] private Map _map;
 
         /// <summary>
         /// A reference to the current map.
@@ -34,12 +34,12 @@ namespace MapGeneration.Utils
         public void OnDrawGizmos()
         {
             if (Map == null || Map.Grid == null)
-                return; 
+                return;
             for (int x = 0; x < Map.Grid.GetLength(0); x++)
             {
                 for (int y = 0; y < Map.Grid.GetLength(1); y++)
                 {
-                    if(Map.Grid[x, y].Instance == null)
+                    if (Map.Grid[x, y].Instance == null)
                         continue;
                     Chunk chunk = Map.Grid[x, y].Instance;
                     DrawBackTracking(chunk);
@@ -57,7 +57,7 @@ namespace MapGeneration.Utils
             float yMin = transform.position.y;
             float yMax = transform.position.y + _map.MapBlueprint.GridSize.y * _map.MapBlueprint.ChunkSize.y;
 
-            Gizmos.DrawLine(new Vector3(xMin,yMin), new Vector3(xMax,yMin));
+            Gizmos.DrawLine(new Vector3(xMin, yMin), new Vector3(xMax, yMin));
             Gizmos.DrawLine(new Vector3(xMax, yMin), new Vector3(xMax, yMax));
             Gizmos.DrawLine(new Vector3(xMax, yMax), new Vector3(xMin, yMax));
             Gizmos.DrawLine(new Vector3(xMin, yMax), new Vector3(xMin, yMin));
@@ -102,7 +102,7 @@ namespace MapGeneration.Utils
                     break;
             }
 
-            Vector3 middleAdder = new Vector2(chunk.Width/2,chunk.Height/2);
+            Vector3 middleAdder = new Vector2(chunk.Width / 2, chunk.Height / 2);
 
             switch (dir)
             {
@@ -131,5 +131,3 @@ namespace MapGeneration.Utils
     }
 
 }
-
-

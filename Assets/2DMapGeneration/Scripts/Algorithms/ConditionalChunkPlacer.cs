@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using MapGeneration.ChunkSystem;
 using MapGeneration.Extensions;
 using UnityEngine;
@@ -38,9 +38,9 @@ namespace MapGeneration.Algorithm
                     continue;
 
                 if (map.Place(holder,
-                    usableChunks.RandomEntry(chunk =>
-                        chunk.ConditionalChunk &&
-                        holder.ChunkOpenings.IsMatching(chunk.ChunkOpenings), map.Random), true))
+                        usableChunks.RandomEntry(chunk =>
+                            chunk.ConditionalChunk &&
+                            holder.ChunkOpenings.IsMatching(chunk.ChunkOpenings), map.Random), true))
                 {
                     iterations++;
                 }

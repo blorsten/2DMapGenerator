@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using MapGeneration.SaveSystem;
@@ -43,15 +43,27 @@ namespace MapGeneration
         /// <summary>
         /// A list of saved map data.
         /// </summary>
-        public List<MapDataSaver> SavedMaps { get { return _savedMaps ?? 
-                    (_savedMaps = new List<MapDataSaver>()); } }
+        public List<MapDataSaver> SavedMaps
+        {
+            get
+            {
+                return _savedMaps ??
+                    (_savedMaps = new List<MapDataSaver>());
+            }
+        }
 
         /// <summary>
         /// A reference to the map generation settings.
         /// </summary>
-        public static MapGenerationSettings Settings { get { return _settings ?? 
+        public static MapGenerationSettings Settings
+        {
+            get
+            {
+                return _settings ??
                     (_settings = AssetDatabase.LoadAssetAtPath<MapGenerationSettings>
-                    ("Assets/2DMapGeneration/MapGenerationSettings.asset")); } }
+                        ("Assets/2DMapGeneration/MapGenerationSettings.asset"));
+            }
+        }
 
         /// <summary>
         /// Event is invoked a frame after a map has been spawned.
@@ -61,7 +73,7 @@ namespace MapGeneration
         protected override void Awake()
         {
             base.Awake();
-            
+
             //If we generated a map in editor make it active when running the game.
             if (PreExistingMap)
             {
@@ -76,15 +88,15 @@ namespace MapGeneration
         /// <param name="mapBlueprint">blueprint</param>
         /// <param name="seed">If defined it will be the chosen seed for this generation.</param>
         /// <returns>Map</returns>
-        public Map Generate(MapBlueprint mapBlueprint, int seed = 0)                               
+        public Map Generate(MapBlueprint mapBlueprint, int seed = 0)
         {
             if (!mapBlueprint)
             {
                 Debug.LogWarning("MapBuilder: Tried to generate map from " +
-                               "blueprint but diden't get one.", gameObject);
+                    "blueprint but diden't get one.", gameObject);
                 return null;
             }
-            
+
             //If the seed has been defined in the blueprint use that instead.
             int chosenSeed;
 
@@ -114,8 +126,8 @@ namespace MapGeneration
             //Now that the map is fully made, spawn it.
             Spawn(map);
 
-            ActiveMap = map; 
-             
+            ActiveMap = map;
+
             return map;
         }
 
@@ -129,7 +141,7 @@ namespace MapGeneration
             if (existingMap == null)
             {
                 Debug.LogWarning("MapBuilder: Tried to generate map from " +
-                                 "a existing map but diden't get a valid one.", gameObject);
+                    "a existing map but diden't get a valid one.", gameObject);
                 return null;
             }
 
@@ -196,7 +208,7 @@ namespace MapGeneration
         {
             Vector2 gridSize = map.MapBlueprint.GridSize;
             Vector2 chunkSize = map.MapBlueprint.ChunkSize;
-            
+
             //Remember if we have a already active map.
             Map oldMap = ActiveMap;
 
@@ -214,9 +226,9 @@ namespace MapGeneration
                     float xPosition = map.transform.position.x + chunkSize.x * x;
                     float yPosition = map.transform.position.y + chunkSize.y * y;
 
-                    if (map.Grid[x, y] != null && map.Grid[x,y].Prefab != null) 
-                        map.Grid[x, y].Instantiate(new Vector2(xPosition, yPosition), 
-                            map.transform,map);
+                    if (map.Grid[x, y] != null && map.Grid[x, y].Prefab != null)
+                        map.Grid[x, y].Instantiate(new Vector2(xPosition, yPosition),
+                            map.transform, map);
 
                 }
             }

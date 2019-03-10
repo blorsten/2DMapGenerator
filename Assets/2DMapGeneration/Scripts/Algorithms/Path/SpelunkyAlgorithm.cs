@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using MapGeneration.Extensions;
+using System.Collections.Generic;
 using System.Linq;
 using MapGeneration.ChunkSystem;
+using MapGeneration.Extensions;
+using UnityEngine;
 
 namespace MapGeneration.Algorithm
 {
@@ -22,7 +22,7 @@ namespace MapGeneration.Algorithm
         {
             //set the startpoint in the top row of the map grid
             Vector2Int startPoint = new Vector2Int(map.Random.Range(0, map.MapBlueprint.GridSize.x), map.MapBlueprint.GridSize.y - 1);
-            
+
             //The first chunk is marked.
             ChunkHolder firstChunk = map.Grid[startPoint.x, startPoint.y];
             MarkedChunks.Enqueue(firstChunk);

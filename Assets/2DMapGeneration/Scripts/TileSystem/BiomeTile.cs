@@ -1,4 +1,4 @@
-﻿using MapGeneration.ChunkSystem;
+using MapGeneration.ChunkSystem;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -59,15 +59,15 @@ namespace MapGeneration.TileSystem
 
             //Here the biome values are reset and if the gameobject is present in the active map's
             //tilemap dictionary, then get the values
-            _biome = ""; 
+            _biome = "";
             _chunk = null;
             if (MapBuilder.Instance && MapBuilder.Instance.ActiveMap &&
                 MapBuilder.Instance.ActiveMap.Tilemaps.ContainsKey(_gameObject))
             {
-                _chunk = MapBuilder.Instance.ActiveMap.Tilemaps[_gameObject]; 
+                _chunk = MapBuilder.Instance.ActiveMap.Tilemaps[_gameObject];
                 _biome = NoiseToBiome(_chunk, position);
             }
-        } 
+        }
 
         /// <summary>
         /// This is used to check if the gameobjects if not in the tilemaps dictionary in the 
@@ -95,7 +95,7 @@ namespace MapGeneration.TileSystem
         /// <returns></returns>
         private string NoiseToBiome(Chunk chunk, Vector3Int position)
         {
-            if(chunk.BiomeValues == null)
+            if (chunk.BiomeValues == null)
                 return "";
 
             if (position.x >= chunk.BiomeValues.GetLength(0) || position.x < 0 ||

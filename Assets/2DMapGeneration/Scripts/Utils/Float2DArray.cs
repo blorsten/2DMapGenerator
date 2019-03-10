@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,7 +67,7 @@ namespace MapGeneration.Utils
         /// <param name="rowIndex">Row index.</param>
         /// <param name="colIndex">Column index.</param>
         /// <returns>Returns the found float on this array position.</returns>
-        public float this[int rowIndex, int colIndex]
+        public float this [int rowIndex, int colIndex]
         {
             get { return _rows[rowIndex].ColumnsArray[colIndex]; }
             set { _rows[rowIndex].ColumnsArray[colIndex] = value; }

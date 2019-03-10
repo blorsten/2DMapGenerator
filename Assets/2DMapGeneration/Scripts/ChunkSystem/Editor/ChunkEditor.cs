@@ -1,4 +1,4 @@
-﻿using MapGeneration.ChunkSystem;
+using MapGeneration.ChunkSystem;
 using UnityEditor;
 using UnityEngine;
 
@@ -31,6 +31,3 @@ namespace MapGeneration.Editor
     }
 
 }
-
-
- 

@@ -1,11 +1,11 @@
-﻿using UnityEngine;
-using UnityEditor;
-using UnityEngine.TestTools;
-using NUnit.Framework;
 using System.Collections;
 using MapGeneration;
 using MapGeneration.Algorithm;
 using MapGeneration.ChunkSystem;
+using NUnit.Framework;
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.TestTools;
 
 [TestFixture(Author = "Niels", Category = "PathAlgorithms")]
 public class AlgorithmTest
@@ -35,7 +35,7 @@ public class AlgorithmTest
     {
         MapBuilder.Instance.CurrentBlueprint = _bp = Object.Instantiate(_recipeBp);
     }
-     
+
     [Test]
     public void Algorithm_In_Stack()
     {

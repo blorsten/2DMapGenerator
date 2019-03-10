@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using MapGeneration.ChunkSystem;
 using UnityEngine;
@@ -23,9 +23,8 @@ namespace MapGeneration.TileSystem
             left,
             Right
         }
-         
-        [SerializeField] private List<RuleBiomeSprites> _biomesSprites 
-            = new List<RuleBiomeSprites>();
+
+        [SerializeField] private List<RuleBiomeSprites> _biomesSprites = new List<RuleBiomeSprites>();
 
         private RuleBiomeSprites _currentSprites;
         private TileNeighborType _neighborType;
@@ -39,17 +38,17 @@ namespace MapGeneration.TileSystem
         {
             base.RefreshBiomeValues(position, tilemap);
 
-                //if a chunk is found, then get the current biome id and use it to get sprites
-                if (_chunk)
-                {
-                    _currentSprites = _biomesSprites.Count > 0
-                        ? _biomesSprites.FirstOrDefault(x => x.ID == _biome)
-                        : null;
+            //if a chunk is found, then get the current biome id and use it to get sprites
+            if (_chunk)
+            {
+                _currentSprites = _biomesSprites.Count > 0 ?
+                    _biomesSprites.FirstOrDefault(x => x.ID == _biome) :
+                    null;
 
-                    //This checks the tiles neighbor status
-                    _neighborType = GetNeighborType(position, tilemap);
+                //This checks the tiles neighbor status
+                _neighborType = GetNeighborType(position, tilemap);
             }
-            
+
         }
 
         /// <summary>
@@ -61,7 +60,7 @@ namespace MapGeneration.TileSystem
         public override void GetTileData(Vector3Int position, ITilemap tilemap,
             ref TileData tileData)
         {
-            base.GetTileData(position,tilemap,ref tileData);
+            base.GetTileData(position, tilemap, ref tileData);
 
             //This refeshes the values needed for the tile
             RefreshBiomeValues(position, tilemap);
@@ -90,7 +89,7 @@ namespace MapGeneration.TileSystem
                 /*TODO Figure out why setting the tiledata.color dosen't change the color of the tile 
                 and why this does.*/
                 tilemap.GetComponent<Tilemap>().SetColor(position, _currentSprites.Tint);
-            }            
+            }
         }
 
         /// <summary>
@@ -106,8 +105,7 @@ namespace MapGeneration.TileSystem
             TileBase left = null;
             TileBase right = null;
 
-            bool topOutOfBounds =
-                !CheckNextChunk(position, new Vector3Int(0, 1, 0), ref top, tilemap);
+            bool topOutOfBounds = !CheckNextChunk(position, new Vector3Int(0, 1, 0), ref top, tilemap);
 
             CheckNextChunk(position, new Vector3Int(-1, 0, 0), ref left, tilemap);
             CheckNextChunk(position, new Vector3Int(1, 0, 0), ref right, tilemap);
@@ -144,12 +142,11 @@ namespace MapGeneration.TileSystem
         {
             bool hasMap = _chunk != null && _chunk.Map != null;
 
-
-            if ((position.x + direction.x >= _chunk.Width || position.x + direction.x < 0
-                || position.y + direction.y >= _chunk.Height || position.y + direction.y < 0 )
-                && hasMap)
+            if ((position.x + direction.x >= _chunk.Width || position.x + direction.x < 0 ||
+                    position.y + direction.y >= _chunk.Height || position.y + direction.y < 0) &&
+                hasMap)
             {
-                Vector2Int newPosition = _chunk.ChunkHolder.Position + new Vector2Int(direction.x,direction.y);
+                Vector2Int newPosition = _chunk.ChunkHolder.Position + new Vector2Int(direction.x, direction.y);
                 ChunkHolder chunkholder = _chunk.Map.GetChunkHolder(newPosition);
                 if (chunkholder != null && chunkholder.Instance && chunkholder.Instance.Environment)
                 {
@@ -165,6 +162,5 @@ namespace MapGeneration.TileSystem
             return true;
         }
 
-        
     }
 }

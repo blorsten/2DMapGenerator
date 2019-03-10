@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using MapGeneration.Algorithm;
 using MapGeneration.ChunkSystem;
@@ -12,12 +12,12 @@ namespace MapGeneration
     /// Map blueprint is the class that builds a map.
     /// </summary>
     [CreateAssetMenu(fileName = "New Map Blueprint", menuName = "2D Map Generation/Blueprint")]
-    public class MapBlueprint : ScriptableObject 
+    public class MapBlueprint : ScriptableObject
     {
         private readonly List<MapGenerationAlgorithm> _instancedAlgorithms = new List<MapGenerationAlgorithm>();
 
         //These needs to be serialized and public
-        #region Custom Inspector Fields
+#region Custom Inspector Fields
         /// <summary>
         /// Should be true if the empty chunks should be filled.
         /// </summary>
@@ -56,13 +56,13 @@ namespace MapGeneration
         /// <summary>
         /// List of all chunks it MAY not use, if its empty it uses all or whitelisted.
         /// </summary>
-        [SerializeField] public List<Chunk> BlacklistedChunks; 
+        [SerializeField] public List<Chunk> BlacklistedChunks;
 
         /// <summary>
         /// A user defined seed.
         /// </summary>
         [SerializeField] public int UserSeed;
-        #endregion
+#endregion
 
         /// <summary>
         /// Generates a map from the blueprint 
@@ -88,7 +88,7 @@ namespace MapGeneration
                 _instancedAlgorithms.Add(CreateInstance<ChunkPlacer>());
 
             if (OpenConnections)
-                _instancedAlgorithms.Add(CreateInstance<ConnectionOpenerAlgorithm>());    
+                _instancedAlgorithms.Add(CreateInstance<ConnectionOpenerAlgorithm>());
 
             //If we got any algorithms, go through them and process them.
             if (_instancedAlgorithms != null && _instancedAlgorithms.Any())
@@ -98,7 +98,7 @@ namespace MapGeneration
                     {
                         Debug.LogWarning(
                             string.Format("MapBlueprint: {0} in {1} " +
-                                          "failed to succeed its process.", algorithm.name,
+                                "failed to succeed its process.", algorithm.name,
                                 name), this);
                     }
                 }
@@ -128,7 +128,7 @@ namespace MapGeneration
                     {
                         Debug.LogWarning(
                             string.Format("MapBlueprint: {0} in {1} " +
-                                          "failed to succeed its post process.", algorithm.name,
+                                "failed to succeed its post process.", algorithm.name,
                                 name), this);
                     }
                 }
@@ -169,15 +169,15 @@ namespace MapGeneration
             }
 
             //Remove all chunks that doesnt fit the blueprint.
-            usableChunks.RemoveAll(chunk => 
-                                    !chunk.CompareSize(ChunkSize) || 
-                                    !chunk.IsStandaloneChunk);
+            usableChunks.RemoveAll(chunk =>
+                !chunk.CompareSize(ChunkSize) ||
+                !chunk.IsStandaloneChunk);
 
             if (!usableChunks.Any())
             {
                 Debug.LogWarning(string.Format("MapBlueprint: {0} couldn't find any usable " +
-                                               "chunks, check whitelist/blacklist, or make " +
-                                               "some suitable chunks.", name), this);
+                    "chunks, check whitelist/blacklist, or make " +
+                    "some suitable chunks.", name), this);
                 return null;
             }
 
@@ -195,22 +195,22 @@ namespace MapGeneration
             if (GridSize == Vector2Int.zero || GridSize.x == 0 || GridSize.y == 0)
             {
                 Debug.LogWarning(string.Format("MapBlueprint: {0} " +
-                                               "has a invalid grid size.", name), this);
+                    "has a invalid grid size.", name), this);
                 isUsable = false;
             }
 
             if (ChunkSize == Vector2Int.zero || ChunkSize.x == 0 || ChunkSize.y == 0)
             {
                 Debug.LogWarning(string.Format("MapBlueprint: {0} " +
-                                               "has a invalid chunk size.", name), this);
+                    "has a invalid chunk size.", name), this);
                 isUsable = false;
             }
 
             if (AlgorithmStack == null || (AlgorithmStack != null &&
-                                            AlgorithmStack.All(algorithm => algorithm.Algorithm == null)))
+                    AlgorithmStack.All(algorithm => algorithm.Algorithm == null)))
             {
                 Debug.LogWarning(string.Format("MapBlueprint: {0} doesn't have any algorithms, " +
-                                               "make sure to give it some.", name), this);
+                    "make sure to give it some.", name), this);
 
                 isUsable = false;
             }

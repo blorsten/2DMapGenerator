@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using MapGeneration.ChunkSystem;
 using MapGeneration.TileSystem;
 using UnityEngine;
@@ -63,13 +63,12 @@ namespace MapGeneration.Algorithm
             list.Clear();
             foreach (var o in ResourceHandler.Instance.Objects)
             {
-                if(o.GetType() == typeof(T))
+                if (o.GetType() == typeof(T))
                     list.Add(o);
             }
             if (list.Count > 0)
                 Instantiate(list[Random.Range(0, list.Count)].gameObject, position, Quaternion.identity, chunk.transform);
             list.Clear();
         }
+    }
 }
-}
-

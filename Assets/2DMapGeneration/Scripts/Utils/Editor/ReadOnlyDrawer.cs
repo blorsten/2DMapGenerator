@@ -1,4 +1,4 @@
-﻿using MapGeneration.Utils;
+using MapGeneration.Utils;
 using UnityEditor;
 using UnityEngine;
 
@@ -18,7 +18,7 @@ namespace MapGeneration.Editor
             SerializedProperty property,
             GUIContent label)
         {
-            var readOnly = (ReadOnlyAttribute)attribute;
+            var readOnly = (ReadOnlyAttribute) attribute;
 
             if (readOnly.OnlyWhilePlaying && !Application.isPlaying)
                 EditorGUI.PropertyField(position, property, label, true);

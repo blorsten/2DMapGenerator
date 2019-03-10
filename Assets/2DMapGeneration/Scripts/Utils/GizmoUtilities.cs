@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace MapGeneration.Utils
 {
@@ -26,9 +26,9 @@ namespace MapGeneration.Utils
         /// <param name="size">The size of the arrow</param>
         public static void DrawArrow(Vector3 position, ArrowDirection direction, float size = .5f)
         {
-            Vector3 shaftPosition = Vector3.zero;//The middle part of the arrow
-            Vector3 leftPosition = Vector3.zero;//The left side of the arrow
-            Vector3 rightPosition = Vector3.zero;//The right side of the arrow
+            Vector3 shaftPosition = Vector3.zero; //The middle part of the arrow
+            Vector3 leftPosition = Vector3.zero; //The left side of the arrow
+            Vector3 rightPosition = Vector3.zero; //The right side of the arrow
 
             //This takes the direction parameter and sets the position for an arrow corresponding with the drection
             switch (direction)
@@ -56,11 +56,10 @@ namespace MapGeneration.Utils
             }
 
             //This draws the arrow
-            UnityEngine.Gizmos.DrawLine(position,shaftPosition);
-            UnityEngine.Gizmos.DrawLine(position,leftPosition);
-            UnityEngine.Gizmos.DrawLine(position,rightPosition);
+            UnityEngine.Gizmos.DrawLine(position, shaftPosition);
+            UnityEngine.Gizmos.DrawLine(position, leftPosition);
+            UnityEngine.Gizmos.DrawLine(position, rightPosition);
         }
 
     }
 }
-

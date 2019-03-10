@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -92,7 +92,7 @@ namespace MapGeneration.ChunkSystem
         /// </summary>
         public Chunk Instantiate(Vector2 position, Transform parent, Map map)
         {
-            Instance = Object.Instantiate(Prefab, position, Quaternion.identity,parent);
+            Instance = Object.Instantiate(Prefab, position, Quaternion.identity, parent);
             Instance.RecipeReference = Prefab;
             Instance.ChunkHolder = this;
             Instance.Map = map;

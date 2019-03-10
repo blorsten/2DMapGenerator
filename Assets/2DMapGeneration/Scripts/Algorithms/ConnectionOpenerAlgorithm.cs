@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using MapGeneration.ChunkSystem;
 using MapGeneration.TileSystem;
 
@@ -51,5 +51,3 @@ namespace MapGeneration.Algorithm
         }
     }
 }
-
-

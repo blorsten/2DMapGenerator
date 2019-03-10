@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using MapGeneration;
 using MapGeneration.SaveSystem;
@@ -31,7 +31,7 @@ public class SaveSystemTest
     {
         Map newMap = MapBuilder.Instance.Generate();
 
-        newMap.GetComponentInChildren<SaveSystemTestScript>().TestInt = Int32.MaxValue; 
+        newMap.GetComponentInChildren<SaveSystemTestScript>().TestInt = Int32.MaxValue;
 
         newMap.MapDataSaver.SavePersistentData();
 

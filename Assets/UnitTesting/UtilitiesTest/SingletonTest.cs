@@ -1,4 +1,4 @@
-﻿using MapGeneration.Utils;
+using MapGeneration.Utils;
 using UnityEngine;
 
 public class SingletonTest : Singleton<SingletonTest>

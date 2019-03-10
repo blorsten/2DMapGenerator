@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using MapGeneration.SaveSystem;
@@ -84,7 +84,7 @@ namespace MapGeneration
             if (Maps == null || (Maps != null && CurrentMap.Previous == null))
             {
                 Debug.LogWarning(string.Format("MapCycler: {0} tried to load a previous map, " +
-                                               "but it isn't there.", name), this);
+                    "but it isn't there.", name), this);
                 return;
             }
 

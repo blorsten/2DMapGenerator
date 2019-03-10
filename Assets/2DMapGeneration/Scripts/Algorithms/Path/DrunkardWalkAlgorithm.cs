@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+using System.Collections.Generic;
 using System.Linq;
 using MapGeneration.ChunkSystem;
 using MapGeneration.Extensions;
+using UnityEngine;
 
 namespace MapGeneration.Algorithm
 {

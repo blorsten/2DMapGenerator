@@ -1,5 +1,5 @@
-﻿using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using MapGeneration.ChunkSystem;
 using MapGeneration.Extensions;
 
@@ -69,7 +69,7 @@ namespace MapGeneration.Algorithm
                 if (chunkholder == map.EndChunk)
                 {
                     map.Place(chunkholder,
-                        listToCheck.RandomEntry(chunk => 
+                        listToCheck.RandomEntry(chunk =>
                             chunkholder.ChunkOpenings.IsMatching(chunk.ChunkOpenings) &&
                             chunk.ChunkType == ChunkType.End, map.Random));
                     continue;
@@ -88,8 +88,8 @@ namespace MapGeneration.Algorithm
                 {
                     //If we dident find any of the specific type, find a default one.
                     placeCandidate = listToCheck.RandomEntry(chunk =>
-                            chunkholder.ChunkOpenings.IsMatching(chunk.ChunkOpenings) &&
-                            chunk.ChunkType == ChunkType.Default, map.Random);
+                        chunkholder.ChunkOpenings.IsMatching(chunk.ChunkOpenings) &&
+                        chunk.ChunkType == ChunkType.Default, map.Random);
                 }
 
                 //Places the actual prefab in the map

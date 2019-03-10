@@ -1,8 +1,8 @@
-﻿using MapGeneration.Extensions;
 using System.Collections.Generic;
 using System.Linq;
 using MapGeneration;
 using MapGeneration.ChunkSystem;
+using MapGeneration.Extensions;
 using UnityEngine;
 
 namespace MapGeneration.Algorithm
@@ -15,16 +15,16 @@ namespace MapGeneration.Algorithm
     public class VoronoiBiome : MapGenerationAlgorithm
     {
         [SerializeField, Tooltip("Defines the number of biomes set on the map")] private int _nrOfPoints;
-        private float[,] _noiseGrid;
+        private float[, ] _noiseGrid;
         private int _width;
-        private int _heigt;    
+        private int _heigt;
 
         private List<Vector2Int> _directionsToCheck = new List<Vector2Int>()
         {
-            new Vector2Int(-1,0),
-            new Vector2Int(1,0),
-            new Vector2Int(0,-1),
-            new Vector2Int(0,1)
+            new Vector2Int(-1, 0),
+            new Vector2Int(1, 0),
+            new Vector2Int(0, -1),
+            new Vector2Int(0, 1)
         };
 
         /// <summary>
@@ -46,7 +46,6 @@ namespace MapGeneration.Algorithm
                     _noiseGrid[x, y] = 0;
                 }
             }
-
 
             //Set the random points in the grid
             for (int i = 1; i <= _nrOfPoints; i++)
@@ -80,20 +79,20 @@ namespace MapGeneration.Algorithm
                 {
                     int width = chunk.Instance.Width;
                     int height = chunk.Instance.Height;
-                    
+
                     for (int x = 0; x < chunk.Instance.Width; x++)
                     {
                         for (int y = 0; y < chunk.Instance.Height; y++)
-                        { 
+                        {
                             chunk.Instance.BiomeValues[x, y] = _noiseGrid[x + width * chunk.Position.x, y + height * chunk.Position.y];
                         }
                     }
-                }   
+                }
             }
             return base.PostProcess(map, usableChunks);
         }
 
-        private float[,] VornonoiPopulation(float[,] map, ref List<VornonoiData> data)
+        private float[, ] VornonoiPopulation(float[, ] map, ref List<VornonoiData> data)
         {
             for (int x = 0; x < _width; x++)
             {

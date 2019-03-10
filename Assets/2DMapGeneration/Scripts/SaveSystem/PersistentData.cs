@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace MapGeneration.SaveSystem
 {
@@ -7,6 +7,5 @@ namespace MapGeneration.SaveSystem
     /// </summary>
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
     public class PersistentData : Attribute
-    {
-    }
+    { }
 }

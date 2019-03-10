@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 namespace MapGeneration.TileSystem
@@ -27,5 +27,3 @@ namespace MapGeneration.TileSystem
     }
 
 }
-
-

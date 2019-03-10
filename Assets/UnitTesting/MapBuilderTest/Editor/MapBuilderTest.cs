@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using MapGeneration;
 using MapGeneration.ChunkSystem;
@@ -19,10 +19,10 @@ public class MapBuilderTest
     }
 
     [Test]
-	public void Blueprint_Acceptance()
+    public void Blueprint_Acceptance()
     {
         Assert.IsTrue(MapBuilder.Instance.CurrentBlueprint);
-	}
+    }
 
     [Test]
     public void Generate()
@@ -57,7 +57,7 @@ public class MapBuilderTest
     public void Spawn_Map()
     {
         Map newMap = MapBuilder.Instance.Generate();
-        
+
         MapBuilder.Instance.Spawn(newMap);
 
         foreach (ChunkHolder chunkHolder in newMap.Grid)
@@ -70,7 +70,7 @@ public class MapBuilderTest
         Map newMap = MapBuilder.Instance.Generate();
 
         MapBuilder.Instance.Despawn(newMap);
-        
+
         Assert.IsFalse(newMap);
     }
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using MapGeneration;
@@ -35,7 +35,7 @@ namespace MapGeneration.Editor
         }
 
         public override void OnInspectorGUI()
-        { 
+        {
             if (!_context.gameObject.activeInHierarchy)
                 return;
 
@@ -45,7 +45,7 @@ namespace MapGeneration.Editor
 
             GUILayout.Space(10);
 
-            #region SEED HISTORY
+#region SEED HISTORY
             if (_context.SavedSeeds != null && _context.SavedSeeds.Any())
             {
                 GUILayout.BeginHorizontal();
@@ -62,9 +62,9 @@ namespace MapGeneration.Editor
 
                 if (_context.SavedSeeds.Count > SCROLLVIEW_LIMIT)
                     _scrollPos = EditorGUILayout.BeginScrollView(
-                        _scrollPos, 
-                        false, 
-                        true, 
+                        _scrollPos,
+                        false,
+                        true,
                         GUIStyle.none,
                         GUI.skin.verticalScrollbar, GUI.skin.scrollView,
                         GUILayout.Height((SCROLLVIEW_LIMIT * SCROLLVIEW_ENTRY_HEIGHT) + 10));
@@ -96,7 +96,7 @@ namespace MapGeneration.Editor
             }
 
             GUILayout.Space(10);
-            #endregion
+#endregion
 
             //If we're not in play mode show what has been chosen as the preexisting map.
             if (!Application.isPlaying)
@@ -107,7 +107,7 @@ namespace MapGeneration.Editor
             }
 
             GUILayout.Space(10);
-             
+
             //Also make it posible to change the blueprint.
             _context.CurrentBlueprint = EditorGUILayout.ObjectField("Current Blueprint", _context.CurrentBlueprint, typeof(MapBlueprint), true) as MapBlueprint;
 
@@ -163,8 +163,8 @@ namespace MapGeneration.Editor
             }
 
             //After we set edited to serialized object, mark it as dirty.
-            EditorUtility.SetDirty(_context); 
-            if(!Application.isPlaying)
+            EditorUtility.SetDirty(_context);
+            if (!Application.isPlaying)
                 EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
         }
     }

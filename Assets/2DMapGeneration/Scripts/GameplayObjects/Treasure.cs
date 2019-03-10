@@ -1,4 +1,4 @@
-﻿namespace MapGeneration
+namespace MapGeneration
 {
     /// <summary>
     /// Root class for all treasures.

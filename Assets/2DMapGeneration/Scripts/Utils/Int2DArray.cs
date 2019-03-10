@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,7 +42,7 @@ namespace MapGeneration.Utils
             }
         }
 
-        [SerializeField, HideInInspector] private Columns[] _rows; 
+        [SerializeField, HideInInspector] private Columns[] _rows;
 
         /// <summary>
         /// Constructs a 2D Array for int(s).
@@ -67,7 +67,7 @@ namespace MapGeneration.Utils
         /// <param name="rowIndex">Row index.</param>
         /// <param name="colIndex">Column index.</param>
         /// <returns>Returns the found floats on this array position.</returns>
-        public int this[int rowIndex, int colIndex]
+        public int this [int rowIndex, int colIndex]
         {
             get { return _rows[rowIndex].ColumnsArray[colIndex]; }
             set { _rows[rowIndex].ColumnsArray[colIndex] = value; }

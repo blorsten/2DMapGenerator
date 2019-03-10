@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using MapGeneration.ChunkSystem;
 using MapGeneration.TileSystem;
 using UnityEditor;
@@ -11,7 +11,10 @@ namespace MapGeneration
     /// </summary>
     public enum BrushTileFlag
     {
-       Treasure, Trap, GroundSpawn, FlyingSpawn 
+        Treasure,
+        Trap,
+        GroundSpawn,
+        FlyingSpawn
     }
 
     /// <summary>
@@ -36,7 +39,7 @@ namespace MapGeneration
         {
             //This tries to get a chunk component from the brush target
             Chunk chunk = brushTarget.GetComponent<Chunk>() ??
-                          brushTarget.GetComponentInParent<Chunk>();
+                brushTarget.GetComponentInParent<Chunk>();
 
             if (chunk)
             {
@@ -65,7 +68,7 @@ namespace MapGeneration
                     tileFlags.Chunk = chunk;
                 }
                 else
-                    chunk.TileFlags.Add(new TileFlag(position,flagType,chunk));
+                    chunk.TileFlags.Add(new TileFlag(position, flagType, chunk));
             }
         }
 
@@ -80,7 +83,7 @@ namespace MapGeneration
         {
             //This tries to get a chunk component from the brush target
             Chunk chunk = brushTarget.GetComponent<Chunk>() ??
-                          brushTarget.GetComponentInParent<Chunk>();
+                brushTarget.GetComponentInParent<Chunk>();
 
             //If a chunk is found, erase a tile in the position
             if (chunk)
@@ -90,10 +93,7 @@ namespace MapGeneration
                     chunk.TileFlags.Remove(tileFlag);
             }
 
-
         }
     }
 
 }
-
-

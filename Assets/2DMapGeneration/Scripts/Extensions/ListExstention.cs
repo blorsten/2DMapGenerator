@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MapGeneration.Extensions
@@ -7,7 +7,7 @@ namespace MapGeneration.Extensions
     /// <summary>
     /// An extension for the .net interface IList.
     /// </summary>
-    public static class ListExstention 
+    public static class ListExstention
     {
         /// <summary>
         /// Returns a random entry in list

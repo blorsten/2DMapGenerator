@@ -1,6 +1,6 @@
-﻿using NUnit.Framework;
-using MapGeneration.ChunkSystem;
 using MapGeneration.Algorithm;
+using MapGeneration.ChunkSystem;
+using NUnit.Framework;
 
 public class ChunkOpeningsTest
 {
@@ -92,7 +92,6 @@ public class ChunkOpeningsTest
         ChunkOpenings opening3 = new ChunkOpenings();
         ChunkOpenings opening4 = new ChunkOpenings();
 
-
         opening1.TopOpen = true;
         opening1.BottomOpen = true;
         opening1.LeftOpen = true;
@@ -139,16 +138,13 @@ public class ChunkOpeningsTest
         opening.TopOpen = true;
         Assert.IsTrue(opening.IsDeadEnd());
 
-
         opening = new ChunkOpenings();
         opening.BottomOpen = true;
         Assert.IsTrue(opening.IsDeadEnd());
 
-
         opening = new ChunkOpenings();
         opening.LeftOpen = true;
         Assert.IsTrue(opening.IsDeadEnd());
-
 
         opening = new ChunkOpenings();
         opening.RightOpen = true;

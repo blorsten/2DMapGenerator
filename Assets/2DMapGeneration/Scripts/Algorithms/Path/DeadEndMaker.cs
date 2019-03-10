@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using UnityEngine;
-using MapGeneration.Extensions;
 using System.Linq;
 using MapGeneration.ChunkSystem;
+using MapGeneration.Extensions;
+using UnityEngine;
 
 namespace MapGeneration.Algorithm
 {
@@ -130,12 +130,12 @@ namespace MapGeneration.Algorithm
                 //If it succeeded remove it from start candidates and add it to the main road.
                 if (newRoad != null)
                     _roads.Add(newRoad);
-                else 
+                else
                     i--; //If it failed to find a new road, dont count it as a dead end iteration.
             }
 
             //Now that we have made alot of dead ends, set the start and end to the first ones.
-            map.StartChunk = start; 
+            map.StartChunk = start;
             map.EndChunk = end;
             return null;
         }

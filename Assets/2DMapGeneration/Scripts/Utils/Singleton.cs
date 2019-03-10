@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace MapGeneration.Utils
 {
@@ -9,7 +9,7 @@ namespace MapGeneration.Utils
     public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         //If true then the application is closing.
-        private static bool _isQuitting; 
+        private static bool _isQuitting;
 
         //Should the single object persist between scene loading.
         public bool DontDestroyOnLoadConfig = true;
@@ -32,8 +32,8 @@ namespace MapGeneration.Utils
                 if (instance == null)
                 {
                     //First try and find an already instantiated instnace.
-                    instance = (T)FindObjectOfType(typeof(T));
-                    
+                    instance = (T) FindObjectOfType(typeof(T));
+
                     //If that dident work create a new one.
                     if (instance == null)
                     {
@@ -50,7 +50,7 @@ namespace MapGeneration.Utils
                 return instance;
             }
         }
-        
+
         /// <summary>
         /// Check if the instance has been instantiated.
         /// </summary>

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,13 +38,13 @@ namespace MapGeneration.Utils
             /// </summary>
             public ChunkHolder[] ColumnsArray
             {
-                get { return _columnsArray; } 
+                get { return _columnsArray; }
                 set { _columnsArray = value; }
             }
         }
 
         [SerializeField, HideInInspector] private Columns[] _rows;
-        
+
         /// <summary>
         /// Constructs a 2D Array for <see cref="ChunkHolder"/>(s).
         /// </summary>
@@ -55,7 +55,7 @@ namespace MapGeneration.Utils
             _rows = new Columns[rowsLength];
             for (var i = 0; i < _rows.Length; i++)
             {
-                _rows[i] = new Columns(columnsLength); 
+                _rows[i] = new Columns(columnsLength);
             }
 
             _rowsLength = rowsLength;
@@ -68,7 +68,7 @@ namespace MapGeneration.Utils
         /// <param name="rowIndex">Row index.</param>
         /// <param name="colIndex">Column index.</param>
         /// <returns>Returns the found chunk holder on this array position.</returns>
-        public ChunkHolder this[int rowIndex, int colIndex]
+        public ChunkHolder this [int rowIndex, int colIndex]
         {
             get { return _rows[rowIndex].ColumnsArray[colIndex]; }
             set { _rows[rowIndex].ColumnsArray[colIndex] = value; }
@@ -86,7 +86,7 @@ namespace MapGeneration.Utils
 
             if (p0 == 1)
                 return _columnsLength;
-                
+
             return 0;
         }
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using MapGeneration.Extensions;
 using UnityEngine;
 using Random = System.Random;
@@ -8,7 +8,7 @@ namespace MapGeneration.SaveSystem
     /// <summary>
     /// This class used to find certain game objects that needs saving.
     /// </summary>
-    public class DataIdentity : MonoBehaviour 
+    public class DataIdentity : MonoBehaviour
     {
         /// <summary>
         /// The data's id.

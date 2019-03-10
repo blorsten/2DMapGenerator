@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using MapGeneration.ChunkSystem;
 using UnityEngine;
@@ -31,7 +31,7 @@ namespace MapGeneration.Algorithm
             IsActive = true;
         }
     }
-    
+
     /// <summary>
     /// Base class for all algorithms.
     /// </summary>
@@ -118,7 +118,7 @@ namespace MapGeneration.Algorithm
         /// </summary>
         protected virtual void Reset()
         {
-            
+
         }
     }
 }
