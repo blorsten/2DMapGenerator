@@ -56,7 +56,6 @@ GameObject:
   - component: {fileID: 4916919118434258}
   - component: {fileID: 114688200258480658}
   - component: {fileID: 2569400265907550648}
-  - component: {fileID: 114158215605352230}
   m_Layer: 0
   m_Name: TopLeft2
   m_TagString: Untagged
@@ -105,19 +104,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114158215605352230
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1949520831517498}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf92a4de50567e1479b742918de01ad5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _chunk: {fileID: 114688200258480658}
-  _exitFillers: []
 --- !u!114 &114688200258480658
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -129,6 +115,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0b6ce6d609e4c048893132c6fcb3c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _biomeValues:
+    _rowsLength: 0
+    _columnsLength: 0
+    _rows: []
   _conditionalChunk: {fileID: 0}
   _width: 10
   _height: 8
@@ -190,7 +180,6 @@ MonoBehaviour:
     _type: 3
     _chunk: {fileID: 114688200258480658}
   _tileTileFlags: []
-  _chunkBehavior: {fileID: 114158215605352230}
   _environment: {fileID: 8195094279635728220}
   _chunkHolder:
     __prefab: {fileID: 0}
@@ -735,15 +724,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
-  m_TileRefreshArray:
-  - serializedVersion: 1
-    m_DirtyIndex: 0
-  - serializedVersion: 1
-    m_DirtyIndex: 0
-  - serializedVersion: 1
-    m_DirtyIndex: 0
-  - serializedVersion: 1
-    m_DirtyIndex: 0
 --- !u!1839735485 &8195094281511895228
 Tilemap:
   m_ObjectHideFlags: 1
@@ -1542,12 +1522,3 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
-  m_TileRefreshArray:
-  - serializedVersion: 1
-    m_DirtyIndex: 1
-  - serializedVersion: 1
-    m_DirtyIndex: 0
-  - serializedVersion: 1
-    m_DirtyIndex: 0
-  - serializedVersion: 1
-    m_DirtyIndex: 0

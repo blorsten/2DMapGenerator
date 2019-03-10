@@ -56,7 +56,6 @@ GameObject:
   - component: {fileID: 4234102749599438}
   - component: {fileID: 114222823847141162}
   - component: {fileID: 2569400266137460002}
-  - component: {fileID: 114272385071699628}
   m_Layer: 0
   m_Name: End
   m_TagString: Untagged
@@ -116,6 +115,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0b6ce6d609e4c048893132c6fcb3c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _biomeValues:
+    _rowsLength: 0
+    _columnsLength: 0
+    _rows: []
   _conditionalChunk: {fileID: 0}
   _width: 10
   _height: 8
@@ -198,7 +201,6 @@ MonoBehaviour:
   - _position: {x: 8, y: 2, z: 0}
     _type: 6
     _chunk: {fileID: 114222823847141162}
-  _chunkBehavior: {fileID: 114272385071699628}
   _environment: {fileID: 8195094282194350772}
   _chunkHolder:
     __prefab: {fileID: 0}
@@ -223,19 +225,6 @@ MonoBehaviour:
   _drawTileFlags: 1
   _isStandaloneChunk: 1
   _recipeReference: {fileID: 0}
---- !u!114 &114272385071699628
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1608750204653428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf92a4de50567e1479b742918de01ad5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _chunk: {fileID: 114222823847141162}
-  _exitFillers: []
 --- !u!19719996 &2113883506045946844
 TilemapCollider2D:
   m_ObjectHideFlags: 1
@@ -1136,15 +1125,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
-  m_TileRefreshArray:
-  - serializedVersion: 1
-    m_DirtyIndex: 1
-  - serializedVersion: 1
-    m_DirtyIndex: 0
-  - serializedVersion: 1
-    m_DirtyIndex: 0
-  - serializedVersion: 1
-    m_DirtyIndex: 0
 --- !u!1839735485 &8195094282194350772
 Tilemap:
   m_ObjectHideFlags: 1
@@ -1563,12 +1543,3 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
-  m_TileRefreshArray:
-  - serializedVersion: 1
-    m_DirtyIndex: 0
-  - serializedVersion: 1
-    m_DirtyIndex: 0
-  - serializedVersion: 1
-    m_DirtyIndex: 0
-  - serializedVersion: 1
-    m_DirtyIndex: 0

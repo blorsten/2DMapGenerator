@@ -56,7 +56,6 @@ GameObject:
   - component: {fileID: 4584699303393812}
   - component: {fileID: 114466475761858796}
   - component: {fileID: 2569400267466432202}
-  - component: {fileID: 114776259122291328}
   m_Layer: 0
   m_Name: TestConditionalChunkB
   m_TagString: Untagged
@@ -274,19 +273,6 @@ MonoBehaviour:
   _drawTileFlags: 1
   _isStandaloneChunk: 0
   _recipeReference: {fileID: 0}
---- !u!114 &114776259122291328
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1812675901737012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf92a4de50567e1479b742918de01ad5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _chunk: {fileID: 0}
-  _exitFillers: []
 --- !u!19719996 &2113883505221262140
 TilemapCollider2D:
   m_ObjectHideFlags: 1
@@ -1177,11 +1163,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
-  m_TileRefreshArray:
-  - serializedVersion: 1
-    m_DirtyIndex: 0
-  - serializedVersion: 1
-    m_DirtyIndex: 0
 --- !u!1839735485 &8195094282222659366
 Tilemap:
   m_ObjectHideFlags: 1
@@ -1560,12 +1541,3 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
-  m_TileRefreshArray:
-  - serializedVersion: 1
-    m_DirtyIndex: 0
-  - serializedVersion: 1
-    m_DirtyIndex: 0
-  - serializedVersion: 1
-    m_DirtyIndex: 0
-  - serializedVersion: 1
-    m_DirtyIndex: 0
